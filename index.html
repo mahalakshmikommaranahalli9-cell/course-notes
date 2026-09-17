@@ -17,7 +17,9 @@
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================================
+     HEADER
+========================================= -->
 
 <header>
 
@@ -26,9 +28,9 @@
     </div>
 
     <button
-        onclick="toggleTheme()"
         class="theme-btn"
-        id="themeButton">
+        id="themeButton"
+        type="button">
 
         🌙
 
@@ -38,9 +40,13 @@
 
 
 
-<!-- HERO -->
+<!-- =========================================
+     HERO
+========================================= -->
 
-<section class="hero">
+<section
+    class="hero"
+    id="home">
 
     <div class="semester">
         5TH SEMESTER • CSE
@@ -59,16 +65,19 @@
 
     <div class="search-box">
 
-        <span>🔍</span>
+        <span>
+            🔍
+        </span>
 
         <input
             type="text"
-            id="search"
+            id="searchInput"
             placeholder="Search subject by code or name..."
             autocomplete="off">
 
         <button
-            id="clearSearch">
+            id="clearSearch"
+            type="button">
 
             ✕
 
@@ -87,21 +96,28 @@
 
 
 
-<!-- MAIN -->
+<!-- =========================================
+     MAIN
+========================================= -->
 
 <main>
 
 
-    <!-- SUBJECTS -->
+    <!-- =====================================
+         SUBJECT CONTAINER
+    ====================================== -->
 
     <div
         class="notes-container"
-        id="notesContainer">
+        id="subjectContainer">
 
 
-        <!-- BCS501 -->
+        <!-- =================================
+             BCS501
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 💻
@@ -121,17 +137,25 @@
                 development models and project management.
             </p>
 
-            <button onclick="openNote('BCS501')">
+            <button
+                class="open-btn"
+                data-subject="BCS501"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BCS502 -->
+        <!-- =================================
+             BCS502
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🌐
@@ -150,17 +174,25 @@
                 architectures and communication.
             </p>
 
-            <button onclick="openNote('BCS502')">
+            <button
+                class="open-btn"
+                data-subject="BCS502"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BCS503 -->
+        <!-- =================================
+             BCS503
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🧮
@@ -179,17 +211,25 @@
                 grammars and Turing machines.
             </p>
 
-            <button onclick="openNote('BCS503')">
+            <button
+                class="open-btn"
+                data-subject="BCS503"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BCS515B -->
+        <!-- =================================
+             BCS515B
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🤖
@@ -208,17 +248,25 @@
                 techniques and applications.
             </p>
 
-            <button onclick="openNote('BCS515B')">
+            <button
+                class="open-btn"
+                data-subject="BCS515B"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BCSL504 -->
+        <!-- =================================
+             BCSL504
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🌐
@@ -237,17 +285,25 @@
                 HTML, CSS and JavaScript.
             </p>
 
-            <button onclick="openNote('BCSL504')">
+            <button
+                class="open-btn"
+                data-subject="BCSL504"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BCS586 -->
+        <!-- =================================
+             BCS586
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🚀
@@ -266,17 +322,25 @@
                 documentation and presentation.
             </p>
 
-            <button onclick="openNote('BCS586')">
+            <button
+                class="open-btn"
+                data-subject="BCS586"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BRMK557 -->
+        <!-- =================================
+             BRMK557
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🔬
@@ -295,17 +359,25 @@
                 patents and intellectual property rights.
             </p>
 
-            <button onclick="openNote('BRMK557')">
+            <button
+                class="open-btn"
+                data-subject="BRMK557"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BESK508 -->
+        <!-- =================================
+             BESK508
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🌱
@@ -324,17 +396,25 @@
                 resources and sustainability.
             </p>
 
-            <button onclick="openNote('BESK508')">
+            <button
+                class="open-btn"
+                data-subject="BESK508"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
 
 
 
-        <!-- BNSK559 -->
+        <!-- =================================
+             BNSK559
+        ================================== -->
 
-        <div class="note-card">
+        <div
+            class="note-card subject-card">
 
             <div class="icon">
                 🤝
@@ -353,8 +433,13 @@
                 community service and social responsibility.
             </p>
 
-            <button onclick="openNote('BNSK559')">
+            <button
+                class="open-btn"
+                data-subject="BNSK559"
+                type="button">
+
                 Open Subject →
+
             </button>
 
         </div>
@@ -364,7 +449,9 @@
 
 
 
-    <!-- NO RESULTS -->
+    <!-- =====================================
+         NO RESULTS
+    ====================================== -->
 
     <div
         id="noResults"
@@ -386,22 +473,26 @@
 
 
 
-    <!-- NOTE CONTENT -->
+    <!-- =====================================
+         SUBJECT PAGE
+    ====================================== -->
 
     <section
-        id="note-content"
-        class="note-content">
+        id="subjectPage"
+        class="subject-page">
 
         <button
-            onclick="closeNote()"
-            class="back">
+            id="backButton"
+            class="back"
+            type="button">
 
             ← Back to Subjects
 
         </button>
 
 
-        <div id="content">
+        <div
+            id="subjectContent">
 
         </div>
 
@@ -412,7 +503,9 @@
 
 
 
-<!-- FOOTER -->
+<!-- =========================================
+     FOOTER
+========================================= -->
 
 <footer>
 
@@ -425,10 +518,13 @@
     </p>
 
     <p class="made-by">
+
         Made with ❤️ by
+
         <strong>
             Mahalakshmi Kommaranahalli
         </strong>
+
     </p>
 
     <p>
@@ -438,6 +534,10 @@
 </footer>
 
 
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
 <script src="script.js"></script>
 
