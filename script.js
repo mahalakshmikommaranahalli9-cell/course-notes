@@ -1,6 +1,6 @@
 /* =========================================
    SUBJECT DATA
-=========================================*/
+========================================= */
 
 const subjects = {
 
@@ -17,7 +17,6 @@ const subjects = {
         ]
     },
 
-
     BCS502: {
         code: "BCS502",
         name: "Computer Networks",
@@ -30,7 +29,6 @@ const subjects = {
             "Unit 5"
         ]
     },
-
 
     BCS503: {
         code: "BCS503",
@@ -45,7 +43,6 @@ const subjects = {
         ]
     },
 
-
     BCS515B: {
         code: "BCS515B",
         name: "Artificial Intelligence",
@@ -58,7 +55,6 @@ const subjects = {
             "Unit 5"
         ]
     },
-
 
     BCSL504: {
         code: "BCSL504",
@@ -73,7 +69,6 @@ const subjects = {
         ]
     },
 
-
     BCS586: {
         code: "BCS586",
         name: "Mini Project",
@@ -86,7 +81,6 @@ const subjects = {
             "Documentation & Presentation"
         ]
     },
-
 
     BRMK557: {
         code: "BRMK557",
@@ -101,7 +95,6 @@ const subjects = {
         ]
     },
 
-
     BESK508: {
         code: "BESK508",
         name: "Environmental Studies",
@@ -114,7 +107,6 @@ const subjects = {
             "Unit 5"
         ]
     },
-
 
     BNSK559: {
         code: "BNSK559",
@@ -130,7 +122,6 @@ const subjects = {
     }
 
 };
-
 
 
 /* =========================================
@@ -168,111 +159,126 @@ const hero =
     document.getElementById("home");
 
 
-
 /* =========================================
    SEARCH
 ========================================= */
 
-searchInput.addEventListener("input", function () {
+if (searchInput) {
 
-    const searchText =
-        searchInput.value
-            .trim()
-            .toLowerCase();
+    searchInput.addEventListener("input", function () {
 
+        const searchText =
+            searchInput.value
+                .trim()
+                .toLowerCase();
 
-    let found = 0;
-
-
-    subjectCards.forEach(function (card) {
-
-        const cardText =
-            card.innerText.toLowerCase();
+        let found = 0;
 
 
-        if (
-            searchText === "" ||
-            cardText.includes(searchText)
-        ) {
+        subjectCards.forEach(function (card) {
 
-            card.style.display = "";
+            const cardText =
+                card.innerText.toLowerCase();
 
-            found++;
+            if (
+                searchText === "" ||
+                cardText.includes(searchText)
+            ) {
 
-        } else {
+                card.style.display = "";
 
-            card.style.display = "none";
+                found++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        /* Clear button */
+
+        if (clearSearch) {
+
+            if (searchText.length > 0) {
+
+                clearSearch.style.display = "block";
+
+            } else {
+
+                clearSearch.style.display = "none";
+
+            }
+
+        }
+
+
+        /* Search result */
+
+        if (searchResult) {
+
+            if (searchText === "") {
+
+                searchResult.textContent = "";
+
+            } else {
+
+                searchResult.textContent =
+                    found + " subject" +
+                    (found === 1 ? "" : "s") +
+                    " found";
+
+            }
+
+        }
+
+
+        /* No results */
+
+        if (noResults) {
+
+            if (found === 0 && searchText !== "") {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
 
         }
 
     });
 
-
-    /* Clear button */
-
-    if (searchText.length > 0) {
-
-        clearSearch.style.display = "block";
-
-    } else {
-
-        clearSearch.style.display = "none";
-
-    }
-
-
-    /* Search result text */
-
-    if (searchText === "") {
-
-        searchResult.textContent = "";
-
-    } else {
-
-        searchResult.textContent =
-            found + " subject" +
-            (found === 1 ? "" : "s") +
-            " found";
-
-    }
-
-
-    /* No results */
-
-    if (found === 0) {
-
-        noResults.style.display = "block";
-
-    } else {
-
-        noResults.style.display = "none";
-
-    }
-
-});
-
+}
 
 
 /* =========================================
    CLEAR SEARCH
 ========================================= */
 
-clearSearch.addEventListener("click", function () {
+if (clearSearch) {
 
-    searchInput.value = "";
+    clearSearch.addEventListener("click", function () {
 
-    searchInput.dispatchEvent(
-        new Event("input")
-    );
+        searchInput.value = "";
 
-    searchInput.focus();
+        searchInput.dispatchEvent(
+            new Event("input")
+        );
 
-});
+        searchInput.focus();
 
+    });
+
+}
 
 
 /* =========================================
-   OPEN SUBJECT
+   OPEN SUBJECT BUTTONS
 ========================================= */
 
 document.querySelectorAll(".open-btn").forEach(function (button) {
@@ -289,8 +295,25 @@ document.querySelectorAll(".open-btn").forEach(function (button) {
 });
 
 
+/* =========================================
+   OPEN SUBJECT
+========================================= */
 
 function openSubject(code) {
+
+    /* =========================================
+       BCS503 MODULE 1
+       OPEN SEPARATE NOTES PAGE
+    ========================================= */
+
+    if (code === "BCS503") {
+
+        window.location.href =
+            "BCS503-MODULE1.html";
+
+        return;
+    }
+
 
     const subject = subjects[code];
 
@@ -304,16 +327,32 @@ function openSubject(code) {
 
     /* Hide home */
 
-    hero.style.display = "none";
+    if (hero) {
 
-    subjectContainer.style.display = "none";
+        hero.style.display = "none";
 
-    noResults.style.display = "none";
+    }
+
+    if (subjectContainer) {
+
+        subjectContainer.style.display = "none";
+
+    }
+
+    if (noResults) {
+
+        noResults.style.display = "none";
+
+    }
 
 
-    /* Show subject */
+    /* Show subject page */
 
-    subjectPage.style.display = "block";
+    if (subjectPage) {
+
+        subjectPage.style.display = "block";
+
+    }
 
 
     /* Create units */
@@ -344,57 +383,61 @@ function openSubject(code) {
 
     /* Subject page */
 
-    subjectContent.innerHTML = `
+    if (subjectContent) {
 
-        <div class="subject-heading">
+        subjectContent.innerHTML = `
 
-            <div class="big-icon">
-                ${subject.icon}
+            <div class="subject-heading">
+
+                <div class="big-icon">
+                    ${subject.icon}
+                </div>
+
+                <span class="subject-code">
+                    ${subject.code}
+                </span>
+
+                <h1>
+                    ${subject.name}
+                </h1>
+
+                <p>
+                    5th Semester • Computer Science & Engineering
+                </p>
+
             </div>
 
-            <span class="subject-code">
-                ${subject.code}
-            </span>
 
-            <h1>
-                ${subject.name}
-            </h1>
+            <div class="toc">
 
-            <p>
-                5th Semester • Computer Science & Engineering
-            </p>
+                <h2>
+                    📑 Table of Contents
+                </h2>
 
-        </div>
+                ${unitsHTML}
 
-
-        <div class="toc">
-
-            <h2>
-                📑 Table of Contents
-            </h2>
-
-            ${unitsHTML}
-
-        </div>
-
-
-        <div class="notes-message">
-
-            <div class="book">
-                📚
             </div>
 
-            <h2>
-                Notes Coming Soon
-            </h2>
 
-            <p>
-                Notes for this subject will be added here.
-            </p>
+            <div class="notes-message">
 
-        </div>
+                <div class="book">
+                    📚
+                </div>
 
-    `;
+                <h2>
+                    Notes Coming Soon
+                </h2>
+
+                <p>
+                    Notes for this subject will be added here.
+                </p>
+
+            </div>
+
+        `;
+
+    }
 
 
     /* Scroll to top */
@@ -407,27 +450,47 @@ function openSubject(code) {
 }
 
 
-
 /* =========================================
    BACK BUTTON
 ========================================= */
 
-backButton.addEventListener("click", function () {
+if (backButton) {
 
-    closeSubject();
+    backButton.addEventListener("click", function () {
 
-});
+        closeSubject();
+
+    });
+
+}
 
 
 function closeSubject() {
 
-    subjectPage.style.display = "none";
+    if (subjectPage) {
 
-    hero.style.display = "block";
+        subjectPage.style.display = "none";
 
-    subjectContainer.style.display = "grid";
+    }
 
-    searchResult.textContent = "";
+    if (hero) {
+
+        hero.style.display = "block";
+
+    }
+
+    if (subjectContainer) {
+
+        subjectContainer.style.display = "grid";
+
+    }
+
+    if (searchResult) {
+
+        searchResult.textContent = "";
+
+    }
+
 
     window.scrollTo({
         top: 0,
@@ -435,7 +498,6 @@ function closeSubject() {
     });
 
 }
-
 
 
 /* =========================================
@@ -446,29 +508,42 @@ const themeButton =
     document.getElementById("themeButton");
 
 
-themeButton.addEventListener("click", function () {
+if (themeButton) {
 
-    document.body.classList.toggle("dark");
+    themeButton.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark");
 
 
-    if (
-        document.body.classList.contains("dark")
-    ) {
+        if (
+            document.body.classList.contains("dark")
+        ) {
 
-        themeButton.textContent = "☀️";
+            themeButton.textContent = "☀️";
 
-    } else {
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
 
-        themeButton.textContent = "🌙";
+        } else {
 
-    }
+            themeButton.textContent = "🌙";
 
-});
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
 
+        }
+
+    });
+
+}
 
 
 /* =========================================
-   SAVE DARK MODE
+   LOAD SAVED THEME
 ========================================= */
 
 if (
@@ -477,27 +552,22 @@ if (
 
     document.body.classList.add("dark");
 
-    themeButton.textContent = "☀️";
 
-}
+    if (themeButton) {
 
-
-themeButton.addEventListener("click", function () {
-
-    if (
-        document.body.classList.contains("dark")
-    ) {
-
-        localStorage.setItem("theme", "dark");
-
-    } else {
-
-        localStorage.setItem("theme", "light");
+        themeButton.textContent = "☀️";
 
     }
 
-});
+} else {
 
+    if (themeButton) {
+
+        themeButton.textContent = "🌙";
+
+    }
+
+}
 
 
 /* =========================================
@@ -512,7 +582,6 @@ document.addEventListener(
 
     }
 );
-
 
 
 /* =========================================
