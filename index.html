@@ -13,7 +13,32 @@
 
 </head>
 
+<script>
+"use strict";
 
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+
+document.addEventListener("keydown", e => {
+    const k = e.key.toLowerCase();
+
+    if (
+        k === "f12" ||
+        (e.ctrlKey && ["c", "p", "s", "u", "a"].includes(k)) ||
+        (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(k))
+    ) {
+        e.preventDefault();
+    }
+});
+
+window.addEventListener("beforeprint", () => {
+    document.body.innerHTML =
+        "<h2 style='text-align:center;margin-top:100px'>Printing is disabled.</h2>";
+});
+</script>
 <body>
 
 
