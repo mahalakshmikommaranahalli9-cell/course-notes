@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BCS503 - Module 1 | Course Notes</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-top: 4px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .back:hover {
+            opacity: 0.85;
+        }
+
+        .intro {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .intro h2 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        section {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #2563eb;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #374151;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        code {
+            background: #eef2ff;
+            padding: 3px 7px;
+            border-radius: 5px;
+            color: #4338ca;
+        }
+
+        pre {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #eef2ff;
+        }
+
+        .important {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .exam {
+            background: #ecfdf5;
+            border-left: 5px solid #10b981;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .diagram {
+            font-family: monospace;
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 15px 0;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 30px 10px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: #cbd5e1;
+        }
+
+        .made-by {
+            color: white;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 21px;
+            }
+
+            section,
+            .intro {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>📘 BCS503 — Theory of Computation</h1>
+    <p>Module 1 — Finite Automata</p>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back">← Back to Course Notes</a>
+
+    <div class="intro">
+        <h2>📚 Module 1: Finite Automata</h2>
+
+        <p>
+            This module introduces the basic concepts of Automata Theory,
+            Finite Automata, DFA, NFA, ε-NFA, structural representations,
+            and applications such as text searching.
+        </p>
+
+        <div class="important">
+            <strong>🎯 Exam Focus:</strong>
+            DFA construction, NFA construction, NFA to DFA conversion,
+            ε-closure and finite automata concepts are especially important.
+        </div>
+    </div>
+
+
+    <!-- 1 -->
+    <section>
+        <h2>1. Introduction to Automata Theory</h2>
+
+        <p>
+            Automata Theory is a branch of computer science that studies
+            mathematical models of computation called automata.
+        </p>
+
+        <p>
+            An automaton is an abstract machine that receives input,
+            processes the input, changes its state and finally accepts
+            or rejects the input.
+        </p>
+
+        <h3>Simple Example</h3>
+
+        <p>
+            Consider a machine that accepts only binary strings ending in
+            <code>01</code>.
+        </p>
+
+        <pre>
+Input: 1101
+
+1 → 1 → 0 → 1
+
+Ends with 01
+Therefore: ACCEPT
+        </pre>
+
+        <p>
+            If the input is <code>1100</code>, it does not end with
+            <code>01</code>, so it is rejected.
+        </p>
+    </section>
+
+
+    <!-- 2 -->
+    <section>
+        <h2>2. Finite Automaton</h2>
+
+        <p>
+            A Finite Automaton (FA) is a mathematical model of computation
+            having a finite number of states.
+        </p>
+
+        <p>
+            It reads an input string symbol by symbol and determines
+            whether the string belongs to a particular language.
+        </p>
+
+        <div class="diagram">
+Input String
+     ↓
+┌─────────────────┐
+│ Finite          │
+│ Automaton       │
+└─────────────────┘
+     ↓
+Accept / Reject
+        </div>
+
+        <h3>Applications</h3>
+
+        <ul>
+            <li>Compiler design</li>
+            <li>Lexical analysis</li>
+            <li>Pattern matching</li>
+            <li>Text searching</li>
+            <li>Regular expressions</li>
+            <li>Communication protocols</li>
+            <li>Digital circuit design</li>
+        </ul>
+    </section>
+
+
+    <!-- 3 -->
+    <section>
+        <h2>3. Central Concepts of Automata Theory</h2>
+
+        <p>Four basic concepts are:</p>
+
+        <ol>
+            <li>Alphabet</li>
+            <li>String</li>
+            <li>Language</li>
+            <li>Automaton</li>
+        </ol>
+
+        <div class="diagram">
+Alphabet
+   ↓
+Strings
+   ↓
+Language
+   ↓
+Automaton
+   ↓
+Accept / Reject
+        </div>
+    </section>
+
+
+    <!-- 4 -->
+    <section>
+        <h2>4. Alphabet</h2>
+
+        <p>
+            An alphabet is a finite, non-empty set of symbols.
+            It is generally represented by the Greek letter
+            <code>Σ</code>.
+        </p>
+
+        <h3>Examples</h3>
+
+        <pre>
+Σ = {0, 1}
+
+Σ = {a, b}
+
+Σ = {a, b, c}
+        </pre>
+
+        <div class="important">
+            <strong>Remember:</strong>
+            An alphabet contains symbols, not complete strings.
+        </div>
+
+        <p>For example:</p>
+
+        <pre>
+a  → symbol
+b  → symbol
+ab → string
+        </pre>
+    </section>
+
+
+    <!-- 5 -->
+    <section>
+        <h2>5. String</h2>
+
+        <p>
+            A string is a finite sequence of symbols selected from
+            an alphabet.
+        </p>
+
+        <h3>Example</h3>
+
+        <pre>
+Σ = {0,1}
+
+101 → string
+
+Σ = {a,b}
+
+abba → string
+        </pre>
+
+        <h3>Length of a String</h3>
+
+        <p>
+            The number of symbols present in a string is called its length.
+        </p>
+
+        <pre>
+w = 10110
+
+|w| = 5
+        </pre>
+
+        <pre>
+w = abba
+
+|w| = 4
+        </pre>
+    </section>
+
+
+    <!-- 6 -->
+    <section>
+        <h2>6. Empty String</h2>
+
+        <p>
+            A string containing no symbols is called the empty string.
+        </p>
+
+        <p>
+            It is represented by:
+        </p>
+
+        <pre>ε</pre>
+
+        <p>The length of the empty string is:</p>
+
+        <pre>|ε| = 0</pre>
+
+        <div class="important">
+            <strong>Important:</strong>
+            ε is not the same as the symbol 0.
+        </div>
+    </section>
+
+
+    <!-- 7 -->
+    <section>
+        <h2>7. Power of an Alphabet</h2>
+
+        <p>
+            <code>Σⁿ</code> represents the set of all strings of length
+            n that can be formed using symbols from Σ.
+        </p>
+
+        <p>Suppose:</p>
+
+        <pre>Σ = {a,b}</pre>
+
+        <h3>Σ⁰</h3>
+
+        <pre>Σ⁰ = {ε}</pre>
+
+        <h3>Σ¹</h3>
+
+        <pre>Σ¹ = {a,b}</pre>
+
+        <h3>Σ²</h3>
+
+        <pre>Σ² = {aa, ab, ba, bb}</pre>
+
+        <h3>Σ³</h3>
+
+        <pre>
+Σ³ = {
+aaa, aab, aba, abb,
+baa, bab, bba, bbb
+}
+        </pre>
+    </section>
+
+
+    <!-- 8 -->
+    <section>
+        <h2>8. Σ* and Σ+</h2>
+
+        <h3>Σ*</h3>
+
+        <p>
+            <code>Σ*</code> represents the set of all possible finite
+            strings over Σ, including the empty string.
+        </p>
+
+        <pre>
+Σ* = Σ⁰ ∪ Σ¹ ∪ Σ² ∪ Σ³ ∪ ...
+        </pre>
+
+        <h3>Σ+</h3>
+
+        <p>
+            <code>Σ+</code> represents all non-empty strings.
+        </p>
+
+        <pre>
+Σ+ = Σ¹ ∪ Σ² ∪ Σ³ ∪ ...
+        </pre>
+
+        <table>
+            <tr>
+                <th>Concept</th>
+                <th>Meaning</th>
+                <th>Contains ε?</th>
+            </tr>
+
+            <tr>
+                <td>Σ*</td>
+                <td>All finite strings</td>
+                <td>Yes</td>
+            </tr>
+
+            <tr>
+                <td>Σ+</td>
+                <td>All non-empty strings</td>
+                <td>No</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <!-- 9 -->
+    <section>
+        <h2>9. String Concatenation</h2>
+
+        <p>
+            Joining two strings together is called concatenation.
+        </p>
+
+        <pre>
+x = abc
+y = 101
+
+xy = abc101
+        </pre>
+
+        <h3>Example</h3>
+
+        <pre>
+x = ab
+y = ba
+
+xy = abba
+yx = baab
+        </pre>
+
+        <div class="important">
+            String concatenation is generally NOT commutative.
+            Therefore, xy ≠ yx.
+        </div>
+    </section>
+
+
+    <!-- 10 -->
+    <section>
+        <h2>10. Language</h2>
+
+        <p>
+            A language is a set of strings over an alphabet.
+        </p>
+
+        <h3>Example</h3>
+
+        <pre>
+Σ = {0,1}
+
+L = {0, 01, 101, 111}
+        </pre>
+
+        <p>
+            The language may be finite or infinite.
+        </p>
+
+        <h3>Finite Language</h3>
+
+        <pre>
+L = {a, ab, aba}
+        </pre>
+
+        <h3>Infinite Language</h3>
+
+        <pre>
+L = {a, aa, aaa, aaaa, ...}
+        </pre>
+    </section>
+
+
+    <!-- 11 -->
+    <section>
+        <h2>11. Structural Representation of Finite Automata</h2>
+
+        <p>
+            A finite automaton can be represented in different ways.
+        </p>
+
+        <ol>
+            <li>Transition Diagram</li>
+            <li>Transition Table</li>
+            <li>Formal Mathematical Representation</li>
+        </ol>
+
+        <h3>Transition Diagram</h3>
+
+        <ul>
+            <li>Circle represents a state.</li>
+            <li>Arrow represents a transition.</li>
+            <li>Incoming arrow represents initial state.</li>
+            <li>Double circle represents final state.</li>
+        </ul>
+
+        <div class="diagram">
+             1
+        ┌──────────┐
+        ↓          │
+→  (q0) ───────→ ((q1))
+        </div>
+    </section>
+
+
+    <!-- 12 -->
+    <section>
+        <h2>12. DFA — Deterministic Finite Automaton</h2>
+
+        <p>
+            DFA stands for <strong>Deterministic Finite Automaton</strong>.
+        </p>
+
+        <p>
+            In a DFA, for every state and every input symbol, there is
+            exactly one next state.
+        </p>
+
+        <h3>Formal Definition</h3>
+
+        <pre>
+M = (Q, Σ, δ, q₀, F)
+        </pre>
+
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Meaning</th>
+            </tr>
+
+            <tr>
+                <td>Q</td>
+                <td>Finite set of states</td>
+            </tr>
+
+            <tr>
+                <td>Σ</td>
+                <td>Input alphabet</td>
+            </tr>
+
+            <tr>
+                <td>δ</td>
+                <td>Transition function</td>
+            </tr>
+
+            <tr>
+                <td>q₀</td>
+                <td>Initial state</td>
+            </tr>
+
+            <tr>
+                <td>F</td>
+                <td>Set of final states</td>
+            </tr>
+        </table>
+
+        <h3>Transition Function</h3>
+
+        <pre>
+δ : Q × Σ → Q
+        </pre>
+
+        <p>
+            This means that every state-input pair produces exactly
+            one next state.
+        </p>
+    </section>
+
+
+    <!-- 13 -->
+    <section>
+        <h2>13. Example DFA</h2>
+
+        <p>
+            Construct a DFA that accepts binary strings ending in
+            <code>1</code>.
+        </p>
+
+        <h3>States</h3>
+
+        <pre>
+q0 = string does not currently end in 1
+q1 = string ends in 1
+        </pre>
+
+        <h3>Transition Table</h3>
+
+        <table>
+            <tr>
+                <th>State</th>
+                <th>0</th>
+                <th>1</th>
+            </tr>
+
+            <tr>
+                <td>→ q0</td>
+                <td>q0</td>
+                <td>q1</td>
+            </tr>
+
+            <tr>
+                <td>* q1</td>
+                <td>q0</td>
+                <td>q1</td>
+            </tr>
+        </table>
+
+        <p>
+            q0 is the initial state and q1 is the final state.
+        </p>
+    </section>
+
+
+    <!-- 14 -->
+    <section>
+        <h2>14. NFA — Nondeterministic Finite Automaton</h2>
+
+        <p>
+            NFA stands for <strong>Nondeterministic Finite Automaton</strong>.
+        </p>
+
+        <p>
+            In an NFA, for a state and input symbol, there can be
+            zero, one or multiple possible next states.
+        </p>
+
+        <h3>Formal Representation</h3>
+
+        <pre>
+M = (Q, Σ, δ, q₀, F)
+        </pre>
+
+        <h3>Transition Function</h3>
+
+        <pre>
+δ : Q × Σ → 2^Q
+        </pre>
+
+        <p>
+            The result can be a set of states.
+        </p>
+
+        <h3>Example</h3>
+
+        <div class="diagram">
+             ┌────→ q1
+             │
+q0 ─── a ───┤
+             │
+             └────→ q2
+        </div>
+
+        <p>
+            From q0 on input a, the machine can go to q1 or q2.
+            Therefore, it is an NFA.
+        </p>
+    </section>
+
+
+    <!-- 15 -->
+    <section>
+        <h2>15. DFA vs NFA</h2>
+
+        <table>
+            <tr>
+                <th>DFA</th>
+                <th>NFA</th>
+            </tr>
+
+            <tr>
+                <td>Deterministic</td>
+                <td>Nondeterministic</td>
+            </tr>
+
+            <tr>
+                <td>Exactly one transition</td>
+                <td>Zero, one or multiple transitions</td>
+            </tr>
+
+            <tr>
+                <td>No ε-transition</td>
+                <td>ε-transition is possible in ε-NFA</td>
+            </tr>
+
+            <tr>
+                <td>δ : Q × Σ → Q</td>
+                <td>δ : Q × Σ → 2^Q</td>
+            </tr>
+
+            <tr>
+                <td>One possible path</td>
+                <td>Multiple possible paths</td>
+            </tr>
+
+            <tr>
+                <td>Recognizes regular languages</td>
+                <td>Recognizes regular languages</td>
+            </tr>
+        </table>
+
+        <div class="important">
+            <strong>⭐ Important:</strong>
+            DFA and NFA have the same computational power.
+            Both recognize regular languages.
+        </div>
+    </section>
+
+
+    <!-- 16 -->
+    <section>
+        <h2>16. NFA Acceptance</h2>
+
+        <p>
+            An NFA accepts a string if at least one possible computation
+            path ends in a final state after consuming the complete input.
+        </p>
+
+        <div class="diagram">
+                 a
+              ┌──────→ q1*
+              │
+q0 ──────────┤
+              │
+              └──────→ q2
+        </div>
+
+        <p>
+            If one possible path reaches a final state, the input is accepted.
+        </p>
+    </section>
+
+
+    <!-- 17 -->
+    <section>
+        <h2>17. ε-NFA</h2>
+
+        <p>
+            An ε-NFA is a finite automaton that allows transitions without
+            consuming an input symbol.
+        </p>
+
+        <p>
+            The symbol used for such a transition is:
+        </p>
+
+        <pre>ε</pre>
+
+        <div class="diagram">
+q0 ─── ε ───→ q1
+        </div>
+
+        <p>
+            The machine can move from q0 to q1 without reading an input symbol.
+        </p>
+    </section>
+
+
+    <!-- 18 -->
+    <section>
+        <h2>18. ε-Closure</h2>
+
+        <p>
+            The ε-closure of a state q is the set of all states reachable
+            from q using zero or more ε-transitions.
+        </p>
+
+        <h3>Example</h3>
+
+        <div class="diagram">
+q0 ──ε──→ q1 ──ε──→ q2
+        </div>
+
+        <pre>
+ε-closure(q0) = {q0, q1, q2}
+
+ε-closure(q1) = {q1, q2}
+
+ε-closure(q2) = {q2}
+        </pre>
+
+        <div class="important">
+            <strong>Remember:</strong>
+            The starting state is always included in its own ε-closure
+            because zero ε-moves are allowed.
+        </div>
+    </section>
+
+
+    <!-- 19 -->
+    <section>
+        <h2>19. Text Search using Finite Automata</h2>
+
+        <p>
+            Finite automata can be used for pattern matching and text searching.
+        </p>
+
+        <p>
+            Suppose we want to search for:
+        </p>
+
+        <pre>CAT</pre>
+
+        <p>inside:</p>
+
+        <pre>THE CAT IS ON THE MAT</pre>
+
+        <p>
+            We can construct an automaton representing the pattern:
+        </p>
+
+        <div class="diagram">
+q0 ──C──→ q1 ──A──→ q2 ──T──→ q3*
+        </div>
+
+        <p>
+            When the automaton reaches q3, the pattern has been found.
+        </p>
+    </section>
+
+
+    <!-- 20 -->
+    <section>
+        <h2>20. Automata and Complexity</h2>
+
+        <p>
+            Automata provide mathematical models for studying computation.
+            Different types of automata have different computational capabilities.
+        </p>
+
+        <div class="diagram">
+Finite Automata
+       ↓
+Pushdown Automata
+       ↓
+Turing Machines
+        </div>
+
+        <p>
+            Finite Automata are mainly used for recognizing regular languages.
+        </p>
+    </section>
+
+
+    <!-- 21 -->
+    <section>
+        <h2>21. DFA Construction — General Method</h2>
+
+        <ol>
+            <li>Understand the given language.</li>
+            <li>Determine what information must be remembered.</li>
+            <li>Create suitable states.</li>
+            <li>Identify the initial state.</li>
+            <li>Identify the final state or states.</li>
+            <li>Fill all transitions.</li>
+            <li>Test the DFA using accepted and rejected strings.</li>
+        </ol>
+
+        <div class="exam">
+            <strong>Exam Tip:</strong>
+            In a DFA, every state must have exactly one transition
+            for every symbol in the input alphabet.
+        </div>
+    </section>
+
+
+    <!-- 22 -->
+    <section>
+        <h2>22. Example — DFA for Even Number of 0s</h2>
+
+        <p>
+            Language:
+            All strings over <code>{0,1}</code> containing an even number
+            of zeros.
+        </p>
+
+        <h3>States</h3>
+
+        <pre>
+q0 = even number of 0s
+q1 = odd number of 0s
+        </pre>
+
+        <p>
+            Initial state = q0
+        </p>
+
+        <p>
+            Final state = q0
+        </p>
+
+        <h3>Transition Table</h3>
+
+        <table>
+            <tr>
+                <th>State</th>
+                <th>0</th>
+                <th>1</th>
+            </tr>
+
+            <tr>
+                <td>→ *q0</td>
+                <td>q1</td>
+                <td>q0</td>
+            </tr>
+
+            <tr>
+                <td>q1</td>
+                <td>q0</td>
+                <td>q1</td>
+            </tr>
+        </table>
+
+        <p>
+            Reading 0 changes even to odd or odd to even.
+            Reading 1 does not change the number of zeros.
+        </p>
+    </section>
+
+
+    <!-- 23 -->
+    <section>
+        <h2>23. Important Definitions</h2>
+
+        <h3>Alphabet</h3>
+        <p>
+            A finite non-empty set of symbols is called an alphabet.
+        </p>
+
+        <h3>String</h3>
+        <p>
+            A finite sequence of symbols from an alphabet is called a string.
+        </p>
+
+        <h3>Empty String</h3>
+        <p>
+            A string containing no symbols is called an empty string and
+            is represented by ε.
+        </p>
+
+        <h3>Language</h3>
+        <p>
+            A set of strings over an alphabet is called a language.
+        </p>
+
+        <h3>Finite Automaton</h3>
+        <p>
+            A finite automaton is an abstract machine with a finite number
+            of states used to recognize languages.
+        </p>
+
+        <h3>DFA</h3>
+        <p>
+            A deterministic finite automaton has exactly one transition
+            for every state and input symbol.
+        </p>
+
+        <h3>NFA</h3>
+        <p>
+            A nondeterministic finite automaton may have zero, one or
+            multiple transitions for a state and input symbol.
+        </p>
+
+        <h3>ε-NFA</h3>
+        <p>
+            An NFA that permits transitions without consuming an input
+            symbol is called an ε-NFA.
+        </p>
+
+        <h3>ε-Closure</h3>
+        <p>
+            The set of states reachable from a state using zero or more
+            ε-transitions is called its ε-closure.
+        </p>
+    </section>
+
+
+    <!-- 24 -->
+    <section>
+        <h2>24. ⭐ Important VTU Questions</h2>
+
+        <div class="exam">
+            <h3>Short Answer Questions</h3>
+
+            <ol>
+                <li>Define alphabet with an example.</li>
+                <li>Define string.</li>
+                <li>Define empty string.</li>
+                <li>Define language.</li>
+                <li>Define finite automaton.</li>
+                <li>Define DFA.</li>
+                <li>Define NFA.</li>
+                <li>Define ε-NFA.</li>
+                <li>What is ε-closure?</li>
+                <li>Differentiate DFA and NFA.</li>
+                <li>Define Σ* and Σ+.</li>
+                <li>What is string concatenation?</li>
+            </ol>
+        </div>
+
+        <div class="exam">
+            <h3>10-Mark / Problem Questions</h3>
+
+            <ol>
+                <li>Construct a DFA for a given language.</li>
+                <li>Construct a DFA for strings containing an odd number of a's and even number of b's.</li>
+                <li>Construct a DFA for a divisibility condition.</li>
+                <li>Construct an NFA for a given language.</li>
+                <li>Convert a given NFA into an equivalent DFA.</li>
+                <li>Find ε-closure of all states of a given ε-NFA.</li>
+                <li>Convert an ε-NFA into an equivalent DFA.</li>
+                <li>Explain DFA with formal definition and transition diagram.</li>
+                <li>Explain NFA with a suitable example.</li>
+                <li>Explain finite automata and their structural representations.</li>
+                <li>Explain the application of finite automata in text searching.</li>
+            </ol>
+        </div>
+    </section>
+
+
+    <!-- 25 -->
+    <section>
+        <h2>25. 🧠 One-Page Revision</h2>
+
+        <div class="diagram">
+AUTOMATA THEORY
+       ↓
+FINITE AUTOMATA
+       ↓
+ ┌─────┴─────┐
+ ↓           ↓
+DFA         NFA
+             ↓
+          ε-NFA
+        </div>
+
+        <pre>
+Alphabet → String → Language → Automaton → Accept/Reject
+        </pre>
+
+        <h3>DFA</h3>
+
+        <pre>
+M = (Q, Σ, δ, q₀, F)
+
+δ : Q × Σ → Q
+        </pre>
+
+        <h3>NFA</h3>
+
+        <pre>
+M = (Q, Σ, δ, q₀, F)
+
+δ : Q × Σ → 2^Q
+        </pre>
+
+        <h3>ε-NFA</h3>
+
+        <p>
+            Can move using ε without consuming an input symbol.
+        </p>
+
+        <h3>ε-Closure</h3>
+
+        <p>
+            All states reachable through zero or more ε-transitions.
+        </p>
+    </section>
+
+
+</div>
+
+
+<footer>
+    <h3>📚 Course Notes</h3>
+
+    <p>
+        BCS503 • Theory of Computation
+    </p>
+
+    <p class="made-by">
+        Made with ❤️ by
+        <strong>Mahalakshmi Kommaranahalli</strong>
+    </p>
+
+    <p>© 2026</p>
+</footer>
+
+</body>
+</html>
