@@ -595,3 +595,38 @@ document.addEventListener(
 
     }
 );
+/* =========================================
+   EXTRA CONTENT PROTECTION
+========================================= */
+
+document.addEventListener("copy", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("cut", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("dragstart", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("selectstart", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("keydown", function (event) {
+
+    const key = event.key.toLowerCase();
+
+    if (
+        key === "f12" ||
+        (event.ctrlKey && event.shiftKey &&
+            ["i", "j", "c"].includes(key)) ||
+        (event.ctrlKey &&
+            ["c", "p", "s", "u", "a"].includes(key))
+    ) {
+        event.preventDefault();
+    }
+
+});
