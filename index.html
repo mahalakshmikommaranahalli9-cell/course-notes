@@ -1,150 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Course Notes</title>
+    <title>5th Semester | Course Notes</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<header>
-    <div class="logo">📚 Course Notes</div>
 
-    <button onclick="toggleTheme()" class="theme-btn">
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        📚 Course Notes
+    </div>
+
+    <button
+        onclick="toggleTheme()"
+        class="theme-btn"
+        id="themeButton">
+
         🌙
+
     </button>
+
 </header>
 
 
+
+<!-- HERO -->
+
 <section class="hero">
 
-    <h1>My Course Notes</h1>
+    <div class="semester">
+        5TH SEMESTER • CSE
+    </div>
+
+    <h1>
+        Course Notes
+    </h1>
 
     <p>
-        Simple, organized and exam-friendly study notes.
+        Jain Institute of Technology, Davangere
     </p>
 
-    <input
-        type="text"
-        id="search"
-        placeholder="🔍 Search notes..."
-        onkeyup="searchNotes()"
-    >
 
-</section>
+    <!-- SEARCH -->
 
+    <div class="search-box">
 
-<main>
+        <span>🔍</span>
 
-    <div class="notes-container">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search subject by code or name..."
+            autocomplete="off">
 
-        <!-- Computer Networks -->
+        <button
+            id="clearSearch">
 
-        <div class="note-card">
+            ✕
 
-            <div class="icon">🌐</div>
-
-            <h2>Computer Networks</h2>
-
-            <p>
-                Networking concepts and important exam notes.
-            </p>
-
-            <button onclick="openNote('network')">
-                Read Notes →
-            </button>
-
-        </div>
-
-
-        <!-- Artificial Intelligence -->
-
-        <div class="note-card">
-
-            <div class="icon">🤖</div>
-
-            <h2>Artificial Intelligence</h2>
-
-            <p>
-                AI and Machine Learning concepts.
-            </p>
-
-            <button onclick="openNote('ai')">
-                Read Notes →
-            </button>
-
-        </div>
-
-
-        <!-- Programming -->
-
-        <div class="note-card">
-
-            <div class="icon">💻</div>
-
-            <h2>Programming</h2>
-
-            <p>
-                Programming concepts and examples.
-            </p>
-
-            <button onclick="openNote('programming')">
-                Read Notes →
-            </button>
-
-        </div>
-
-
-        <!-- Important Questions -->
-
-        <div class="note-card">
-
-            <div class="icon">📝</div>
-
-            <h2>Important Questions</h2>
-
-            <p>
-                Important questions for examinations.
-            </p>
-
-            <button onclick="openNote('questions')">
-                Read Notes →
-            </button>
-
-        </div>
+        </button>
 
     </div>
 
 
-    <!-- Notes Content -->
+    <p
+        id="searchResult"
+        class="search-result">
 
-    <section id="note-content" class="note-content">
+    </p>
 
-        <button onclick="closeNote()" class="back">
-            ← Back
+</section>
+
+
+
+<!-- MAIN -->
+
+<main>
+
+
+    <!-- SUBJECTS -->
+
+    <div
+        class="notes-container"
+        id="notesContainer">
+
+
+        <!-- BCS501 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                💻
+            </div>
+
+            <span class="code">
+                BCS501
+            </span>
+
+            <h2>
+                Software Engineering and
+                Project Management
+            </h2>
+
+            <p>
+                Software engineering concepts,
+                development models and project management.
+            </p>
+
+            <button onclick="openNote('BCS501')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BCS502 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <span class="code">
+                BCS502
+            </span>
+
+            <h2>
+                Computer Networks
+            </h2>
+
+            <p>
+                Networking concepts, protocols,
+                architectures and communication.
+            </p>
+
+            <button onclick="openNote('BCS502')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BCS503 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🧮
+            </div>
+
+            <span class="code">
+                BCS503
+            </span>
+
+            <h2>
+                Theory of Computation
+            </h2>
+
+            <p>
+                Automata, formal languages,
+                grammars and Turing machines.
+            </p>
+
+            <button onclick="openNote('BCS503')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BCS515B -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <span class="code">
+                BCS515B
+            </span>
+
+            <h2>
+                Artificial Intelligence
+            </h2>
+
+            <p>
+                Artificial intelligence concepts,
+                techniques and applications.
+            </p>
+
+            <button onclick="openNote('BCS515B')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BCSL504 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <span class="code">
+                BCSL504
+            </span>
+
+            <h2>
+                Web Technology Lab
+            </h2>
+
+            <p>
+                Practical web development using
+                HTML, CSS and JavaScript.
+            </p>
+
+            <button onclick="openNote('BCSL504')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BCS586 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🚀
+            </div>
+
+            <span class="code">
+                BCS586
+            </span>
+
+            <h2>
+                Mini Project
+            </h2>
+
+            <p>
+                Project development, implementation,
+                documentation and presentation.
+            </p>
+
+            <button onclick="openNote('BCS586')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BRMK557 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🔬
+            </div>
+
+            <span class="code">
+                BRMK557
+            </span>
+
+            <h2>
+                Research Methodology and IPR
+            </h2>
+
+            <p>
+                Research methods, technical writing,
+                patents and intellectual property rights.
+            </p>
+
+            <button onclick="openNote('BRMK557')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BESK508 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🌱
+            </div>
+
+            <span class="code">
+                BESK508
+            </span>
+
+            <h2>
+                Environmental Studies
+            </h2>
+
+            <p>
+                Environment, ecosystems,
+                resources and sustainability.
+            </p>
+
+            <button onclick="openNote('BESK508')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+
+        <!-- BNSK559 -->
+
+        <div class="note-card">
+
+            <div class="icon">
+                🤝
+            </div>
+
+            <span class="code">
+                BNSK559
+            </span>
+
+            <h2>
+                NSS
+            </h2>
+
+            <p>
+                National Service Scheme,
+                community service and social responsibility.
+            </p>
+
+            <button onclick="openNote('BNSK559')">
+                Open Subject →
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- NO RESULTS -->
+
+    <div
+        id="noResults"
+        class="no-results">
+
+        <div>
+            🔎
+        </div>
+
+        <h2>
+            No subject found
+        </h2>
+
+        <p>
+            Try another subject name or code.
+        </p>
+
+    </div>
+
+
+
+    <!-- NOTE CONTENT -->
+
+    <section
+        id="note-content"
+        class="note-content">
+
+        <button
+            onclick="closeNote()"
+            class="back">
+
+            ← Back to Subjects
+
         </button>
 
-        <div id="content"></div>
+
+        <div id="content">
+
+        </div>
 
     </section>
+
 
 </main>
 
 
+
+<!-- FOOTER -->
+
 <footer>
 
+    <h3>
+        📚 Course Notes
+    </h3>
+
     <p>
-        © 2026 Course Notes | Made with ❤️
+        5th Semester • Computer Science & Engineering
+    </p>
+
+    <p class="made-by">
+        Made with ❤️ by
+        <strong>
+            Mahalakshmi Kommaranahalli
+        </strong>
+    </p>
+
+    <p>
+        © 2026
     </p>
 
 </footer>
 
 
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
