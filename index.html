@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Notes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">📚 Course Notes</div>
+
+    <button onclick="toggleTheme()" class="theme-btn">
+        🌙
+    </button>
+</header>
+
+
+<section class="hero">
+
+    <h1>My Course Notes</h1>
+
+    <p>
+        Simple, organized and exam-friendly study notes.
+    </p>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search notes..."
+        onkeyup="searchNotes()"
+    >
+
+</section>
+
+
+<main>
+
+    <div class="notes-container">
+
+        <!-- Computer Networks -->
+
+        <div class="note-card">
+
+            <div class="icon">🌐</div>
+
+            <h2>Computer Networks</h2>
+
+            <p>
+                Networking concepts and important exam notes.
+            </p>
+
+            <button onclick="openNote('network')">
+                Read Notes →
+            </button>
+
+        </div>
+
+
+        <!-- Artificial Intelligence -->
+
+        <div class="note-card">
+
+            <div class="icon">🤖</div>
+
+            <h2>Artificial Intelligence</h2>
+
+            <p>
+                AI and Machine Learning concepts.
+            </p>
+
+            <button onclick="openNote('ai')">
+                Read Notes →
+            </button>
+
+        </div>
+
+
+        <!-- Programming -->
+
+        <div class="note-card">
+
+            <div class="icon">💻</div>
+
+            <h2>Programming</h2>
+
+            <p>
+                Programming concepts and examples.
+            </p>
+
+            <button onclick="openNote('programming')">
+                Read Notes →
+            </button>
+
+        </div>
+
+
+        <!-- Important Questions -->
+
+        <div class="note-card">
+
+            <div class="icon">📝</div>
+
+            <h2>Important Questions</h2>
+
+            <p>
+                Important questions for examinations.
+            </p>
+
+            <button onclick="openNote('questions')">
+                Read Notes →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Notes Content -->
+
+    <section id="note-content" class="note-content">
+
+        <button onclick="closeNote()" class="back">
+            ← Back
+        </button>
+
+        <div id="content"></div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Course Notes | Made with ❤️
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
