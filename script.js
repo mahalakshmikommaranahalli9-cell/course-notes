@@ -8,12 +8,13 @@ const subjects = {
         code: "BCS501",
         name: "Software Engineering and Project Management",
         icon: "💻",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "Software engineering concepts, development models and project management.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     },
 
@@ -21,12 +22,13 @@ const subjects = {
         code: "BCS502",
         name: "Computer Networks",
         icon: "🌐",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "Networking concepts, protocols, architectures and communication.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     },
 
@@ -34,12 +36,13 @@ const subjects = {
         code: "BCS503",
         name: "Theory of Computation",
         icon: "🧮",
-        units: [
-            "Unit 1 – Finite Automata",
-            "Unit 2 – Regular Languages",
-            "Unit 3 – Context-Free Grammars",
-            "Unit 4 – Pushdown Automata",
-            "Unit 5 – Turing Machines"
+        description: "Automata, formal languages, grammars and Turing machines.",
+        modules: [
+            "Module 1 – Finite Automata",
+            "Module 2 – Regular Languages",
+            "Module 3 – Context-Free Grammars",
+            "Module 4 – Pushdown Automata",
+            "Module 5 – Turing Machines"
         ]
     },
 
@@ -47,12 +50,13 @@ const subjects = {
         code: "BCS515B",
         name: "Artificial Intelligence",
         icon: "🤖",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "Artificial intelligence concepts, techniques and applications.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     },
 
@@ -60,7 +64,8 @@ const subjects = {
         code: "BCSL504",
         name: "Web Technology Lab",
         icon: "🌐",
-        units: [
+        description: "Practical web development using HTML, CSS and JavaScript.",
+        modules: [
             "HTML",
             "CSS",
             "JavaScript",
@@ -73,7 +78,8 @@ const subjects = {
         code: "BCS586",
         name: "Mini Project",
         icon: "🚀",
-        units: [
+        description: "Project development, implementation, documentation and presentation.",
+        modules: [
             "Project Planning",
             "Project Design",
             "Implementation",
@@ -86,12 +92,13 @@ const subjects = {
         code: "BRMK557",
         name: "Research Methodology and IPR",
         icon: "🔬",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "Research methods, technical writing and intellectual property rights.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     },
 
@@ -99,12 +106,13 @@ const subjects = {
         code: "BESK508",
         name: "Environmental Studies",
         icon: "🌱",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "Environmental concepts, sustainability and ecological awareness.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     },
 
@@ -112,12 +120,13 @@ const subjects = {
         code: "BNSK559",
         name: "NSS",
         icon: "🤝",
-        units: [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5"
+        description: "National Service Scheme activities and community service.",
+        modules: [
+            "Module 1",
+            "Module 2",
+            "Module 3",
+            "Module 4",
+            "Module 5"
         ]
     }
 
@@ -158,6 +167,9 @@ const backButton =
 const hero =
     document.getElementById("home");
 
+const themeButton =
+    document.getElementById("themeButton");
+
 
 /* =========================================
    SEARCH
@@ -168,12 +180,9 @@ if (searchInput) {
     searchInput.addEventListener("input", function () {
 
         const searchText =
-            searchInput.value
-                .trim()
-                .toLowerCase();
+            searchInput.value.trim().toLowerCase();
 
         let found = 0;
-
 
         subjectCards.forEach(function (card) {
 
@@ -186,7 +195,6 @@ if (searchInput) {
             ) {
 
                 card.style.display = "";
-
                 found++;
 
             } else {
@@ -198,24 +206,15 @@ if (searchInput) {
         });
 
 
-        /* Clear button */
-
         if (clearSearch) {
 
-            if (searchText.length > 0) {
-
-                clearSearch.style.display = "block";
-
-            } else {
-
-                clearSearch.style.display = "none";
-
-            }
+            clearSearch.style.display =
+                searchText.length > 0
+                    ? "block"
+                    : "none";
 
         }
 
-
-        /* Search result */
 
         if (searchResult) {
 
@@ -235,19 +234,12 @@ if (searchInput) {
         }
 
 
-        /* No results */
-
         if (noResults) {
 
-            if (found === 0 && searchText !== "") {
-
-                noResults.style.display = "block";
-
-            } else {
-
-                noResults.style.display = "none";
-
-            }
+            noResults.style.display =
+                found === 0
+                    ? "block"
+                    : "none";
 
         }
 
@@ -264,13 +256,17 @@ if (clearSearch) {
 
     clearSearch.addEventListener("click", function () {
 
-        searchInput.value = "";
+        if (searchInput) {
 
-        searchInput.dispatchEvent(
-            new Event("input")
-        );
+            searchInput.value = "";
 
-        searchInput.focus();
+            searchInput.dispatchEvent(
+                new Event("input")
+            );
+
+            searchInput.focus();
+
+        }
 
     });
 
@@ -301,78 +297,86 @@ document.querySelectorAll(".open-btn").forEach(function (button) {
 
 function openSubject(code) {
 
-    /* =========================================
-       BCS503 MODULE 1
-       OPEN SEPARATE NOTES PAGE
-    ========================================= */
-
-    if (code === "BCS503") {
-
-        window.location.href =
-            "BCS503-MODULE1.html";
-
-        return;
-    }
-
-
     const subject = subjects[code];
 
-
     if (!subject) {
-
         return;
-
     }
 
 
-    /* Hide home */
+    /* Hide homepage */
 
     if (hero) {
-
         hero.style.display = "none";
-
     }
 
     if (subjectContainer) {
-
         subjectContainer.style.display = "none";
-
     }
 
     if (noResults) {
-
         noResults.style.display = "none";
-
     }
 
 
     /* Show subject page */
 
     if (subjectPage) {
-
         subjectPage.style.display = "block";
-
     }
 
 
-    /* Create units */
+    /* =====================================
+       CREATE MODULE LIST
+    ===================================== */
 
-    let unitsHTML = "";
+    let modulesHTML = "";
 
 
-    subject.units.forEach(function (unit) {
+    subject.modules.forEach(function (module, index) {
 
-        unitsHTML += `
+        const moduleNumber = index + 1;
+
+        let moduleFile =
+            `module${moduleNumber}.html`;
+
+
+        let isAvailable = false;
+
+
+        /* Currently available notes */
+
+        if (
+            code === "BCS503" &&
+            moduleNumber === 1
+        ) {
+
+            isAvailable = true;
+
+        }
+
+
+        modulesHTML += `
 
             <div class="unit">
 
                 <span class="unit-name">
-                    ${unit}
+                    ${module}
                 </span>
 
-                <span class="coming-soon">
-                    Coming Soon
-                </span>
+                ${
+                    isAvailable
+                    ?
+                    `<button
+                        class="read-btn"
+                        onclick="openModule('${code}', ${moduleNumber})">
+                        📖 Read Notes →
+                    </button>`
+                    :
+                    `<span class="coming-soon">
+                        Coming Soon
+                    </span>`
+                }
 
             </div>
 
@@ -381,7 +385,9 @@ function openSubject(code) {
     });
 
 
-    /* Subject page */
+    /* =====================================
+       SUBJECT PAGE
+    ===================================== */
 
     if (subjectContent) {
 
@@ -411,10 +417,10 @@ function openSubject(code) {
             <div class="toc">
 
                 <h2>
-                    📑 Table of Contents
+                    📑 Course Modules
                 </h2>
 
-                ${unitsHTML}
+                ${modulesHTML}
 
             </div>
 
@@ -426,11 +432,11 @@ function openSubject(code) {
                 </div>
 
                 <h2>
-                    Notes Coming Soon
+                    Notes Library
                 </h2>
 
                 <p>
-                    Notes for this subject will be added here.
+                    Select a module above to access the course notes.
                 </p>
 
             </div>
@@ -440,12 +446,25 @@ function openSubject(code) {
     }
 
 
-    /* Scroll to top */
-
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
+}
+
+
+/* =========================================
+   OPEN MODULE
+========================================= */
+
+function openModule(code, moduleNumber) {
+
+    const moduleFile =
+        `module${moduleNumber}.html`;
+
+    window.location.href =
+        `${code}/${moduleFile}`;
 
 }
 
@@ -468,29 +487,20 @@ if (backButton) {
 function closeSubject() {
 
     if (subjectPage) {
-
         subjectPage.style.display = "none";
-
     }
 
     if (hero) {
-
         hero.style.display = "block";
-
     }
 
     if (subjectContainer) {
-
         subjectContainer.style.display = "grid";
-
     }
 
     if (searchResult) {
-
         searchResult.textContent = "";
-
     }
-
 
     window.scrollTo({
         top: 0,
@@ -504,16 +514,11 @@ function closeSubject() {
    DARK MODE
 ========================================= */
 
-const themeButton =
-    document.getElementById("themeButton");
-
-
 if (themeButton) {
 
     themeButton.addEventListener("click", function () {
 
         document.body.classList.toggle("dark");
-
 
         if (
             document.body.classList.contains("dark")
@@ -539,31 +544,16 @@ if (themeButton) {
 
     });
 
-}
 
+    /* Load saved theme */
 
-/* =========================================
-   LOAD SAVED THEME
-========================================= */
+    if (
+        localStorage.getItem("theme") === "dark"
+    ) {
 
-if (
-    localStorage.getItem("theme") === "dark"
-) {
-
-    document.body.classList.add("dark");
-
-
-    if (themeButton) {
+        document.body.classList.add("dark");
 
         themeButton.textContent = "☀️";
-
-    }
-
-} else {
-
-    if (themeButton) {
-
-        themeButton.textContent = "🌙";
 
     }
 
