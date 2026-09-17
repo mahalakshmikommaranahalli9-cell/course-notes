@@ -775,3 +775,30 @@ body.dark {
     }
 
 }
+/* =========================================
+   CONTENT PROTECTION
+========================================= */
+
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+input,
+textarea {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+@media print {
+    body {
+        display: none !important;
+    }
+}
