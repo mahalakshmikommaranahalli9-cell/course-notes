@@ -1,175 +1,203 @@
-const notes = {
+/* =========================================
+   SUBJECT DATA
+========================================= */
 
-    network: `
-        <h1>🌐 Computer Networks</h1>
+const subjects = {
 
-        <h2>OSI Model</h2>
-
-        <p>
-            The OSI model is a seven-layer model used
-            to understand network communication.
-        </p>
-
-        <ol>
-            <li>Physical Layer</li>
-            <li>Data Link Layer</li>
-            <li>Network Layer</li>
-            <li>Transport Layer</li>
-            <li>Session Layer</li>
-            <li>Presentation Layer</li>
-            <li>Application Layer</li>
-        </ol>
-
-        <h2>ICMP</h2>
-
-        <p>
-            ICMP stands for Internet Control Message Protocol.
-            It is used for error reporting and diagnostic purposes.
-        </p>
-    `,
+    BCS501: {
+        code: "BCS501",
+        name: "Software Engineering and Project Management",
+        icon: "💻",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    },
 
 
-    ai: `
-        <h1>🤖 Artificial Intelligence</h1>
-
-        <h2>What is AI?</h2>
-
-        <p>
-            Artificial Intelligence is the field of computing
-            that focuses on creating systems capable of performing
-            tasks that normally require human intelligence.
-        </p>
-
-        <h2>Machine Learning</h2>
-
-        <p>
-            Machine Learning allows computers to learn patterns
-            from data and make predictions or decisions.
-        </p>
-
-        <h2>Overfitting</h2>
-
-        <p>
-            Overfitting occurs when a model learns the training
-            data too closely and performs poorly on new data.
-        </p>
-
-        <h2>Underfitting</h2>
-
-        <p>
-            Underfitting occurs when a model is too simple to
-            capture important patterns in the data.
-        </p>
-    `,
+    BCS502: {
+        code: "BCS502",
+        name: "Computer Networks",
+        icon: "🌐",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    },
 
 
-    programming: `
-        <h1>💻 Programming</h1>
-
-        <h2>Python</h2>
-
-        <p>
-            Python is a high-level programming language
-            widely used in web development, automation,
-            data science and AI.
-        </p>
-
-        <h2>Variables</h2>
-
-        <p>
-            Variables are used to store data values.
-        </p>
-
-        <h2>Example</h2>
-
-        <p>
-            x = 10
-        </p>
-    `,
+    BCS503: {
+        code: "BCS503",
+        name: "Theory of Computation",
+        icon: "🧮",
+        units: [
+            "Unit 1 – Finite Automata",
+            "Unit 2 – Regular Languages",
+            "Unit 3 – Context-Free Grammars",
+            "Unit 4 – Pushdown Automata",
+            "Unit 5 – Turing Machines"
+        ]
+    },
 
 
-    questions: `
-        <h1>📝 Important Questions</h1>
+    BCS515B: {
+        code: "BCS515B",
+        name: "Artificial Intelligence",
+        icon: "🤖",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    },
 
-        <h2>Computer Networks</h2>
 
-        <ul>
-            <li>Explain the OSI model.</li>
-            <li>Explain TCP/IP architecture.</li>
-            <li>Explain ICMP.</li>
-            <li>Explain different network protocols.</li>
-        </ul>
+    BCSL504: {
+        code: "BCSL504",
+        name: "Web Technology Lab",
+        icon: "🌐",
+        units: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Web Programming",
+            "Lab Programs"
+        ]
+    },
 
-        <h2>Artificial Intelligence</h2>
 
-        <ul>
-            <li>What is Artificial Intelligence?</li>
-            <li>Explain Machine Learning.</li>
-            <li>Explain overfitting and underfitting.</li>
-            <li>Explain feature engineering.</li>
-        </ul>
-    `
+    BCS586: {
+        code: "BCS586",
+        name: "Mini Project",
+        icon: "🚀",
+        units: [
+            "Project Planning",
+            "Project Design",
+            "Implementation",
+            "Testing",
+            "Documentation & Presentation"
+        ]
+    },
+
+
+    BRMK557: {
+        code: "BRMK557",
+        name: "Research Methodology and IPR",
+        icon: "🔬",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    },
+
+
+    BESK508: {
+        code: "BESK508",
+        name: "Environmental Studies",
+        icon: "🌱",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    },
+
+
+    BNSK559: {
+        code: "BNSK559",
+        name: "NSS",
+        icon: "🤝",
+        units: [
+            "Unit 1",
+            "Unit 2",
+            "Unit 3",
+            "Unit 4",
+            "Unit 5"
+        ]
+    }
+
 };
 
 
-/* Open note */
 
-function openNote(type) {
+/* =========================================
+   GET ELEMENTS
+========================================= */
 
-    document.querySelector(".notes-container").style.display = "none";
+const searchInput =
+    document.getElementById("searchInput");
 
-    document.querySelector(".hero").style.display = "none";
+const clearSearch =
+    document.getElementById("clearSearch");
 
-    document.querySelector("#note-content").style.display = "block";
+const subjectCards =
+    document.querySelectorAll(".subject-card");
 
-    document.querySelector("#content").innerHTML = notes[type];
+const subjectContainer =
+    document.getElementById("subjectContainer");
 
-}
+const noResults =
+    document.getElementById("noResults");
 
+const searchResult =
+    document.getElementById("searchResult");
 
-/* Close note */
+const subjectPage =
+    document.getElementById("subjectPage");
 
-function closeNote() {
+const subjectContent =
+    document.getElementById("subjectContent");
 
-    document.querySelector(".notes-container").style.display = "grid";
+const backButton =
+    document.getElementById("backButton");
 
-    document.querySelector(".hero").style.display = "block";
-
-    document.querySelector("#note-content").style.display = "none";
-
-}
-
-
-/* Dark mode */
-
-function toggleTheme() {
-
-    document.body.classList.toggle("dark");
-
-}
+const hero =
+    document.getElementById("home");
 
 
-/* Search */
 
-function searchNotes() {
+/* =========================================
+   SEARCH
+========================================= */
 
-    const search =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+searchInput.addEventListener("input", function () {
 
-    const cards =
-        document.querySelectorAll(".note-card");
+    const searchText =
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
-    cards.forEach(card => {
 
-        const text =
+    let found = 0;
+
+
+    subjectCards.forEach(function (card) {
+
+        const cardText =
             card.innerText.toLowerCase();
 
-        if (text.includes(search)) {
 
-            card.style.display = "block";
+        if (
+            searchText === "" ||
+            cardText.includes(searchText)
+        ) {
+
+            card.style.display = "";
+
+            found++;
 
         } else {
 
@@ -179,29 +207,332 @@ function searchNotes() {
 
     });
 
-}
+
+    /* Clear button */
+
+    if (searchText.length > 0) {
+
+        clearSearch.style.display = "block";
+
+    } else {
+
+        clearSearch.style.display = "none";
+
+    }
 
 
-/* Disable right click */
+    /* Search result text */
 
-document.addEventListener("contextmenu", function(event) {
+    if (searchText === "") {
 
-    event.preventDefault();
+        searchResult.textContent = "";
 
-});
+    } else {
+
+        searchResult.textContent =
+            found + " subject" +
+            (found === 1 ? "" : "s") +
+            " found";
+
+    }
 
 
-/* Disable common copy shortcuts */
+    /* No results */
 
-document.addEventListener("keydown", function(event) {
+    if (found === 0) {
 
-    if (
-        (event.ctrlKey || event.metaKey) &&
-        ["c", "p", "u", "s"].includes(event.key.toLowerCase())
-    ) {
+        noResults.style.display = "block";
 
-        event.preventDefault();
+    } else {
+
+        noResults.style.display = "none";
 
     }
 
 });
+
+
+
+/* =========================================
+   CLEAR SEARCH
+========================================= */
+
+clearSearch.addEventListener("click", function () {
+
+    searchInput.value = "";
+
+    searchInput.dispatchEvent(
+        new Event("input")
+    );
+
+    searchInput.focus();
+
+});
+
+
+
+/* =========================================
+   OPEN SUBJECT
+========================================= */
+
+document.querySelectorAll(".open-btn").forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+        const code =
+            button.getAttribute("data-subject");
+
+        openSubject(code);
+
+    });
+
+});
+
+
+
+function openSubject(code) {
+
+    const subject = subjects[code];
+
+
+    if (!subject) {
+
+        return;
+
+    }
+
+
+    /* Hide home */
+
+    hero.style.display = "none";
+
+    subjectContainer.style.display = "none";
+
+    noResults.style.display = "none";
+
+
+    /* Show subject */
+
+    subjectPage.style.display = "block";
+
+
+    /* Create units */
+
+    let unitsHTML = "";
+
+
+    subject.units.forEach(function (unit) {
+
+        unitsHTML += `
+
+            <div class="unit">
+
+                <span class="unit-name">
+                    ${unit}
+                </span>
+
+                <span class="coming-soon">
+                    Coming Soon
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+
+    /* Subject page */
+
+    subjectContent.innerHTML = `
+
+        <div class="subject-heading">
+
+            <div class="big-icon">
+                ${subject.icon}
+            </div>
+
+            <span class="subject-code">
+                ${subject.code}
+            </span>
+
+            <h1>
+                ${subject.name}
+            </h1>
+
+            <p>
+                5th Semester • Computer Science & Engineering
+            </p>
+
+        </div>
+
+
+        <div class="toc">
+
+            <h2>
+                📑 Table of Contents
+            </h2>
+
+            ${unitsHTML}
+
+        </div>
+
+
+        <div class="notes-message">
+
+            <div class="book">
+                📚
+            </div>
+
+            <h2>
+                Notes Coming Soon
+            </h2>
+
+            <p>
+                Notes for this subject will be added here.
+            </p>
+
+        </div>
+
+    `;
+
+
+    /* Scroll to top */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+backButton.addEventListener("click", function () {
+
+    closeSubject();
+
+});
+
+
+function closeSubject() {
+
+    subjectPage.style.display = "none";
+
+    hero.style.display = "block";
+
+    subjectContainer.style.display = "grid";
+
+    searchResult.textContent = "";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+const themeButton =
+    document.getElementById("themeButton");
+
+
+themeButton.addEventListener("click", function () {
+
+    document.body.classList.toggle("dark");
+
+
+    if (
+        document.body.classList.contains("dark")
+    ) {
+
+        themeButton.textContent = "☀️";
+
+    } else {
+
+        themeButton.textContent = "🌙";
+
+    }
+
+});
+
+
+
+/* =========================================
+   SAVE DARK MODE
+========================================= */
+
+if (
+    localStorage.getItem("theme") === "dark"
+) {
+
+    document.body.classList.add("dark");
+
+    themeButton.textContent = "☀️";
+
+}
+
+
+themeButton.addEventListener("click", function () {
+
+    if (
+        document.body.classList.contains("dark")
+    ) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+
+    }
+
+});
+
+
+
+/* =========================================
+   DISABLE RIGHT CLICK
+========================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function (event) {
+
+        event.preventDefault();
+
+    }
+);
+
+
+
+/* =========================================
+   DISABLE COMMON SHORTCUTS
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "p", "u", "s"].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+);
