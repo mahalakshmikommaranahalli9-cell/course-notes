@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#111827">
+
+    <title>BCS501 Module 2 | VTU Notes</title>
+
+    <link rel="stylesheet"
+          href="../style.css">
+
+    <style>
+
+        .module-page {
+            width: min(900px, 92%);
+            margin: auto;
+            padding: 35px 0 70px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .module-header {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 22px;
+        }
+
+        .code {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .module-header h1 {
+            margin: 15px 0 8px;
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.15;
+        }
+
+        .module-header p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        .content-box {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .content-box h2 {
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        .content-box h3 {
+            font-size: 19px;
+            margin: 25px 0 10px;
+        }
+
+        .content-box p {
+            line-height: 1.75;
+            color: #475467;
+            margin-bottom: 12px;
+        }
+
+        .content-box ul,
+        .content-box ol {
+            padding-left: 23px;
+            line-height: 1.8;
+            color: #475467;
+        }
+
+        .content-box li {
+            margin-bottom: 6px;
+        }
+
+        .definition {
+            background: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            padding: 15px 17px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .definition strong {
+            color: #3730a3;
+        }
+
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .flow span {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 10px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .arrow {
+            color: #667085;
+            font-weight: bold;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e4e7ec;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .question h3 {
+            margin: 0 0 12px;
+            font-size: 17px;
+        }
+
+        .answer-title {
+            color: #4f46e5;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 18px 0;
+        }
+
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #dfe3eb;
+            padding: 11px;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        th {
+            background: #eef2ff;
+            color: #3730a3;
+        }
+
+        .diagram {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 18px 0;
+            text-align: center;
+            font-family: monospace;
+            line-height: 2;
+            overflow-x: auto;
+        }
+
+        .exam-tip {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .exam-tip strong {
+            color: #c2410c;
+        }
+
+        body.dark .module-header,
+        body.dark .content-box,
+        body.dark .question {
+            background: #111827;
+            border-color: #263043;
+        }
+
+        body.dark .module-header h1,
+        body.dark .content-box h2,
+        body.dark .content-box h3,
+        body.dark .question h3 {
+            color: #f8fafc;
+        }
+
+        body.dark .module-header p,
+        body.dark .content-box p,
+        body.dark .content-box ul,
+        body.dark .content-box ol {
+            color: #aab4c5;
+        }
+
+        body.dark .definition,
+        body.dark .question,
+        body.dark .diagram {
+            background: #172033;
+        }
+
+        body.dark th {
+            background: #1e293b;
+            color: #a5b4fc;
+        }
+
+        body.dark td {
+            border-color: #344054;
+            color: #d0d5dd;
+        }
+
+        @media (max-width: 600px) {
+
+            .module-page {
+                padding-top: 25px;
+            }
+
+            .module-header,
+            .content-box {
+                padding: 20px;
+            }
+
+            .module-header h1 {
+                font-size: 29px;
+            }
+
+            .content-box h2 {
+                font-size: 21px;
+            }
+
+            .content-box h3 {
+                font-size: 18px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow .arrow {
+                transform: rotate(90deg);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="../index.html"
+           class="logo">
+
+            📚 VTU Notes
+
+        </a>
+
+        <button id="themeButton"
+                class="theme-btn">
+
+            🌙
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main class="module-page">
+
+
+    <a href="index.html"
+       class="back">
+
+        ← Back to BCS501
+
+    </a>
+
+
+    <!-- HEADER -->
+
+    <section class="module-header">
+
+        <span class="code">
+            BCS501
+        </span>
+
+        <h1>
+            Module 2
+        </h1>
+
+        <p>
+            Understanding Requirements and
+            Requirements Modeling
+        </p>
+
+        <p>
+            5th Semester • CSE • 2022 Scheme
+        </p>
+
+    </section>
+
+
+
+    <!-- TOPICS -->
+
+    <section class="content-box">
+
+        <h2>📚 Module 2 Topics</h2>
+
+        <ul>
+
+            <li>Requirements Engineering</li>
+
+            <li>Establishing the Groundwork</li>
+
+            <li>Eliciting Requirements</li>
+
+            <li>Developing Use Cases</li>
+
+            <li>Building the Requirements Model</li>
+
+            <li>Negotiating Requirements</li>
+
+            <li>Validating Requirements</li>
+
+            <li>Scenario-Based Modeling</li>
+
+            <li>Information and Analysis Classes</li>
+
+            <li>UML Models that Supplement the Use Case</li>
+
+            <li>Data Modeling Concepts</li>
+
+            <li>Class-Based Modeling</li>
+
+            <li>Flow-Oriented Modeling</li>
+
+            <li>Behavioral Modeling</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- REQUIREMENTS ENGINEERING -->
+
+    <section class="content-box">
+
+        <h2>1. Requirements Engineering</h2>
+
+        <p>
+            Requirements engineering is a systematic process
+            used to identify, understand, document and validate
+            what stakeholders expect from a software system.
+        </p>
+
+        <div class="definition">
+
+            <strong>Definition:</strong>
+
+            Requirements engineering is the process of
+            discovering, documenting and maintaining the
+            services and constraints required from a system.
+
+        </div>
+
+
+        <h3>Main Activities</h3>
+
+        <div class="flow">
+
+            <span>Inception</span>
+
+            <b class="arrow">→</b>
+
+            <span>Elicitation</span>
+
+            <b class="arrow">→</b>
+
+            <span>Elaboration</span>
+
+            <b class="arrow">→</b>
+
+            <span>Negotiation</span>
+
+            <b class="arrow">→</b>
+
+            <span>Specification</span>
+
+            <b class="arrow">→</b>
+
+            <span>Validation</span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- GROUNDWORK -->
+
+    <section class="content-box">
+
+        <h2>2. Establishing the Groundwork</h2>
+
+        <p>
+            Before requirements are collected in detail,
+            the development team establishes a foundation
+            for communication with stakeholders.
+        </p>
+
+        <h3>Important Activities</h3>
+
+        <ol>
+
+            <li>
+                Identify stakeholders.
+            </li>
+
+            <li>
+                Understand the problem and business objectives.
+            </li>
+
+            <li>
+                Identify project scope.
+            </li>
+
+            <li>
+                Establish communication methods.
+            </li>
+
+            <li>
+                Identify constraints and assumptions.
+            </li>
+
+            <li>
+                Determine feasibility and project context.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+
+    <!-- ELICITATION -->
+
+    <section class="content-box">
+
+        <h2>3. Eliciting Requirements</h2>
+
+        <p>
+            Requirements elicitation is the process of collecting
+            requirements from customers, users and other stakeholders.
+        </p>
+
+        <h3>Common Elicitation Techniques</h3>
+
+        <ul>
+
+            <li>Interviews</li>
+
+            <li>Questionnaires</li>
+
+            <li>Observation</li>
+
+            <li>Workshops</li>
+
+            <li>Brainstorming</li>
+
+            <li>Document analysis</li>
+
+            <li>Prototyping</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- USE CASE -->
+
+    <section class="content-box">
+
+        <h2>4. Developing Use Cases</h2>
+
+        <p>
+            A use case describes how an actor interacts with
+            a system to accomplish a particular goal.
+        </p>
+
+        <div class="definition">
+
+            <strong>Example:</strong>
+
+            In an online shopping system, a customer can
+            "Place Order" by selecting products, entering
+            delivery details and confirming payment.
+
+        </div>
+
+
+        <h3>Basic Use Case Elements</h3>
+
+        <ul>
+
+            <li><strong>Actor:</strong> external entity interacting with the system.</li>
+
+            <li><strong>Use Case:</strong> functionality provided by the system.</li>
+
+            <li><strong>System Boundary:</strong> identifies what belongs to the system.</li>
+
+            <li><strong>Association:</strong> relationship between actor and use case.</li>
+
+        </ul>
+
+
+        <div class="diagram">
+
+            Actor
+
+            <br>
+
+            ↓
+
+            <br>
+
+            [ Use Case ]
+
+            <br>
+
+            ↓
+
+            <br>
+
+            System
+
+        </div>
+
+    </section>
+
+
+
+    <!-- REQUIREMENT MODEL -->
+
+    <section class="content-box">
+
+        <h2>5. Building the Requirements Model</h2>
+
+        <p>
+            A requirements model represents the requirements
+            from different viewpoints so that developers and
+            stakeholders can understand the proposed system.
+        </p>
+
+        <h3>Major Modeling Elements</h3>
+
+        <ul>
+
+            <li>Scenario-based elements</li>
+
+            <li>Class-based elements</li>
+
+            <li>Behavioral elements</li>
+
+            <li>Flow-oriented elements</li>
+
+            <li>Data-oriented elements</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- QFD -->
+
+    <section class="content-box">
+
+        <h2>6. Quality Function Deployment (QFD)</h2>
+
+        <p>
+            Quality Function Deployment is a technique used
+            to identify customer requirements and translate
+            them into technical or engineering requirements.
+        </p>
+
+        <h3>Types of Requirements in QFD</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Type</th>
+
+                    <th>Description</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>Normal Requirements</td>
+
+                    <td>
+                        Requirements explicitly requested by
+                        customers or users.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Expected Requirements</td>
+
+                    <td>
+                        Features that users normally expect
+                        even if they do not explicitly state them.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Exciting Requirements</td>
+
+                    <td>
+                        Features that provide additional
+                        satisfaction when present.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+
+    <!-- NEGOTIATION -->
+
+    <section class="content-box">
+
+        <h2>7. Negotiating Requirements</h2>
+
+        <p>
+            Different stakeholders may have conflicting
+            requirements. Negotiation is used to reach an
+            acceptable agreement.
+        </p>
+
+        <h3>Basic Steps</h3>
+
+        <ol>
+
+            <li>Identify conflicting requirements.</li>
+
+            <li>Discuss stakeholder priorities.</li>
+
+            <li>Identify technical and business constraints.</li>
+
+            <li>Find alternative solutions.</li>
+
+            <li>Agree on priorities and compromises.</li>
+
+            <li>Document the final decisions.</li>
+
+        </ol>
+
+    </section>
+
+
+
+    <!-- VALIDATION -->
+
+    <section class="content-box">
+
+        <h2>8. Validating Requirements</h2>
+
+        <p>
+            Requirements validation checks whether documented
+            requirements correctly represent stakeholder needs
+            and are suitable for development.
+        </p>
+
+        <h3>Validation Checks</h3>
+
+        <ul>
+
+            <li><strong>Validity:</strong> Does the requirement represent a real need?</li>
+
+            <li><strong>Consistency:</strong> Are requirements free from conflicts?</li>
+
+            <li><strong>Completeness:</strong> Are all important requirements included?</li>
+
+            <li><strong>Realism:</strong> Can the requirement actually be implemented?</li>
+
+            <li><strong>Verifiability:</strong> Can the requirement be tested?</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- SCENARIO -->
+
+    <section class="content-box">
+
+        <h2>9. Scenario-Based Modeling</h2>
+
+        <p>
+            Scenario-based modeling describes system behavior
+            from the viewpoint of users or external actors.
+        </p>
+
+        <h3>Example</h3>
+
+        <p>
+            Consider an ATM withdrawal scenario:
+        </p>
+
+        <ol>
+
+            <li>Customer inserts the card.</li>
+
+            <li>System asks for PIN.</li>
+
+            <li>Customer enters PIN.</li>
+
+            <li>System validates the PIN.</li>
+
+            <li>Customer selects withdrawal.</li>
+
+            <li>System provides the requested amount.</li>
+
+        </ol>
+
+    </section>
+
+
+
+    <!-- UML -->
+
+    <section class="content-box">
+
+        <h2>10. UML Models</h2>
+
+        <p>
+            UML provides standardized diagrams for representing
+            different views of a software system.
+        </p>
+
+        <h3>Useful UML Models</h3>
+
+        <ul>
+
+            <li>Use Case Diagram</li>
+
+            <li>Activity Diagram</li>
+
+            <li>Class Diagram</li>
+
+            <li>Sequence Diagram</li>
+
+            <li>State Diagram</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <!-- DATA MODEL -->
+
+    <section class="content-box">
+
+        <h2>11. Data Modeling Concepts</h2>
+
+        <p>
+            Data modeling identifies important data objects,
+            their attributes and relationships.
+        </p>
+
+        <h3>Example: Student System</h3>
+
+        <div class="diagram">
+
+            STUDENT
+
+            <br>
+
+            ├── Student_ID
+
+            <br>
+
+            ├── Name
+
+            <br>
+
+            ├── Email
+
+            <br>
+
+            └── Department
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CRC -->
+
+    <section class="content-box">
+
+        <h2>12. Class-Responsibility-Collaborator (CRC) Modeling</h2>
+
+        <p>
+            CRC modeling is a technique used to identify classes
+            and distribute responsibilities among them.
+        </p>
+
+        <h3>Three Components</h3>
+
+        <ul>
+
+            <li>
+                <strong>Class:</strong>
+                Represents an important entity or abstraction.
+            </li>
+
+            <li>
+                <strong>Responsibility:</strong>
+                Describes what the class knows or does.
+            </li>
+
+            <li>
+                <strong>Collaborator:</strong>
+                Identifies another class that helps perform
+                a responsibility.
+            </li>
+
+        </ul>
+
+
+        <div class="diagram">
+
+            ┌───────────────────────────┐
+
+            <br>
+
+            │ CLASS: Student           │
+
+            <br>
+
+            │                           │
+
+            <br>
+
+            │ Responsibilities:        │
+
+            <br>
+
+            │ • Register course        │
+
+            <br>
+
+            │ • View marks             │
+
+            <br>
+
+            │                           │
+
+            <br>
+
+            │ Collaborators:           │
+
+            <br>
+
+            │ • Course                 │
+
+            <br>
+
+            │ • Faculty                │
+
+            <br>
+
+            └───────────────────────────┘
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FLOW MODEL -->
+
+    <section class="content-box">
+
+        <h2>13. Flow-Oriented Modeling</h2>
+
+        <p>
+            Flow-oriented modeling represents how information
+            moves through a system and how it is transformed
+            by processing functions.
+        </p>
+
+        <div class="flow">
+
+            <span>Input</span>
+
+            <b class="arrow">→</b>
+
+            <span>Process</span>
+
+            <b class="arrow">→</b>
+
+            <span>Output</span>
+
+        </div>
+
+        <p>
+            Data Flow Diagrams (DFDs) are commonly used to
+            represent information flow.
+        </p>
+
+    </section>
+
+
+
+    <!-- BEHAVIOR -->
+
+    <section class="content-box">
+
+        <h2>14. Behavioral Modeling</h2>
+
+        <p>
+            Behavioral modeling describes how a system or object
+            responds to events and how its state changes.
+        </p>
+
+        <div class="flow">
+
+            <span>Event</span>
+
+            <b class="arrow">→</b>
+
+            <span>State Change</span>
+
+            <b class="arrow">→</b>
+
+            <span>Action</span>
+
+        </div>
+
+        <p>
+            State diagrams are commonly used to represent
+            behavioral aspects of a system.
+        </p>
+
+    </section>
+
+
+
+    <!-- IMPORTANT QUESTIONS -->
+
+    <section class="content-box">
+
+        <h2>⭐ Important VTU Questions</h2>
+
+
+        <div class="question">
+
+            <h3>
+                Q1. With an example, describe CRC modeling.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                CRC stands for Class-Responsibility-Collaborator.
+                It is a technique used during object-oriented
+                requirements modeling.
+            </p>
+
+            <p>
+                A CRC card identifies a class, the responsibilities
+                assigned to it, and the other classes that collaborate
+                with it.
+            </p>
+
+            <p>
+                For example, in a college system, the
+                <strong>Student</strong> class may have
+                responsibilities such as registering for courses
+                and viewing marks. Its collaborators may include
+                <strong>Course</strong> and <strong>Faculty</strong>.
+            </p>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q2. Explain the three types of QFD requirements
+                with examples.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <ul>
+
+                <li>
+                    <strong>Normal requirements:</strong>
+                    Explicitly requested features.
+                    Example: user login.
+                </li>
+
+                <li>
+                    <strong>Expected requirements:</strong>
+                    Features users normally expect.
+                    Example: reasonable response time.
+                </li>
+
+                <li>
+                    <strong>Exciting requirements:</strong>
+                    Additional features that can increase
+                    user satisfaction.
+                    Example: personalized recommendations.
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q3. Explain scenario-based modeling with an example.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Scenario-based modeling describes the interaction
+                between an external actor and a software system.
+            </p>
+
+            <p>
+                For example, an ATM withdrawal scenario includes
+                inserting a card, entering a PIN, selecting
+                withdrawal, validating the transaction and
+                dispensing cash.
+            </p>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q4. How can you develop an effective use case?
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <ol>
+
+                <li>Identify the primary actor.</li>
+
+                <li>Identify the actor's goal.</li>
+
+                <li>Define the normal flow of events.</li>
+
+                <li>Identify alternate and exceptional flows.</li>
+
+                <li>Specify preconditions.</li>
+
+                <li>Specify postconditions.</li>
+
+                <li>Review the use case with stakeholders.</li>
+
+            </ol>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q5. Explain requirements engineering and
+                its major activities.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Requirements engineering is the systematic process
+                of discovering, documenting, negotiating and
+                validating system requirements.
+            </p>
+
+            <ol>
+
+                <li>Inception</li>
+
+                <li>Elicitation</li>
+
+                <li>Elaboration</li>
+
+                <li>Negotiation</li>
+
+                <li>Specification</li>
+
+                <li>Validation</li>
+
+            </ol>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q6. Explain requirements validation.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Requirements validation ensures that the
+                documented requirements correctly describe
+                the required system.
+            </p>
+
+            <p>
+                The main checks are validity, consistency,
+                completeness, realism and verifiability.
+            </p>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q7. Explain class-based modeling.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Class-based modeling identifies classes,
+                attributes, operations and relationships
+                among objects in the problem domain.
+            </p>
+
+            <p>
+                For example, in a college system,
+                Student, Course and Faculty can be identified
+                as analysis classes.
+            </p>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q8. Explain flow-oriented modeling.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Flow-oriented modeling represents the movement
+                and transformation of information within a system.
+            </p>
+
+            <p>
+                A Data Flow Diagram can represent external entities,
+                processes, data stores and data flows.
+            </p>
+
+        </div>
+
+
+
+        <div class="question">
+
+            <h3>
+                Q9. Explain behavioral modeling.
+            </h3>
+
+            <div class="answer-title">
+                Answer:
+            </div>
+
+            <p>
+                Behavioral modeling represents how a system
+                responds to events and how its state changes.
+                State diagrams are commonly used to model
+                such behavior.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- EXAM TIP -->
+
+    <section class="content-box">
+
+        <div class="exam-tip">
+
+            <strong>🎯 VTU Exam Tip</strong>
+
+            <p style="margin-top:8px;">
+
+                Prepare CRC modeling, QFD, scenario-based modeling,
+                use cases, requirements engineering, negotiation,
+                validation and UML models carefully.
+
+                For 10-mark questions, use:
+                <br><br>
+
+                <strong>
+                    Definition → Diagram → Explanation →
+                    Example → Key points
+                </strong>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<footer class="footer">
+
+    <p>
+        5th Semester CSE • VTU 2022 Scheme
+    </p>
+
+    <p>
+        Made with ❤️ by
+        <strong>Mahalakshmi Kommaranahalli</strong>
+    </p>
+
+</footer>
+
+
+
+<script src="../script.js"></script>
+
+
+</body>
+</html>
