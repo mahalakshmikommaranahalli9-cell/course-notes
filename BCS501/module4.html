@@ -1,0 +1,2066 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+
+    <title>BCS501 Module 4 | Software Project Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #1e3a8a);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #dbeafe;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 25px auto;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #2563eb;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 25px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2563eb;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #374151;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #111827;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .exam {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .danger {
+            background: #fef2f2;
+            border-left: 5px solid #dc2626;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .diagram {
+            background: #111827;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 3px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .two-mark {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 7px;
+        }
+
+        .answer {
+            background: #f9fafb;
+            padding: 14px;
+            margin-top: 8px;
+            border-radius: 7px;
+        }
+
+        .toc a {
+            display: block;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .diagram {
+                font-size: 12px;
+            }
+        }
+
+        /* Discourage casual copying */
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>BCS501 — Module 4</h1>
+
+    <p>
+        Software Engineering & Project Management
+        • Software Project Management
+    </p>
+
+</header>
+
+
+<div class="container">
+
+    <a href="index.html" class="back">
+        ← Back to BCS501
+    </a>
+
+
+    <!-- OVERVIEW -->
+
+    <section class="card">
+
+        <h2>📚 Module 4 — Introduction to Project Management</h2>
+
+        <p>
+            Software Project Management deals with planning,
+            organizing, monitoring and controlling software projects
+            so that the project objectives can be achieved within
+            agreed constraints.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Simple Definition:</strong>
+
+            Software Project Management =
+            <strong>Plan + Organize + Monitor + Control + Deliver</strong>
+
+        </div>
+
+        <h3>Major Topics</h3>
+
+        <span class="tag">Project Management</span>
+        <span class="tag">Contract Management</span>
+        <span class="tag">Project Activities</span>
+        <span class="tag">Project Plans</span>
+        <span class="tag">Project Categories</span>
+        <span class="tag">Stakeholders</span>
+        <span class="tag">Objectives</span>
+        <span class="tag">Business Case</span>
+        <span class="tag">Project Life Cycle</span>
+        <span class="tag">Project Evaluation</span>
+        <span class="tag">Cost-Benefit</span>
+        <span class="tag">Risk Evaluation</span>
+
+    </section>
+
+
+    <!-- TOC -->
+
+    <section class="card toc">
+
+        <h2>📑 Contents</h2>
+
+        <a href="#intro">1. Introduction to Project Management</a>
+
+        <a href="#importance">2. Importance of Project Management</a>
+
+        <a href="#contract">3. Contract Management</a>
+
+        <a href="#activities">4. Activities Covered by Software Project Management</a>
+
+        <a href="#plans">5. Plans, Methods and Methodologies</a>
+
+        <a href="#categories">6. Categories of Software Projects</a>
+
+        <a href="#stakeholders">7. Stakeholders</a>
+
+        <a href="#objectives">8. Setting Project Objectives</a>
+
+        <a href="#business">9. Business Case</a>
+
+        <a href="#success">10. Project Success and Failure</a>
+
+        <a href="#control">11. Management and Management Control</a>
+
+        <a href="#lifecycle">12. Project Management Life Cycle</a>
+
+        <a href="#traditional">13. Traditional vs Modern Project Management</a>
+
+        <a href="#evaluation">14. Project Evaluation</a>
+
+        <a href="#costbenefit">15. Cost-Benefit Evaluation Techniques</a>
+
+        <a href="#risk">16. Risk Evaluation</a>
+
+        <a href="#comparison">17. Software Projects vs Other Projects</a>
+
+        <a href="#questions">18. VTU Important Questions</a>
+
+        <a href="#twomark">19. 2-Mark Questions</a>
+
+        <a href="#tenmark">20. 10-Mark Answer Preparation</a>
+
+        <a href="#revision">21. Last-Minute Revision</a>
+
+    </section>
+
+
+    <!-- INTRO -->
+
+    <section class="card" id="intro">
+
+        <h2>1. Introduction to Project Management</h2>
+
+        <p>
+            A <strong>project</strong> is a temporary activity
+            undertaken to create a specific product, service or result.
+        </p>
+
+        <p>
+            A software project involves activities such as requirements
+            analysis, design, coding, testing, deployment and maintenance.
+        </p>
+
+        <h3>Project Management</h3>
+
+        <p>
+            Project management is the application of knowledge,
+            skills, tools and techniques to project activities to
+            achieve project requirements and objectives.
+        </p>
+
+        <h3>Typical Project Constraints</h3>
+
+        <div class="diagram">
+
+                 PROJECT
+                    │
+        ┌───────────┼───────────┐
+        ↓           ↓           ↓
+       TIME       COST       SCOPE
+        │           │           │
+        └───────────┼───────────┘
+                    ↓
+                 QUALITY
+
+        </div>
+
+        <p>
+            A project manager must balance factors such as
+            <strong>scope, time, cost, quality, resources and risk</strong>.
+        </p>
+
+    </section>
+
+
+    <!-- IMPORTANCE -->
+
+    <section class="card" id="importance">
+
+        <h2>2. Importance of Project Management</h2>
+
+        <p>
+            Software projects involve people, technology, money,
+            schedules and changing requirements. Project management
+            provides a systematic way to coordinate these elements.
+        </p>
+
+        <h3>Importance</h3>
+
+        <ul>
+
+            <li>Helps define clear project objectives.</li>
+
+            <li>Provides proper planning.</li>
+
+            <li>Controls project cost.</li>
+
+            <li>Controls project schedule.</li>
+
+            <li>Manages project risks.</li>
+
+            <li>Coordinates team members.</li>
+
+            <li>Monitors project progress.</li>
+
+            <li>Helps maintain quality.</li>
+
+            <li>Improves communication with stakeholders.</li>
+
+            <li>Supports successful project delivery.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- CONTRACT -->
+
+    <section class="card" id="contract">
+
+        <h2>3. Contract Management</h2>
+
+        <p>
+            A <strong>contract</strong> is a formal agreement between
+            parties that defines obligations, responsibilities,
+            deliverables, payments and other conditions.
+        </p>
+
+        <p>
+            Contract management is the process of managing the contract
+            from its creation through completion.
+        </p>
+
+        <h3>Stages of Contract Management</h3>
+
+        <div class="diagram">
+
+        Identify Requirement
+                ↓
+        Prepare Contract
+                ↓
+        Select Supplier / Contractor
+                ↓
+        Negotiate Terms
+                ↓
+        Contract Agreement
+                ↓
+        Contract Execution
+                ↓
+        Monitor Performance
+                ↓
+        Manage Changes
+                ↓
+        Contract Completion
+                ↓
+        Review / Closure
+
+        </div>
+
+        <h3>Important Activities</h3>
+
+        <ul>
+
+            <li>Define requirements.</li>
+
+            <li>Prepare contract specifications.</li>
+
+            <li>Negotiate price and terms.</li>
+
+            <li>Define responsibilities.</li>
+
+            <li>Monitor supplier performance.</li>
+
+            <li>Manage changes and disputes.</li>
+
+            <li>Verify deliverables.</li>
+
+            <li>Complete contract closure.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- ACTIVITIES -->
+
+    <section class="card" id="activities">
+
+        <h2>4. Activities Covered by Software Project Management</h2>
+
+        <p>
+            Software Project Management covers several activities
+            required to plan and control the project.
+        </p>
+
+        <div class="diagram">
+
+          SOFTWARE PROJECT MANAGEMENT
+                    │
+       ┌────────────┼─────────────┐
+       ↓            ↓             ↓
+    Planning    Monitoring     Control
+       │            │             │
+       ↓            ↓             ↓
+   Estimation   Progress       Corrective
+   Scheduling   Tracking       Actions
+       │
+       ├── Resources
+       ├── Cost
+       ├── Time
+       ├── Quality
+       └── Risk
+
+        </div>
+
+        <h3>Main Activities</h3>
+
+        <ol>
+
+            <li>
+                <strong>Project planning:</strong>
+                Define what must be done and how.
+            </li>
+
+            <li>
+                <strong>Estimation:</strong>
+                Estimate effort, cost and resources.
+            </li>
+
+            <li>
+                <strong>Scheduling:</strong>
+                Assign activities and establish time frames.
+            </li>
+
+            <li>
+                <strong>Resource management:</strong>
+                Allocate people, hardware and software resources.
+            </li>
+
+            <li>
+                <strong>Risk management:</strong>
+                Identify and manage possible risks.
+            </li>
+
+            <li>
+                <strong>Quality management:</strong>
+                Ensure required quality standards are followed.
+            </li>
+
+            <li>
+                <strong>Monitoring:</strong>
+                Compare actual progress with planned progress.
+            </li>
+
+            <li>
+                <strong>Control:</strong>
+                Take corrective actions when deviations occur.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- PLANS -->
+
+    <section class="card" id="plans">
+
+        <h2>5. Plans, Methods and Methodologies</h2>
+
+        <h3>Project Plan</h3>
+
+        <p>
+            A project plan describes how the project will be executed,
+            monitored and controlled.
+        </p>
+
+        <h3>Typical Contents</h3>
+
+        <ul>
+
+            <li>Project objectives</li>
+
+            <li>Scope</li>
+
+            <li>Schedule</li>
+
+            <li>Resources</li>
+
+            <li>Budget</li>
+
+            <li>Quality requirements</li>
+
+            <li>Risk management</li>
+
+            <li>Communication plan</li>
+
+            <li>Configuration management</li>
+
+        </ul>
+
+        <h3>Methods</h3>
+
+        <p>
+            Methods are organized approaches used to perform project
+            activities or solve specific project problems.
+        </p>
+
+        <h3>Methodology</h3>
+
+        <p>
+            A methodology provides a structured set of processes,
+            practices, guidelines and activities for managing and
+            developing a project.
+        </p>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="card" id="categories">
+
+        <h2>6. Categories of Software Projects</h2>
+
+        <p>
+            Software projects can be categorized based on their
+            purpose, size, application domain, complexity and
+            development environment.
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Category</th>
+                <th>Example</th>
+            </tr>
+
+            <tr>
+                <td>Information Systems</td>
+                <td>
+                    College management system
+                </td>
+            </tr>
+
+            <tr>
+                <td>Embedded Systems</td>
+                <td>
+                    Software controlling a medical device
+                </td>
+            </tr>
+
+            <tr>
+                <td>Web Applications</td>
+                <td>
+                    Online shopping website
+                </td>
+            </tr>
+
+            <tr>
+                <td>Mobile Applications</td>
+                <td>
+                    Banking mobile application
+                </td>
+            </tr>
+
+            <tr>
+                <td>Real-Time Systems</td>
+                <td>
+                    Air traffic monitoring system
+                </td>
+            </tr>
+
+            <tr>
+                <td>Scientific / Engineering Software</td>
+                <td>
+                    Simulation software
+                </td>
+            </tr>
+
+            <tr>
+                <td>Artificial Intelligence Systems</td>
+                <td>
+                    Machine learning prediction system
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="exam">
+
+            <strong>Exam Tip:</strong>
+
+            If asked to explain categories, write the category,
+            definition and one suitable example.
+
+        </div>
+
+    </section>
+
+
+    <!-- STAKEHOLDERS -->
+
+    <section class="card" id="stakeholders">
+
+        <h2>7. Stakeholders</h2>
+
+        <p>
+            A <strong>stakeholder</strong> is a person, group or
+            organization that can affect, be affected by, or have an
+            interest in the project.
+        </p>
+
+        <h3>Examples</h3>
+
+        <ul>
+
+            <li>Customer</li>
+
+            <li>Project manager</li>
+
+            <li>Software developers</li>
+
+            <li>Testers</li>
+
+            <li>End users</li>
+
+            <li>Management</li>
+
+            <li>Suppliers</li>
+
+            <li>Government or regulatory bodies</li>
+
+        </ul>
+
+        <div class="diagram">
+
+                  STAKEHOLDERS
+                       │
+        ┌──────────────┼──────────────┐
+        ↓              ↓              ↓
+     Customer       Project         Users
+                    Manager
+        ↓              ↓              ↓
+    Requirements     Team         Feedback
+
+        </div>
+
+    </section>
+
+
+    <!-- OBJECTIVES -->
+
+    <section class="card" id="objectives">
+
+        <h2>8. Setting Project Objectives</h2>
+
+        <p>
+            Project objectives describe what the project is expected
+            to achieve.
+        </p>
+
+        <h3>Characteristics of Good Objectives</h3>
+
+        <ul>
+
+            <li><strong>Specific</strong> — clearly defined.</li>
+
+            <li><strong>Measurable</strong> — progress can be measured.</li>
+
+            <li><strong>Achievable</strong> — realistically possible.</li>
+
+            <li><strong>Relevant</strong> — related to project goals.</li>
+
+            <li><strong>Time-bound</strong> — has a defined time frame.</li>
+
+        </ul>
+
+        <h3>Procedure for Setting Objectives</h3>
+
+        <div class="diagram">
+
+        Identify Business Need
+                ↓
+        Understand Stakeholder Needs
+                ↓
+        Define Project Scope
+                ↓
+        Define Specific Objectives
+                ↓
+        Identify Constraints
+                ↓
+        Define Measures of Success
+                ↓
+        Review and Approve
+                ↓
+        Monitor Objectives
+
+        </div>
+
+        <div class="exam">
+
+            <strong>Example:</strong>
+
+            Develop and deploy a college attendance system that allows
+            faculty to record attendance and students to view their
+            attendance within the planned project period.
+
+        </div>
+
+    </section>
+
+
+    <!-- BUSINESS CASE -->
+
+    <section class="card" id="business">
+
+        <h2>9. Business Case</h2>
+
+        <p>
+            A <strong>business case</strong> provides justification
+            for undertaking a project. It explains why the project is
+            needed and whether the expected benefits justify the
+            required investment.
+        </p>
+
+        <h3>Contents of a Business Case</h3>
+
+        <ul>
+
+            <li>Business problem or opportunity</li>
+
+            <li>Project objectives</li>
+
+            <li>Expected benefits</li>
+
+            <li>Estimated cost</li>
+
+            <li>Resources required</li>
+
+            <li>Major risks</li>
+
+            <li>Possible alternatives</li>
+
+            <li>Financial evaluation</li>
+
+            <li>Recommendation / decision</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- SUCCESS FAILURE -->
+
+    <section class="card" id="success">
+
+        <h2>10. Project Success and Failure</h2>
+
+        <h3>Project Success</h3>
+
+        <p>
+            A software project can be considered successful when it
+            satisfies its agreed objectives and stakeholder
+            expectations within applicable constraints.
+        </p>
+
+        <h3>Factors Supporting Success</h3>
+
+        <ul>
+
+            <li>Clear objectives</li>
+
+            <li>Good requirements</li>
+
+            <li>Effective planning</li>
+
+            <li>Skilled team</li>
+
+            <li>Good communication</li>
+
+            <li>Effective risk management</li>
+
+            <li>Customer involvement</li>
+
+            <li>Quality assurance</li>
+
+        </ul>
+
+        <h3>Common Causes of Failure</h3>
+
+        <ul>
+
+            <li>Unclear objectives</li>
+
+            <li>Poor requirements</li>
+
+            <li>Unrealistic schedules</li>
+
+            <li>Poor estimation</li>
+
+            <li>Insufficient resources</li>
+
+            <li>Weak communication</li>
+
+            <li>Unmanaged risks</li>
+
+            <li>Uncontrolled scope changes</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- CONTROL -->
+
+    <section class="card" id="control">
+
+        <h2>11. Management and Management Control</h2>
+
+        <p>
+            Management involves planning, organizing, directing and
+            controlling project resources to achieve project objectives.
+        </p>
+
+        <h3>Management Control</h3>
+
+        <p>
+            Management control involves comparing actual project
+            performance with planned performance and taking corrective
+            action when necessary.
+        </p>
+
+        <div class="diagram">
+
+             PROJECT PLAN
+                  ↓
+             ACTUAL WORK
+                  ↓
+             MEASURE PROGRESS
+                  ↓
+          COMPARE WITH PLAN
+                  ↓
+             ┌────┴────┐
+             ↓         ↓
+          On Track   Deviation
+             ↓         ↓
+          Continue   Corrective
+                     Action
+                         ↓
+                    Update Plan
+
+        </div>
+
+    </section>
+
+
+    <!-- LIFE CYCLE -->
+
+    <section class="card" id="lifecycle">
+
+        <h2>12. Project Management Life Cycle</h2>
+
+        <p>
+            The project management life cycle describes the major
+            stages through which a project passes from beginning to
+            completion.
+        </p>
+
+        <div class="diagram">
+
+        INITIATION
+             ↓
+        PLANNING
+             ↓
+        EXECUTION
+             ↓
+        MONITORING
+          & CONTROL
+             ↓
+        CLOSURE
+
+        </div>
+
+        <h3>1. Initiation</h3>
+
+        <ul>
+
+            <li>Identify the project.</li>
+
+            <li>Understand the business need.</li>
+
+            <li>Identify stakeholders.</li>
+
+            <li>Define initial objectives.</li>
+
+            <li>Assess feasibility.</li>
+
+        </ul>
+
+        <h3>2. Planning</h3>
+
+        <ul>
+
+            <li>Define scope.</li>
+
+            <li>Prepare schedule.</li>
+
+            <li>Estimate cost.</li>
+
+            <li>Allocate resources.</li>
+
+            <li>Plan quality.</li>
+
+            <li>Identify risks.</li>
+
+        </ul>
+
+        <h3>3. Execution</h3>
+
+        <ul>
+
+            <li>Perform planned project activities.</li>
+
+            <li>Develop software.</li>
+
+            <li>Coordinate team members.</li>
+
+            <li>Manage resources.</li>
+
+        </ul>
+
+        <h3>4. Monitoring and Control</h3>
+
+        <ul>
+
+            <li>Measure project progress.</li>
+
+            <li>Compare actual and planned performance.</li>
+
+            <li>Monitor cost and schedule.</li>
+
+            <li>Manage risks.</li>
+
+            <li>Take corrective action.</li>
+
+        </ul>
+
+        <h3>5. Closure</h3>
+
+        <ul>
+
+            <li>Complete deliverables.</li>
+
+            <li>Obtain acceptance.</li>
+
+            <li>Close contracts.</li>
+
+            <li>Document lessons learned.</li>
+
+            <li>Release project resources.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- TRADITIONAL MODERN -->
+
+    <section class="card" id="traditional">
+
+        <h2>13. Traditional vs Modern Project Management</h2>
+
+        <table>
+
+            <tr>
+                <th>Traditional</th>
+                <th>Modern</th>
+            </tr>
+
+            <tr>
+                <td>Strong emphasis on upfront planning</td>
+                <td>Planning is progressively refined</td>
+            </tr>
+
+            <tr>
+                <td>Changes may require formal control</td>
+                <td>Change can be incorporated more continuously</td>
+            </tr>
+
+            <tr>
+                <td>Hierarchical management</td>
+                <td>Greater collaboration and team involvement</td>
+            </tr>
+
+            <tr>
+                <td>Progress often measured against plan</td>
+                <td>Working outcomes and value are emphasized</td>
+            </tr>
+
+            <tr>
+                <td>Customer involvement may be periodic</td>
+                <td>Frequent stakeholder feedback can be used</td>
+            </tr>
+
+            <tr>
+                <td>Detailed plans established early</td>
+                <td>Plans can evolve as information changes</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- EVALUATION -->
+
+    <section class="card" id="evaluation">
+
+        <h2>14. Project Evaluation</h2>
+
+        <p>
+            Project evaluation is the process of assessing whether a
+            proposed or completed project is worthwhile and whether it
+            meets specified objectives.
+        </p>
+
+        <h3>Evaluation of Individual Projects</h3>
+
+        <p>
+            Before selecting a project, management may examine
+            technical, financial, organizational and strategic factors.
+        </p>
+
+        <h3>Important Evaluation Factors</h3>
+
+        <ul>
+
+            <li>Expected benefits</li>
+
+            <li>Development cost</li>
+
+            <li>Operating cost</li>
+
+            <li>Technical feasibility</li>
+
+            <li>Available resources</li>
+
+            <li>Project risks</li>
+
+            <li>Strategic importance</li>
+
+            <li>Expected return</li>
+
+            <li>Time required</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- COST BENEFIT -->
+
+    <section class="card" id="costbenefit">
+
+        <h2>15. Cost-Benefit Evaluation Techniques</h2>
+
+        <p>
+            Cost-benefit evaluation compares the expected costs of a
+            project with its expected benefits.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Basic Idea:</strong>
+
+            If expected benefits justify the costs and risks, the
+            project may be considered economically attractive.
+
+        </div>
+
+        <h3>1. Payback Period</h3>
+
+        <p>
+            Payback period is the time required for the accumulated
+            benefits or cash inflows to recover the initial investment.
+        </p>
+
+        <div class="exam">
+
+            <strong>Simple formula:</strong>
+
+            <br><br>
+
+            Payback Period =
+            Initial Investment ÷ Annual Cash Inflow
+
+        </div>
+
+        <h3>2. Return on Investment (ROI)</h3>
+
+        <p>
+            ROI measures the return obtained relative to the investment.
+        </p>
+
+        <div class="exam">
+
+            <strong>Formula:</strong>
+
+            <br><br>
+
+            ROI =
+            (Net Benefit ÷ Investment) × 100
+
+        </div>
+
+        <h3>3. Net Present Value (NPV)</h3>
+
+        <p>
+            NPV considers the time value of money by converting future
+            cash flows into their present value.
+        </p>
+
+        <div class="exam">
+
+            <strong>Basic idea:</strong>
+
+            <br><br>
+
+            NPV = Present Value of Benefits − Present Value of Costs
+
+        </div>
+
+        <h3>4. Internal Rate of Return (IRR)</h3>
+
+        <p>
+            IRR is the discount rate at which the NPV of a project
+            becomes zero.
+        </p>
+
+        <h3>5. Cost-Benefit Ratio</h3>
+
+        <p>
+            The cost-benefit ratio compares the value of expected
+            benefits with the associated costs.
+        </p>
+
+        <div class="diagram">
+
+             PROJECT
+                │
+        ┌───────┴────────┐
+        ↓                ↓
+      COSTS           BENEFITS
+        │                │
+        └───────┬────────┘
+                ↓
+        ECONOMIC EVALUATION
+                ↓
+          PROJECT DECISION
+
+        </div>
+
+    </section>
+
+
+    <!-- RISK -->
+
+    <section class="card" id="risk">
+
+        <h2>16. Risk Evaluation</h2>
+
+        <p>
+            A <strong>risk</strong> is an uncertain event or condition
+            that may negatively affect project objectives such as
+            cost, schedule, scope or quality.
+        </p>
+
+        <h3>Risk Evaluation</h3>
+
+        <p>
+            Risk evaluation involves assessing identified risks based
+            on their likelihood and potential impact.
+        </p>
+
+        <h3>Risk Evaluation Process</h3>
+
+        <div class="diagram">
+
+        Identify Risk
+             ↓
+        Estimate Probability
+             ↓
+        Estimate Impact
+             ↓
+        Determine Risk Exposure
+             ↓
+        Prioritize Risks
+             ↓
+        Plan Response
+             ↓
+        Monitor Risk
+
+        </div>
+
+        <h3>Risk Exposure</h3>
+
+        <p>
+            A simple way to represent risk exposure is:
+        </p>
+
+        <div class="exam">
+
+            <strong>
+                Risk Exposure = Probability × Impact
+            </strong>
+
+        </div>
+
+        <h3>Example</h3>
+
+        <p>
+            Suppose a project has a 20% probability of a particular
+            risk occurring and the estimated loss is ₹50,000.
+        </p>
+
+        <div class="highlight">
+
+            Risk Exposure = 0.20 × ₹50,000
+
+            <br><br>
+
+            <strong>
+                Risk Exposure = ₹10,000
+            </strong>
+
+        </div>
+
+        <h3>Risk Responses</h3>
+
+        <table>
+
+            <tr>
+                <th>Response</th>
+                <th>Meaning</th>
+            </tr>
+
+            <tr>
+                <td>Avoid</td>
+                <td>
+                    Change the plan to eliminate the risk.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Reduce / Mitigate</td>
+                <td>
+                    Reduce probability or impact.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Transfer</td>
+                <td>
+                    Shift some responsibility or financial impact
+                    to another party.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Accept</td>
+                <td>
+                    Acknowledge the risk and monitor or manage it.
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- COMPARISON -->
+
+    <section class="card" id="comparison">
+
+        <h2>17. Software Projects vs Other Projects</h2>
+
+        <table>
+
+            <tr>
+                <th>Software Projects</th>
+                <th>Many Physical/Traditional Projects</th>
+            </tr>
+
+            <tr>
+                <td>
+                    Product is mainly intangible.
+                </td>
+
+                <td>
+                    Product may be physically observable.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Requirements can change frequently.
+                </td>
+
+                <td>
+                    Changes may be more expensive after physical work.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Progress can be difficult to judge visually.
+                </td>
+
+                <td>
+                    Physical progress may be easier to observe.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Technology changes rapidly.
+                </td>
+
+                <td>
+                    Technology may be comparatively stable depending
+                    on the project.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Software can be copied and modified easily.
+                </td>
+
+                <td>
+                    Physical products require physical materials.
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Maintenance and evolution are major concerns.
+                </td>
+
+                <td>
+                    Maintenance depends on the type of physical project.
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- VTU QUESTIONS -->
+
+    <section class="card" id="questions">
+
+        <h2>18. ⭐ VTU Important Questions</h2>
+
+        <div class="important">
+
+            These questions are based on the official VTU BCS501
+            model question paper.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q1.</strong>
+            Describe Project Management Life Cycle.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q2.</strong>
+            Demonstrate activities covered by Software Project
+            Management with neat diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q3.</strong>
+            Explain various stages of Contract Management.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q4.</strong>
+            Explain Project Risk Evaluation.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q5.</strong>
+            Explain Cost-Benefit Evaluation Techniques.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q6.</strong>
+            Differentiate between Software Projects and other types
+            of projects.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q7.</strong>
+            Explain the procedure of setting objectives for successful
+            completion of a software project.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q8.</strong>
+            With example explain different categories of Software
+            Projects.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q9.</strong>
+            Explain project evaluation.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q10.</strong>
+            Explain project success and failure.
+
+        </div>
+
+    </section>
+
+
+    <!-- 2 MARK -->
+
+    <section class="card" id="twomark">
+
+        <h2>19. ✍️ 2-Mark Questions & Answers</h2>
+
+        <div class="two-mark">
+
+            <strong>1. What is a project?</strong>
+
+            <div class="answer">
+                A project is a temporary activity undertaken to create
+                a specific product, service or result.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>2. What is Project Management?</strong>
+
+            <div class="answer">
+                Project management is the application of knowledge,
+                skills, tools and techniques to project activities to
+                achieve project objectives.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>3. What is a stakeholder?</strong>
+
+            <div class="answer">
+                A stakeholder is a person, group or organization that
+                can affect, be affected by, or have an interest in
+                the project.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>4. What is a business case?</strong>
+
+            <div class="answer">
+                A business case provides justification for undertaking
+                a project by considering its costs, benefits, risks
+                and expected value.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>5. What is project risk?</strong>
+
+            <div class="answer">
+                Project risk is an uncertain event or condition that
+                may negatively affect project objectives.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>6. What is risk exposure?</strong>
+
+            <div class="answer">
+                Risk exposure is a simple measure of potential risk
+                obtained as probability multiplied by impact.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>7. What is project life cycle?</strong>
+
+            <div class="answer">
+                Project life cycle is the sequence of stages through
+                which a project passes from initiation to closure.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>8. What is ROI?</strong>
+
+            <div class="answer">
+                Return on Investment measures the return obtained from
+                an investment relative to its cost.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>9. What is NPV?</strong>
+
+            <div class="answer">
+                Net Present Value is the difference between the present
+                value of project benefits and the present value of
+                project costs.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>10. What is contract management?</strong>
+
+            <div class="answer">
+                Contract management is the process of managing a
+                contract from preparation and negotiation through
+                execution and closure.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 10 MARK -->
+
+    <section class="card" id="tenmark">
+
+        <h2>20. 📝 10-Mark Answer Preparation</h2>
+
+        <h3>Q1. Describe Project Management Life Cycle.</h3>
+
+        <div class="exam">
+
+            <strong>Write in this order:</strong>
+
+            <ol>
+
+                <li>Definition of project management.</li>
+
+                <li>Definition of project life cycle.</li>
+
+                <li>Draw the life-cycle diagram.</li>
+
+                <li>Explain Initiation.</li>
+
+                <li>Explain Planning.</li>
+
+                <li>Explain Execution.</li>
+
+                <li>Explain Monitoring and Control.</li>
+
+                <li>Explain Closure.</li>
+
+                <li>Write a short conclusion.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q2. Explain Software Project Management Activities.</h3>
+
+        <div class="exam">
+
+            <strong>Remember:</strong>
+
+            <br><br>
+
+            Planning → Estimation → Scheduling → Resources →
+            Risk → Quality → Monitoring → Control
+
+        </div>
+
+
+        <h3>Q3. Explain Project Risk Evaluation.</h3>
+
+        <div class="exam">
+
+            <strong>Answer structure:</strong>
+
+            <ol>
+
+                <li>Define risk.</li>
+
+                <li>Define risk evaluation.</li>
+
+                <li>Risk identification.</li>
+
+                <li>Probability estimation.</li>
+
+                <li>Impact estimation.</li>
+
+                <li>Risk exposure.</li>
+
+                <li>Risk prioritization.</li>
+
+                <li>Risk response.</li>
+
+                <li>Risk monitoring.</li>
+
+                <li>Give one example.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q4. Explain Cost-Benefit Evaluation Techniques.</h3>
+
+        <div class="exam">
+
+            <strong>Remember:</strong>
+
+            <br><br>
+
+            Payback Period → ROI → NPV → IRR → Cost-Benefit Ratio
+
+        </div>
+
+    </section>
+
+
+    <!-- REVISION -->
+
+    <section class="card" id="revision">
+
+        <h2>21. 🚀 Last-Minute Revision</h2>
+
+        <h3>🔥 Easy Memory Formula</h3>
+
+        <div class="highlight">
+
+            <strong>Project Management:</strong>
+
+            <br>
+
+            Plan → Organize → Execute → Monitor → Control → Close
+
+            <br><br>
+
+            <strong>Life Cycle:</strong>
+
+            <br>
+
+            Initiation → Planning → Execution →
+            Monitoring & Control → Closure
+
+            <br><br>
+
+            <strong>Risk:</strong>
+
+            <br>
+
+            Identify → Probability → Impact →
+            Exposure → Response → Monitor
+
+            <br><br>
+
+            <strong>Cost-Benefit:</strong>
+
+            <br>
+
+            Payback → ROI → NPV → IRR → Benefit/Cost
+
+        </div>
+
+
+        <h3>🔥 Must Study Before Exam</h3>
+
+        <ol>
+
+            <li>Project Management Life Cycle</li>
+
+            <li>Activities covered by Software Project Management</li>
+
+            <li>Contract Management</li>
+
+            <li>Project Risk Evaluation</li>
+
+            <li>Cost-Benefit Evaluation Techniques</li>
+
+            <li>Software Projects vs Other Projects</li>
+
+            <li>Setting Project Objectives</li>
+
+            <li>Categories of Software Projects</li>
+
+            <li>Stakeholders</li>
+
+            <li>Business Case</li>
+
+            <li>Project Success and Failure</li>
+
+        </ol>
+
+
+        <div class="danger">
+
+            <strong>Boss Exam Tip 😎:</strong>
+
+            For Module 4 long answers, use:
+
+            <br><br>
+
+            <strong>
+                Definition → Neat Diagram → Main Points →
+                Example → Conclusion
+            </strong>
+
+            <br><br>
+
+            For Risk Evaluation, always remember:
+
+            <strong>Probability × Impact = Risk Exposure</strong>.
+
+        </div>
+
+    </section>
+
+
+    <!-- TEXTBOOK -->
+
+    <section class="card">
+
+        <h2>📖 Textbook Study Guide</h2>
+
+        <p>
+            The BCS501 syllabus covers Project Management topics
+            including project introduction, contract management,
+            software-project activities, project life cycle,
+            project evaluation, cost-benefit evaluation and
+            risk evaluation.
+        </p>
+
+        <p>
+            Use the prescribed textbook for deeper explanations and
+            examples. This page provides original exam-oriented notes
+            rather than reproducing copyrighted textbook content.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Best Study Method:</strong>
+
+            Understand the concept →
+            learn the diagram →
+            memorize keywords →
+            practice the VTU question.
+
+        </div>
+
+    </section>
+
+
+    <!-- OFFICIAL SOURCES -->
+
+    <section class="card">
+
+        <h2>🔗 Official VTU Resources</h2>
+
+        <p>
+            <strong>VTU UG Scheme & Syllabus:</strong><br>
+            https://vtu.ac.in/b-e-scheme-syllabus/
+        </p>
+
+        <p>
+            <strong>VTU Model Question Papers:</strong><br>
+            https://vtu.ac.in/model-question-paper-b-e-b-tech-b-arch/
+        </p>
+
+        <p>
+            <strong>BCS501 Model Question Paper:</strong><br>
+            https://vtu.ac.in/pdf/QP/BCS501.pdf
+        </p>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        📚 BCS501 • Module 4 • Software Project Management
+    </p>
+
+    <p>
+        Made with ❤️ for learning
+    </p>
+
+</footer>
+
+
+<script>
+
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("dragstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("copy", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("cut", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("keydown", function(event) {
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>
+```
