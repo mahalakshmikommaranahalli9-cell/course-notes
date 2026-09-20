@@ -1,1265 +1,1281 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
 
-    <meta charset="UTF-8">
+<title>BCS501 Module 1 | VTU Complete Notes</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../style.css">
 
-    <meta name="theme-color"
-          content="#111827">
+<style>
+*{
+    box-sizing:border-box;
+}
 
-    <title>BCS501 Module 1 | VTU Notes</title>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    line-height:1.7;
+}
 
-    <link rel="stylesheet"
-          href="../style.css">
+.module-page{
+    width:min(1000px,94%);
+    margin:auto;
+    padding:30px 0 70px;
+}
 
-    <style>
+.back{
+    display:inline-block;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:10px;
+    background:#eef2ff;
+    color:#3730a3;
+    font-weight:bold;
+    margin-bottom:20px;
+}
 
-        /* ===============================
-           MODULE PAGE
-        =============================== */
+.module-header{
+    padding:30px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#eef2ff,#f8fafc);
+    border:1px solid #e5e7eb;
+    margin-bottom:25px;
+}
 
-        .module-page {
-            width: min(900px, 92%);
-            margin: auto;
-            padding: 35px 0 70px;
-        }
+.module-header h1{
+    font-size:38px;
+    margin:10px 0;
+}
 
-        .back {
-            display: inline-block;
-            margin-bottom: 22px;
-            color: #4f46e5;
-            text-decoration: none;
-            font-weight: 700;
-        }
+.code{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:8px;
+    background:#111827;
+    color:white;
+    font-weight:bold;
+}
 
-        .module-header {
-            background: #ffffff;
-            border: 1px solid #e4e7ec;
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 22px;
-        }
+.section{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:25px;
+    margin:22px 0;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
 
-        .code {
-            display: inline-block;
-            background: #eef2ff;
-            color: #4338ca;
-            padding: 6px 10px;
-            border-radius: 7px;
-            font-size: 12px;
-            font-weight: 800;
-        }
+.section h2{
+    color:#111827;
+    border-bottom:2px solid #e5e7eb;
+    padding-bottom:8px;
+}
 
-        .module-header h1 {
-            margin: 15px 0 8px;
-            font-size: clamp(28px, 5vw, 42px);
-            line-height: 1.15;
-        }
+.section h3{
+    color:#3730a3;
+}
 
-        .module-header p {
-            color: #667085;
-            line-height: 1.6;
-        }
+.definition{
+    background:#f0f9ff;
+    border-left:5px solid #0284c7;
+    padding:15px;
+    border-radius:10px;
+    margin:15px 0;
+}
 
-        /* ===============================
-           CONTENT BOX
-        =============================== */
+.exam{
+    background:#fff7ed;
+    border-left:5px solid #f97316;
+    padding:15px;
+    border-radius:10px;
+    margin:15px 0;
+}
 
-        .content-box {
-            background: #ffffff;
-            border: 1px solid #e4e7ec;
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 20px;
-        }
+.tip{
+    background:#f0fdf4;
+    border-left:5px solid #16a34a;
+    padding:15px;
+    border-radius:10px;
+}
 
-        .content-box h2 {
-            font-size: 24px;
-            margin-bottom: 18px;
-        }
+.flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:20px 0;
+}
 
-        .content-box h3 {
-            font-size: 19px;
-            margin: 25px 0 10px;
-        }
+.flow span{
+    background:#eef2ff;
+    padding:12px 15px;
+    border-radius:10px;
+    font-weight:bold;
+}
 
-        .content-box p {
-            line-height: 1.75;
-            color: #475467;
-            margin-bottom: 12px;
-        }
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+}
 
-        .content-box ul,
-        .content-box ol {
-            padding-left: 23px;
-            line-height: 1.8;
-            color: #475467;
-        }
+th,td{
+    border:1px solid #d1d5db;
+    padding:12px;
+    text-align:left;
+    vertical-align:top;
+}
 
-        .content-box li {
-            margin-bottom: 6px;
-        }
+th{
+    background:#f3f4f6;
+}
 
-        /* ===============================
-           DEFINITION
-        =============================== */
+.question{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    padding:18px;
+    border-radius:12px;
+    margin:12px 0;
+}
 
-        .definition {
-            background: #f8fafc;
-            border-left: 4px solid #4f46e5;
-            padding: 15px 17px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
+.answer{
+    margin-top:10px;
+}
 
-        .definition strong {
-            color: #3730a3;
-        }
+.diagram{
+    background:#111827;
+    color:#f9fafb;
+    padding:20px;
+    border-radius:12px;
+    overflow-x:auto;
+    font-family:monospace;
+    white-space:pre;
+}
 
-        /* ===============================
-           PROCESS FLOW
-        =============================== */
+ul,ol{
+    padding-left:25px;
+}
 
-        .flow {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 20px 0;
-        }
+@media(max-width:600px){
+    .module-header h1{
+        font-size:29px;
+    }
 
-        .flow span {
-            background: #eef2ff;
-            color: #3730a3;
-            padding: 10px 13px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-        }
+    .section{
+        padding:18px;
+    }
 
-        .arrow {
-            color: #667085;
-            font-weight: bold;
-        }
+    table{
+        font-size:14px;
+        display:block;
+        overflow-x:auto;
+    }
 
-        /* ===============================
-           QUESTION
-        =============================== */
+    .diagram{
+        font-size:12px;
+    }
+}
 
-        .question {
-            background: #f8fafc;
-            border: 1px solid #e4e7ec;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-        }
+/* DARK MODE */
+body.dark .module-header{
+    background:#111827;
+    border-color:#374151;
+}
 
-        .question h3 {
-            margin: 0 0 12px;
-            font-size: 17px;
-        }
+body.dark .section{
+    background:#111827;
+    border-color:#374151;
+}
 
-        .answer-title {
-            color: #4f46e5;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
+body.dark .section h2,
+body.dark .section h3{
+    color:#f9fafb;
+}
 
-        /* ===============================
-           TABLE
-        =============================== */
+body.dark .back{
+    background:#1f2937;
+    color:#93c5fd;
+}
 
-        .table-wrap {
-            overflow-x: auto;
-            margin: 18px 0;
-        }
+body.dark th{
+    background:#1f2937;
+}
 
-        table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-        }
+body.dark td,
+body.dark th{
+    border-color:#374151;
+}
 
-        th,
-        td {
-            border: 1px solid #dfe3eb;
-            padding: 11px;
-            text-align: left;
-            line-height: 1.5;
-        }
+body.dark .definition{
+    background:#082f49;
+}
 
-        th {
-            background: #eef2ff;
-            color: #3730a3;
-        }
+body.dark .exam{
+    background:#431407;
+}
 
-        /* ===============================
-           EXAM TIP
-        =============================== */
+body.dark .tip{
+    background:#052e16;
+}
 
-        .exam-tip {
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
-            border-radius: 12px;
-            padding: 18px;
-            margin-top: 18px;
-        }
-
-        .exam-tip strong {
-            color: #c2410c;
-        }
-
-        /* ===============================
-           DARK MODE
-        =============================== */
-
-        body.dark .module-header,
-        body.dark .content-box,
-        body.dark .question {
-            background: #111827;
-            border-color: #263043;
-        }
-
-        body.dark .module-header h1,
-        body.dark .content-box h2,
-        body.dark .content-box h3,
-        body.dark .question h3 {
-            color: #f8fafc;
-        }
-
-        body.dark .module-header p,
-        body.dark .content-box p,
-        body.dark .content-box ul,
-        body.dark .content-box ol {
-            color: #aab4c5;
-        }
-
-        body.dark .definition,
-        body.dark .question {
-            background: #172033;
-        }
-
-        body.dark th {
-            background: #1e293b;
-            color: #a5b4fc;
-        }
-
-        body.dark td {
-            border-color: #344054;
-            color: #d0d5dd;
-        }
-
-        /* ===============================
-           MOBILE
-        =============================== */
-
-        @media (max-width: 600px) {
-
-            .module-page {
-                padding-top: 25px;
-            }
-
-            .module-header,
-            .content-box {
-                padding: 20px;
-            }
-
-            .module-header h1 {
-                font-size: 29px;
-            }
-
-            .content-box h2 {
-                font-size: 21px;
-            }
-
-            .content-box h3 {
-                font-size: 18px;
-            }
-
-            .flow {
-                flex-direction: column;
-            }
-
-            .flow .arrow {
-                transform: rotate(90deg);
-            }
-
-        }
-
-    </style>
-
+body.dark .question{
+    background:#1f2937;
+}
+</style>
 </head>
-
 
 <body>
 
-
-<!-- ===============================
-     HEADER
-================================ -->
-
 <header class="header">
-
     <div class="header-inner">
-
-        <a href="../index.html"
-           class="logo">
-
-            📚 VTU Notes
-
-        </a>
-
-        <button id="themeButton"
-                class="theme-btn">
-
-            🌙
-
-        </button>
-
+        <a href="../index.html" class="logo">📚 VTU Notes</a>
+        <button id="themeButton" class="theme-btn">🌙</button>
     </div>
-
 </header>
-
-
-
-<!-- ===============================
-     MAIN
-================================ -->
 
 <main class="module-page">
 
+<a href="index.html" class="back">
+    ← Back to BCS501
+</a>
 
-    <a href="index.html"
-       class="back">
+<section class="module-header">
 
-        ← Back to BCS501
+<span class="code">BCS501</span>
 
-    </a>
+<h1>Module 1</h1>
 
+<p><strong>Software and Software Engineering & Process Models</strong></p>
 
-    <!-- ===============================
-         TITLE
-    ================================= -->
+<p>5th Semester • CSE • 2022 Scheme</p>
 
-    <section class="module-header">
+</section>
 
-        <span class="code">
-            BCS501
-        </span>
 
-        <h1>
-            Module 1
-        </h1>
+<!-- TEXTBOOK -->
 
-        <p>
-            Software Engineering and
-            Project Management
-        </p>
+<section class="section">
 
-        <p>
-            5th Semester • CSE • 2022 Scheme
-        </p>
+<h2>📚 Textbook & VTU Syllabus Guide</h2>
 
-    </section>
+<div class="definition">
 
+<strong>Prescribed Textbook:</strong><br>
+Roger S. Pressman, Bruce R. Maxim —
+<em>Software Engineering: A Practitioner's Approach</em>, 7th Edition.
 
+</div>
 
-    <!-- ===============================
-         SYLLABUS TOPICS
-    ================================= -->
+<p>
+For Module 1, the official VTU syllabus maps the topics to:
+</p>
 
-    <section class="content-box">
+<ul>
+<li><strong>Chapter 1:</strong> Sections 1.1 to 1.6</li>
+<li><strong>Chapter 2:</strong> Sections 2.1 to 2.5</li>
+</ul>
 
-        <h2>📚 Module 1 Topics</h2>
+<p>
+These notes are an original study guide based on the VTU syllabus.
+They are designed to help you understand the concepts and prepare
+for VTU examinations.
+</p>
 
-        <ul>
+</section>
 
-            <li>Nature of Software</li>
 
-            <li>Software Engineering</li>
+<!-- 1 -->
 
-            <li>Unique Nature of WebApps</li>
+<section class="section">
 
-            <li>Software Process</li>
+<h2>1. The Nature of Software</h2>
 
-            <li>Software Engineering Practice</li>
+<h3>What is Software?</h3>
 
-            <li>Software Myths</li>
+<div class="definition">
 
-            <li>Generic Process Model</li>
+<strong>Software</strong> is a collection of programs, data and related
+information that instructs a computer to perform specific tasks.
 
-            <li>Process Assessment and Improvement</li>
+</div>
 
-            <li>Waterfall Model</li>
+<p>
+Software is different from physical products such as machines.
+It is developed through engineering activities and does not wear out
+physically like hardware.
+</p>
 
-            <li>Incremental Process Models</li>
+<h3>Major characteristics of software</h3>
 
-            <li>Evolutionary Process Models</li>
+<ol>
+<li>Software is developed or engineered; it is not manufactured like hardware.</li>
+<li>Software does not physically wear out.</li>
+<li>Software is highly flexible and can be modified.</li>
+<li>Software is intangible.</li>
+<li>Most software is custom-built or customized.</li>
+<li>Software becomes increasingly complex as functionality grows.</li>
+</ol>
 
-            <li>Concurrent Models</li>
+<h3>Software applications</h3>
 
-            <li>Specialized Process Models</li>
+<ul>
+<li>System software</li>
+<li>Application software</li>
+<li>Engineering/scientific software</li>
+<li>Embedded software</li>
+<li>Web applications</li>
+<li>Artificial intelligence software</li>
+<li>Cloud applications</li>
+</ul>
 
-            <li>Unified Process</li>
+<div class="tip">
+<strong>Remember:</strong>
+Software is intangible, engineered rather than manufactured,
+and does not physically wear out.
+</div>
 
-            <li>Personal and Team Process Models</li>
+</section>
 
-        </ul>
 
-    </section>
+<!-- 2 -->
 
+<section class="section">
 
+<h2>2. Unique Nature of WebApps</h2>
 
-    <!-- ===============================
-         1 SOFTWARE
-    ================================= -->
+<p>
+Web applications are software applications that are accessed through
+a network using browsers or other web-enabled clients.
+</p>
 
-    <section class="content-box">
+<h3>Important characteristics</h3>
 
-        <h2>1. Software and Software Engineering</h2>
+<table>
 
-        <h3>What is Software?</h3>
+<tr>
+<th>Characteristic</th>
+<th>Explanation</th>
+</tr>
 
-        <p>
-            Software is a collection of computer programs,
-            procedures, associated data and documentation
-            that performs a specific task or provides a
-            particular service to users.
-        </p>
+<tr>
+<td>Network intensive</td>
+<td>WebApps depend on networks and Internet/Intranet connectivity.</td>
+</tr>
 
-        <div class="definition">
+<tr>
+<td>Concurrency</td>
+<td>Many users may access the application simultaneously.</td>
+</tr>
 
-            <strong>Definition:</strong>
+<tr>
+<td>Unpredictable load</td>
+<td>The number of users can change significantly.</td>
+</tr>
 
-            Software is a set of instructions and associated
-            data that tells a computer how to perform a task.
+<tr>
+<td>Performance</td>
+<td>Response time is important for user satisfaction.</td>
+</tr>
 
-        </div>
+<tr>
+<td>Availability</td>
+<td>Users expect WebApps to remain available.</td>
+</tr>
 
+<tr>
+<td>Security</td>
+<td>WebApps must protect user data and services.</td>
+</tr>
 
-        <h3>Characteristics of Software</h3>
+<tr>
+<td>Aesthetics</td>
+<td>Interface design and visual presentation affect usability.</td>
+</tr>
 
-        <ul>
+<tr>
+<td>Continuous evolution</td>
+<td>WebApps are frequently updated and enhanced.</td>
+</tr>
 
-            <li>Software is developed or engineered rather than manufactured.</li>
+</table>
 
-            <li>Software does not wear out in the same way as physical hardware.</li>
+<div class="exam">
 
-            <li>Most software is custom-built for particular requirements.</li>
+<strong>VTU exam:</strong>
+"Explain the different attributes encountered in the vast majority
+of WebApps."
 
-            <li>Software can be modified and enhanced.</li>
+</div>
 
-            <li>Software complexity can become very high.</li>
+</section>
 
-        </ul>
 
+<!-- 3 -->
 
-        <h3>Software Engineering</h3>
+<section class="section">
 
-        <p>
-            Software engineering is a systematic and disciplined
-            approach to the development, operation and maintenance
-            of software.
-        </p>
+<h2>3. Software Engineering</h2>
 
-        <div class="definition">
+<div class="definition">
 
-            <strong>Exam point:</strong>
+<strong>Software Engineering</strong> is a systematic, disciplined
+and measurable approach to the development, operation and maintenance
+of software.
 
-            Software engineering applies engineering principles
-            to software development so that software can be
-            developed systematically and maintained effectively.
+</div>
 
-        </div>
+<h3>Objectives</h3>
 
-    </section>
+<ul>
+<li>Develop reliable software.</li>
+<li>Meet customer requirements.</li>
+<li>Control development cost.</li>
+<li>Deliver software within planned time.</li>
+<li>Improve maintainability.</li>
+<li>Improve quality.</li>
+</ul>
 
+<h3>Software Engineering vs Programming</h3>
 
+<table>
 
-    <!-- ===============================
-         2 WEB APPS
-    ================================= -->
+<tr>
+<th>Programming</th>
+<th>Software Engineering</th>
+</tr>
 
-    <section class="content-box">
+<tr>
+<td>Mainly focuses on writing code.</td>
+<td>Covers the complete software lifecycle.</td>
+</tr>
 
-        <h2>2. Unique Nature of WebApps</h2>
+<tr>
+<td>Usually smaller scope.</td>
+<td>Suitable for large and complex systems.</td>
+</tr>
 
-        <p>
-            WebApps are applications delivered through a web
-            browser or web-based environment. They have several
-            characteristics that distinguish them from traditional
-            software applications.
-        </p>
+<tr>
+<td>Less emphasis on management.</td>
+<td>Includes planning, quality, risk and maintenance.</td>
+</tr>
 
-        <h3>Important WebApp Attributes</h3>
+</table>
 
-        <ul>
+</section>
 
-            <li><strong>Network intensive:</strong>
-                WebApps normally operate over a network.</li>
 
-            <li><strong>Content driven:</strong>
-                They often provide large amounts of information.</li>
+<!-- 4 -->
 
-            <li><strong>Continuous evolution:</strong>
-                Web applications may change frequently.</li>
+<section class="section">
 
-            <li><strong>Immediacy:</strong>
-                New versions and updates can be delivered quickly.</li>
+<h2>4. Software Engineering Practice</h2>
 
-            <li><strong>Security:</strong>
-                WebApps must protect users, data and transactions.</li>
+<p>
+Software engineering practice provides the technical activities
+required to build high-quality software.
+</p>
 
-            <li><strong>Aesthetics:</strong>
-                User interface and visual presentation are important.</li>
+<h3>Seven principles of software engineering practice</h3>
 
-            <li><strong>Concurrency:</strong>
-                Many users may access a WebApp at the same time.</li>
+<ol>
+<li><strong>Divide and conquer:</strong> Solve a large problem by dividing it into smaller problems.</li>
 
-        </ul>
+<li><strong>Understand the problem:</strong> Clearly understand requirements before designing a solution.</li>
 
-    </section>
+<li><strong>Use an effective approach:</strong> Select suitable methods and tools.</li>
 
+<li><strong>Build quality into the solution:</strong> Quality should be considered throughout development.</li>
 
+<li><strong>Produce effective representations:</strong> Models and diagrams help communicate the solution.</li>
 
-    <!-- ===============================
-         3 SOFTWARE PROCESS
-    ================================= -->
+<li><strong>Maintain consistency:</strong> Keep requirements, design and implementation consistent.</li>
 
-    <section class="content-box">
+<li><strong>Review the result:</strong> Examine the work to identify defects and improvements.</li>
+</ol>
 
-        <h2>3. Software Process</h2>
+</section>
 
-        <p>
-            A software process is a set of activities, actions
-            and tasks performed to create and maintain software.
-        </p>
 
-        <h3>Generic Process Framework</h3>
+<!-- 5 -->
 
-        <div class="flow">
+<section class="section">
 
-            <span>Communication</span>
+<h2>5. Software Myths</h2>
 
-            <b class="arrow">→</b>
+<p>
+Software myths are incorrect beliefs about software development.
+They can create unrealistic expectations and poor decisions.
+</p>
 
-            <span>Planning</span>
+<h3>Customer myths</h3>
 
-            <b class="arrow">→</b>
+<ul>
+<li>"A general statement of objectives is enough to start coding."</li>
+<li>"Changes can be made easily at any time."</li>
+</ul>
 
-            <span>Modeling</span>
+<h3>Management myths</h3>
 
-            <b class="arrow">→</b>
+<ul>
+<li>"If a project is late, adding more programmers will always make it faster."</li>
+<li>"Existing standards and procedures automatically guarantee success."</li>
+</ul>
 
-            <span>Construction</span>
+<h3>Practitioner myths</h3>
 
-            <b class="arrow">→</b>
+<ul>
+<li>"Once the program runs, the job is finished."</li>
+<li>"Quality cannot be evaluated until the program executes."</li>
+</ul>
 
-            <span>Deployment</span>
+<div class="tip">
+<strong>Exam point:</strong>
+A myth sounds reasonable but does not represent the reality of
+professional software development.
+</div>
 
-        </div>
+</section>
 
 
-        <h3>1. Communication</h3>
+<!-- 6 -->
 
-        <p>
-            Communication involves interaction with stakeholders
-            to understand requirements, objectives and expectations.
-        </p>
+<section class="section">
 
+<h2>6. Software Process</h2>
 
-        <h3>2. Planning</h3>
+<div class="definition">
 
-        <p>
-            Planning identifies the work to be performed,
-            resources required, schedule, cost and risks.
-        </p>
+A <strong>software process</strong> is a set of activities,
+actions and tasks performed to develop and maintain software.
 
+</div>
 
-        <h3>3. Modeling</h3>
+<h3>Framework activities</h3>
 
-        <p>
-            Modeling creates analysis and design representations
-            that help developers understand the system.
-        </p>
+<div class="flow">
 
+<span>Communication</span>
+<span>Planning</span>
+<span>Modeling</span>
+<span>Construction</span>
+<span>Deployment</span>
 
-        <h3>4. Construction</h3>
+</div>
 
-        <p>
-            Construction includes coding and testing the software.
-        </p>
+<h3>Umbrella activities</h3>
 
+<ul>
+<li>Software project tracking and control</li>
+<li>Risk management</li>
+<li>Software quality assurance</li>
+<li>Technical reviews</li>
+<li>Configuration management</li>
+<li>Measurement</li>
+<li>Documentation</li>
+</ul>
 
-        <h3>5. Deployment</h3>
+</section>
 
-        <p>
-            The software is delivered to users, evaluated and
-            maintained based on feedback.
-        </p>
 
-    </section>
+<!-- 7 -->
 
+<section class="section">
 
+<h2>7. Generic Process Model</h2>
 
-    <!-- ===============================
-         4 SOFTWARE PRACTICE
-    ================================= -->
+<p>
+A generic process model provides a common framework for organizing
+software engineering activities.
+</p>
 
-    <section class="content-box">
+<div class="diagram">
+COMMUNICATION
+      ↓
+   PLANNING
+      ↓
+   MODELING
+      ↓
+ CONSTRUCTION
+      ↓
+ DEPLOYMENT
+      ↓
+FEEDBACK
+</div>
 
-        <h2>4. Software Engineering Practice</h2>
+<h3>1. Communication</h3>
 
-        <p>
-            Software engineering practice provides a disciplined
-            approach for building software.
-        </p>
+<p>
+Developers communicate with stakeholders to understand requirements,
+objectives and constraints.
+</p>
 
-        <h3>Major Practice Activities</h3>
+<h3>2. Planning</h3>
 
-        <ol>
+<p>
+The team estimates resources, cost, schedule and activities.
+</p>
 
-            <li>Understand the problem.</li>
+<h3>3. Modeling</h3>
 
-            <li>Plan the solution.</li>
+<p>
+Requirements and design models are created to understand the solution.
+</p>
 
-            <li>Model the requirements and design.</li>
+<h3>4. Construction</h3>
 
-            <li>Construct the software.</li>
+<p>
+Coding and testing are performed.
+</p>
 
-            <li>Test the software.</li>
+<h3>5. Deployment</h3>
 
-            <li>Deploy and maintain the product.</li>
+<p>
+The completed software is delivered to users and feedback is collected.
+</p>
 
-        </ol>
+<div class="exam">
 
-    </section>
+<strong>VTU 10-mark question:</strong><br>
+Define process and explain the generic process framework
+for software engineering.
 
+</div>
 
+</section>
 
-    <!-- ===============================
-         5 SOFTWARE MYTHS
-    ================================= -->
 
-    <section class="content-box">
+<!-- 8 -->
 
-        <h2>5. Software Myths</h2>
+<section class="section">
 
-        <p>
-            Software myths are incorrect beliefs about software
-            development that can create unrealistic expectations
-            and poor project decisions.
-        </p>
+<h2>8. Process Assessment and Improvement</h2>
 
-        <div class="table-wrap">
+<p>
+Process assessment examines the existing software development process
+to identify strengths, weaknesses and areas for improvement.
+</p>
 
-            <table>
+<h3>General steps</h3>
 
-                <thead>
+<ol>
+<li>Assess the current process.</li>
+<li>Identify problems.</li>
+<li>Analyze possible improvements.</li>
+<li>Introduce improved practices.</li>
+<li>Measure the results.</li>
+<li>Continue improvement.</li>
+</ol>
 
-                    <tr>
-                        <th>Myth</th>
-                        <th>Reality</th>
-                    </tr>
+</section>
 
-                </thead>
 
-                <tbody>
+<!-- 9 -->
 
-                    <tr>
-                        <td>
-                            Requirements can be changed at any time
-                            without major impact.
-                        </td>
+<section class="section">
 
-                        <td>
-                            Requirement changes can affect cost,
-                            schedule and design.
-                        </td>
-                    </tr>
+<h2>9. Waterfall Model</h2>
 
-                    <tr>
-                        <td>
-                            Once the program works, the job is finished.
-                        </td>
+<p>
+The Waterfall model is a sequential software process model in which
+development activities proceed through defined phases.
+</p>
 
-                        <td>
-                            Testing, deployment and maintenance
-                            are also important.
-                        </td>
-                    </tr>
+<div class="diagram">
+Requirements
+     ↓
+System Design
+     ↓
+Implementation
+     ↓
+Testing
+     ↓
+Deployment
+     ↓
+Maintenance
+</div>
 
-                    <tr>
-                        <td>
-                            Adding more programmers always makes
-                            development faster.
-                        </td>
+<h3>Advantages</h3>
 
-                        <td>
-                            Additional people can increase
-                            communication and coordination effort.
-                        </td>
-                    </tr>
+<ul>
+<li>Simple and easy to understand.</li>
+<li>Clearly defined phases.</li>
+<li>Easy to manage when requirements are stable.</li>
+<li>Documentation is produced throughout the process.</li>
+</ul>
 
-                </tbody>
+<h3>Disadvantages</h3>
 
-            </table>
+<ul>
+<li>Difficult to accommodate changing requirements.</li>
+<li>Working software appears relatively late.</li>
+<li>Testing occurs after implementation.</li>
+<li>Risk of discovering requirement problems late.</li>
+</ul>
 
-        </div>
+</section>
 
-    </section>
 
+<!-- 10 -->
 
+<section class="section">
 
-    <!-- ===============================
-         6 WATERFALL
-    ================================= -->
+<h2>10. Incremental Process Model</h2>
 
-    <section class="content-box">
+<p>
+The incremental model develops software through multiple smaller
+releases called increments.
+</p>
 
-        <h2>6. Waterfall Model</h2>
+<div class="diagram">
+Requirements
+     ↓
+Increment 1 → Working Product
+     ↓
+Increment 2 → More Features
+     ↓
+Increment 3 → More Features
+     ↓
+Final Product
+</div>
 
-        <p>
-            The Waterfall model is a sequential software process
-            model in which development progresses through
-            well-defined phases.
-        </p>
+<h3>Advantages</h3>
 
-        <div class="flow">
+<ul>
+<li>Early delivery of working software.</li>
+<li>Customer feedback can be obtained early.</li>
+<li>Important features can be delivered first.</li>
+<li>Changes can be incorporated into later increments.</li>
+</ul>
 
-            <span>Requirements</span>
-            <b class="arrow">→</b>
+</section>
 
-            <span>Design</span>
-            <b class="arrow">→</b>
 
-            <span>Implementation</span>
-            <b class="arrow">→</b>
+<!-- 11 -->
 
-            <span>Testing</span>
-            <b class="arrow">→</b>
+<section class="section">
 
-            <span>Deployment</span>
-            <b class="arrow">→</b>
+<h2>11. Evolutionary Process Models</h2>
 
-            <span>Maintenance</span>
+<p>
+Evolutionary models produce an initial version of the software and
+then evolve it based on feedback and changing requirements.
+</p>
 
-        </div>
+<h3>Prototyping</h3>
 
+<p>
+A prototype is an early version of a software system used to understand
+requirements and obtain feedback.
+</p>
 
-        <h3>Advantages</h3>
+<h3>Spiral Model</h3>
 
-        <ul>
+<p>
+The Spiral model combines iterative development with systematic
+risk analysis.
+</p>
 
-            <li>Simple and easy to understand.</li>
+<div class="diagram">
+Planning
+   ↓
+Risk Analysis
+   ↓
+Engineering
+   ↓
+Customer Evaluation
+   ↺
+Next Spiral
+</div>
 
-            <li>Phases are clearly defined.</li>
+<h3>Advantages of Spiral Model</h3>
 
-            <li>Documentation is produced at each stage.</li>
+<ul>
+<li>Strong focus on risk management.</li>
+<li>Suitable for large and complex projects.</li>
+<li>Customer feedback is incorporated.</li>
+<li>Software evolves through repeated cycles.</li>
+</ul>
 
-            <li>Useful when requirements are stable.</li>
+<h3>Disadvantages</h3>
 
-        </ul>
+<ul>
+<li>Can be expensive.</li>
+<li>Requires risk-analysis expertise.</li>
+<li>May be difficult for small projects.</li>
+</ul>
 
+</section>
 
-        <h3>Limitations</h3>
 
-        <ul>
+<!-- 12 -->
 
-            <li>Changes can be difficult after a phase is completed.</li>
+<section class="section">
 
-            <li>Working software is produced relatively late.</li>
+<h2>12. Concurrent Development Model</h2>
 
-            <li>It is less suitable when requirements are uncertain.</li>
+<p>
+The concurrent development model represents software activities
+as states that can occur concurrently.
+</p>
 
-        </ul>
+<div class="diagram">
+Activity
+   ↓
+Under Development
+   ↓
+Under Review
+   ↓
+Completed
+   ↓
+Changes Required
+   ↺
+</div>
 
-    </section>
+<p>
+Different engineering activities may progress at different rates.
+This model is useful when several activities need to proceed
+simultaneously.
+</p>
 
+</section>
 
 
-    <!-- ===============================
-         7 INCREMENTAL
-    ================================= -->
+<!-- 13 -->
 
-    <section class="content-box">
+<section class="section">
 
-        <h2>7. Incremental Process Model</h2>
+<h2>13. Specialized Process Models</h2>
 
-        <p>
-            In an incremental model, the software is developed
-            and delivered in multiple increments.
-        </p>
+<h3>Component-Based Development</h3>
 
-        <div class="flow">
+<p>
+Existing reusable software components are selected, adapted and
+assembled to construct a system.
+</p>
 
-            <span>Increment 1</span>
+<h3>Formal Methods</h3>
 
-            <b class="arrow">→</b>
+<p>
+Mathematical techniques are used to specify and verify software.
+</p>
 
-            <span>Increment 2</span>
+<h3>Aspect-Oriented Development</h3>
 
-            <b class="arrow">→</b>
+<p>
+Cross-cutting concerns such as security, logging and error handling
+are separated from the main application logic.
+</p>
 
-            <span>Increment 3</span>
+</section>
 
-            <b class="arrow">→</b>
 
-            <span>Complete Product</span>
+<!-- 14 -->
 
-        </div>
+<section class="section">
 
-        <p>
-            Each increment provides additional functionality
-            until the complete system is developed.
-        </p>
+<h2>14. Unified Process</h2>
 
-    </section>
+<p>
+The Unified Process is an iterative software development process.
+It organizes development into four major phases.
+</p>
 
+<div class="flow">
+<span>Inception</span>
+<span>Elaboration</span>
+<span>Construction</span>
+<span>Transition</span>
+</div>
 
+<h3>Inception</h3>
+<p>
+Defines project scope, objectives and initial business requirements.
+</p>
 
-    <!-- ===============================
-         8 EVOLUTIONARY
-    ================================= -->
+<h3>Elaboration</h3>
+<p>
+Analyzes requirements and establishes the architectural foundation.
+</p>
 
-    <section class="content-box">
+<h3>Construction</h3>
+<p>
+Software components are implemented and tested.
+</p>
 
-        <h2>8. Evolutionary Process Models</h2>
+<h3>Transition</h3>
+<p>
+The software is delivered to users and deployment issues are addressed.
+</p>
 
-        <p>
-            Evolutionary models are designed to produce an initial
-            version of software and progressively refine it based
-            on feedback and changing requirements.
-        </p>
+</section>
 
-        <h3>Examples</h3>
 
-        <ul>
+<!-- 15 -->
 
-            <li>Prototyping model</li>
+<section class="section">
 
-            <li>Spiral model</li>
+<h2>15. Personal Software Process (PSP)</h2>
 
-        </ul>
+<div class="definition">
 
-    </section>
+<strong>PSP</strong> is a disciplined process that helps an individual
+software engineer improve planning, estimation, quality and productivity.
 
+</div>
 
+<h3>PSP activities</h3>
 
-    <!-- ===============================
-         9 CONCURRENT
-    ================================= -->
+<ul>
+<li>Planning</li>
+<li>Design</li>
+<li>Code</li>
+<li>Compile</li>
+<li>Test</li>
+<li>Postmortem analysis</li>
+</ul>
 
-    <section class="content-box">
+<h3>Benefits</h3>
 
-        <h2>9. Concurrent Process Model</h2>
+<ul>
+<li>Improves individual productivity.</li>
+<li>Improves estimation.</li>
+<li>Helps track defects.</li>
+<li>Encourages disciplined development.</li>
+</ul>
 
-        <p>
-            The concurrent model represents software development
-            activities as states. Different activities can progress
-            concurrently depending on the status of the project.
-        </p>
+</section>
 
-        <div class="definition">
 
-            <strong>Key idea:</strong>
+<!-- 16 -->
 
-            Different software engineering activities may be
-            performed concurrently rather than strictly one after
-            another.
+<section class="section">
 
-        </div>
+<h2>16. Team Software Process (TSP)</h2>
 
-    </section>
+<div class="definition">
 
+<strong>TSP</strong> is a structured process that helps software teams
+plan, manage and control their development work.
 
+</div>
 
-    <!-- ===============================
-         10 UNIFIED PROCESS
-    ================================= -->
+<h3>Important characteristics</h3>
 
-    <section class="content-box">
+<ul>
+<li>Team planning</li>
+<li>Defined responsibilities</li>
+<li>Measurement</li>
+<li>Quality management</li>
+<li>Project tracking</li>
+<li>Continuous improvement</li>
+</ul>
 
-        <h2>10. Unified Process</h2>
+<h3>PSP vs TSP</h3>
 
-        <p>
-            The Unified Process is an iterative and incremental
-            software development process.
-        </p>
+<table>
 
-        <h3>Main Phases</h3>
+<tr>
+<th>PSP</th>
+<th>TSP</th>
+</tr>
 
-        <ol>
+<tr>
+<td>Focuses on an individual engineer.</td>
+<td>Focuses on the complete team.</td>
+</tr>
 
-            <li>
-                <strong>Inception:</strong>
-                Defines the project scope and business case.
-            </li>
+<tr>
+<td>Individual planning.</td>
+<td>Team planning.</td>
+</tr>
 
-            <li>
-                <strong>Elaboration:</strong>
-                Establishes the architecture and addresses
-                important risks.
-            </li>
+<tr>
+<td>Individual quality measurement.</td>
+<td>Team quality and project measurement.</td>
+</tr>
 
-            <li>
-                <strong>Construction:</strong>
-                Builds the software functionality.
-            </li>
+</table>
 
-            <li>
-                <strong>Transition:</strong>
-                Delivers the system to users.
-            </li>
+</section>
 
-        </ol>
 
-    </section>
+<!-- COMPARISON -->
 
+<section class="section">
 
+<h2>📊 Important Process Model Comparison</h2>
 
-    <!-- ===============================
-         IMPORTANT QUESTIONS
-    ================================= -->
+<table>
 
-    <section class="content-box">
+<tr>
+<th>Model</th>
+<th>Main Idea</th>
+<th>Suitable For</th>
+</tr>
 
-        <h2>⭐ Important VTU Questions</h2>
+<tr>
+<td>Waterfall</td>
+<td>Sequential development</td>
+<td>Stable requirements</td>
+</tr>
 
+<tr>
+<td>Incremental</td>
+<td>Multiple working releases</td>
+<td>Early delivery</td>
+</tr>
 
-        <!-- Q1 -->
+<tr>
+<td>Spiral</td>
+<td>Iteration + risk analysis</td>
+<td>Large/high-risk systems</td>
+</tr>
 
-        <div class="question">
+<tr>
+<td>Prototyping</td>
+<td>Early model for feedback</td>
+<td>Unclear requirements</td>
+</tr>
 
-            <h3>
-                Q1. Define process and explain the generic
-                process framework for software engineering.
-            </h3>
+<tr>
+<td>Concurrent</td>
+<td>Activities progress concurrently</td>
+<td>Parallel development</td>
+</tr>
 
-            <div class="answer-title">
-                Answer:
-            </div>
+<tr>
+<td>Unified Process</td>
+<td>Iterative and incremental</td>
+<td>Large object-oriented systems</td>
+</tr>
 
-            <p>
-                A software process is a structured collection
-                of activities, actions and tasks used to develop,
-                deliver and maintain software.
-            </p>
+</table>
 
-            <p>
-                The generic framework consists of five major
-                activities:
-            </p>
+</section>
 
-            <ol>
 
-                <li>
-                    <strong>Communication</strong> –
-                    understand stakeholder requirements.
-                </li>
+<!-- VTU QUESTIONS -->
 
-                <li>
-                    <strong>Planning</strong> –
-                    estimate resources, schedule, cost and risks.
-                </li>
+<section class="section">
 
-                <li>
-                    <strong>Modeling</strong> –
-                    create analysis and design models.
-                </li>
+<h2>🎯 VTU Model-Paper Questions</h2>
 
-                <li>
-                    <strong>Construction</strong> –
-                    coding and testing.
-                </li>
+<p>
+The following questions are based on the official VTU BCS501 model
+question paper. :contentReference[oaicite:1]{index=1}
+</p>
 
-                <li>
-                    <strong>Deployment</strong> –
-                    deliver the software and collect feedback.
-                </li>
+<div class="question">
 
-            </ol>
+<strong>Q1.</strong>
+Define process and explain the generic process framework for
+software engineering.
 
-        </div>
+<div class="answer">
+<strong>Answer approach:</strong>
+Define software process → explain communication → planning →
+modeling → construction → deployment → explain umbrella activities →
+conclude with importance.
+</div>
 
+</div>
 
-        <!-- Q2 -->
 
-        <div class="question">
+<div class="question">
 
-            <h3>
-                Q2. Explain the different attributes encountered
-                in WebApps.
-            </h3>
+<strong>Q2.</strong>
+Explain the different attributes encountered in the vast majority
+of WebApps.
 
-            <div class="answer-title">
-                Answer:
-            </div>
+<div class="answer">
+<strong>Answer approach:</strong>
+Network intensive → concurrency → unpredictable load →
+performance → availability → data-driven content →
+security → aesthetics → continuous evolution.
+</div>
 
-            <p>
-                Important WebApp attributes include:
-            </p>
+</div>
 
-            <ul>
 
-                <li>Network intensive</li>
+<div class="question">
 
-                <li>Content driven</li>
+<strong>Q3.</strong>
+Compare and contrast Waterfall model and Spiral model.
 
-                <li>Continuous evolution</li>
+<div class="answer">
 
-                <li>Immediacy</li>
+<table>
 
-                <li>Security</li>
+<tr>
+<th>Waterfall</th>
+<th>Spiral</th>
+</tr>
 
-                <li>Aesthetics</li>
+<tr>
+<td>Sequential.</td>
+<td>Iterative.</td>
+</tr>
 
-                <li>Concurrency</li>
+<tr>
+<td>Limited explicit risk analysis.</td>
+<td>Strong emphasis on risk analysis.</td>
+</tr>
 
-            </ul>
+<tr>
+<td>Changes are difficult later.</td>
+<td>Changes can be incorporated in later cycles.</td>
+</tr>
 
-        </div>
+<tr>
+<td>Simple to understand.</td>
+<td>More complex to manage.</td>
+</tr>
 
+</table>
 
-        <!-- Q3 -->
+</div>
 
-        <div class="question">
+</div>
 
-            <h3>
-                Q3. Compare Waterfall model and Spiral model.
-            </h3>
 
-            <div class="answer-title">
-                Answer:
-            </div>
+<div class="question">
 
-            <div class="table-wrap">
+<strong>Q4.</strong>
+Discuss the principles of software engineering practice.
 
-                <table>
+<div class="answer">
+Explain problem understanding, divide and conquer, suitable
+approach, quality, representations, consistency and reviews.
+</div>
 
-                    <thead>
+</div>
 
-                        <tr>
-                            <th>Waterfall</th>
-                            <th>Spiral</th>
-                        </tr>
 
-                    </thead>
+<div class="question">
 
-                    <tbody>
+<strong>Q5.</strong>
+Explain software myths with examples.
 
-                        <tr>
-                            <td>Sequential approach</td>
-                            <td>Iterative approach</td>
-                        </tr>
+</div>
 
-                        <tr>
-                            <td>Phases are performed in sequence</td>
-                            <td>Development occurs through repeated cycles</td>
-                        </tr>
 
-                        <tr>
-                            <td>Changes can be difficult later</td>
-                            <td>Changes can be incorporated during iterations</td>
-                        </tr>
+<div class="exam">
 
-                        <tr>
-                            <td>Less emphasis on repeated risk analysis</td>
-                            <td>Risk analysis is a major activity</td>
-                        </tr>
+<strong>⭐ High-value preparation:</strong><br>
+The official VTU model paper contains 10-mark questions on the
+generic process framework, WebApp attributes, Waterfall vs Spiral,
+and software engineering practice. :contentReference[oaicite:2]{index=2}
 
-                    </tbody>
+</div>
 
-                </table>
+</section>
 
-            </div>
 
-        </div>
+<!-- 2 MARK -->
 
+<section class="section">
 
-        <!-- Q4 -->
+<h2>✍️ 2-Mark Quick Questions</h2>
 
-        <div class="question">
+<div class="question">
+<strong>1. Define software.</strong><br>
+Software is a collection of programs, data and related information
+used to perform computational tasks.
+</div>
 
-            <h3>
-                Q4. Explain software myths.
-            </h3>
+<div class="question">
+<strong>2. Define software engineering.</strong><br>
+It is a systematic, disciplined and measurable approach to software
+development, operation and maintenance.
+</div>
 
-            <div class="answer-title">
-                Answer:
-            </div>
+<div class="question">
+<strong>3. What is a software process?</strong><br>
+A set of activities, actions and tasks used to develop and maintain
+software.
+</div>
 
-            <p>
-                Software myths are false assumptions about software
-                and software development.
-            </p>
+<div class="question">
+<strong>4. What is a software myth?</strong><br>
+A false belief about software development that can lead to unrealistic
+expectations or poor decisions.
+</div>
 
-            <p>
-                Examples include the belief that requirements can
-                always be changed without impact, that a working
-                program means the project is complete, and that
-                adding more programmers always makes a project
-                faster.
-            </p>
+<div class="question">
+<strong>5. What is a prototype?</strong><br>
+An early version of a software system created to explore requirements
+and obtain feedback.
+</div>
 
-        </div>
+<div class="question">
+<strong>6. What is PSP?</strong><br>
+Personal Software Process is a disciplined process for improving an
+individual engineer's planning, estimation and quality.
+</div>
 
+<div class="question">
+<strong>7. What is TSP?</strong><br>
+Team Software Process is a structured approach for planning and
+managing software development by a team.
+</div>
 
-        <!-- Q5 -->
+</section>
 
-        <div class="question">
 
-            <h3>
-                Q5. Explain the Waterfall model with advantages
-                and limitations.
-            </h3>
+<!-- REVISION -->
 
-            <div class="answer-title">
-                Answer:
-            </div>
+<section class="section">
 
-            <p>
-                The Waterfall model follows a sequential development
-                process in which requirements, design, implementation,
-                testing, deployment and maintenance are performed
-                in defined stages.
-            </p>
+<h2>🧠 Last-Minute Revision</h2>
 
-            <p>
-                <strong>Advantages:</strong>
-            </p>
+<div class="flow">
+<span>Software</span>
+<span>SE</span>
+<span>WebApps</span>
+<span>Process</span>
+<span>Practice</span>
+<span>Myths</span>
+<span>Waterfall</span>
+<span>Incremental</span>
+<span>Spiral</span>
+<span>Concurrent</span>
+<span>Unified Process</span>
+<span>PSP</span>
+<span>TSP</span>
+</div>
 
-            <ul>
+<div class="tip">
 
-                <li>Simple structure.</li>
+<strong>Easy memory order:</strong>
 
-                <li>Clear phases.</li>
+<p>
+<strong>Software → WebApps → Engineering → Practice → Myths
+→ Process → Waterfall → Incremental → Evolutionary → Concurrent
+→ Specialized → Unified → PSP → TSP</strong>
+</p>
 
-                <li>Good documentation.</li>
+</div>
 
-                <li>Suitable for stable requirements.</li>
+</section>
 
-            </ul>
 
-            <p>
-                <strong>Limitations:</strong>
-            </p>
+<!-- FOOTER -->
 
-            <ul>
+<footer style="text-align:center;padding:30px 10px;opacity:.7;">
 
-                <li>Late discovery of problems.</li>
+<p>📚 BCS501 • Software Engineering and Project Management</p>
 
-                <li>Difficult requirement changes.</li>
-
-                <li>Working software appears relatively late.</li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- Q6 -->
-
-        <div class="question">
-
-            <h3>
-                Q6. Explain the phases of the Unified Process.
-            </h3>
-
-            <div class="answer-title">
-                Answer:
-            </div>
-
-            <ol>
-
-                <li>
-                    <strong>Inception</strong> –
-                    determines project scope and objectives.
-                </li>
-
-                <li>
-                    <strong>Elaboration</strong> –
-                    develops the architecture and reduces major risks.
-                </li>
-
-                <li>
-                    <strong>Construction</strong> –
-                    develops the system.
-                </li>
-
-                <li>
-                    <strong>Transition</strong> –
-                    delivers the system to users.
-                </li>
-
-            </ol>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ===============================
-         EXAM TIP
-    ================================= -->
-
-    <section class="content-box">
-
-        <div class="exam-tip">
-
-            <strong>🎯 VTU Exam Tip</strong>
-
-            <p style="margin-top:8px;">
-
-                For Module 1, prepare the generic process framework,
-                WebApp attributes, Waterfall model, process models,
-                software myths and Unified Process carefully.
-
-                Draw simple flow diagrams wherever appropriate.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-
-<!-- ===============================
-     FOOTER
-================================ -->
-
-<footer class="footer">
-
-    <p>
-        5th Semester CSE • VTU 2022 Scheme
-    </p>
-
-    <p>
-        Made with ❤️ by
-        <strong>Mahalakshmi Kommaranahalli</strong>
-    </p>
+<p>
+Made with ❤️ by Mahalakshmi Kommaranahalli
+</p>
 
 </footer>
 
-
-
-<!-- ===============================
-     SCRIPT
-================================ -->
+</main>
 
 <script src="../script.js"></script>
-
 
 </body>
 </html>
