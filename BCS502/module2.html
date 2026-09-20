@@ -2,13 +2,25 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BCS502 Module 2 | Data Link Layer</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-        content="BCS502 Computer Networks Module 2 - Data Link Layer VTU Notes">
+    <meta
+        name="theme-color"
+        content="#080808"
+    >
+
+    <meta
+        name="description"
+        content="BCS502 Computer Networks - VTU 5th Semester Course Notes by Mahalakshmi"
+    >
+
+    <title>BCS502 | Computer Networks | Mahalakshmi's Course Notes</title>
 
     <style>
 
@@ -24,1873 +36,1033 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #080b0f;
-            color: #eeeeee;
-            line-height: 1.7;
-        }
-
-        body {
+            background:
+                radial-gradient(
+                    circle at top,
+                    #1a160e 0%,
+                    #0b0b0b 38%,
+                    #050505 100%
+                );
+            color: #f4f1e8;
+            min-height: 100vh;
+            overflow-x: hidden;
             user-select: none;
             -webkit-user-select: none;
         }
 
-        .container {
-            width: min(1100px, 92%);
-            margin: auto;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 0%,
+                    rgba(255, 193, 7, 0.025) 50%,
+                    transparent 100%
+                );
+            z-index: -2;
         }
+
+        /* LION */
+
+        .lion {
+            position: fixed;
+            font-size: 85px;
+            opacity: 0.055;
+            pointer-events: none;
+            z-index: -1;
+            animation: lionMove 18s ease-in-out infinite;
+        }
+
+        .lion.one {
+            top: 14%;
+            left: -20px;
+        }
+
+        .lion.two {
+            bottom: 10%;
+            right: -20px;
+            animation-delay: 6s;
+            animation-duration: 22s;
+        }
+
+        @keyframes lionMove {
+
+            0% {
+                transform: translate(0, 0) rotate(-4deg);
+            }
+
+            25% {
+                transform: translate(35px, -25px) rotate(4deg);
+            }
+
+            50% {
+                transform: translate(0, 20px) rotate(-2deg);
+            }
+
+            75% {
+                transform: translate(-30px, -15px) rotate(5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(-4deg);
+            }
+
+        }
+
+        /* HEADER */
 
         header {
-            padding: 55px 0 35px;
-            text-align: center;
+            width: 100%;
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.16);
+            background: rgba(5, 5, 5, 0.88);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 20;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 7px 15px;
-            border: 1px solid #444;
-            border-radius: 30px;
-            color: #aaa;
+        .header-inner {
+            width: min(1100px, 94%);
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: #ffc107;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .back {
+            color: #ddd;
+            text-decoration: none;
+            border: 1px solid #333;
+            padding: 10px 15px;
+            border-radius: 10px;
             font-size: 13px;
-            margin-bottom: 18px;
+            transition: 0.3s ease;
+        }
+
+        .back:hover {
+            border-color: #ffc107;
+            color: #ffc107;
+            transform: translateY(-2px);
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(1100px, 94%);
+            margin: auto;
+            padding: 65px 0 80px;
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 30px 10px 55px;
+        }
+
+        .course-code {
+            display: inline-block;
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.35);
+            background: rgba(255, 193, 7, 0.06);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
         }
 
         h1 {
-            font-size: clamp(32px, 6vw, 55px);
-            margin-bottom: 10px;
+            font-size: clamp(38px, 7vw, 76px);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #ffc107;
         }
 
         .subtitle {
             color: #aaa;
-            font-size: 18px;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: auto;
         }
 
-        .back {
-            display: inline-block;
-            margin-top: 20px;
-            color: #aaa;
-            text-decoration: none;
-        }
-
-        .back:hover {
-            color: white;
-        }
-
-        .toc {
-            background: #10151b;
-            border: 1px solid #242b33;
-            border-radius: 18px;
-            padding: 25px;
-            margin: 30px 0 45px;
-        }
-
-        .toc h2 {
-            margin-bottom: 15px;
-            font-size: 22px;
-        }
-
-        .toc a {
-            display: block;
-            color: #bbb;
-            text-decoration: none;
-            padding: 5px 0;
-        }
-
-        .toc a:hover {
-            color: white;
-        }
-
-        section {
-            margin-bottom: 55px;
-        }
-
-        h2 {
-            font-size: 30px;
-            margin-bottom: 18px;
-            border-left: 4px solid #888;
-            padding-left: 14px;
-        }
-
-        h3 {
-            font-size: 23px;
-            margin: 25px 0 12px;
-        }
-
-        h4 {
-            font-size: 18px;
-            margin: 20px 0 8px;
-        }
-
-        p {
-            color: #c8c8c8;
-            margin-bottom: 14px;
-        }
-
-        ul,
-        ol {
-            margin: 10px 0 18px 25px;
-            color: #c8c8c8;
-        }
-
-        li {
-            margin-bottom: 7px;
-        }
-
-        strong {
-            color: #fff;
-        }
-
-        .card {
-            background: #10151b;
-            border: 1px solid #252d35;
-            border-radius: 16px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-
-        .definition {
-            border-left: 4px solid #777;
-            background: #11161c;
-            padding: 18px;
-            margin: 18px 0;
-            border-radius: 8px;
-        }
-
-        .example {
-            border-left: 4px solid #555;
-            background: #0e1318;
-            padding: 18px;
-            margin: 18px 0;
-            border-radius: 8px;
-        }
-
-        .formula {
-            background: #050709;
-            border: 1px solid #292f35;
-            border-radius: 10px;
-            padding: 16px;
-            margin: 15px 0;
-            font-family: Consolas, monospace;
+        .semester {
+            margin-top: 18px;
             color: #ddd;
-            overflow-x: auto;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
 
-        .diagram {
-            background: #050709;
-            border: 1px solid #292f35;
-            border-radius: 14px;
-            padding: 25px;
-            margin: 22px 0;
-            overflow-x: auto;
+        /* INFO */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 45px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid #242424;
+            border-radius: 16px;
+            padding: 22px;
             text-align: center;
         }
 
-        .diagram pre {
-            display: inline-block;
-            text-align: left;
-            font-family: Consolas, monospace;
-            color: #ddd;
-            line-height: 1.5;
-            font-size: 14px;
+        .info-card small {
+            display: block;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 10px;
+            margin-bottom: 9px;
         }
 
-        .table-wrap {
-            overflow-x: auto;
-            margin: 20px 0;
+        .info-card strong {
+            color: #ffc107;
+            font-size: 16px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 600px;
+        /* SECTION */
+
+        .section-heading {
+            margin-bottom: 24px;
         }
 
-        th,
-        td {
-            border: 1px solid #303840;
-            padding: 12px;
-            text-align: left;
-            color: #ccc;
+        .section-heading small {
+            color: #ffc107;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
-        th {
-            background: #171d24;
-            color: white;
+        .section-heading h2 {
+            margin-top: 8px;
+            font-size: clamp(25px, 4vw, 36px);
         }
 
-        .question {
-            background: #10151b;
-            border: 1px solid #282f37;
-            border-radius: 12px;
-            padding: 18px;
-            margin: 12px 0;
+        /* MODULES */
+
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        .answer {
-            margin-top: 10px;
-            color: #bbb;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 9px;
-            border: 1px solid #444;
+        .module-card {
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.018)
+                );
+            border: 1px solid #292929;
             border-radius: 20px;
-            font-size: 12px;
-            color: #aaa;
-            margin-right: 5px;
+            padding: 30px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
-        .revision {
-            background: #0f1419;
-            border: 1px solid #2a323a;
-            border-radius: 16px;
-            padding: 25px;
+        .module-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #ffc107,
+                transparent
+            );
+            opacity: 0.7;
         }
+
+        .module-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(255, 193, 7, 0.45);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        .module-number {
+            color: #ffc107;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .module-card h3 {
+            font-size: 27px;
+            margin-bottom: 13px;
+        }
+
+        .module-card p {
+            color: #a7a7a7;
+            font-size: 14px;
+            line-height: 1.75;
+            flex: 1;
+        }
+
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 18px 0 22px;
+        }
+
+        .topic {
+            color: #aaa;
+            background: #111;
+            border: 1px solid #292929;
+            padding: 5px 9px;
+            border-radius: 7px;
+            font-size: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 13px 18px;
+            border-radius: 10px;
+            background: #ffc107;
+            color: #090909;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ffd54f;
+            transform: translateY(-2px);
+        }
+
+        /* STUDY */
+
+        .study-section {
+            margin-top: 60px;
+        }
+
+        .study-box {
+            border: 1px solid #282828;
+            background: rgba(255,255,255,0.025);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .study-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            list-style: none;
+        }
+
+        .study-list li {
+            position: relative;
+            padding: 17px 18px 17px 45px;
+            border-radius: 12px;
+            background: #101010;
+            border: 1px solid #222;
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+
+        .study-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 17px;
+            top: 15px;
+            color: #ffc107;
+            font-weight: 900;
+            font-size: 16px;
+        }
+
+        /* GITHUB */
+
+        .github-section {
+            margin-top: 60px;
+        }
+
+        .github-box {
+            text-align: center;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,193,7,0.07),
+                    rgba(255,255,255,0.015)
+                );
+            border-radius: 22px;
+            padding: 42px 25px;
+        }
+
+        .github-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .github-box h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .github-box p {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 22px;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: #ffc107;
+            color: #080808;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
 
         footer {
-            border-top: 1px solid #222;
-            padding: 30px 0;
+            border-top: 1px solid #1d1d1d;
+            padding: 25px 20px;
             text-align: center;
-            color: #777;
-            margin-top: 40px;
+            color: #666;
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        footer strong {
+            color: #ffc107;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .modules {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .study-list {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 45px;
+            }
+
+        }
+
+        @media (max-width: 520px) {
 
             header {
-                padding-top: 35px;
+                padding: 17px 14px;
             }
 
-            h2 {
-                font-size: 25px;
+            .header-inner {
+                width: 100%;
             }
 
-            h3 {
-                font-size: 21px;
+            .brand {
+                font-size: 11px;
+                letter-spacing: 1px;
             }
 
-            .card,
-            .toc,
-            .revision {
-                padding: 18px;
+            .back {
+                padding: 8px 11px;
+                font-size: 11px;
             }
 
-            .diagram {
-                padding: 15px;
-                text-align: left;
+            main {
+                width: 92%;
+                padding-bottom: 55px;
             }
 
-            .diagram pre {
-                font-size: 12px;
+            .hero {
+                padding: 20px 5px 40px;
             }
+
+            h1 {
+                font-size: 42px;
+                letter-spacing: -1.5px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .module-card {
+                padding: 23px;
+                min-height: 260px;
+            }
+
+            .module-card h3 {
+                font-size: 24px;
+            }
+
+            .study-box {
+                padding: 20px;
+            }
+
+            .github-box {
+                padding: 32px 18px;
+            }
+
+            .lion {
+                font-size: 60px;
+            }
+
         }
 
         @media print {
+
             body {
                 display: none !important;
             }
+
         }
 
     </style>
+
 </head>
 
 
 <body>
 
-<div class="container">
+    <div class="lion one">🦁</div>
+    <div class="lion two">🦁</div>
 
-<header>
 
-    <div class="tag">
-        BCS502 • COMPUTER NETWORKS • VTU 5TH SEMESTER
-    </div>
+    <header>
 
-    <h1>Module 2</h1>
+        <div class="header-inner">
 
-    <p class="subtitle">
-        Data Link Layer
-    </p>
+            <div class="brand">
+                MAHALAKSHMI'S COURSE NOTES
+            </div>
 
-    <a href="index.html" class="back">
-        ← Back to BCS502
-    </a>
+            <a
+                href="../index.html"
+                class="back"
+            >
+                ← Back to Course Notes
+            </a>
 
-</header>
+        </div>
 
+    </header>
 
-<!-- TABLE OF CONTENTS -->
 
-<div class="toc">
+    <main>
 
-    <h2>📚 Module Contents</h2>
 
-    <a href="#intro">1. Data Link Layer Introduction</a>
-    <a href="#error">2. Error Detection and Correction</a>
-    <a href="#block">3. Block Coding</a>
-    <a href="#crc">4. Cyclic Codes / CRC</a>
-    <a href="#framing">5. Framing</a>
-    <a href="#flow">6. Flow Control</a>
-    <a href="#errorcontrol">7. Error Control</a>
-    <a href="#hdlc">8. HDLC</a>
-    <a href="#mac">9. Medium Access Control</a>
-    <a href="#random">10. Random Access</a>
-    <a href="#controlled">11. Controlled Access</a>
-    <a href="#checksum">12. Checksum</a>
-    <a href="#ppp">13. PPP</a>
-    <a href="#questions">14. VTU Important Questions</a>
-    <a href="#revision">15. Quick Revision</a>
+        <section class="hero">
 
-</div>
+            <div class="course-code">
+                BCS502
+            </div>
 
+            <h1>
+                Computer <span>Networks</span>
+            </h1>
 
-<!-- INTRODUCTION -->
+            <p class="subtitle">
+                Complete VTU 5th Semester course notes covering
+                all five modules from Introduction to Application Layer.
+            </p>
 
-<section id="intro">
+            <p class="semester">
+                VTU • 5TH SEMESTER • CSE
+            </p>
 
-<h2>1. Data Link Layer Introduction</h2>
+        </section>
 
-<div class="definition">
 
-<strong>Definition:</strong>
+        <section class="info-grid">
 
-<p>
-The Data Link Layer is the second layer of the OSI model.
-It provides reliable transfer of data frames between two directly
-connected nodes over a physical link.
-</p>
+            <div class="info-card">
+                <small>Course Code</small>
+                <strong>BCS502</strong>
+            </div>
 
-</div>
+            <div class="info-card">
+                <small>Subject</small>
+                <strong>Computer Networks</strong>
+            </div>
 
-<h3>Main Responsibilities</h3>
+            <div class="info-card">
+                <small>Modules</small>
+                <strong>5 Modules</strong>
+            </div>
 
-<ul>
-    <li>Framing</li>
-    <li>Physical addressing</li>
-    <li>Flow control</li>
-    <li>Error control</li>
-    <li>Access control</li>
-</ul>
+        </section>
 
-<div class="diagram">
 
-<pre>
-        OSI MODEL
+        <section>
 
-┌──────────────────────────┐
-│  Application Layer       │
-├──────────────────────────┤
-│  Presentation Layer      │
-├──────────────────────────┤
-│  Session Layer           │
-├──────────────────────────┤
-│  Transport Layer         │
-├──────────────────────────┤
-│  Network Layer           │
-├──────────────────────────┤
-│  DATA LINK LAYER         │  ← Module 2
-├──────────────────────────┤
-│  Physical Layer          │
-└──────────────────────────┘
-</pre>
+            <div class="section-heading">
 
-</div>
+                <small>
+                    Course Content
+                </small>
 
-<h3>Data Link Layer Functions</h3>
+                <h2>
+                    📚 Modules
+                </h2>
 
-<div class="card">
+            </div>
 
-<h4>1. Framing</h4>
-<p>
-The data received from the network layer is divided into manageable
-units called frames.
-</p>
 
-<h4>2. Flow Control</h4>
-<p>
-Flow control prevents a fast sender from overwhelming a slow receiver.
-</p>
+            <div class="modules">
 
-<h4>3. Error Control</h4>
-<p>
-It detects and sometimes corrects errors that occur during transmission.
-</p>
 
-<h4>4. Access Control</h4>
-<p>
-When multiple devices share the same communication medium,
-the data link layer determines which device can transmit.
-</p>
+                <!-- MODULE 1 -->
 
-</div>
+                <article
+                    class="module-card"
+                    onclick="openModule('module1.html')"
+                >
 
-</section>
+                    <div class="module-number">
+                        MODULE 01
+                    </div>
 
+                    <h3>
+                        Introduction
+                    </h3>
+
+                    <p>
+                        Data communications, networks, network types,
+                        network models, TCP/IP protocol suite, OSI model,
+                        transmission media and packet switching.
+                    </p>
 
-<!-- ERROR DETECTION -->
+                    <div class="topics">
+
+                        <span class="topic">Data Communications</span>
+                        <span class="topic">TCP/IP</span>
+                        <span class="topic">OSI</span>
+                        <span class="topic">Transmission Media</span>
+                        <span class="topic">Switching</span>
 
-<section id="error">
+                    </div>
 
-<h2>2. Error Detection and Correction</h2>
+                    <a
+                        href="module1.html"
+                        class="btn"
+                        onclick="event.stopPropagation()"
+                    >
+                        Open Module 1 →
+                    </a>
 
-<p>
-During data transmission, bits may change because of noise,
-interference, attenuation or other transmission problems.
-</p>
+                </article>
 
-<div class="definition">
 
-<strong>Error:</strong>
-A change in one or more bits of the transmitted data.
-</div>
+                <!-- MODULE 2 -->
 
-<h3>Types of Errors</h3>
+                <article
+                    class="module-card"
+                    onclick="openModule('module2.html')"
+                >
 
-<h4>Single-Bit Error</h4>
+                    <div class="module-number">
+                        MODULE 02
+                    </div>
 
-<p>
-Only one bit is changed from 0 to 1 or from 1 to 0.
-</p>
+                    <h3>
+                        Data Link Layer
+                    </h3>
 
-<div class="example">
+                    <p>
+                        Error detection and correction, block coding,
+                        cyclic codes, data link control, framing,
+                        flow control, error control, HDLC, MAC,
+                        checksum and PPP.
+                    </p>
 
-<strong>Example:</strong>
+                    <div class="topics">
 
-<div class="formula">
-Sent:      1011001
-Received:  1010001
-</div>
+                        <span class="topic">Error Detection</span>
+                        <span class="topic">Block Coding</span>
+                        <span class="topic">HDLC</span>
+                        <span class="topic">MAC</span>
+                        <span class="topic">PPP</span>
 
-<p>
-Only one bit has changed.
-</p>
+                    </div>
 
-</div>
+                    <a
+                        href="module2.html"
+                        class="btn"
+                        onclick="event.stopPropagation()"
+                    >
+                        Open Module 2 →
+                    </a>
 
-<h4>Burst Error</h4>
+                </article>
 
-<p>
-Two or more bits in a data unit are affected.
-The corrupted bits need not be consecutive.
-</p>
 
-<div class="example">
+                <!-- MODULE 3 -->
 
-<div class="formula">
-Sent:      1001100110
-Received:  1000011110
-</div>
+                <article
+                    class="module-card"
+                    onclick="openModule('module3.html')"
+                >
 
-</div>
+                    <div class="module-number">
+                        MODULE 03
+                    </div>
 
-<h3>Error Detection Techniques</h3>
+                    <h3>
+                        Network Layer
+                    </h3>
 
-<ul>
-    <li>Parity Check</li>
-    <li>Checksum</li>
-    <li>Cyclic Redundancy Check (CRC)</li>
-    <li>Block Coding</li>
-</ul>
+                    <p>
+                        Network layer services, packet switching,
+                        IPv4 addressing, IPv4 datagram, IPv6 datagram,
+                        routing algorithms, DVR, LSR, PVR,
+                        RIP, OSPF, BGP and multicast routing.
+                    </p>
 
-<h3>Error Correction</h3>
+                    <div class="topics">
 
-<p>
-Error correction attempts to identify the error and recover the
-original transmitted data.
-</p>
+                        <span class="topic">IPv4</span>
+                        <span class="topic">IPv6</span>
+                        <span class="topic">DVR</span>
+                        <span class="topic">OSPF</span>
+                        <span class="topic">BGP</span>
 
-</section>
+                    </div>
 
+                    <a
+                        href="module3.html"
+                        class="btn"
+                        onclick="event.stopPropagation()"
+                    >
+                        Open Module 3 →
+                    </a>
 
-<!-- BLOCK CODING -->
+                </article>
 
-<section id="block">
 
-<h2>3. Block Coding</h2>
+                <!-- MODULE 4 -->
 
-<div class="definition">
+                <article
+                    class="module-card"
+                    onclick="openModule('module4.html')"
+                >
 
-<strong>Definition:</strong>
+                    <div class="module-number">
+                        MODULE 04
+                    </div>
 
-<p>
-Block coding divides a message into blocks of m bits and replaces
-each block with an n-bit codeword, where n is greater than m.
-</p>
+                    <h3>
+                        Transport Layer
+                    </h3>
 
-</div>
+                    <p>
+                        Transport layer services, UDP, TCP,
+                        TCP segments, connections, flow control,
+                        error control and congestion control.
+                    </p>
 
-<div class="diagram">
+                    <div class="topics">
 
-<pre>
-       m bits
-          │
-          ▼
-   ┌─────────────┐
-   │   Encoder   │
-   └─────────────┘
-          │
-          ▼
-       n bits
-      Codeword
+                        <span class="topic">UDP</span>
+                        <span class="topic">TCP</span>
+                        <span class="topic">Flow Control</span>
+                        <span class="topic">Error Control</span>
+                        <span class="topic">Congestion</span>
 
-        n > m
-</pre>
+                    </div>
 
-</div>
+                    <a
+                        href="module4.html"
+                        class="btn"
+                        onclick="event.stopPropagation()"
+                    >
+                        Open Module 4 →
+                    </a>
 
-<h3>Redundancy</h3>
+                </article>
 
-<p>
-The additional bits added to the original data are called redundant
-bits. They help the receiver detect or correct errors.
-</p>
 
-<div class="formula">
-Redundancy = n - m
-</div>
+                <!-- MODULE 5 -->
 
-<h3>Code Rate</h3>
+                <article
+                    class="module-card"
+                    onclick="openModule('module5.html')"
+                >
 
-<div class="formula">
-Code Rate = m / n
-</div>
+                    <div class="module-number">
+                        MODULE 05
+                    </div>
 
-<div class="example">
+                    <h3>
+                        Application Layer
+                    </h3>
 
-<strong>Example:</strong>
+                    <p>
+                        Application layer concepts, client-server
+                        programming, HTTP, FTP, electronic mail,
+                        DNS, TELNET and SSH.
+                    </p>
 
-<p>
-If 4 data bits are converted into an 8-bit codeword:
-</p>
+                    <div class="topics">
 
-<div class="formula">
-m = 4
-n = 8
+                        <span class="topic">HTTP</span>
+                        <span class="topic">FTP</span>
+                        <span class="topic">Email</span>
+                        <span class="topic">DNS</span>
+                        <span class="topic">SSH</span>
 
-Code Rate = 4 / 8
-          = 0.5
-</div>
+                    </div>
 
-</div>
+                    <a
+                        href="module5.html"
+                        class="btn"
+                        onclick="event.stopPropagation()"
+                    >
+                        Open Module 5 →
+                    </a>
 
-</section>
+                </article>
 
 
-<!-- CRC -->
+            </div>
 
-<section id="crc">
+        </section>
 
-<h2>4. Cyclic Codes / CRC</h2>
 
-<div class="definition">
+        <section class="study-section">
 
-<strong>Cyclic Redundancy Check (CRC)</strong>
+            <div class="section-heading">
 
-<p>
-CRC is an error-detection technique based on binary polynomial
-division. It is widely used for detecting transmission errors.
-</p>
+                <small>
+                    Preparation
+                </small>
 
-</div>
+                <h2>
+                    📖 Study Guide
+                </h2>
 
-<h3>Basic CRC Process</h3>
+            </div>
 
-<div class="diagram">
 
-<pre>
-       Dataword
-          │
-          ▼
-    Append zeros
-          │
-          ▼
-   Binary division
-          │
-          ▼
-       Remainder
-          │
-          ▼
-       Codeword
-</pre>
+            <div class="study-box">
 
-</div>
+                <ul class="study-list">
 
-<h3>Important Terms</h3>
+                    <li>
+                        Start with the basic concepts of each module
+                        before moving to advanced topics.
+                    </li>
 
-<ul>
-    <li><strong>Dataword:</strong> Original data bits.</li>
-    <li><strong>Divisor:</strong> Generator used for binary division.</li>
-    <li><strong>Remainder:</strong> Result obtained after division.</li>
-    <li><strong>Codeword:</strong> Dataword combined with the CRC remainder.</li>
-</ul>
+                    <li>
+                        Practice diagrams for OSI, TCP/IP,
+                        protocols and networking layers.
+                    </li>
 
-<h3>CRC Steps</h3>
+                    <li>
+                        Practice numerical problems related to
+                        CRC, addressing and routing algorithms.
+                    </li>
 
-<ol>
+                    <li>
+                        Prepare important 2-mark, 5-mark and
+                        10-mark examination questions.
+                    </li>
 
-<li>
-Let the dataword contain m bits.
-</li>
+                    <li>
+                        Compare related concepts such as TCP vs UDP,
+                        IPv4 vs IPv6 and OSI vs TCP/IP.
+                    </li>
 
-<li>
-Let the divisor contain n bits.
-</li>
+                    <li>
+                        Revise protocols and their functions before
+                        the VTU examination.
+                    </li>
 
-<li>
-Append n − 1 zeros to the dataword.
-</li>
+                </ul>
 
-<li>
-Perform modulo-2 binary division.
-</li>
+            </div>
 
-<li>
-The remainder is appended to the original dataword.
-</li>
+        </section>
 
-<li>
-The resulting sequence is transmitted as the codeword.
-</li>
 
-</ol>
+        <section class="github-section">
 
-<div class="example">
+            <div class="github-box">
 
-<strong>Simple Example:</strong>
+                <div class="github-icon">
+                    🐙
+                </div>
 
-<p>
-Suppose:
-</p>
+                <h2>
+                    MAHALAKSHMI'S GITHUB
+                </h2>
 
-<div class="formula">
-Dataword = 1001
-Divisor  = 1011
-</div>
+                <p>
+                    Explore the complete Course Notes project,
+                    source code and other projects.
+                </p>
 
-<p>
-The divisor has 4 bits, therefore append 3 zeros:
-</p>
+                <a
+                    href="https://github.com/mahalakshmikommaranahalli9-cell"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="github-btn"
+                >
+                    🐙 Visit Mahalakshmi's GitHub
+                </a>
 
-<div class="formula">
-1001 → 1001000
-</div>
+            </div>
 
-<p>
-Perform modulo-2 division. The resulting remainder is attached
-to the original dataword to form the transmitted codeword.
-</p>
+        </section>
 
-</div>
 
-<h3>Modulo-2 Arithmetic</h3>
+    </main>
 
-<p>
-CRC uses XOR instead of ordinary subtraction.
-</p>
 
-<div class="formula">
-0 XOR 0 = 0
-0 XOR 1 = 1
-1 XOR 0 = 1
-1 XOR 1 = 0
-</div>
+    <footer>
 
-<div class="card">
+        © 2026
+        <strong>
+            Mahalakshmi
+        </strong>
+        • BCS502 Computer Networks
 
-<strong>Exam Tip:</strong>
+    </footer>
 
-<p>
-For CRC numerical problems, remember:
-</p>
 
-<div class="formula">
-Number of appended zeros = Divisor length − 1
-</div>
+    <script>
 
-</div>
-
-</section>
-
-
-<!-- FRAMING -->
-
-<section id="framing">
-
-<h2>5. Framing</h2>
-
-<div class="definition">
-
-<strong>Framing:</strong>
-
-<p>
-Framing is the process of dividing the stream of bits received from
-the network layer into manageable units called frames.
-</p>
-
-</div>
-
-<div class="diagram">
-
-<pre>
-                FRAME
-
-┌──────────┬────────────────────┬──────────┐
-│  Header  │        Data        │  Trailer │
-└──────────┴────────────────────┴──────────┘
-</pre>
-
-</div>
-
-<h3>Framing Methods</h3>
-
-<ul>
-    <li>Character-oriented framing</li>
-    <li>Byte stuffing</li>
-    <li>Bit-oriented framing</li>
-    <li>Bit stuffing</li>
-</ul>
-
-<h3>Byte Stuffing</h3>
-
-<p>
-In byte stuffing, special bytes are inserted into the data whenever
-the data contains a byte that has a special meaning.
-</p>
-
-<div class="example">
-
-<strong>Example:</strong>
-
-<p>
-Suppose FLAG represents the beginning or end of a frame.
-If FLAG appears inside the actual data, an escape byte can be inserted
-before it.
-</p>
-
-<div class="formula">
-Original Data:
-A  B  FLAG  C
-
-After Stuffing:
-A  B  ESC  FLAG  C
-</div>
-
-</div>
-
-<h3>Bit Stuffing</h3>
-
-<p>
-Bit stuffing is commonly used with bit-oriented protocols.
-A 0 is inserted after five consecutive 1s in the data.
-</p>
-
-<div class="example">
-
-<div class="formula">
-Original:
-111111
-
-After bit stuffing:
-1111101
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FLOW CONTROL -->
-
-<section id="flow">
-
-<h2>6. Flow Control</h2>
-
-<div class="definition">
-
-<strong>Definition:</strong>
-
-<p>
-Flow control controls the rate at which a sender transmits data
-so that a receiver can process the data properly.
-</p>
-
-</div>
-
-<div class="diagram">
-
-<pre>
-       SENDER                         RECEIVER
-
-          │                              │
-          │────── Frame 1 ──────────────►│
-          │────── Frame 2 ──────────────►│
-          │                              │
-          │◄──────── ACK ────────────────│
-          │                              │
-</pre>
-
-</div>
-
-<h3>Why Flow Control is Needed</h3>
-
-<ul>
-    <li>Sender may be faster than receiver.</li>
-    <li>Receiver may have limited buffer space.</li>
-    <li>Prevents loss of frames due to buffer overflow.</li>
-</ul>
-
-<h3>Main Flow Control Techniques</h3>
-
-<ul>
-    <li>Stop-and-Wait</li>
-    <li>Sliding Window</li>
-</ul>
-
-</section>
-
-
-<!-- STOP AND WAIT -->
-
-<section>
-
-<h2>7. Stop-and-Wait Protocol</h2>
-
-<p>
-In Stop-and-Wait, the sender transmits one frame and waits for
-an acknowledgement before sending the next frame.
-</p>
-
-<div class="diagram">
-
-<pre>
- Sender                         Receiver
-   │                               │
-   │────── Frame 1 ───────────────►│
-   │                               │
-   │◄────────── ACK ───────────────│
-   │                               │
-   │────── Frame 2 ───────────────►│
-   │                               │
-   │◄────────── ACK ───────────────│
-   │                               │
-</pre>
-
-</div>
-
-<h3>Advantages</h3>
-
-<ul>
-    <li>Simple implementation.</li>
-    <li>Easy error handling.</li>
-    <li>Suitable for low-speed links.</li>
-</ul>
-
-<h3>Disadvantage</h3>
-
-<p>
-It can be inefficient when the propagation delay is large because
-the sender spends significant time waiting for acknowledgements.
-</p>
-
-</section>
-
-
-<!-- SLIDING WINDOW -->
-
-<section>
-
-<h2>8. Sliding Window Protocol</h2>
-
-<p>
-Sliding Window allows multiple frames to be transmitted before
-receiving acknowledgements.
-</p>
-
-<div class="diagram">
-
-<pre>
-Frame Numbers
-
-┌────┬────┬────┬────┬────┬────┬────┐
-│ 0  │ 1  │ 2  │ 3  │ 4  │ 5  │ 6  │
-└────┴────┴────┴────┴────┴────┴────┘
-       └───────────────┘
-          Window
-</pre>
-
-</div>
-
-<h3>Advantages</h3>
-
-<ul>
-    <li>Better link utilization.</li>
-    <li>Higher throughput.</li>
-    <li>Multiple frames can be in transit.</li>
-</ul>
-
-<h3>Types</h3>
-
-<ul>
-    <li>Go-Back-N ARQ</li>
-    <li>Selective Repeat ARQ</li>
-</ul>
-
-</section>
-
-
-<!-- ERROR CONTROL -->
-
-<section id="errorcontrol">
-
-<h2>9. Error Control</h2>
-
-<div class="definition">
-
-<p>
-Error control combines error detection, acknowledgement,
-retransmission and timeout mechanisms to provide reliable delivery.
-</p>
-
-</div>
-
-<h3>Important Components</h3>
-
-<ul>
-    <li>Error detection</li>
-    <li>ACK — acknowledgement</li>
-    <li>NAK — negative acknowledgement</li>
-    <li>Timeout</li>
-    <li>Retransmission</li>
-</ul>
-
-<div class="diagram">
-
-<pre>
- Sender                         Receiver
-   │                               │
-   │────── Data ──────────────────►│
-   │                               │
-   │◄────────── ACK ───────────────│
-   │                               │
-
-If error occurs:
-
-   │────── Data ──────────────────►│
-   │                               │
-   │◄────────── NAK ───────────────│
-   │                               │
-   │────── Retransmission ────────►│
-</pre>
-
-</div>
-
-<h3>ARQ</h3>
-
-<p>
-ARQ stands for Automatic Repeat reQuest.
-It uses acknowledgements and retransmission to recover from errors.
-</p>
-
-<h4>Types of ARQ</h4>
-
-<ul>
-    <li>Stop-and-Wait ARQ</li>
-    <li>Go-Back-N ARQ</li>
-    <li>Selective Repeat ARQ</li>
-</ul>
-
-</section>
-
-
-<!-- HDLC -->
-
-<section id="hdlc">
-
-<h2>10. HDLC</h2>
-
-<div class="definition">
-
-<strong>HDLC — High-Level Data Link Control</strong>
-
-<p>
-HDLC is a bit-oriented data link layer protocol used for reliable
-communication over point-to-point and multipoint links.
-</p>
-
-</div>
-
-<h3>HDLC Frame Format</h3>
-
-<div class="diagram">
-
-<pre>
-┌──────┬───────┬──────┬──────────┬──────┬──────┐
-│ Flag │ Address│Control│ Information│ FCS │ Flag │
-└──────┴───────┴──────┴──────────┴──────┴──────┘
-</pre>
-
-</div>
-
-<h3>HDLC Fields</h3>
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>Field</th>
-<th>Purpose</th>
-</tr>
-
-<tr>
-<td>Flag</td>
-<td>Marks beginning and end of frame.</td>
-</tr>
-
-<tr>
-<td>Address</td>
-<td>Identifies the secondary station.</td>
-</tr>
-
-<tr>
-<td>Control</td>
-<td>Specifies the type and control information.</td>
-</tr>
-
-<tr>
-<td>Information</td>
-<td>Carries user data.</td>
-</tr>
-
-<tr>
-<td>FCS</td>
-<td>Frame Check Sequence used for error detection.</td>
-</tr>
-
-</table>
-
-</div>
-
-<h3>Types of HDLC Frames</h3>
-
-<ul>
-    <li><strong>I-Frame:</strong> Information frame.</li>
-    <li><strong>S-Frame:</strong> Supervisory frame.</li>
-    <li><strong>U-Frame:</strong> Unnumbered frame.</li>
-</ul>
-
-</section>
-
-
-<!-- MAC -->
-
-<section id="mac">
-
-<h2>11. Medium Access Control</h2>
-
-<div class="definition">
-
-<strong>MAC:</strong>
-
-<p>
-Medium Access Control determines how multiple devices share
-a common communication medium.
-</p>
-
-</div>
-
-<div class="diagram">
-
-<pre>
-              SHARED MEDIUM
-                   │
-        ┌──────────┼──────────┐
-        │          │          │
-        ▼          ▼          ▼
-    Station A   Station B   Station C
-</pre>
-
-</div>
-
-<h3>Two Major Approaches</h3>
-
-<ul>
-    <li>Random Access</li>
-    <li>Controlled Access</li>
-</ul>
-
-</section>
-
-
-<!-- RANDOM ACCESS -->
-
-<section id="random">
-
-<h2>12. Random Access</h2>
-
-<p>
-In random access, all stations have equal opportunity to access
-the shared medium.
-</p>
-
-<h3>Important Random Access Protocols</h3>
-
-<ul>
-    <li>ALOHA</li>
-    <li>Slotted ALOHA</li>
-    <li>CSMA</li>
-    <li>CSMA/CD</li>
-    <li>CSMA/CA</li>
-</ul>
-
-<h3>ALOHA</h3>
-
-<p>
-A station transmits whenever it has data. If a collision occurs,
-the frame is retransmitted after a random waiting period.
-</p>
-
-<h3>Slotted ALOHA</h3>
-
-<p>
-Time is divided into slots. A station can transmit only at the
-beginning of a time slot.
-</p>
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>ALOHA</th>
-<th>Slotted ALOHA</th>
-</tr>
-
-<tr>
-<td>Transmission can begin at any time.</td>
-<td>Transmission begins only at slot boundaries.</td>
-</tr>
-
-<tr>
-<td>Higher collision possibility.</td>
-<td>Lower collision possibility.</td>
-</tr>
-
-</table>
-
-</div>
-
-<h3>CSMA</h3>
-
-<p>
-CSMA stands for Carrier Sense Multiple Access.
-A station senses the channel before transmitting.
-</p>
-
-<h3>CSMA/CD</h3>
-
-<p>
-CSMA/CD stands for Carrier Sense Multiple Access with Collision Detection.
-It detects collisions while transmission is taking place.
-</p>
-
-<h3>CSMA/CA</h3>
-
-<p>
-CSMA/CA stands for Carrier Sense Multiple Access with Collision Avoidance.
-It attempts to avoid collisions before they occur.
-It is associated with wireless LAN communication.
-</p>
-
-</section>
-
-
-<!-- CONTROLLED ACCESS -->
-
-<section id="controlled">
-
-<h2>13. Controlled Access</h2>
-
-<p>
-In controlled access, stations coordinate their access to the
-shared medium.
-</p>
-
-<h3>Main Methods</h3>
-
-<ul>
-    <li>Reservation</li>
-    <li>Polling</li>
-    <li>Token Passing</li>
-</ul>
-
-<h3>Polling</h3>
-
-<p>
-A central controller asks each station whether it wants to transmit.
-</p>
-
-<div class="diagram">
-
-<pre>
-             Controller
-             /   |   \
-            /    |    \
-           ▼     ▼     ▼
-       Station A B    Station C
-</pre>
-
-</div>
-
-<h3>Token Passing</h3>
-
-<p>
-A special control frame called a token is passed between stations.
-Only the station holding the token can transmit.
-</p>
-
-<div class="diagram">
-
-<pre>
-       ┌───────────┐
-       │ Station A │
-       └─────┬─────┘
-             │
-             ▼
-       ┌───────────┐
-       │ Station B │
-       └─────┬─────┘
-             │
-             ▼
-       ┌───────────┐
-       │ Station C │
-       └─────┬─────┘
-             │
-             └──────────────► Station A
-</pre>
-
-</div>
-
-</section>
-
-
-<!-- CHECKSUM -->
-
-<section id="checksum">
-
-<h2>14. Checksum</h2>
-
-<div class="definition">
-
-<p>
-Checksum is an error-detection technique in which data is divided
-into fixed-size units and added using one's complement arithmetic.
-</p>
-
-</div>
-
-<h3>Basic Steps</h3>
-
-<ol>
-
-<li>Divide data into equal-sized words.</li>
-
-<li>Add all words using one's complement addition.</li>
-
-<li>Take the one's complement of the sum.</li>
-
-<li>The result is the checksum.</li>
-
-<li>The checksum is transmitted along with the data.</li>
-
-</ol>
-
-<div class="diagram">
-
-<pre>
-Data Words
-   │
-   ▼
-┌─────────────┐
-│ Add Words   │
-└──────┬──────┘
-       │
-       ▼
-    Sum
-       │
-       ▼
-One's Complement
-       │
-       ▼
-  Checksum
-</pre>
-
-</div>
-
-<div class="example">
-
-<strong>Conceptual Example:</strong>
-
-<div class="formula">
-Word 1 = 1010
-Word 2 = 1100
-Word 3 = 0110
-
-        ↓
-One's complement addition
-
-        ↓
-       Sum
-
-        ↓
-One's complement
-
-        ↓
-     Checksum
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PPP -->
-
-<section id="ppp">
-
-<h2>15. PPP — Point-to-Point Protocol</h2>
-
-<div class="definition">
-
-<p>
-PPP is a data link layer protocol designed for communication
-between two directly connected devices.
-</p>
-
-</div>
-
-<h3>PPP Features</h3>
-
-<ul>
-    <li>Framing</li>
-    <li>Link establishment</li>
-    <li>Error detection</li>
-    <li>Network layer protocol support</li>
-    <li>Authentication support</li>
-</ul>
-
-<h3>PPP Components</h3>
-
-<div class="diagram">
-
-<pre>
-             Network Layer
-                   │
-                   ▼
-             ┌───────────┐
-             │    NCP    │
-             └─────┬─────┘
-                   │
-             ┌───────────┐
-             │    LCP    │
-             └─────┬─────┘
-                   │
-             ┌───────────┐
-             │   PPP     │
-             └─────┬─────┘
-                   │
-                   ▼
-             Physical Layer
-</pre>
-
-</div>
-
-<h3>LCP</h3>
-
-<p>
-LCP stands for Link Control Protocol. It establishes, configures,
-tests and terminates the data-link connection.
-</p>
-
-<h3>NCP</h3>
-
-<p>
-NCP stands for Network Control Protocol. It allows PPP to support
-different network-layer protocols.
-</p>
-
-<h3>PPP Frame</h3>
-
-<div class="diagram">
-
-<pre>
-┌──────┬─────┬──────┬─────────┬─────┬──────┐
-│ Flag │ Addr│ Ctrl │ Protocol│Data │ FCS  │
-└──────┴─────┴──────┴─────────┴─────┴──────┘
-</pre>
-
-</div>
-
-</section>
-
-
-<!-- COMPARISON -->
-
-<section>
-
-<h2>16. Important Comparisons</h2>
-
-<h3>Stop-and-Wait vs Sliding Window</h3>
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>Stop-and-Wait</th>
-<th>Sliding Window</th>
-</tr>
-
-<tr>
-<td>One frame at a time.</td>
-<td>Multiple frames can be transmitted.</td>
-</tr>
-
-<tr>
-<td>Simple.</td>
-<td>More complex.</td>
-</tr>
-
-<tr>
-<td>Lower efficiency.</td>
-<td>Higher efficiency.</td>
-</tr>
-
-<tr>
-<td>Suitable for simple links.</td>
-<td>Suitable for high-delay links.</td>
-</tr>
-
-</table>
-
-</div>
-
-
-<h3>CRC vs Checksum</h3>
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>CRC</th>
-<th>Checksum</th>
-</tr>
-
-<tr>
-<td>Uses binary polynomial division.</td>
-<td>Uses arithmetic addition.</td>
-</tr>
-
-<tr>
-<td>Uses XOR operation.</td>
-<td>Uses one's complement arithmetic.</td>
-</tr>
-
-<tr>
-<td>Strong error detection.</td>
-<td>Simple error detection.</td>
-</tr>
-
-</table>
-
-</div>
-
-
-<h3>Random Access vs Controlled Access</h3>
-
-<div class="table-wrap">
-
-<table>
-
-<tr>
-<th>Random Access</th>
-<th>Controlled Access</th>
-</tr>
-
-<tr>
-<td>Stations compete for the medium.</td>
-<td>Stations coordinate access.</td>
-</tr>
-
-<tr>
-<td>Collisions may occur.</td>
-<td>Collisions can be reduced.</td>
-</tr>
-
-<tr>
-<td>Examples: ALOHA, CSMA.</td>
-<td>Examples: Polling, Token Passing.</td>
-</tr>
-
-</table>
-
-</div>
-
-</section>
-
-
-<!-- 2 MARK -->
-
-<section id="questions">
-
-<h2>17. VTU Important 2-Mark Questions</h2>
-
-<div class="question">
-<strong>Q1. What is framing?</strong>
-<div class="answer">
-Framing is the process of dividing a stream of bits into manageable
-units called frames.
-</div>
-</div>
-
-<div class="question">
-<strong>Q2. What is flow control?</strong>
-<div class="answer">
-Flow control regulates the rate of data transmission so that a
-fast sender does not overwhelm a slow receiver.
-</div>
-</div>
-
-<div class="question">
-<strong>Q3. What is CRC?</strong>
-<div class="answer">
-CRC is an error-detection technique based on modulo-2 binary division.
-</div>
-</div>
-
-<div class="question">
-<strong>Q4. What is HDLC?</strong>
-<div class="answer">
-HDLC is a bit-oriented data link layer protocol used for reliable
-communication.
-</div>
-</div>
-
-<div class="question">
-<strong>Q5. What is checksum?</strong>
-<div class="answer">
-Checksum is an error-detection technique using one's complement
-arithmetic.
-</div>
-</div>
-
-<div class="question">
-<strong>Q6. What is PPP?</strong>
-<div class="answer">
-PPP is a data link protocol used for point-to-point communication.
-</div>
-</div>
-
-<div class="question">
-<strong>Q7. What is bit stuffing?</strong>
-<div class="answer">
-Bit stuffing inserts a 0 after five consecutive 1s in a bit-oriented
-frame.
-</div>
-</div>
-
-<div class="question">
-<strong>Q8. What is CSMA/CD?</strong>
-<div class="answer">
-CSMA/CD is a medium-access technique that senses the carrier and
-detects collisions during transmission.
-</div>
-</div>
-
-</section>
-
-
-<!-- 5 MARK -->
-
-<section>
-
-<h2>18. VTU Important 5-Mark Questions</h2>
-
-<div class="card">
-
-<ol>
-
-<li>Explain the functions of the Data Link Layer.</li>
-
-<li>Explain different types of transmission errors.</li>
-
-<li>Explain block coding with code rate and redundancy.</li>
-
-<li>Explain CRC with its steps.</li>
-
-<li>Explain framing and its techniques.</li>
-
-<li>Explain Stop-and-Wait flow control.</li>
-
-<li>Explain Sliding Window protocol.</li>
-
-<li>Explain HDLC frame format.</li>
-
-<li>Explain random access protocols.</li>
-
-<li>Explain controlled access protocols.</li>
-
-<li>Explain checksum.</li>
-
-<li>Explain PPP and its components.</li>
-
-</ol>
-
-</div>
-
-</section>
-
-
-<!-- 10 MARK -->
-
-<section>
-
-<h2>19. VTU Important 10-Mark Questions</h2>
-
-<div class="card">
-
-<ol>
-
-<li>
-Explain error detection and correction techniques with suitable examples.
-</li>
-
-<li>
-Explain CRC algorithm with a suitable numerical example.
-</li>
-
-<li>
-Explain framing methods including byte stuffing and bit stuffing.
-</li>
-
-<li>
-Explain Stop-and-Wait and Sliding Window protocols with diagrams.
-</li>
-
-<li>
-Explain HDLC architecture, frame format and frame types.
-</li>
-
-<li>
-Explain random access protocols including ALOHA, Slotted ALOHA,
-CSMA, CSMA/CD and CSMA/CA.
-</li>
-
-<li>
-Explain controlled access techniques: reservation, polling and
-token passing.
-</li>
-
-<li>
-Explain PPP architecture, components and frame format.
-</li>
-
-</ol>
-
-</div>
-
-</section>
-
-
-<!-- EXAM ANSWER TEMPLATE -->
-
-<section>
-
-<h2>20. How to Write a 10-Mark Answer</h2>
-
-<div class="card">
-
-<h3>Recommended Structure</h3>
-
-<ol>
-
-<li>Write the definition.</li>
-
-<li>Draw a neat diagram.</li>
-
-<li>Explain the working step-by-step.</li>
-
-<li>Give a suitable example.</li>
-
-<li>Write advantages / important points.</li>
-
-<li>Conclude with 1–2 lines.</li>
-
-</ol>
-
-<div class="example">
-
-<strong>Example:</strong>
-
-<p>
-For a question on HDLC, write:
-</p>
-
-<div class="formula">
-Definition
-      ↓
-HDLC Architecture
-      ↓
-Frame Format
-      ↓
-Field Explanation
-      ↓
-Frame Types
-      ↓
-Advantages / Applications
-      ↓
-Conclusion
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- QUICK REVISION -->
-
-<section id="revision">
-
-<h2>21. ⚡ Quick Revision</h2>
-
-<div class="revision">
-
-<p><span class="badge">DLL</span> Second layer of OSI model.</p>
-
-<p><span class="badge">Frame</span> Data unit of Data Link Layer.</p>
-
-<p><span class="badge">CRC</span> Error detection using modulo-2 division.</p>
-
-<p><span class="badge">Framing</span> Divides bit stream into frames.</p>
-
-<p><span class="badge">Flow Control</span> Controls sender's transmission rate.</p>
-
-<p><span class="badge">Stop-and-Wait</span> Send one frame and wait for ACK.</p>
-
-<p><span class="badge">Sliding Window</span> Multiple frames can be in transit.</p>
-
-<p><span class="badge">HDLC</span> Bit-oriented data link protocol.</p>
-
-<p><span class="badge">ALOHA</span> Random access protocol.</p>
-
-<p><span class="badge">CSMA</span> Sense channel before transmission.</p>
-
-<p><span class="badge">Polling</span> Central controller grants access.</p>
-
-<p><span class="badge">Token</span> Only token holder transmits.</p>
-
-<p><span class="badge">Checksum</span> Error detection using one's complement.</p>
-
-<p><span class="badge">PPP</span> Point-to-point data link protocol.</p>
-
-</div>
-
-</section>
-
-
-<!-- FINAL -->
-
-<section>
-
-<h2>22. Module 2 Summary</h2>
-
-<div class="card">
-
-<p>
-The Data Link Layer provides node-to-node delivery and performs
-important functions such as framing, flow control, error control
-and medium access control.
-</p>
-
-<p>
-Important examination areas include <strong>CRC, framing,
-Stop-and-Wait, Sliding Window, HDLC, ALOHA, CSMA, checksum
-and PPP.</strong>
-</p>
-
-<p>
-For numerical questions, practice CRC and checksum carefully.
-For theory questions, always include a neat diagram wherever
-applicable.
-</p>
-
-</div>
-
-</section>
-
-
-<footer>
-
-    <p>
-        BCS502 • Computer Networks • Module 2
-    </p>
-
-    <p>
-        Original exam-oriented study notes
-    </p>
-
-</footer>
-
-</div>
-
-
-<script>
-
-    /* Disable right click */
-    document.addEventListener("contextmenu", function(e) {
-        e.preventDefault();
-    });
-
-    /* Disable selection */
-    document.addEventListener("selectstart", function(e) {
-        e.preventDefault();
-    });
-
-    /* Disable dragging */
-    document.addEventListener("dragstart", function(e) {
-        e.preventDefault();
-    });
-
-    /* Disable copy/cut */
-    document.addEventListener("copy", function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener("cut", function(e) {
-        e.preventDefault();
-    });
-
-    /* Basic shortcut protection */
-    document.addEventListener("keydown", function(e) {
-
-        const key = e.key.toLowerCase();
-
-        if (
-            (e.ctrlKey || e.metaKey) &&
-            ["c", "x", "a", "u", "s", "p"].includes(key)
-        ) {
-            e.preventDefault();
+        function openModule(page) {
+            window.location.href = page;
         }
 
-        if (e.key === "PrintScreen") {
-            e.preventDefault();
-        }
 
-    });
+        document.addEventListener(
+            "contextmenu",
+            function(event) {
+                event.preventDefault();
+            }
+        );
 
-</script>
+
+        document.addEventListener(
+            "selectstart",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "dragstart",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "copy",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "cut",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                const key =
+                    event.key.toLowerCase();
+
+                if (
+                    (event.ctrlKey || event.metaKey) &&
+                    [
+                        "c",
+                        "x",
+                        "a",
+                        "u",
+                        "s",
+                        "p"
+                    ].includes(key)
+                ) {
+                    event.preventDefault();
+                }
+
+
+                if (
+                    event.key === "PrintScreen"
+                ) {
+                    event.preventDefault();
+                }
+
+            }
+        );
+
+    </script>
+
 
 </body>
+
 </html>
