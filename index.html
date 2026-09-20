@@ -2,571 +2,398 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>5th Semester | Course Notes</title>
+    <meta name="theme-color" content="#111827">
+
+    <meta name="description"
+          content="5th Semester CSE VTU Notes - 2022 Scheme">
+
+    <link rel="manifest" href="manifest.json">
+
+    <title>5th Semester CSE | VTU Notes</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
-<script>
-"use strict";
-
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("copy", e => e.preventDefault());
-document.addEventListener("cut", e => e.preventDefault());
-document.addEventListener("dragstart", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-
-document.addEventListener("keydown", e => {
-    const k = e.key.toLowerCase();
-
-    if (
-        k === "f12" ||
-        (e.ctrlKey && ["c", "p", "s", "u", "a"].includes(k)) ||
-        (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(k))
-    ) {
-        e.preventDefault();
-    }
-});
-
-window.addEventListener("beforeprint", () => {
-    document.body.innerHTML =
-        "<h2 style='text-align:center;margin-top:100px'>Printing is disabled.</h2>";
-});
-</script>
 <body>
 
+<!-- ================= HEADER ================= -->
 
-<!-- =========================================
-     HEADER
-========================================= -->
+<header class="header">
 
-<header>
+    <div class="header-inner">
 
-    <div class="logo">
-        📚 Course Notes
+        <a href="index.html" class="logo">
+            📚 VTU Notes
+        </a>
+
+        <button id="themeButton"
+                class="theme-btn"
+                aria-label="Toggle theme">
+            🌙
+        </button>
+
     </div>
-
-    <button
-        class="theme-btn"
-        id="themeButton"
-        type="button">
-
-        🌙
-
-    </button>
 
 </header>
 
 
+<!-- ================= HERO ================= -->
 
-<!-- =========================================
-     HERO
-========================================= -->
+<section class="hero">
 
-<section
-    class="hero"
-    id="home">
+    <div class="hero-content">
 
-    <div class="semester">
-        5TH SEMESTER • CSE
-    </div>
-
-    <h1>
-        Course Notes
-    </h1>
-
-    <p>
-        Jain Institute of Technology, Davangere
-    </p>
-
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-        <span>
-            🔍
+        <span class="badge">
+            2022 SCHEME
         </span>
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search subject by code or name..."
-            autocomplete="off">
+        <h1>
+            5th Semester
+            <span>CSE</span>
+        </h1>
 
-        <button
-            id="clearSearch"
-            type="button">
+        <p>
+            VTU Notes, Important Questions & Answers
+        </p>
 
-            ✕
+        <div class="search-box">
 
-        </button>
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search subject or course code..."
+                autocomplete="off"
+            >
+
+        </div>
 
     </div>
-
-
-    <p
-        id="searchResult"
-        class="search-result">
-
-    </p>
 
 </section>
 
 
+<!-- ================= MAIN ================= -->
 
-<!-- =========================================
-     MAIN
-========================================= -->
+<main class="container">
 
-<main>
+    <div class="section-heading">
 
-
-    <!-- =====================================
-         SUBJECT CONTAINER
-    ====================================== -->
-
-    <div
-        class="notes-container"
-        id="subjectContainer">
-
-
-        <!-- =================================
-             BCS501
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                💻
-            </div>
-
-            <span class="code">
-                BCS501
-            </span>
-
-            <h2>
-                Software Engineering and
-                Project Management
-            </h2>
+        <div>
+            <h2>Courses</h2>
 
             <p>
-                Software engineering concepts,
-                development models and project management.
+                Select a subject to view all modules
             </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCS501"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
         </div>
 
-
-
-        <!-- =================================
-             BCS502
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🌐
-            </div>
-
-            <span class="code">
-                BCS502
-            </span>
-
-            <h2>
-                Computer Networks
-            </h2>
-
-            <p>
-                Networking concepts, protocols,
-                architectures and communication.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCS502"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BCS503
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🧮
-            </div>
-
-            <span class="code">
-                BCS503
-            </span>
-
-            <h2>
-                Theory of Computation
-            </h2>
-
-            <p>
-                Automata, formal languages,
-                grammars and Turing machines.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCS503"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BCS515B
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🤖
-            </div>
-
-            <span class="code">
-                BCS515B
-            </span>
-
-            <h2>
-                Artificial Intelligence
-            </h2>
-
-            <p>
-                Artificial intelligence concepts,
-                techniques and applications.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCS515B"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BCSL504
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🌐
-            </div>
-
-            <span class="code">
-                BCSL504
-            </span>
-
-            <h2>
-                Web Technology Lab
-            </h2>
-
-            <p>
-                Practical web development using
-                HTML, CSS and JavaScript.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCSL504"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BCS586
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🚀
-            </div>
-
-            <span class="code">
-                BCS586
-            </span>
-
-            <h2>
-                Mini Project
-            </h2>
-
-            <p>
-                Project development, implementation,
-                documentation and presentation.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BCS586"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BRMK557
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🔬
-            </div>
-
-            <span class="code">
-                BRMK557
-            </span>
-
-            <h2>
-                Research Methodology and IPR
-            </h2>
-
-            <p>
-                Research methods, technical writing,
-                patents and intellectual property rights.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BRMK557"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BESK508
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🌱
-            </div>
-
-            <span class="code">
-                BESK508
-            </span>
-
-            <h2>
-                Environmental Studies
-            </h2>
-
-            <p>
-                Environment, ecosystems,
-                resources and sustainability.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BESK508"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================
-             BNSK559
-        ================================== -->
-
-        <div
-            class="note-card subject-card">
-
-            <div class="icon">
-                🤝
-            </div>
-
-            <span class="code">
-                BNSK559
-            </span>
-
-            <h2>
-                NSS
-            </h2>
-
-            <p>
-                National Service Scheme,
-                community service and social responsibility.
-            </p>
-
-            <button
-                class="open-btn"
-                data-subject="BNSK559"
-                type="button">
-
-                Open Subject →
-
-            </button>
-
-        </div>
-
+        <span id="courseCount"></span>
 
     </div>
 
 
+    <!-- ================= COURSE GRID ================= -->
 
-    <!-- =====================================
-         NO RESULTS
-    ====================================== -->
+    <div id="courseGrid" class="course-grid">
 
-    <div
-        id="noResults"
-        class="no-results">
 
-        <div>
-            🔎
-        </div>
+        <!-- BCS501 -->
 
-        <h2>
-            No subject found
-        </h2>
+        <article class="course-card"
+                 data-search="BCS501 Software Engineering Project Management">
+
+            <div class="course-code">
+                BCS501
+            </div>
+
+            <h3>
+                Software Engineering and
+                Project Management
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BCS501/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BCS502 -->
+
+        <article class="course-card"
+                 data-search="BCS502 Computer Networks">
+
+            <div class="course-code">
+                BCS502
+            </div>
+
+            <h3>
+                Computer Networks
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BCS502/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BCS503 -->
+
+        <article class="course-card"
+                 data-search="BCS503 Theory of Computation">
+
+            <div class="course-code">
+                BCS503
+            </div>
+
+            <h3>
+                Theory of Computation
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BCS503/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BCS515B -->
+
+        <article class="course-card"
+                 data-search="BCS515B Artificial Intelligence">
+
+            <div class="course-code">
+                BCS515B
+            </div>
+
+            <h3>
+                Artificial Intelligence
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BCS515B/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BCSL504 -->
+
+        <article class="course-card"
+                 data-search="BCSL504 Web Technology Lab">
+
+            <div class="course-code">
+                BCSL504
+            </div>
+
+            <h3>
+                Web Technology Laboratory
+            </h3>
+
+            <p>
+                Programs • Viva Questions • Answers
+            </p>
+
+            <a href="BCSL504/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BCS586 -->
+
+        <article class="course-card"
+                 data-search="BCS586 Mini Project">
+
+            <div class="course-code">
+                BCS586
+            </div>
+
+            <h3>
+                Mini Project
+            </h3>
+
+            <p>
+                Guidelines • Ideas • Documentation
+            </p>
+
+            <a href="BCS586/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BRMK557 -->
+
+        <article class="course-card"
+                 data-search="BRMK557 Research Methodology IPR">
+
+            <div class="course-code">
+                BRMK557
+            </div>
+
+            <h3>
+                Research Methodology and IPR
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BRMK557/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BESK508 -->
+
+        <article class="course-card"
+                 data-search="BESK508 Environmental Studies">
+
+            <div class="course-code">
+                BESK508
+            </div>
+
+            <h3>
+                Environmental Studies
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BESK508/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+
+        <!-- BNSK559 -->
+
+        <article class="course-card"
+                 data-search="BNSK559 NSS National Service Scheme">
+
+            <div class="course-code">
+                BNSK559
+            </div>
+
+            <h3>
+                National Service Scheme
+            </h3>
+
+            <p>
+                Notes • Important Questions • Answers
+            </p>
+
+            <a href="BNSK559/index.html"
+               class="view-btn">
+
+                View Course
+                <span>→</span>
+
+            </a>
+
+        </article>
+
+    </div>
+
+
+    <!-- NO RESULTS -->
+
+    <div id="noResults" class="no-results">
+
+        <div>🔎</div>
+
+        <h3>No subject found</h3>
 
         <p>
-            Try another subject name or code.
+            Try another subject name or course code.
         </p>
 
     </div>
 
-
-
-    <!-- =====================================
-         SUBJECT PAGE
-    ====================================== -->
-
-    <section
-        id="subjectPage"
-        class="subject-page">
-
-        <button
-            id="backButton"
-            class="back"
-            type="button">
-
-            ← Back to Subjects
-
-        </button>
-
-
-        <div
-            id="subjectContent">
-
-        </div>
-
-    </section>
-
-
 </main>
 
 
+<!-- ================= FOOTER ================= -->
 
-<!-- =========================================
-     FOOTER
-========================================= -->
-
-<footer>
-
-    <h3>
-        📚 Course Notes
-    </h3>
+<footer class="footer">
 
     <p>
-        5th Semester • Computer Science & Engineering
+        5th Semester CSE • VTU 2022 Scheme
     </p>
 
-    <p class="made-by">
-
+    <p>
         Made with ❤️ by
-
-        <strong>
-            Mahalakshmi Kommaranahalli
-        </strong>
-
-    </p>
-
-    <p>
-        © 2026
+        <strong>Mahalakshmi Kommaranahalli</strong>
     </p>
 
 </footer>
 
 
-
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
+<!-- ================= SCRIPT ================= -->
 
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
