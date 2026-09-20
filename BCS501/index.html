@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+
+    <title>BCS501 | Software Engineering</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .course-page {
+            width: min(900px, 92%);
+            margin: auto;
+            padding: 45px 0 70px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .course-header {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .course-header .code {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 6px 10px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .course-header h1 {
+            margin: 15px 0 10px;
+            font-size: clamp(28px, 5vw, 42px);
+        }
+
+        .course-header p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .info-box h2 {
+            margin-bottom: 15px;
+            font-size: 21px;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+            line-height: 1.9;
+        }
+
+        .module-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .module {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            background: #ffffff;
+            border: 1px solid #e4e7ec;
+            border-radius: 13px;
+            padding: 18px 20px;
+
+            text-decoration: none;
+            color: #172033;
+
+            transition: 0.2s;
+        }
+
+        .module:hover {
+            transform: translateY(-2px);
+            border-color: #c7d2fe;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+        }
+
+        .module strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .module small {
+            color: #667085;
+        }
+
+        .arrow {
+            font-size: 20px;
+            color: #4f46e5;
+        }
+
+        @media (max-width: 600px) {
+
+            .course-page {
+                padding-top: 30px;
+            }
+
+            .course-header {
+                padding: 22px;
+            }
+
+            .info-box {
+                padding: 20px;
+            }
+
+            .module {
+                padding: 16px;
+            }
+        }
+
+        body.dark .course-header,
+        body.dark .info-box,
+        body.dark .module {
+            background: #111827;
+            border-color: #263043;
+        }
+
+        body.dark .course-header h1,
+        body.dark .module {
+            color: #f8fafc;
+        }
+
+        body.dark .course-header p,
+        body.dark .module small {
+            color: #aab4c5;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="../index.html" class="logo">
+            📚 VTU Notes
+        </a>
+
+        <button id="themeButton"
+                class="theme-btn">
+            🌙
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="course-page">
+
+    <a href="../index.html" class="back">
+        ← Back to 5th Semester
+    </a>
+
+
+    <section class="course-header">
+
+        <span class="code">
+            BCS501
+        </span>
+
+        <h1>
+            Software Engineering and
+            Project Management
+        </h1>
+
+        <p>
+            5th Semester CSE • VTU 2022 Scheme
+        </p>
+
+    </section>
+
+
+    <section class="info-box">
+
+        <h2>📚 Course Information</h2>
+
+        <ul>
+            <li>Course Code: BCS501</li>
+            <li>Semester: 5th Semester</li>
+            <li>Branch: Computer Science and Engineering</li>
+            <li>Scheme: VTU 2022 Scheme</li>
+        </ul>
+
+    </section>
+
+
+    <section class="info-box">
+
+        <h2>📖 Textbooks & References</h2>
+
+        <ul>
+            <li>Software Engineering — recommended VTU references</li>
+            <li>Project Management — recommended course references</li>
+        </ul>
+
+    </section>
+
+
+    <section class="info-box">
+
+        <h2>📖 Modules</h2>
+
+        <div class="module-list">
+
+            <a href="module1.html" class="module">
+                <div>
+                    <strong>Module 1</strong>
+                    <small>Notes & Important Questions</small>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="module2.html" class="module">
+                <div>
+                    <strong>Module 2</strong>
+                    <small>Notes & Important Questions</small>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="module3.html" class="module">
+                <div>
+                    <strong>Module 3</strong>
+                    <small>Notes & Important Questions</small>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="module4.html" class="module">
+                <div>
+                    <strong>Module 4</strong>
+                    <small>Notes & Important Questions</small>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+            <a href="module5.html" class="module">
+                <div>
+                    <strong>Module 5</strong>
+                    <small>Notes & Important Questions</small>
+                </div>
+                <span class="arrow">→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        5th Semester CSE • VTU 2022 Scheme
+    </p>
+
+    <p>
+        Made with ❤️ by
+        <strong>Mahalakshmi Kommaranahalli</strong>
+    </p>
+
+</footer>
+
+
+<script src="../script.js"></script>
+
+</body>
+</html>
