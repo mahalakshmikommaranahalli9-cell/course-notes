@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#080808">
+
+<meta
+name="description"
+content="BCS502 Computer Networks Module 3 - Network Layer VTU Notes"
+>
+
+<title>BCS502 Module 3 | Network Layer</title>
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#070707;
+    --card:#111111;
+    --card2:#151515;
+    --text:#eeeeee;
+    --muted:#a7a7a7;
+    --accent:#00e5ff;
+    --accent2:#7c4dff;
+    --green:#00e676;
+    --yellow:#ffd740;
+    --red:#ff5252;
+    --border:#292929;
+    --shadow:0 10px 35px rgba(0,0,0,.45);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at top right,rgba(0,229,255,.08),transparent 30%),
+        radial-gradient(circle at bottom left,rgba(124,77,255,.08),transparent 30%),
+        var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    line-height:1.7;
+
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+a{
+    color:var(--accent);
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+::selection{
+    background:transparent;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    padding:55px 20px 40px;
+
+    text-align:center;
+
+    border-bottom:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,229,255,.08),
+            rgba(124,77,255,.08)
+        );
+}
+
+header h1{
+    font-size:clamp(2rem,6vw,4rem);
+
+    letter-spacing:2px;
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+header h1 span{
+    color:var(--accent);
+}
+
+header p{
+    color:var(--muted);
+
+    max-width:800px;
+
+    margin:auto;
+
+    font-size:1.05rem;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+    width:min(1100px,92%);
+
+    margin:auto;
+
+    padding:30px 0 70px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back{
+    display:inline-block;
+
+    margin-bottom:25px;
+
+    padding:10px 17px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    background:#101010;
+
+    transition:.25s;
+}
+
+.back:hover{
+    border-color:var(--accent);
+
+    text-decoration:none;
+
+    transform:translateX(-3px);
+}
+
+
+/* =========================================================
+   TOC
+========================================================= */
+
+.toc{
+    background:linear-gradient(
+        135deg,
+        #101010,
+        #161616
+    );
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:35px;
+
+    box-shadow:var(--shadow);
+}
+
+.toc h2{
+    color:var(--accent);
+
+    margin-bottom:15px;
+}
+
+.toc ol{
+    padding-left:25px;
+}
+
+.toc li{
+    margin:5px 0;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+    margin-bottom:35px;
+
+    padding:30px;
+
+    background:rgba(17,17,17,.94);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+}
+
+section h2{
+    color:var(--accent);
+
+    font-size:clamp(1.45rem,4vw,2rem);
+
+    margin-bottom:18px;
+
+    border-bottom:1px solid var(--border);
+
+    padding-bottom:10px;
+}
+
+section h3{
+    color:#ffffff;
+
+    margin-top:24px;
+
+    margin-bottom:10px;
+}
+
+section h4{
+    color:var(--green);
+
+    margin-top:18px;
+
+    margin-bottom:8px;
+}
+
+p{
+    margin:9px 0;
+
+    color:#dddddd;
+}
+
+ul,
+ol{
+    padding-left:25px;
+
+    margin:10px 0;
+}
+
+li{
+    margin:7px 0;
+}
+
+
+/* =========================================================
+   NOTE BOXES
+========================================================= */
+
+.note,
+.example,
+.important,
+.exam{
+    padding:18px;
+
+    margin:18px 0;
+
+    border-radius:12px;
+
+    border-left:4px solid;
+}
+
+.note{
+    background:#101c20;
+
+    border-color:var(--accent);
+}
+
+.example{
+    background:#151d16;
+
+    border-color:var(--green);
+}
+
+.important{
+    background:#211d10;
+
+    border-color:var(--yellow);
+}
+
+.exam{
+    background:#201313;
+
+    border-color:var(--red);
+}
+
+.note strong,
+.example strong,
+.important strong,
+.exam strong{
+    color:white;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+    width:100%;
+
+    overflow-x:auto;
+
+    margin:20px 0;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
+}
+
+th,
+td{
+    border:1px solid var(--border);
+
+    padding:12px;
+
+    text-align:left;
+}
+
+th{
+    background:#1a1a1a;
+
+    color:var(--accent);
+}
+
+td{
+    background:#0d0d0d;
+}
+
+
+/* =========================================================
+   DIAGRAM
+========================================================= */
+
+.diagram{
+    background:#050505;
+
+    border:1px solid #303030;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    margin:20px 0;
+
+    overflow-x:auto;
+}
+
+.diagram pre{
+    color:#d9faff;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    white-space:pre;
+}
+
+
+/* =========================================================
+   CODE
+========================================================= */
+
+code{
+    color:#00e5ff;
+
+    background:#181818;
+
+    padding:2px 6px;
+
+    border-radius:5px;
+}
+
+pre.code{
+    background:#050505;
+
+    border:1px solid var(--border);
+
+    padding:18px;
+
+    border-radius:12px;
+
+    overflow-x:auto;
+
+    color:#d9faff;
+
+    margin:15px 0;
+}
+
+
+/* =========================================================
+   QUESTION CARDS
+========================================================= */
+
+.question{
+    padding:18px;
+
+    margin:14px 0;
+
+    background:#101010;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+}
+
+.question strong{
+    color:var(--accent);
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+    display:inline-block;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:.8rem;
+
+    margin:3px;
+
+    border:1px solid var(--border);
+
+    background:#151515;
+
+    color:#ccc;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+
+    color:#777;
+
+    padding:35px 15px;
+
+    border-top:1px solid var(--border);
+
+    margin-top:20px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    header{
+        padding:40px 15px 30px;
+    }
+
+    .container{
+        width:94%;
+    }
+
+    section{
+        padding:20px;
+
+        border-radius:14px;
+    }
+
+    .toc{
+        padding:20px;
+    }
+
+    .diagram{
+        padding:12px;
+    }
+
+    .diagram pre{
+        font-size:11px;
+    }
+
+    table{
+        font-size:.85rem;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT BLOCK
+========================================================= */
+
+@media print{
+    body{
+        display:none !important;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header>
+
+<h1>BCS502 <span>Module 3</span></h1>
+
+<p>
+Computer Networks — Network Layer
+</p>
+
+<p>
+VTU 2022 Scheme • Concept-wise Notes • Diagrams •
+2/5/10 Mark Questions
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<a href="index.html" class="back">
+← Back to BCS502
+</a>
+
+
+<!-- =======================================================
+     TABLE OF CONTENTS
+======================================================= -->
+
+<div class="toc">
+
+<h2>📚 Module 3 Contents</h2>
+
+<ol>
+
+<li><a href="#intro">Network Layer Introduction</a></li>
+
+<li><a href="#services">Network Layer Services</a></li>
+
+<li><a href="#packet">Packet Switching</a></li>
+
+<li><a href="#ipv4">IPv4 Addressing</a></li>
+
+<li><a href="#subnet">Subnetting</a></li>
+
+<li><a href="#datagram">IPv4 Datagram</a></li>
+
+<li><a href="#ipv6">IPv6 Datagram</a></li>
+
+<li><a href="#routing">Routing Algorithms</a></li>
+
+<li><a href="#dv">Distance Vector Routing</a></li>
+
+<li><a href="#ls">Link State Routing</a></li>
+
+<li><a href="#pv">Path Vector Routing</a></li>
+
+<li><a href="#rip">RIP</a></li>
+
+<li><a href="#ospf">OSPF</a></li>
+
+<li><a href="#bgp">BGP</a></li>
+
+<li><a href="#multicast">Multicast and MOSPF</a></li>
+
+<li><a href="#compare">Important Comparisons</a></li>
+
+<li><a href="#two">2-Mark Questions</a></li>
+
+<li><a href="#five">5-Mark Questions</a></li>
+
+<li><a href="#ten">10-Mark Questions</a></li>
+
+<li><a href="#revision">Quick Revision</a></li>
+
+</ol>
+
+</div>
+
+
+
+<!-- =======================================================
+     1. INTRODUCTION
+======================================================= -->
+
+<section id="intro">
+
+<h2>1. Network Layer Introduction</h2>
+
+<p>
+The <strong>Network Layer</strong> is the third layer of the
+OSI reference model.
+</p>
+
+<p>
+Its main responsibility is to deliver packets from the
+source host to the destination host across one or more
+interconnected networks.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        SENDER                                      RECEIVER
+
+     Application                                  Application
+          ↓                                            ↑
+     Transport                                    Transport
+          ↓                                            ↑
+     Network       ──── PACKETS ────►             Network
+          ↓                                            ↑
+     Data Link                                    Data Link
+          ↓                                            ↑
+      Physical                                     Physical
+
+                  NETWORK LAYER
+             Source → Router → Router → Destination
+
+</pre>
+
+</div>
+
+
+<h3>Main Functions</h3>
+
+<ul>
+
+<li>Logical addressing</li>
+
+<li>Routing</li>
+
+<li>Packet forwarding</li>
+
+<li>Internetworking</li>
+
+<li>Fragmentation and reassembly in IPv4</li>
+
+<li>Congestion-related support</li>
+
+</ul>
+
+
+<div class="important">
+
+<strong>Exam Point:</strong>
+
+The Network Layer is mainly responsible for
+<strong>source-to-destination delivery of packets
+across multiple networks.</strong>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     2. SERVICES
+======================================================= -->
+
+<section id="services">
+
+<h2>2. Network Layer Services</h2>
+
+<p>
+The Network Layer provides services to the Transport Layer
+and uses the services of the Data Link Layer.
+</p>
+
+
+<h3>Important Services</h3>
+
+<h4>1. Logical Addressing</h4>
+
+<p>
+Each device is identified using a logical address such as
+an IPv4 or IPv6 address.
+</p>
+
+<h4>2. Routing</h4>
+
+<p>
+Routing determines the path that packets should follow
+from source to destination.
+</p>
+
+<h4>3. Forwarding</h4>
+
+<p>
+Forwarding is the process of moving a packet from an
+incoming interface to the appropriate outgoing interface.
+</p>
+
+<h4>4. Internetworking</h4>
+
+<p>
+The Network Layer allows different networks to communicate
+with each other.
+</p>
+
+<h4>5. Fragmentation</h4>
+
+<p>
+IPv4 can divide a large packet into smaller fragments when
+required by the network's MTU.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+              NETWORK LAYER
+
+       ┌──────────────────────────┐
+       │   Logical Addressing     │
+       ├──────────────────────────┤
+       │        Routing           │
+       ├──────────────────────────┤
+       │       Forwarding         │
+       ├──────────────────────────┤
+       │    Internetworking       │
+       ├──────────────────────────┤
+       │      Fragmentation       │
+       └──────────────────────────┘
+
+</pre>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     3. PACKET SWITCHING
+======================================================= -->
+
+<section id="packet">
+
+<h2>3. Packet Switching</h2>
+
+<p>
+In packet switching, a message is divided into smaller
+units called <strong>packets</strong>.
+</p>
+
+<p>
+Each packet contains control information such as source,
+destination and other header information.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+Original Message
+
+┌─────────────────────────────────────────────┐
+│                 MESSAGE                     │
+└─────────────────────────────────────────────┘
+
+                  ↓ Divide
+
+┌────────┐   ┌────────┐   ┌────────┐
+│Packet 1│   │Packet 2│   │Packet 3│
+└────────┘   └────────┘   └────────┘
+
+                  ↓
+
+        ┌───────────────┐
+        │     Router    │
+        └───────────────┘
+             ↓     ↓
+          Network Network
+             ↓     ↓
+        ┌───────────────┐
+        │   Destination │
+        └───────────────┘
+
+</pre>
+
+</div>
+
+
+<h3>Types of Packet Switching</h3>
+
+<ul>
+
+<li>Datagram approach</li>
+
+<li>Virtual circuit approach</li>
+
+</ul>
+
+
+<h3>Datagram Approach</h3>
+
+<p>
+Each packet is treated independently.
+Packets may follow different paths.
+</p>
+
+
+<div class="example">
+
+<strong>Example:</strong>
+
+If three packets are sent from A to B, packet 1 may use
+one route while packet 2 and packet 3 may use another route.
+</div>
+
+
+<h3>Virtual Circuit Approach</h3>
+
+<p>
+A logical path is established before data transfer.
+Packets normally follow the same logical path.
+</p>
+
+
+<table>
+
+<tr>
+<th>Datagram</th>
+<th>Virtual Circuit</th>
+</tr>
+
+<tr>
+<td>Connectionless</td>
+<td>Connection-oriented</td>
+</tr>
+
+<tr>
+<td>Each packet is independent</td>
+<td>Packets follow a logical path</td>
+</tr>
+
+<tr>
+<td>No setup phase</td>
+<td>Setup phase required</td>
+</tr>
+
+</table>
+
+</section>
+
+
+
+<!-- =======================================================
+     4. IPV4
+======================================================= -->
+
+<section id="ipv4">
+
+<h2>4. IPv4 Addressing</h2>
+
+<p>
+IPv4 uses a <strong>32-bit logical address</strong>.
+</p>
+
+<p>
+The address is normally represented using four decimal
+octets separated by dots.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+IPv4 Address = 32 bits
+
+        8 bits       8 bits       8 bits       8 bits
+
+       192          168            1            10
+        │             │             │             │
+        └─────────────┴─────────────┴─────────────┘
+
+              192.168.1.10
+
+</pre>
+
+</div>
+
+
+<h3>IPv4 Address Format</h3>
+
+<p>
+Each octet has values from <strong>0 to 255</strong>.
+</p>
+
+<p>
+Therefore:
+
+</p>
+
+<div class="example">
+
+<strong>Example:</strong>
+
+192.168.1.10
+
+</div>
+
+
+<h3>Network Part and Host Part</h3>
+
+<p>
+An IP address identifies both the network and the host
+within that network.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        IPv4 Address
+
+┌───────────────────┬───────────────────┐
+│   Network Part    │     Host Part     │
+└───────────────────┴───────────────────┘
+
+Example:
+
+192.168.1.10
+██████████████      █████████
+
+Network              Host
+
+</pre>
+
+</div>
+
+
+<h3>Classful IPv4 Addressing</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Class</th>
+<th>First Octet</th>
+<th>Default Mask</th>
+<th>Typical Use</th>
+</tr>
+
+<tr>
+<td>A</td>
+<td>1–126</td>
+<td>255.0.0.0</td>
+<td>Large networks</td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>128–191</td>
+<td>255.255.0.0</td>
+<td>Medium networks</td>
+</tr>
+
+<tr>
+<td>C</td>
+<td>192–223</td>
+<td>255.255.255.0</td>
+<td>Small networks</td>
+</tr>
+
+<tr>
+<td>D</td>
+<td>224–239</td>
+<td>—</td>
+<td>Multicast</td>
+</tr>
+
+<tr>
+<td>E</td>
+<td>240–255</td>
+<td>—</td>
+<td>Experimental</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="important">
+
+<strong>Remember:</strong>
+
+A → Large networks
+
+<br>
+
+B → Medium networks
+
+<br>
+
+C → Small networks
+
+<br>
+
+D → Multicast
+
+<br>
+
+E → Experimental
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     5. SUBNETTING
+======================================================= -->
+
+<section id="subnet">
+
+<h2>5. Subnetting</h2>
+
+<p>
+<strong>Subnetting</strong> is the process of dividing one
+large network into smaller logical networks called
+subnets.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+             Original Network
+
+        ┌───────────────────────┐
+        │       NETWORK         │
+        └───────────────────────┘
+                    │
+          ┌─────────┼─────────┐
+          ↓         ↓         ↓
+
+      ┌──────┐  ┌──────┐  ┌──────┐
+      │Subnet│  │Subnet│  │Subnet│
+      │  1   │  │  2   │  │  3   │
+      └──────┘  └──────┘  └──────┘
+
+</pre>
+
+</div>
+
+
+<h3>Advantages</h3>
+
+<ul>
+
+<li>Efficient use of IP addresses</li>
+
+<li>Reduces broadcast traffic</li>
+
+<li>Improves network management</li>
+
+<li>Provides logical separation</li>
+
+<li>Can improve security and organization</li>
+
+</ul>
+
+
+<h3>Basic Formula</h3>
+
+<p>
+If <strong>n</strong> bits are borrowed for subnetting:
+</p>
+
+<div class="example">
+
+Number of subnets = 2<sup>n</sup>
+
+</div>
+
+
+<p>
+If <strong>h</strong> bits remain for hosts:
+</p>
+
+<div class="example">
+
+Hosts per subnet = 2<sup>h</sup> − 2
+
+</div>
+
+
+<h3>Example</h3>
+
+<p>
+Suppose a network has a /24 prefix and 2 host bits are
+borrowed.
+</p>
+
+<p>
+
+Original:
+
+<strong>/24</strong>
+
+</p>
+
+<p>
+
+New prefix:
+
+<strong>/26</strong>
+
+</p>
+
+<p>
+
+Number of subnets:
+
+2² = <strong>4</strong>
+
+</p>
+
+<p>
+
+Host addresses per subnet:
+
+2⁶ − 2 = <strong>62</strong>
+
+</p>
+
+</section>
+
+
+
+<!-- =======================================================
+     6. IPV4 DATAGRAM
+======================================================= -->
+
+<section id="datagram">
+
+<h2>6. IPv4 Datagram</h2>
+
+<p>
+An IPv4 packet is called an <strong>IPv4 datagram</strong>.
+</p>
+
+<p>
+It contains a header and data.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+┌─────────────────────────────────────────────┐
+│                 IPv4 Header                 │
+├─────────────────────────────────────────────┤
+│                                             │
+│                 DATA                        │
+│                                             │
+└─────────────────────────────────────────────┘
+
+Header + Data = IPv4 Datagram
+
+</pre>
+
+</div>
+
+
+<h3>Important Header Fields</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>Version</td>
+<td>Identifies IP version</td>
+</tr>
+
+<tr>
+<td>IHL</td>
+<td>Internet Header Length</td>
+</tr>
+
+<tr>
+<td>Total Length</td>
+<td>Total size of datagram</td>
+</tr>
+
+<tr>
+<td>Identification</td>
+<td>Identifies fragments</td>
+</tr>
+
+<tr>
+<td>Flags</td>
+<td>Controls fragmentation</td>
+</tr>
+
+<tr>
+<td>Fragment Offset</td>
+<td>Position of fragment</td>
+</tr>
+
+<tr>
+<td>TTL</td>
+<td>Limits packet lifetime</td>
+</tr>
+
+<tr>
+<td>Protocol</td>
+<td>Identifies upper-layer protocol</td>
+</tr>
+
+<tr>
+<td>Header Checksum</td>
+<td>Checks IPv4 header errors</td>
+</tr>
+
+<tr>
+<td>Source Address</td>
+<td>Sender IPv4 address</td>
+</tr>
+
+<tr>
+<td>Destination Address</td>
+<td>Receiver IPv4 address</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="important">
+
+<strong>TTL — Time To Live:</strong>
+
+TTL prevents packets from circulating indefinitely in
+a network.
+
+A router normally decreases TTL before forwarding the
+packet.
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     7. IPV6
+======================================================= -->
+
+<section id="ipv6">
+
+<h2>7. IPv6 Datagram</h2>
+
+<p>
+IPv6 was designed to overcome several limitations of IPv4,
+especially the shortage of IPv4 addresses.
+</p>
+
+<p>
+IPv6 uses a <strong>128-bit address</strong>.
+</p>
+
+
+<div class="example">
+
+<strong>Example IPv6 address:</strong>
+
+2001:db8:abcd:0012::1
+
+</div>
+
+
+<h3>Important IPv6 Header Fields</h3>
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>Version</td>
+<td>IP version</td>
+</tr>
+
+<tr>
+<td>Traffic Class</td>
+<td>Traffic priority / classification</td>
+</tr>
+
+<tr>
+<td>Flow Label</td>
+<td>Identifies packets belonging to a flow</td>
+</tr>
+
+<tr>
+<td>Payload Length</td>
+<td>Length of payload</td>
+</tr>
+
+<tr>
+<td>Next Header</td>
+<td>Identifies next header or upper-layer protocol</td>
+</tr>
+
+<tr>
+<td>Hop Limit</td>
+<td>Limits packet lifetime</td>
+</tr>
+
+<tr>
+<td>Source Address</td>
+<td>128-bit source address</td>
+</tr>
+
+<tr>
+<td>Destination Address</td>
+<td>128-bit destination address</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>IPv4 vs IPv6</h3>
+
+<table>
+
+<tr>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+
+<tr>
+<td>32-bit address</td>
+<td>128-bit address</td>
+</tr>
+
+<tr>
+<td>Decimal notation</td>
+<td>Hexadecimal notation</td>
+</tr>
+
+<tr>
+<td>Header checksum present</td>
+<td>No header checksum</td>
+</tr>
+
+<tr>
+<td>Broadcast supported</td>
+<td>No traditional broadcast</td>
+</tr>
+
+<tr>
+<td>Routers may fragment IPv4 packets</td>
+<td>Routers do not fragment IPv6 packets</td>
+</tr>
+
+</table>
+
+</section>
+
+
+
+<!-- =======================================================
+     8. ROUTING
+======================================================= -->
+
+<section id="routing">
+
+<h2>8. Routing Algorithms</h2>
+
+<p>
+<strong>Routing</strong> is the process of selecting a path
+for packets from source to destination.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        A
+       / \
+      /   \
+     B-----C
+      \   /
+       \ /
+        D
+
+Possible paths:
+
+A → B → D
+
+A → C → D
+
+A → B → C → D
+
+Routing algorithm selects an appropriate path.
+
+</pre>
+
+</div>
+
+
+<h3>Routing Table</h3>
+
+<p>
+Routers maintain routing information to determine where
+packets should be forwarded.
+</p>
+
+
+<div class="table-wrap">
+
+<table>
+
+<tr>
+<th>Destination</th>
+<th>Next Hop</th>
+<th>Metric</th>
+</tr>
+
+<tr>
+<td>Network A</td>
+<td>Router 1</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Network B</td>
+<td>Router 2</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>Network C</td>
+<td>Router 3</td>
+<td>1</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Main Routing Algorithm Categories</h3>
+
+<ul>
+
+<li>Distance Vector Routing</li>
+
+<li>Link State Routing</li>
+
+<li>Path Vector Routing</li>
+
+</ul>
+
+</section>
+
+
+
+<!-- =======================================================
+     9. DISTANCE VECTOR
+======================================================= -->
+
+<section id="dv">
+
+<h2>9. Distance Vector Routing</h2>
+
+<p>
+Distance Vector Routing is a routing method in which each
+router maintains information about the distance and direction
+to different destinations.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        Router A
+        /      \
+       /        \
+      B          C
+       \        /
+        \      /
+          D
+
+Router A maintains:
+
+Destination     Distance     Next Hop
+
+B                  1            B
+C                  1            C
+D                  2            B/C
+
+</pre>
+
+</div>
+
+
+<h3>Basic Idea</h3>
+
+<p>
+Each router shares its routing information with neighboring
+routers.
+</p>
+
+<p>
+Routers update their routing tables when they receive
+better route information.
+</p>
+
+
+<h3>Bellman-Ford Concept</h3>
+
+<p>
+Distance Vector Routing is based on the Bellman-Ford
+shortest path approach.
+</p>
+
+
+<div class="example">
+
+<strong>Basic idea:</strong>
+
+New distance through neighbor =
+distance to neighbor + neighbor's distance to destination.
+
+</div>
+
+
+<h3>Advantages</h3>
+
+<ul>
+
+<li>Simple implementation</li>
+
+<li>Requires less information than link-state routing</li>
+
+<li>Suitable for smaller networks</li>
+
+</ul>
+
+
+<h3>Disadvantages</h3>
+
+<ul>
+
+<li>Slow convergence</li>
+
+<li>Routing loops may occur</li>
+
+<li>Count-to-infinity problem</li>
+
+</ul>
+
+
+<div class="important">
+
+<strong>Exam Point:</strong>
+
+Distance Vector → information exchanged with
+<strong>neighbors</strong>.
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     10. LINK STATE
+======================================================= -->
+
+<section id="ls">
+
+<h2>10. Link State Routing</h2>
+
+<p>
+In Link State Routing, each router builds a map of the
+network topology and calculates the shortest path.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        A
+       / \
+      2   4
+     /     \
+    B---1---C
+     \     /
+      3   2
+       \ /
+        D
+
+Each router knows:
+
+• Its neighbors
+• Link costs
+• Network topology
+
+Then it calculates shortest paths.
+
+</pre>
+
+</div>
+
+
+<h3>Main Steps</h3>
+
+<ol>
+
+<li>Discover neighboring routers.</li>
+
+<li>Measure the cost of links.</li>
+
+<li>Create link-state information.</li>
+
+<li>Distribute link-state information.</li>
+
+<li>Build a topology database.</li>
+
+<li>Run a shortest-path algorithm.</li>
+
+<li>Build the routing table.</li>
+
+</ol>
+
+
+<h3>Dijkstra's Algorithm</h3>
+
+<p>
+Link State Routing commonly uses the
+<strong>Dijkstra shortest path algorithm</strong>.
+</p>
+
+
+<div class="example">
+
+<strong>Remember:</strong>
+
+Distance Vector → Bellman-Ford
+
+<br>
+
+Link State → Dijkstra
+
+</div>
+
+
+<h3>Advantages</h3>
+
+<ul>
+
+<li>Fast convergence</li>
+
+<li>Better knowledge of network topology</li>
+
+<li>Less chance of routing loops</li>
+
+</ul>
+
+
+<h3>Disadvantages</h3>
+
+<ul>
+
+<li>Requires more memory</li>
+
+<li>Requires more processing</li>
+
+<li>More complex than distance vector</li>
+
+</ul>
+
+</section>
+
+
+
+<!-- =======================================================
+     11. PATH VECTOR
+======================================================= -->
+
+<section id="pv">
+
+<h2>11. Path Vector Routing</h2>
+
+<p>
+Path Vector Routing maintains information about the complete
+path to a destination rather than only the distance.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+        AS 1
+          |
+          |
+        AS 2
+          |
+          |
+        AS 3
+          |
+          |
+        AS 4
+
+Path advertised:
+
+AS 1 → AS 2 → AS 3 → AS 4
+
+The path itself is carried in routing information.
+
+</pre>
+
+</div>
+
+
+<h3>Features</h3>
+
+<ul>
+
+<li>Maintains path information.</li>
+
+<li>Used mainly between autonomous systems.</li>
+
+<li>Helps avoid routing loops.</li>
+
+<li>Supports policy-based routing decisions.</li>
+
+</ul>
+
+
+<div class="important">
+
+<strong>Exam Point:</strong>
+
+Path Vector → complete path information.
+
+BGP is the major example of a path-vector routing
+protocol.
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     12. RIP
+======================================================= -->
+
+<section id="rip">
+
+<h2>12. RIP — Routing Information Protocol</h2>
+
+<p>
+RIP is a distance-vector routing protocol.
+</p>
+
+
+<h3>Important Characteristics</h3>
+
+<ul>
+
+<li>Uses hop count as metric.</li>
+
+<li>Maximum usable hop count is 15.</li>
+
+<li>A metric of 16 represents unreachable.</li>
+
+<li>Routers exchange routing information with neighbors.</li>
+
+<li>It is designed for relatively small networks.</li>
+
+</ul>
+
+
+<div class="diagram">
+
+<pre>
+
+Router A
+   |
+  1 hop
+   |
+Router B
+   |
+  1 hop
+   |
+Router C
+   |
+  1 hop
+   |
+Router D
+
+A → D = 3 hops
+
+</pre>
+
+</div>
+
+
+<div class="important">
+
+<strong>Easy Memory:</strong>
+
+RIP = Distance Vector + Hop Count
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     13. OSPF
+======================================================= -->
+
+<section id="ospf">
+
+<h2>13. OSPF — Open Shortest Path First</h2>
+
+<p>
+OSPF is a link-state routing protocol used within an
+autonomous system.
+</p>
+
+
+<h3>Characteristics</h3>
+
+<ul>
+
+<li>Uses link-state information.</li>
+
+<li>Uses shortest-path calculation.</li>
+
+<li>Supports hierarchical routing using areas.</li>
+
+<li>Supports authentication mechanisms.</li>
+
+<li>Uses a cost-based metric.</li>
+
+</ul>
+
+
+<div class="diagram">
+
+<pre>
+
+                 OSPF Domain
+
+       ┌────────────────────────┐
+       │        Area 0          │
+       │      Backbone          │
+       └──────────┬─────────────┘
+                  │
+          ┌───────┴───────┐
+          ↓               ↓
+
+       Area 1           Area 2
+     ┌────────┐       ┌────────┐
+     │Router  │       │Router  │
+     │Router  │       │Router  │
+     └────────┘       └────────┘
+
+</pre>
+
+</div>
+
+
+<div class="important">
+
+<strong>Easy Memory:</strong>
+
+OSPF = Link State + Dijkstra + Cost
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     14. BGP
+======================================================= -->
+
+<section id="bgp">
+
+<h2>14. BGP — Border Gateway Protocol</h2>
+
+<p>
+BGP is a path-vector routing protocol used for routing
+between autonomous systems.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+       Autonomous System 1
+              |
+              |
+             BGP
+              |
+              |
+       Autonomous System 2
+              |
+              |
+             BGP
+              |
+              |
+       Autonomous System 3
+
+        Inter-AS Routing
+
+</pre>
+
+</div>
+
+
+<h3>Important Features</h3>
+
+<ul>
+
+<li>Path-vector protocol</li>
+
+<li>Used between autonomous systems</li>
+
+<li>Supports policy-based routing</li>
+
+<li>Uses path information</li>
+
+<li>Designed for large-scale inter-network routing</li>
+
+</ul>
+
+
+<h3>Autonomous System</h3>
+
+<p>
+An Autonomous System (AS) is a collection of networks and
+routers under a common administrative control.
+</p>
+
+
+<div class="example">
+
+<strong>Easy Memory:</strong>
+
+BGP = Path Vector + Inter-AS Routing
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     15. MULTICAST
+======================================================= -->
+
+<section id="multicast">
+
+<h2>15. Multicast and MOSPF</h2>
+
+<p>
+<strong>Multicast</strong> is a communication method in which
+one sender sends data to a selected group of receivers.
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+                    Sender
+                      │
+                      │
+                  ┌───┴───┐
+                  │ Router│
+                  └───┬───┘
+              ┌───────┼───────┐
+              ↓       ↓       ↓
+           Receiver Receiver Receiver
+              A       B       C
+
+        One sender → Multiple selected receivers
+
+</pre>
+
+</div>
+
+
+<h3>Unicast vs Multicast vs Broadcast</h3>
+
+<table>
+
+<tr>
+<th>Type</th>
+<th>Communication</th>
+</tr>
+
+<tr>
+<td>Unicast</td>
+<td>One sender → One receiver</td>
+</tr>
+
+<tr>
+<td>Multicast</td>
+<td>One sender → Selected group</td>
+</tr>
+
+<tr>
+<td>Broadcast</td>
+<td>One sender → All devices in broadcast domain</td>
+</tr>
+
+</table>
+
+
+<h3>MOSPF</h3>
+
+<p>
+MOSPF stands for <strong>Multicast Open Shortest Path
+First</strong>.
+</p>
+
+<p>
+It extends OSPF concepts to support multicast routing.
+</p>
+
+
+<div class="important">
+
+<strong>Remember:</strong>
+
+OSPF → Unicast link-state routing
+
+<br>
+
+MOSPF → Multicast extension of OSPF
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     16. COMPARISON
+======================================================= -->
+
+<section id="compare">
+
+<h2>16. Important Comparisons</h2>
+
+
+<h3>Distance Vector vs Link State</h3>
+
+<table>
+
+<tr>
+<th>Distance Vector</th>
+<th>Link State</th>
+</tr>
+
+<tr>
+<td>Shares routing information with neighbors</td>
+<td>Distributes link-state information</td>
+</tr>
+
+<tr>
+<td>Bellman-Ford concept</td>
+<td>Dijkstra algorithm</td>
+</tr>
+
+<tr>
+<td>Slower convergence</td>
+<td>Generally faster convergence</td>
+</tr>
+
+<tr>
+<td>Less topology information</td>
+<td>More topology information</td>
+</tr>
+
+<tr>
+<td>Example: RIP</td>
+<td>Example: OSPF</td>
+</tr>
+
+</table>
+
+
+<h3>RIP vs OSPF vs BGP</h3>
+
+<table>
+
+<tr>
+<th>Feature</th>
+<th>RIP</th>
+<th>OSPF</th>
+<th>BGP</th>
+</tr>
+
+<tr>
+<td>Type</td>
+<td>Distance Vector</td>
+<td>Link State</td>
+<td>Path Vector</td>
+</tr>
+
+<tr>
+<td>Main Metric / Basis</td>
+<td>Hop Count</td>
+<td>Cost</td>
+<td>Path / Policy</td>
+</tr>
+
+<tr>
+<td>Scope</td>
+<td>Within smaller networks</td>
+<td>Within AS</td>
+<td>Between ASes</td>
+</tr>
+
+<tr>
+<td>Algorithm concept</td>
+<td>Bellman-Ford</td>
+<td>Dijkstra</td>
+<td>Path selection</td>
+</tr>
+
+</table>
+
+
+<h3>IPv4 vs IPv6</h3>
+
+<table>
+
+<tr>
+<th>IPv4</th>
+<th>IPv6</th>
+</tr>
+
+<tr>
+<td>32 bits</td>
+<td>128 bits</td>
+</tr>
+
+<tr>
+<td>Dotted decimal</td>
+<td>Hexadecimal</td>
+</tr>
+
+<tr>
+<td>Header checksum</td>
+<td>No header checksum</td>
+</tr>
+
+<tr>
+<td>Broadcast available</td>
+<td>No traditional broadcast</td>
+</tr>
+
+<tr>
+<td>Router fragmentation possible</td>
+<td>Router fragmentation not used</td>
+</tr>
+
+</table>
+
+</section>
+
+
+
+<!-- =======================================================
+     17. 2 MARK
+======================================================= -->
+
+<section id="two">
+
+<h2>17. Important 2-Mark Questions</h2>
+
+
+<div class="question">
+
+<strong>Q1. What is the Network Layer?</strong>
+
+<p>
+The Network Layer is the third OSI layer responsible for
+logical addressing, routing and delivery of packets across
+interconnected networks.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q2. What is routing?</strong>
+
+<p>
+Routing is the process of selecting a path for a packet from
+source to destination.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q3. What is forwarding?</strong>
+
+<p>
+Forwarding is the process of transferring a packet from an
+incoming interface to the appropriate outgoing interface.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q4. What is IPv4?</strong>
+
+<p>
+IPv4 is a network-layer protocol that uses 32-bit logical
+addresses.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q5. What is IPv6?</strong>
+
+<p>
+IPv6 is a network-layer protocol that uses 128-bit logical
+addresses.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q6. What is subnetting?</strong>
+
+<p>
+Subnetting is the process of dividing a network into smaller
+logical subnetworks.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q7. What is Distance Vector Routing?</strong>
+
+<p>
+It is a routing method where routers exchange distance and
+next-hop information with neighboring routers.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q8. What is Link State Routing?</strong>
+
+<p>
+It is a routing method in which routers maintain information
+about network topology and calculate shortest paths.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q9. What is RIP?</strong>
+
+<p>
+RIP is a distance-vector routing protocol that uses hop count
+as its metric.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q10. What is OSPF?</strong>
+
+<p>
+OSPF is a link-state routing protocol that uses shortest-path
+calculation within an autonomous system.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q11. What is BGP?</strong>
+
+<p>
+BGP is a path-vector routing protocol used mainly for routing
+between autonomous systems.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>Q12. What is multicast?</strong>
+
+<p>
+Multicast is communication from one sender to a selected group
+of receivers.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     18. 5 MARK
+======================================================= -->
+
+<section id="five">
+
+<h2>18. Important 5-Mark Questions</h2>
+
+
+<div class="question">
+
+<strong>
+Q1. Explain the functions of the Network Layer.
+</strong>
+
+<p>
+Write about:
+</p>
+
+<ol>
+
+<li>Logical addressing</li>
+
+<li>Routing</li>
+
+<li>Forwarding</li>
+
+<li>Internetworking</li>
+
+<li>Fragmentation</li>
+
+</ol>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q2. Explain packet switching and its types.
+</strong>
+
+<p>
+Explain:
+</p>
+
+<ul>
+
+<li>Packet switching definition</li>
+
+<li>Datagram approach</li>
+
+<li>Virtual circuit approach</li>
+
+<li>Comparison</li>
+
+</ul>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q3. Explain IPv4 addressing.
+</strong>
+
+<p>
+Include:
+</p>
+
+<ul>
+
+<li>32-bit address</li>
+
+<li>Dotted decimal notation</li>
+
+<li>Network and host parts</li>
+
+<li>Address classes</li>
+
+<li>Example</li>
+
+</ul>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q4. Explain subnetting.
+</strong>
+
+<p>
+Include definition, purpose, formula, example and advantages.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q5. Explain Distance Vector Routing.
+</strong>
+
+<p>
+Include concept, neighbor exchange, Bellman-Ford idea,
+advantages and disadvantages.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q6. Explain Link State Routing.
+</strong>
+
+<p>
+Include topology database, link-state advertisement,
+Dijkstra algorithm, advantages and disadvantages.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q7. Explain RIP.
+</strong>
+
+<p>
+Explain RIP as a distance-vector routing protocol and
+describe its hop-count metric.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q8. Explain OSPF.
+</strong>
+
+<p>
+Explain OSPF as a link-state protocol, shortest-path
+calculation and areas.
+</p>
+
+</div>
+
+
+<div class="question">
+
+<strong>
+Q9. Explain BGP.
+</strong>
+
+<p>
+Explain BGP, path-vector routing, autonomous systems and
+policy-based routing.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     19. 10 MARK
+======================================================= -->
+
+<section id="ten">
+
+<h2>19. Important 10-Mark Questions</h2>
+
+
+<div class="exam">
+
+<strong>
+Q1. Explain IPv4 addressing and subnetting with suitable
+examples and diagrams.
+</strong>
+
+<p>
+For a 10-mark answer, write:
+</p>
+
+<ol>
+
+<li>Definition of IPv4</li>
+
+<li>32-bit address format</li>
+
+<li>Network and host parts</li>
+
+<li>Classful addressing</li>
+
+<li>Subnetting definition</li>
+
+<li>Subnetting formula</li>
+
+<li>Worked example</li>
+
+<li>Advantages</li>
+
+<li>Diagram</li>
+
+</ol>
+
+</div>
+
+
+<div class="exam">
+
+<strong>
+Q2. Explain IPv4 datagram format and its fields.
+</strong>
+
+<p>
+Draw the IPv4 datagram/header diagram and explain the
+important fields such as Version, IHL, Total Length,
+Identification, Flags, Fragment Offset, TTL, Protocol,
+Checksum, Source Address and Destination Address.
+</p>
+
+</div>
+
+
+<div class="exam">
+
+<strong>
+Q3. Explain IPv6 datagram format and compare IPv4 with IPv6.
+</strong>
+
+<p>
+Include IPv6 addressing, header fields and a comparison
+between IPv4 and IPv6.
+</p>
+
+</div>
+
+
+<div class="exam">
+
+<strong>
+Q4. Explain Distance Vector, Link State and Path Vector
+routing algorithms.
+</strong>
+
+<p>
+For each method explain:
+</p>
+
+<ul>
+
+<li>Basic concept</li>
+
+<li>Information maintained</li>
+
+<li>Algorithm / principle</li>
+
+<li>Advantages</li>
+
+<li>Disadvantages</li>
+
+<li>Example protocol</li>
+
+</ul>
+
+</div>
+
+
+<div class="exam">
+
+<strong>
+Q5. Explain RIP, OSPF and BGP.
+</strong>
+
+<p>
+Write the type, working principle, metric/path information,
+scope and important features of each protocol.
+</p>
+
+</div>
+
+
+<div class="exam">
+
+<strong>
+Q6. Explain Network Layer services and packet switching.
+</strong>
+
+<p>
+Include Network Layer functions, datagram packet switching,
+virtual circuit packet switching and comparison.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     20. EXAM ANSWER TEMPLATE
+======================================================= -->
+
+<section>
+
+<h2>20. VTU Answer Writing Template</h2>
+
+<p>
+For a 10-mark Network Layer question, use this structure:
+</p>
+
+
+<div class="diagram">
+
+<pre>
+
+1. Definition
+       ↓
+2. Main concept
+       ↓
+3. Working / Steps
+       ↓
+4. Diagram
+       ↓
+5. Example
+       ↓
+6. Advantages
+       ↓
+7. Disadvantages
+       ↓
+8. Comparison / Conclusion
+
+</pre>
+
+</div>
+
+
+<div class="important">
+
+<strong>Boss Exam Tip:</strong>
+
+For Network Layer answers, don't write only paragraphs.
+
+Use:
+
+✔ Headings
+
+✔ Numbered points
+
+✔ Tables
+
+✔ Diagrams
+
+✔ Examples
+
+✔ Important terms underlined
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     21. QUICK REVISION
+======================================================= -->
+
+<section id="revision">
+
+<h2>21. Quick Revision — One Page</h2>
+
+
+<div class="diagram">
+
+<pre>
+
+                 BCS502 MODULE 3
+                  NETWORK LAYER
+
+                         │
+       ┌─────────────────┼─────────────────┐
+       ↓                 ↓                 ↓
+
+   ADDRESSING          ROUTING          PACKETS
+       │                 │                 │
+    IPv4/IPv6            │            Packet Switching
+       │                 │
+       │        ┌────────┼────────┐
+       │        ↓        ↓        ↓
+       │       DV       LS       PV
+       │        │        │        │
+       │      RIP      OSPF      BGP
+       │
+       ├── IPv4 = 32 bit
+       │
+       ├── IPv6 = 128 bit
+       │
+       └── Subnetting
+
+DV  → Distance Vector
+    → Bellman-Ford
+    → RIP
+
+LS  → Link State
+    → Dijkstra
+    → OSPF
+
+PV  → Path Vector
+    → BGP
+    → Inter-AS
+
+Multicast
+    ↓
+  MOSPF
+
+</pre>
+
+</div>
+
+
+<h3>🔥 Must Remember</h3>
+
+<p>
+
+<span class="badge">IPv4 → 32 bit</span>
+
+<span class="badge">IPv6 → 128 bit</span>
+
+<span class="badge">DV → Bellman-Ford</span>
+
+<span class="badge">LS → Dijkstra</span>
+
+<span class="badge">RIP → Hop Count</span>
+
+<span class="badge">OSPF → Cost</span>
+
+<span class="badge">BGP → Path Vector</span>
+
+<span class="badge">BGP → Inter-AS</span>
+
+<span class="badge">MOSPF → Multicast</span>
+
+</p>
+
+
+<div class="example">
+
+<strong>Final Memory Trick:</strong>
+
+<br><br>
+
+<strong>RIP = Route using hops</strong>
+
+<br>
+
+<strong>OSPF = Open shortest path</strong>
+
+<br>
+
+<strong>BGP = Between autonomous systems</strong>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     SUMMARY
+======================================================= -->
+
+<section>
+
+<h2>22. Module 3 Summary</h2>
+
+<p>
+The Network Layer provides logical addressing, routing and
+packet forwarding between networks.
+</p>
+
+<p>
+IPv4 uses 32-bit addresses, while IPv6 uses 128-bit addresses.
+Subnetting divides a network into smaller logical networks.
+</p>
+
+<p>
+Routing can be studied using Distance Vector, Link State and
+Path Vector approaches.
+</p>
+
+<p>
+RIP represents distance-vector routing, OSPF represents
+link-state routing, and BGP represents path-vector routing
+between autonomous systems.
+</p>
+
+<p>
+Multicast allows delivery to a selected group of receivers,
+and MOSPF extends OSPF concepts for multicast routing.
+</p>
+
+<div class="important">
+
+<strong>
+🎯 Module 3 Focus:
+</strong>
+
+IPv4 + Subnetting + IPv4 Datagram + IPv6 +
+Routing Algorithms + RIP + OSPF + BGP + MOSPF.
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+<p>
+BCS502 — Computer Networks | Module 3
+</p>
+
+<p>
+VTU 2022 Scheme • Original Exam-Oriented Notes
+</p>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   BASIC CONTENT PROTECTION
+========================================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(e){
+        e.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "selectstart",
+    function(e){
+        e.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "dragstart",
+    function(e){
+        e.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "copy",
+    function(e){
+        e.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "cut",
+    function(e){
+        e.preventDefault();
+    }
+);
+
+
+/* =========================================================
+   KEYBOARD SHORTCUT BLOCK
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        const key = e.key.toLowerCase();
+
+        if(
+            (e.ctrlKey || e.metaKey) &&
+            ["c","x","a","u","s","p"].includes(key)
+        ){
+            e.preventDefault();
+        }
+
+        if(
+            e.ctrlKey &&
+            e.shiftKey &&
+            ["i","j","c"].includes(key)
+        ){
+            e.preventDefault();
+        }
+
+        if(e.key === "F12"){
+            e.preventDefault();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PRINTSCREEN ATTEMPT
+========================================================= */
+
+document.addEventListener(
+    "keyup",
+    function(e){
+
+        if(e.key === "PrintScreen"){
+
+            document.body.style.filter =
+                "blur(15px)";
+
+            setTimeout(function(){
+
+                document.body.style.filter =
+                    "none";
+
+            },1200);
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
