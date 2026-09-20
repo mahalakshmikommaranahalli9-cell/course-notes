@@ -2,15 +2,27 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BCS502 | Computer Networks</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-        content="BCS502 Computer Networks - VTU 5th Semester Notes">
+    <meta
+        name="theme-color"
+        content="#080808"
+    >
 
-    <style>
+    <meta
+        name="description"
+        content="BCS502 Computer Networks - VTU 5th Semester Course Notes by Mahalakshmi"
+    >
+
+    <title>BCS502 | Computer Networks | Course Notes</title>
+
+    <style
 
         * {
             margin: 0;
@@ -18,229 +30,693 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #0b0f14;
-            color: #f5f5f5;
+            background:
+                radial-gradient(
+                    circle at top,
+                    #1a160e 0%,
+                    #0b0b0b 38%,
+                    #050505 100%
+                );
+            color: #f4f1e8;
             min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
         }
 
-        .container {
-            width: min(1100px, 92%);
-            margin: auto;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    120deg,
+                    transparent 0%,
+                    rgba(255, 193, 7, 0.025) 50%,
+                    transparent 100%
+                );
+            z-index: -2;
         }
+
+        /* =========================================
+           LION BACKGROUND
+        ========================================= */
+
+        .lion {
+            position: fixed;
+            font-size: 85px;
+            opacity: 0.055;
+            pointer-events: none;
+            z-index: -1;
+            animation: lionMove 18s ease-in-out infinite;
+        }
+
+        .lion.one {
+            top: 14%;
+            left: -20px;
+        }
+
+        .lion.two {
+            bottom: 10%;
+            right: -20px;
+            animation-delay: 6s;
+            animation-duration: 22s;
+        }
+
+        @keyframes lionMove {
+
+            0% {
+                transform: translate(0, 0) rotate(-4deg);
+            }
+
+            25% {
+                transform: translate(35px, -25px) rotate(4deg);
+            }
+
+            50% {
+                transform: translate(0, 20px) rotate(-2deg);
+            }
+
+            75% {
+                transform: translate(-30px, -15px) rotate(5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(-4deg);
+            }
+
+        }
+
+        /* =========================================
+           HEADER
+        ========================================= */
 
         header {
-            padding: 55px 0 35px;
-            text-align: center;
+            width: 100%;
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(255, 193, 7, 0.16);
+            background: rgba(5, 5, 5, 0.88);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 20;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 8px 15px;
-            border: 1px solid #444;
-            border-radius: 30px;
-            color: #aaa;
+        .header-inner {
+            width: min(1100px, 94%);
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: #ffc107;
             font-size: 14px;
-            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .back {
+            color: #ddd;
+            text-decoration: none;
+            border: 1px solid #333;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            transition: 0.3s ease;
+        }
+
+        .back:hover {
+            border-color: #ffc107;
+            color: #ffc107;
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        main {
+            width: min(1100px, 94%);
+            margin: auto;
+            padding: 65px 0 80px;
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            text-align: center;
+            padding: 30px 10px 55px;
+        }
+
+        .course-code {
+            display: inline-block;
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.35);
+            background: rgba(255, 193, 7, 0.06);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
         }
 
         h1 {
-            font-size: clamp(32px, 6vw, 58px);
-            margin-bottom: 12px;
+            font-size: clamp(38px, 7vw, 76px);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #ffc107;
         }
 
         .subtitle {
             color: #aaa;
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: auto;
         }
 
-        .back {
-            display: inline-block;
-            margin-top: 25px;
-            color: #aaa;
-            text-decoration: none;
+        .semester {
+            margin-top: 18px;
+            color: #ddd;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
 
-        .back:hover {
-            color: white;
-        }
+        /* =========================================
+           INFO GRID
+        ========================================= */
 
-        .course-info {
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-            margin: 30px 0 45px;
+            margin-bottom: 45px;
         }
 
-        .info-box {
-            background: #121820;
-            border: 1px solid #242c35;
-            border-radius: 14px;
-            padding: 20px;
+        .info-card {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid #242424;
+            border-radius: 16px;
+            padding: 22px;
             text-align: center;
         }
 
-        .info-box strong {
+        .info-card small {
             display: block;
-            font-size: 22px;
-            margin-bottom: 7px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 10px;
+            margin-bottom: 9px;
         }
 
-        .info-box span {
-            color: #999;
-            font-size: 14px;
+        .info-card strong {
+            color: #ffc107;
+            font-size: 16px;
         }
 
-        .section-title {
-            font-size: 28px;
-            margin-bottom: 20px;
+        /* =========================================
+           SECTION TITLE
+        ========================================= */
+
+        .section-heading {
+            margin-bottom: 24px;
         }
+
+        .section-heading small {
+            color: #ffc107;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin-top: 8px;
+            font-size: clamp(25px, 4vw, 36px);
+        }
+
+        /* =========================================
+           MODULE GRID
+        ========================================= */
 
         .modules {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            padding-bottom: 60px;
         }
 
-        .module {
-            background: #121820;
-            border: 1px solid #242c35;
-            border-radius: 18px;
-            padding: 25px;
-            transition: 0.25s ease;
+        .module-card {
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.018)
+                );
+            border: 1px solid #292929;
+            border-radius: 20px;
+            padding: 30px;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
-        .module:hover {
-            transform: translateY(-5px);
-            border-color: #666;
+        .module-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #ffc107,
+                transparent
+            );
+            opacity: 0.7;
+        }
+
+        .module-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(255, 193, 7, 0.45);
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.45);
         }
 
         .module-number {
-            color: #888;
+            color: #ffc107;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .module-card h3 {
+            font-size: 27px;
+            margin-bottom: 13px;
+        }
+
+        .module-card p {
+            color: #a7a7a7;
             font-size: 14px;
-            margin-bottom: 10px;
+            line-height: 1.75;
+            flex: 1;
         }
 
-        .module h3 {
-            font-size: 23px;
-            margin-bottom: 10px;
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 18px 0 22px;
         }
 
-        .module p {
+        .topic {
+            color: #aaa;
+            background: #111;
+            border: 1px solid #292929;
+            padding: 5px 9px;
+            border-radius: 7px;
+            font-size: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 13px 18px;
+            border-radius: 10px;
+            background: #ffc107;
+            color: #090909;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #ffd54f;
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           STUDY GUIDE
+        ========================================= */
+
+        .study-section {
+            margin-top: 60px;
+        }
+
+        .study-box {
+            border: 1px solid #282828;
+            background: rgba(255,255,255,0.025);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .study-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            list-style: none;
+        }
+
+        .study-list li {
+            position: relative;
+            padding: 17px 18px 17px 45px;
+            border-radius: 12px;
+            background: #101010;
+            border: 1px solid #222;
             color: #aaa;
             line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 13px;
         }
 
-        .button {
-            display: inline-block;
+        .study-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 17px;
+            top: 15px;
+            color: #ffc107;
+            font-weight: 900;
+            font-size: 16px;
+        }
+
+        /* =========================================
+           GITHUB SECTION
+        ========================================= */
+
+        .github-section {
+            margin-top: 60px;
+        }
+
+        .github-box {
+            text-align: center;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,193,7,0.07),
+                    rgba(255,255,255,0.015)
+                );
+            border-radius: 22px;
+            padding: 42px 25px;
+        }
+
+        .github-box .github-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .github-box h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .github-box p {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 22px;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            color: #ffc107;
             text-decoration: none;
-            color: white;
-            background: #1f2933;
-            border: 1px solid #3a4652;
-            padding: 11px 18px;
-            border-radius: 9px;
-            transition: 0.2s;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.3s ease;
         }
 
-        .button:hover {
-            background: #303c48;
+        .github-btn:hover {
+            background: #ffc107;
+            color: #080808;
+            transform: translateY(-2px);
         }
 
-        .coming {
-            opacity: 0.55;
-        }
+        /* =========================================
+           FOOTER
+        ========================================= */
 
         footer {
-            border-top: 1px solid #222;
+            border-top: 1px solid #1d1d1d;
+            padding: 25px 20px;
             text-align: center;
-            padding: 25px;
-            color: #777;
-            font-size: 14px;
+            color: #666;
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        footer strong {
+            color: #ffc107;
+        }
 
-            .course-info {
-                grid-template-columns: 1fr;
-            }
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 800px) {
 
             .modules {
                 grid-template-columns: 1fr;
             }
 
-            header {
-                padding-top: 35px;
+            .info-grid {
+                grid-template-columns: 1fr;
             }
 
-            .module {
+            .study-list {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 45px;
+            }
+
+        }
+
+        @media (max-width: 520px) {
+
+            header {
+                padding: 17px 14px;
+            }
+
+            .header-inner {
+                width: 100%;
+            }
+
+            .brand {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .back {
+                padding: 8px 11px;
+                font-size: 11px;
+            }
+
+            main {
+                width: 92%;
+                padding-bottom: 55px;
+            }
+
+            .hero {
+                padding: 20px 5px 40px;
+            }
+
+            h1 {
+                font-size: 42px;
+                letter-spacing: -1.5px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .module-card {
+                padding: 23px;
+                min-height: 260px;
+            }
+
+            .module-card h3 {
+                font-size: 24px;
+            }
+
+            .study-box {
                 padding: 20px;
             }
+
+            .github-box {
+                padding: 32px 18px;
+            }
+
+            .lion {
+                font-size: 60px;
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="container">
+    <!-- =========================================
+         ANIMATED LION
+    ========================================== -->
 
-        <header>
+    <div class="lion one">🦁</div>
+    <div class="lion two">🦁</div>
 
-            <div class="tag">
-                VTU • 5th Semester • CSE
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header>
+
+        <div class="header-inner">
+
+            <div class="brand">
+                MAHALAKSHMI'S COURSE NOTES
             </div>
 
-            <h1>BCS502</h1>
-
-            <p class="subtitle">
-                Computer Networks
-                <br>
-                Concept-wise VTU Notes & Exam Preparation
-            </p>
-
-            <a href="../index.html" class="back">
+            <a
+                href="../index.html"
+                class="back"
+            >
                 ← Back to Course Notes
             </a>
 
-        </header>
+        </div>
+
+    </header>
 
 
-        <section class="course-info">
+    <!-- =========================================
+         MAIN
+    ========================================== -->
 
-            <div class="info-box">
-                <strong>BCS502</strong>
-                <span>Course Code</span>
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="course-code">
+                BCS502
             </div>
 
-            <div class="info-box">
-                <strong>Computer Networks</strong>
-                <span>Subject</span>
+            <h1>
+                Computer <span>Networks</span>
+            </h1>
+
+            <p class="subtitle">
+                Complete VTU 5th Semester course notes covering
+                all five modules from Introduction to Application Layer.
+            </p>
+
+            <p class="semester">
+                VTU • 5TH SEMESTER • CSE
+            </p>
+
+        </section>
+
+
+        <!-- COURSE INFORMATION -->
+
+        <section class="info-grid">
+
+            <div class="info-card">
+
+                <small>Course Code</small>
+
+                <strong>
+                    BCS502
+                </strong>
+
             </div>
 
-            <div class="info-box">
-                <strong>5 Modules</strong>
-                <span>VTU 5th Semester</span>
+
+            <div class="info-card">
+
+                <small>Subject</small>
+
+                <strong>
+                    Computer Networks
+                </strong>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <small>Modules</small>
+
+                <strong>
+                    5 Modules
+                </strong>
+
             </div>
 
         </section>
 
 
+        <!-- MODULES -->
+
         <section>
 
-            <h2 class="section-title">
-                📚 Modules
-            </h2>
+            <div class="section-heading">
+
+                <small>
+                    Course Content
+                </small>
+
+                <h2>
+                    📚 Modules
+                </h2>
+
+            </div>
+
 
             <div class="modules">
 
 
-                <!-- MODULE 1 -->
+                <!-- =================================
+                     MODULE 01
+                ================================== -->
 
-                <div class="module">
+                <article class="module-card">
 
                     <div class="module-number">
                         MODULE 01
@@ -252,20 +728,49 @@
 
                     <p>
                         Data communications, networks, network types,
-                        TCP/IP protocol suite, OSI model, transmission
-                        media and packet switching.
+                        network models, TCP/IP protocol suite, OSI model,
+                        transmission media and packet switching.
                     </p>
 
-                    <a href="module1.html" class="button">
+                    <div class="topics">
+
+                        <span class="topic">
+                            Data Communications
+                        </span>
+
+                        <span class="topic">
+                            TCP/IP
+                        </span>
+
+                        <span class="topic">
+                            OSI
+                        </span>
+
+                        <span class="topic">
+                            Transmission Media
+                        </span>
+
+                        <span class="topic">
+                            Switching
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="module1.html"
+                        class="btn"
+                    >
                         Open Module 1 →
                     </a>
 
-                </div>
+                </article>
 
 
-                <!-- MODULE 2 -->
+                <!-- =================================
+                     MODULE 02
+                ================================== -->
 
-                <div class="module coming">
+                <article class="module-card">
 
                     <div class="module-number">
                         MODULE 02
@@ -276,20 +781,51 @@
                     </h3>
 
                     <p>
-                        Error detection and correction, data link control,
-                        HDLC, MAC, checksum and PPP.
+                        Error detection and correction, block coding,
+                        cyclic codes, data link control, framing,
+                        flow control, error control, HDLC, MAC,
+                        checksum and PPP.
                     </p>
 
-                    <span class="button">
-                        Coming Soon
-                    </span>
+                    <div class="topics">
 
-                </div>
+                        <span class="topic">
+                            Error Detection
+                        </span>
+
+                        <span class="topic">
+                            Block Coding
+                        </span>
+
+                        <span class="topic">
+                            HDLC
+                        </span>
+
+                        <span class="topic">
+                            MAC
+                        </span>
+
+                        <span class="topic">
+                            PPP
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="module2.html"
+                        class="btn"
+                    >
+                        Open Module 2 →
+                    </a>
+
+                </article>
 
 
-                <!-- MODULE 3 -->
+                <!-- =================================
+                     MODULE 03
+                ================================== -->
 
-                <div class="module coming">
+                <article class="module-card">
 
                     <div class="module-number">
                         MODULE 03
@@ -300,20 +836,51 @@
                     </h3>
 
                     <p>
-                        IPv4, IPv6, routing algorithms, DVR, LSR,
-                        PVR, RIP, OSPF and BGP.
+                        Network layer services, packet switching,
+                        IPv4 addressing, IPv4 datagram, IPv6 datagram,
+                        routing algorithms, DVR, LSR, PVR,
+                        RIP, OSPF, BGP and multicast routing.
                     </p>
 
-                    <span class="button">
-                        Coming Soon
-                    </span>
+                    <div class="topics">
 
-                </div>
+                        <span class="topic">
+                            IPv4
+                        </span>
+
+                        <span class="topic">
+                            IPv6
+                        </span>
+
+                        <span class="topic">
+                            DVR
+                        </span>
+
+                        <span class="topic">
+                            OSPF
+                        </span>
+
+                        <span class="topic">
+                            BGP
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="module3.html"
+                        class="btn"
+                    >
+                        Open Module 3 →
+                    </a>
+
+                </article>
 
 
-                <!-- MODULE 4 -->
+                <!-- =================================
+                     MODULE 04
+                ================================== -->
 
-                <div class="module coming">
+                <article class="module-card">
 
                     <div class="module-number">
                         MODULE 04
@@ -324,20 +891,50 @@
                     </h3>
 
                     <p>
-                        UDP, TCP, flow control, error control and
-                        congestion control.
+                        Transport layer services, UDP, TCP,
+                        TCP segments, connections, flow control,
+                        error control and congestion control.
                     </p>
 
-                    <span class="button">
-                        Coming Soon
-                    </span>
+                    <div class="topics">
 
-                </div>
+                        <span class="topic">
+                            UDP
+                        </span>
+
+                        <span class="topic">
+                            TCP
+                        </span>
+
+                        <span class="topic">
+                            Flow Control
+                        </span>
+
+                        <span class="topic">
+                            Error Control
+                        </span>
+
+                        <span class="topic">
+                            Congestion
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="module4.html"
+                        class="btn"
+                    >
+                        Open Module 4 →
+                    </a>
+
+                </article>
 
 
-                <!-- MODULE 5 -->
+                <!-- =================================
+                     MODULE 05
+                ================================== -->
 
-                <div class="module coming">
+                <article class="module-card">
 
                     <div class="module-number">
                         MODULE 05
@@ -348,28 +945,245 @@
                     </h3>
 
                     <p>
-                        HTTP, FTP, email, DNS, TELNET, SSH and
-                        client-server programming.
+                        Application layer concepts, client-server
+                        programming, HTTP, FTP, electronic mail,
+                        DNS, TELNET and SSH.
                     </p>
 
-                    <span class="button">
-                        Coming Soon
-                    </span>
+                    <div class="topics">
 
-                </div>
+                        <span class="topic">
+                            HTTP
+                        </span>
+
+                        <span class="topic">
+                            FTP
+                        </span>
+
+                        <span class="topic">
+                            Email
+                        </span>
+
+                        <span class="topic">
+                            DNS
+                        </span>
+
+                        <span class="topic">
+                            SSH
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="module5.html"
+                        class="btn"
+                    >
+                        Open Module 5 →
+                    </a>
+
+                </article>
+
 
             </div>
 
         </section>
 
-    </div>
 
+        <!-- =========================================
+             STUDY GUIDE
+        ========================================== -->
+
+        <section class="study-section">
+
+            <div class="section-heading">
+
+                <small>
+                    Preparation
+                </small>
+
+                <h2>
+                    📖 Study Guide
+                </h2>
+
+            </div>
+
+
+            <div class="study-box">
+
+                <ul class="study-list">
+
+                    <li>
+                        Start with the basic concepts of each module
+                        before moving to advanced topics.
+                    </li>
+
+                    <li>
+                        Practice diagrams for OSI, TCP/IP,
+                        protocols and networking layers.
+                    </li>
+
+                    <li>
+                        Practice numerical problems related to
+                        CRC, addressing and routing algorithms.
+                    </li>
+
+                    <li>
+                        Prepare important 2-mark, 5-mark and
+                        10-mark examination questions.
+                    </li>
+
+                    <li>
+                        Compare related concepts such as TCP vs UDP,
+                        IPv4 vs IPv6 and OSI vs TCP/IP.
+                    </li>
+
+                    <li>
+                        Revise protocols and their functions before
+                        the VTU examination.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             GITHUB
+        ========================================== -->
+
+        <section class="github-section">
+
+            <div class="github-box">
+
+                <div class="github-icon">
+                    🐙
+                </div>
+
+                <h2>
+                    MAHALAKSHMI'S GITHUB
+                </h2>
+
+                <p>
+                    Explore the complete Course Notes project,
+                    source code and other projects.
+                </p>
+
+                <a
+                    href="https://github.com/mahalakshmikommaranahalli9-cell"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="github-btn"
+                >
+                    🐙 Visit Mahalakshmi's GitHub
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
 
     <footer>
 
-        © 2026 Maha • BCS502 Computer Networks
+        © 2026
+        <strong>
+            Mahalakshmi
+        </strong>
+        • BCS502 Computer Networks
 
     </footer>
+
+
+    <!-- =========================================
+         ANTI-COPY SCRIPT
+    ========================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "contextmenu",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "selectstart",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "dragstart",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "copy",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "cut",
+            function(event) {
+                event.preventDefault();
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                const key =
+                    event.key.toLowerCase();
+
+                if (
+                    (event.ctrlKey || event.metaKey) &&
+                    [
+                        "c",
+                        "x",
+                        "a",
+                        "u",
+                        "s",
+                        "p"
+                    ].includes(key)
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+
+                if (
+                    event.key === "PrintScreen"
+                ) {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
+
+    </script>
 
 
 </body>
