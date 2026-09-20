@@ -1,0 +1,2176 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+
+    <title>BCS501 Module 5 | Software Quality & Estimation</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #1e3a8a);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #dbeafe;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 25px auto;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #2563eb;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 25px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2563eb;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #374151;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #111827;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .exam {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .danger {
+            background: #fef2f2;
+            border-left: 5px solid #dc2626;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .diagram {
+            background: #111827;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 3px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .two-mark {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 7px;
+        }
+
+        .answer {
+            background: #f9fafb;
+            padding: 14px;
+            margin-top: 8px;
+            border-radius: 7px;
+        }
+
+        .toc a {
+            display: block;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .diagram {
+                font-size: 12px;
+            }
+        }
+
+        /* Discourage casual copying */
+
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>BCS501 — Module 5</h1>
+
+    <p>
+        Software Engineering & Project Management
+        • Software Quality and Estimation
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <a href="index.html" class="back">
+        ← Back to BCS501
+    </a>
+
+
+    <!-- OVERVIEW -->
+
+    <section class="card">
+
+        <h2>📚 Module 5 — Software Quality & Estimation</h2>
+
+        <p>
+            Software quality and project estimation are two important
+            parts of software project management.
+        </p>
+
+        <p>
+            <strong>Software quality</strong> focuses on whether the
+            software satisfies specified requirements and expected
+            quality characteristics.
+        </p>
+
+        <p>
+            <strong>Software estimation</strong> attempts to determine
+            the effort, time, cost and resources required to complete
+            a software project.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Easy Memory:</strong>
+
+            <br><br>
+
+            Quality → "Is the software good enough?"
+
+            <br>
+
+            Estimation → "How much effort, time and money will it take?"
+
+        </div>
+
+        <h3>Major Topics</h3>
+
+        <span class="tag">Software Quality</span>
+        <span class="tag">Quality Management</span>
+        <span class="tag">Quality Models</span>
+        <span class="tag">Product Quality</span>
+        <span class="tag">Process Quality</span>
+        <span class="tag">Project Estimation</span>
+        <span class="tag">Decomposition</span>
+        <span class="tag">Empirical Models</span>
+        <span class="tag">COCOMO</span>
+        <span class="tag">Estimation Observations</span>
+
+    </section>
+
+
+    <!-- TOC -->
+
+    <section class="card toc">
+
+        <h2>📑 Contents</h2>
+
+        <a href="#quality">1. Software Quality</a>
+
+        <a href="#place">2. Place of Quality in Project Management</a>
+
+        <a href="#qualitymanagement">3. Software Quality Management</a>
+
+        <a href="#models">4. Software Quality Models</a>
+
+        <a href="#mccall">5. McCall's Quality Model</a>
+
+        <a href="#iso">6. ISO-Based Quality View</a>
+
+        <a href="#productprocess">7. Product vs Process Quality Management</a>
+
+        <a href="#estimation">8. Software Project Estimation</a>
+
+        <a href="#decomposition">9. Decomposition Techniques</a>
+
+        <a href="#size">10. Size-Oriented Estimation</a>
+
+        <a href="#loc">11. LOC-Based Estimation</a>
+
+        <a href="#function">12. Function Point Estimation</a>
+
+        <a href="#empirical">13. Empirical Estimation Models</a>
+
+        <a href="#cocomo">14. COCOMO Model</a>
+
+        <a href="#observations">15. Observations on Project Estimation</a>
+
+        <a href="#questions">16. VTU Important Questions</a>
+
+        <a href="#twomark">17. 2-Mark Questions</a>
+
+        <a href="#tenmark">18. 10-Mark Answer Preparation</a>
+
+        <a href="#revision">19. Last-Minute Revision</a>
+
+    </section>
+
+
+    <!-- QUALITY -->
+
+    <section class="card" id="quality">
+
+        <h2>1. Software Quality</h2>
+
+        <p>
+            <strong>Software quality</strong> refers to the degree to
+            which software satisfies specified requirements and
+            relevant quality characteristics.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Simple Definition:</strong>
+
+            Software quality means developing software that correctly
+            performs its required functions and satisfies expected
+            quality requirements.
+
+        </div>
+
+        <h3>Important Quality Characteristics</h3>
+
+        <ul>
+
+            <li>Correctness</li>
+
+            <li>Reliability</li>
+
+            <li>Efficiency</li>
+
+            <li>Usability</li>
+
+            <li>Maintainability</li>
+
+            <li>Portability</li>
+
+            <li>Security</li>
+
+            <li>Performance</li>
+
+        </ul>
+
+        <h3>Why is Software Quality Important?</h3>
+
+        <ul>
+
+            <li>Reduces software defects.</li>
+
+            <li>Improves customer satisfaction.</li>
+
+            <li>Reduces maintenance cost.</li>
+
+            <li>Improves reliability.</li>
+
+            <li>Improves maintainability.</li>
+
+            <li>Reduces project risks.</li>
+
+            <li>Improves product reputation.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- PLACE -->
+
+    <section class="card" id="place">
+
+        <h2>2. Place of Software Quality in Project Management</h2>
+
+        <p>
+            Quality is not a separate activity performed only at the
+            end of a project. It should be considered throughout
+            planning, development, testing and deployment.
+        </p>
+
+        <div class="diagram">
+
+              PROJECT MANAGEMENT
+                      │
+        ┌─────────────┼─────────────┐
+        ↓             ↓             ↓
+     PLANNING     DEVELOPMENT     CONTROL
+        │             │             │
+        ↓             ↓             ↓
+    QUALITY       QUALITY        QUALITY
+    PLANNING      ASSURANCE      CONTROL
+        │             │             │
+        └─────────────┼─────────────┘
+                      ↓
+               QUALITY PRODUCT
+
+        </div>
+
+        <h3>Quality Activities</h3>
+
+        <ol>
+
+            <li>Define quality requirements.</li>
+
+            <li>Prepare quality plans.</li>
+
+            <li>Define standards and procedures.</li>
+
+            <li>Perform reviews.</li>
+
+            <li>Conduct testing.</li>
+
+            <li>Track defects.</li>
+
+            <li>Measure quality.</li>
+
+            <li>Take corrective action.</li>
+
+        </ol>
+
+        <div class="exam">
+
+            <strong>Exam Point:</strong>
+
+            Quality management helps ensure that project deliverables
+            meet defined requirements while also supporting control of
+            defects, cost, schedule and customer expectations.
+
+        </div>
+
+    </section>
+
+
+    <!-- QUALITY MANAGEMENT -->
+
+    <section class="card" id="qualitymanagement">
+
+        <h2>3. Software Quality Management</h2>
+
+        <p>
+            Software Quality Management is the set of activities used
+            to plan, assure and control the quality of software and
+            software-development processes.
+        </p>
+
+        <h3>Main Components</h3>
+
+        <h4>1. Quality Planning</h4>
+
+        <p>
+            Identifies quality standards, objectives, measurements
+            and procedures that will be used in the project.
+        </p>
+
+        <h4>2. Quality Assurance</h4>
+
+        <p>
+            Focuses on processes and activities used to provide
+            confidence that quality requirements will be satisfied.
+        </p>
+
+        <h4>3. Quality Control</h4>
+
+        <p>
+            Focuses on examining actual work products and identifying
+            defects or deviations from requirements.
+        </p>
+
+        <div class="diagram">
+
+        QUALITY MANAGEMENT
+                │
+        ┌───────┼────────┐
+        ↓       ↓        ↓
+     Planning Assurance Control
+        │       │        │
+        ↓       ↓        ↓
+    Standards Processes Products
+        │       │        │
+        └───────┼────────┘
+                ↓
+           Quality Result
+
+        </div>
+
+    </section>
+
+
+    <!-- QUALITY MODELS -->
+
+    <section class="card" id="models">
+
+        <h2>4. Software Quality Models</h2>
+
+        <p>
+            A software quality model provides a structured way to
+            describe and evaluate quality characteristics of software.
+        </p>
+
+        <h3>Why Use Quality Models?</h3>
+
+        <ul>
+
+            <li>Identify important quality characteristics.</li>
+
+            <li>Provide measurable quality attributes.</li>
+
+            <li>Help compare software products.</li>
+
+            <li>Support quality evaluation.</li>
+
+            <li>Help identify areas for improvement.</li>
+
+        </ul>
+
+        <h3>Common Quality Models / Frameworks</h3>
+
+        <table>
+
+            <tr>
+                <th>Model</th>
+                <th>Main Idea</th>
+            </tr>
+
+            <tr>
+                <td>McCall's Model</td>
+                <td>
+                    Groups software quality factors into major
+                    quality perspectives.
+                </td>
+            </tr>
+
+            <tr>
+                <td>ISO/IEC 9126</td>
+                <td>
+                    Provides a structured quality model for software
+                    product evaluation.
+                </td>
+            </tr>
+
+            <tr>
+                <td>ISO/IEC 25010</td>
+                <td>
+                    Provides a modern software product quality model.
+                </td>
+            </tr>
+
+            <tr>
+                <td>CMM / CMMI</td>
+                <td>
+                    Focuses strongly on process maturity and
+                    organizational process improvement.
+                </td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- MCCALL -->
+
+    <section class="card" id="mccall">
+
+        <h2>5. McCall's Quality Model</h2>
+
+        <p>
+            McCall's quality model organizes software quality factors
+            into three broad perspectives:
+        </p>
+
+        <div class="diagram">
+
+                 McCALL QUALITY MODEL
+                         │
+          ┌──────────────┼──────────────┐
+          ↓              ↓              ↓
+       PRODUCT         PRODUCT        PRODUCT
+        REVISION       TRANSITION      OPERATION
+          │              │              │
+          ↓              ↓              ↓
+     Maintainability   Flexibility   Correctness
+     Flexibility       Testability   Reliability
+     Testability       Portability   Efficiency
+                                      Integrity
+                                      Usability
+
+        </div>
+
+        <h3>1. Product Operation</h3>
+
+        <p>
+            Concerns how well the software operates during use.
+        </p>
+
+        <ul>
+
+            <li>Correctness</li>
+
+            <li>Reliability</li>
+
+            <li>Efficiency</li>
+
+            <li>Integrity</li>
+
+            <li>Usability</li>
+
+        </ul>
+
+        <h3>2. Product Revision</h3>
+
+        <p>
+            Concerns how easily software can be modified.
+        </p>
+
+        <ul>
+
+            <li>Maintainability</li>
+
+            <li>Flexibility</li>
+
+            <li>Testability</li>
+
+        </ul>
+
+        <h3>3. Product Transition</h3>
+
+        <p>
+            Concerns adapting or moving software to other environments.
+        </p>
+
+        <ul>
+
+            <li>Portability</li>
+
+            <li>Reusability</li>
+
+            <li>Interoperability</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- ISO -->
+
+    <section class="card" id="iso">
+
+        <h2>6. ISO-Based Quality View</h2>
+
+        <p>
+            ISO quality models provide structured characteristics
+            that can be used to evaluate software quality.
+        </p>
+
+        <h3>Important Product Quality Characteristics</h3>
+
+        <ul>
+
+            <li>Functionality</li>
+
+            <li>Reliability</li>
+
+            <li>Usability</li>
+
+            <li>Efficiency</li>
+
+            <li>Maintainability</li>
+
+            <li>Portability</li>
+
+        </ul>
+
+        <div class="highlight">
+
+            <strong>Memory Trick:</strong>
+
+            <br><br>
+
+            <strong>F R U E M P</strong>
+
+            <br>
+
+            Functionality → Reliability → Usability →
+            Efficiency → Maintainability → Portability
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCT PROCESS -->
+
+    <section class="card" id="productprocess">
+
+        <h2>7. Product vs Process Quality Management</h2>
+
+        <table>
+
+            <tr>
+
+                <th>Product Quality Management</th>
+
+                <th>Process Quality Management</th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Focuses on the quality of the software product.
+                </td>
+
+                <td>
+                    Focuses on the quality of the development process.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Examines features and behavior of the final product.
+                </td>
+
+                <td>
+                    Examines whether defined processes are followed.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Uses testing and product measurements.
+                </td>
+
+                <td>
+                    Uses process audits, reviews and process metrics.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Main concern is product characteristics.
+                </td>
+
+                <td>
+                    Main concern is process effectiveness and consistency.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Example: reliability testing.
+                </td>
+
+                <td>
+                    Example: checking whether required review procedures
+                    were followed.
+                </td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- ESTIMATION -->
+
+    <section class="card" id="estimation">
+
+        <h2>8. Software Project Estimation</h2>
+
+        <p>
+            Software project estimation is the process of predicting
+            the effort, cost, duration and resources required to
+            complete a software project.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Estimate:</strong>
+
+            <br><br>
+
+            How much software must be developed?
+
+            <br>
+
+            How much effort is required?
+
+            <br>
+
+            How much will it cost?
+
+            <br>
+
+            How long will it take?
+
+        </div>
+
+        <h3>Major Estimation Parameters</h3>
+
+        <ul>
+
+            <li>Software size</li>
+
+            <li>Effort</li>
+
+            <li>Development time</li>
+
+            <li>Cost</li>
+
+            <li>Resources</li>
+
+            <li>Team size</li>
+
+        </ul>
+
+        <div class="diagram">
+
+        REQUIREMENTS
+             ↓
+        ESTIMATE SIZE
+             ↓
+        ESTIMATE EFFORT
+             ↓
+        ESTIMATE COST
+             ↓
+        ESTIMATE SCHEDULE
+             ↓
+        ALLOCATE RESOURCES
+
+        </div>
+
+    </section>
+
+
+    <!-- DECOMPOSITION -->
+
+    <section class="card" id="decomposition">
+
+        <h2>9. Decomposition Techniques</h2>
+
+        <p>
+            Decomposition breaks a large software project into smaller
+            parts so that each part can be estimated more easily.
+        </p>
+
+        <h3>Why Decompose?</h3>
+
+        <ul>
+
+            <li>Large systems are difficult to estimate directly.</li>
+
+            <li>Smaller components are easier to understand.</li>
+
+            <li>Different components may have different complexity.</li>
+
+            <li>Estimates can be combined to obtain an overall estimate.</li>
+
+        </ul>
+
+        <h3>Basic Decomposition Process</h3>
+
+        <div class="diagram">
+
+            SOFTWARE PROJECT
+                   ↓
+        ┌──────────┼──────────┐
+        ↓          ↓          ↓
+      Module A   Module B   Module C
+        ↓          ↓          ↓
+     Estimate   Estimate   Estimate
+        │          │          │
+        └──────────┼──────────┘
+                   ↓
+             Total Estimate
+
+        </div>
+
+        <h3>Two Important Decomposition Approaches</h3>
+
+        <h4>1. Problem-Based Decomposition</h4>
+
+        <p>
+            The project is decomposed according to the functions or
+            features that must be implemented.
+        </p>
+
+        <h4>2. Process-Based Decomposition</h4>
+
+        <p>
+            The project is decomposed according to the activities
+            required to perform the software process.
+        </p>
+
+    </section>
+
+
+    <!-- SIZE -->
+
+    <section class="card" id="size">
+
+        <h2>10. Size-Oriented Estimation</h2>
+
+        <p>
+            Size-oriented estimation uses software size as an important
+            basis for estimating effort, cost and productivity.
+        </p>
+
+        <h3>LOC</h3>
+
+        <p>
+            <strong>LOC (Lines of Code)</strong> represents the number
+            of source-code lines used to implement a software system.
+        </p>
+
+        <h3>Example</h3>
+
+        <p>
+            Suppose a project is estimated to contain 10,000 lines
+            of code.
+        </p>
+
+        <p>
+            If historical data provides effort per thousand lines,
+            that information can be used to estimate total effort.
+        </p>
+
+        <div class="important">
+
+            <strong>Limitation:</strong>
+
+            LOC is language-dependent and is difficult to estimate
+            accurately before design and implementation.
+
+        </div>
+
+    </section>
+
+
+    <!-- LOC -->
+
+    <section class="card" id="loc">
+
+        <h2>11. LOC-Based Estimation</h2>
+
+        <p>
+            LOC-based estimation uses estimated lines of code to
+            derive effort or productivity values.
+        </p>
+
+        <h3>Common Measures</h3>
+
+        <div class="exam">
+
+            <strong>Productivity:</strong>
+
+            <br>
+
+            LOC / Person-Month
+
+            <br><br>
+
+            <strong>Defect Density:</strong>
+
+            <br>
+
+            Defects / KLOC
+
+            <br><br>
+
+            <strong>Cost per KLOC:</strong>
+
+            <br>
+
+            Total Cost / KLOC
+
+        </div>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Easy to understand.</li>
+
+            <li>Useful when historical LOC data exists.</li>
+
+            <li>Can support productivity calculations.</li>
+
+        </ul>
+
+        <h3>Limitations</h3>
+
+        <ul>
+
+            <li>Difficult to estimate LOC early.</li>
+
+            <li>Depends on programming language.</li>
+
+            <li>Encourages focus on code quantity.</li>
+
+            <li>Different coding styles produce different LOC.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- FUNCTION POINT -->
+
+    <section class="card" id="function">
+
+        <h2>12. Function Point Estimation</h2>
+
+        <p>
+            Function Point Analysis estimates software size based on
+            the functionality provided to users rather than directly
+            counting lines of source code.
+        </p>
+
+        <h3>Five Major Function Types</h3>
+
+        <table>
+
+            <tr>
+                <th>Function Type</th>
+                <th>Meaning</th>
+            </tr>
+
+            <tr>
+                <td>External Inputs (EI)</td>
+                <td>
+                    Data entering the system.
+                </td>
+            </tr>
+
+            <tr>
+                <td>External Outputs (EO)</td>
+                <td>
+                    Information produced by the system.
+                </td>
+            </tr>
+
+            <tr>
+                <td>External Inquiries (EQ)</td>
+                <td>
+                    Input-output interactions that provide information.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Internal Logical Files (ILF)</td>
+                <td>
+                    Logical groups of data maintained by the system.
+                </td>
+            </tr>
+
+            <tr>
+                <td>External Interface Files (EIF)</td>
+                <td>
+                    Data used by the system but maintained outside it.
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="diagram">
+
+             FUNCTION POINTS
+                    │
+       ┌────────────┼────────────┐
+       ↓            ↓            ↓
+      EI           EO           EQ
+       │            │            │
+       └────────────┼────────────┘
+                    ↓
+              ILF + EIF
+                    ↓
+              FUNCTIONAL
+                  SIZE
+
+        </div>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Less dependent on programming language.</li>
+
+            <li>Focuses on user-visible functionality.</li>
+
+            <li>Can be useful during early planning.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- EMPIRICAL -->
+
+    <section class="card" id="empirical">
+
+        <h2>13. Empirical Estimation Models</h2>
+
+        <p>
+            An empirical estimation model uses mathematical equations
+            derived from observations and historical project data.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Simple Idea:</strong>
+
+            Past project data → Mathematical relationship →
+            Estimate for a new project
+
+        </div>
+
+        <h3>General Form</h3>
+
+        <div class="exam">
+
+            <strong>
+                Effort = a × (Size)<sup>b</sup>
+            </strong>
+
+            <br><br>
+
+            where <strong>a</strong> and <strong>b</strong> are
+            model parameters determined from historical data.
+
+        </div>
+
+        <h3>Examples</h3>
+
+        <ul>
+
+            <li>COCOMO</li>
+
+            <li>Putnam-based approaches</li>
+
+            <li>Other regression-based estimation models</li>
+
+        </ul>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Uses historical evidence.</li>
+
+            <li>Provides systematic estimates.</li>
+
+            <li>Can be automated.</li>
+
+        </ul>
+
+        <h3>Limitations</h3>
+
+        <ul>
+
+            <li>Accuracy depends on historical data.</li>
+
+            <li>Different organizations may require different parameters.</li>
+
+            <li>New technology may not match old project data.</li>
+
+            <li>Wrong size estimates produce wrong effort estimates.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- COCOMO -->
+
+    <section class="card" id="cocomo">
+
+        <h2>14. COCOMO Model</h2>
+
+        <p>
+            <strong>COCOMO</strong> stands for
+            <strong>Constructive Cost Model</strong>.
+            It is an empirical software estimation model associated
+            with Barry Boehm.
+        </p>
+
+        <h3>Basic COCOMO Effort Equation</h3>
+
+        <div class="exam">
+
+            <strong>
+                Effort = a × (KLOC)<sup>b</sup>
+            </strong>
+
+            <br><br>
+
+            Effort is commonly expressed in person-months.
+
+        </div>
+
+        <h3>Development Time</h3>
+
+        <div class="exam">
+
+            <strong>
+                Development Time = c × (Effort)<sup>d</sup>
+            </strong>
+
+        </div>
+
+        <h3>Traditional COCOMO Project Modes</h3>
+
+        <table>
+
+            <tr>
+                <th>Mode</th>
+                <th>General Description</th>
+            </tr>
+
+            <tr>
+                <td>Organic</td>
+                <td>
+                    Relatively small and familiar projects with
+                    experienced teams.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Semi-detached</td>
+                <td>
+                    Projects with intermediate complexity and
+                    mixed experience.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Embedded</td>
+                <td>
+                    Projects with strong hardware, software,
+                    regulatory or operational constraints.
+                </td>
+            </tr>
+
+        </table>
+
+        <h3>COCOMO Estimation Flow</h3>
+
+        <div class="diagram">
+
+             Estimate KLOC
+                  ↓
+           Select Project Mode
+                  ↓
+          Apply COCOMO Formula
+                  ↓
+            Estimate Effort
+                  ↓
+          Estimate Development
+                Time
+                  ↓
+          Estimate Staffing / Cost
+
+        </div>
+
+        <div class="important">
+
+            <strong>Exam Tip:</strong>
+
+            Remember:
+
+            <br><br>
+
+            <strong>
+            KLOC → Effort → Development Time → Cost
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- OBSERVATIONS -->
+
+    <section class="card" id="observations">
+
+        <h2>15. Observations on Project Estimation</h2>
+
+        <p>
+            Software estimation is difficult because software projects
+            involve uncertainty, changing requirements, people,
+            technology and varying levels of complexity.
+        </p>
+
+        <h3>Important Observations</h3>
+
+        <ol>
+
+            <li>
+                <strong>Estimation is uncertain:</strong>
+                Early estimates may change as more information becomes
+                available.
+            </li>
+
+            <li>
+                <strong>Requirements affect estimates:</strong>
+                Unclear or changing requirements make estimation harder.
+            </li>
+
+            <li>
+                <strong>Historical data is valuable:</strong>
+                Past project information can improve future estimates.
+            </li>
+
+            <li>
+                <strong>Different projects differ:</strong>
+                A model suitable for one project may not give the same
+                accuracy for another.
+            </li>
+
+            <li>
+                <strong>Size estimation is important:</strong>
+                Incorrect size estimates can affect effort and cost.
+            </li>
+
+            <li>
+                <strong>Risk affects estimation:</strong>
+                Technical and organizational risks may increase effort
+                and schedule.
+            </li>
+
+            <li>
+                <strong>Estimates should be revised:</strong>
+                Estimates can be refined as project knowledge improves.
+            </li>
+
+            <li>
+                <strong>Multiple estimation approaches help:</strong>
+                Using more than one technique can provide useful
+                cross-checking.
+            </li>
+
+        </ol>
+
+        <div class="diagram">
+
+       INITIAL ESTIMATE
+              ↓
+       PROJECT STARTS
+              ↓
+      MORE INFORMATION
+              ↓
+       REVISE ESTIMATE
+              ↓
+       BETTER ESTIMATE
+              ↓
+        PROJECT CONTROL
+
+        </div>
+
+    </section>
+
+
+    <!-- VTU QUESTIONS -->
+
+    <section class="card" id="questions">
+
+        <h2>16. ⭐ VTU Important Questions</h2>
+
+        <div class="important">
+
+            These questions are taken from / aligned with the official
+            VTU BCS501 Module 5 model-paper questions. 
+           
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q1.</strong>
+
+            Define Software Quality and explain the place of software
+            quality in project management.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q2.</strong>
+
+            Explain Software Quality Models.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q3.</strong>
+
+            Differentiate between Product and Process Quality Management.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q4.</strong>
+
+            Explain capability process model and CMM key areas.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q5.</strong>
+
+            Describe decomposition techniques in software project
+            estimation.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q6.</strong>
+
+            Explain Empirical Estimation Model.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q7.</strong>
+
+            Write short notes on observations on project estimations.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q8.</strong>
+
+            Explain software quality management.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q9.</strong>
+
+            Explain size-oriented estimation.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q10.</strong>
+
+            Explain function point based estimation.
+
+        </div>
+
+    </section>
+
+
+    <!-- 2 MARK -->
+
+    <section class="card" id="twomark">
+
+        <h2>17. ✍️ 2-Mark Questions & Answers</h2>
+
+
+        <div class="two-mark">
+
+            <strong>1. Define Software Quality.</strong>
+
+            <div class="answer">
+
+                Software quality is the degree to which software
+                satisfies specified requirements and expected
+                quality characteristics.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>2. What is Software Quality Management?</strong>
+
+            <div class="answer">
+
+                It is the set of activities used to plan, assure and
+                control the quality of software and its development
+                processes.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>3. What is Software Estimation?</strong>
+
+            <div class="answer">
+
+                Software estimation is the process of predicting the
+                effort, cost, duration and resources required for a
+                software project.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>4. What is decomposition?</strong>
+
+            <div class="answer">
+
+                Decomposition is the process of dividing a large
+                software project into smaller components for easier
+                estimation.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>5. What is LOC?</strong>
+
+            <div class="answer">
+
+                LOC stands for Lines of Code and represents the amount
+                of source code in a software system.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>6. What is KLOC?</strong>
+
+            <div class="answer">
+
+                KLOC means Thousand Lines of Code and is commonly used
+                as a software size measure.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>7. What is Function Point?</strong>
+
+            <div class="answer">
+
+                Function Point is a measure of software size based on
+                the functionality provided to users.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>8. What is an empirical estimation model?</strong>
+
+            <div class="answer">
+
+                It is an estimation model based on mathematical
+                relationships derived from observations and historical
+                project data.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>9. What is COCOMO?</strong>
+
+            <div class="answer">
+
+                COCOMO stands for Constructive Cost Model. It is an
+                empirical model used to estimate software development
+                effort and time.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>10. What is quality assurance?</strong>
+
+            <div class="answer">
+
+                Quality assurance consists of planned activities used
+                to provide confidence that software processes and
+                products will satisfy quality requirements.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 10 MARK -->
+
+    <section class="card" id="tenmark">
+
+        <h2>18. 📝 10-Mark Answer Preparation</h2>
+
+
+        <h3>Q1. Define Software Quality and explain its place in Project Management.</h3>
+
+        <div class="exam">
+
+            <strong>Write in this order:</strong>
+
+            <ol>
+
+                <li>Define software quality.</li>
+
+                <li>Explain importance of software quality.</li>
+
+                <li>Explain quality planning.</li>
+
+                <li>Explain quality assurance.</li>
+
+                <li>Explain quality control.</li>
+
+                <li>Draw the quality-management diagram.</li>
+
+                <li>Explain quality activities throughout the project.</li>
+
+                <li>Conclude with benefits of quality management.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q2. Explain Software Quality Models.</h3>
+
+        <div class="exam">
+
+            <strong>Write:</strong>
+
+            <ol>
+
+                <li>Definition of quality model.</li>
+
+                <li>Need for quality models.</li>
+
+                <li>McCall's model.</li>
+
+                <li>ISO-based quality models.</li>
+
+                <li>Important quality characteristics.</li>
+
+                <li>Comparison / applications.</li>
+
+                <li>Conclusion.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q3. Describe Decomposition Techniques.</h3>
+
+        <div class="exam">
+
+            <strong>Remember:</strong>
+
+            <br><br>
+
+            Large Project → Smaller Components → Estimate Each →
+            Combine Estimates
+
+            <br><br>
+
+            Explain:
+
+            <br>
+
+            1. Problem-based decomposition
+
+            <br>
+
+            2. Process-based decomposition
+
+            <br>
+
+            3. Advantages
+
+            <br>
+
+            4. Example
+
+        </div>
+
+
+        <h3>Q4. Explain Empirical Estimation Model.</h3>
+
+        <div class="exam">
+
+            <strong>Answer structure:</strong>
+
+            <ol>
+
+                <li>Definition.</li>
+
+                <li>Historical project data.</li>
+
+                <li>Mathematical relationship.</li>
+
+                <li>General equation.</li>
+
+                <li>COCOMO as an example.</li>
+
+                <li>Advantages.</li>
+
+                <li>Limitations.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q5. Explain COCOMO.</h3>
+
+        <div class="exam">
+
+            <strong>Remember:</strong>
+
+            <br><br>
+
+            <strong>
+            COCOMO = Constructive Cost Model
+            </strong>
+
+            <br><br>
+
+            KLOC → Effort → Development Time → Cost
+
+            <br><br>
+
+            Also remember:
+
+            <br>
+
+            Organic → Semi-detached → Embedded
+
+        </div>
+
+    </section>
+
+
+    <!-- REVISION -->
+
+    <section class="card" id="revision">
+
+        <h2>19. 🚀 Last-Minute Revision</h2>
+
+        <h3>🔥 Quality</h3>
+
+        <div class="highlight">
+
+            Quality → Requirements → Standards → Reviews →
+            Testing → Measurement → Improvement
+
+        </div>
+
+
+        <h3>🔥 Quality Management</h3>
+
+        <div class="highlight">
+
+            <strong>Planning → Assurance → Control</strong>
+
+        </div>
+
+
+        <h3>🔥 McCall's Model</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            Operation → Revision → Transition
+
+            </strong>
+
+            <br><br>
+
+            Operation:
+
+            Correctness, Reliability, Efficiency, Integrity, Usability
+
+            <br><br>
+
+            Revision:
+
+            Maintainability, Flexibility, Testability
+
+            <br><br>
+
+            Transition:
+
+            Portability, Reusability, Interoperability
+
+        </div>
+
+
+        <h3>🔥 Estimation</h3>
+
+        <div class="highlight">
+
+            Size → Effort → Time → Cost → Resources
+
+        </div>
+
+
+        <h3>🔥 Decomposition</h3>
+
+        <div class="highlight">
+
+            Large Project → Smaller Parts → Estimate →
+            Combine
+
+        </div>
+
+
+        <h3>🔥 Function Points</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            EI → EO → EQ → ILF → EIF
+
+            </strong>
+
+        </div>
+
+
+        <h3>🔥 COCOMO</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            COCOMO = Constructive Cost Model
+
+            <br><br>
+
+            Effort = a × (KLOC)<sup>b</sup>
+
+            <br><br>
+
+            Organic → Semi-detached → Embedded
+
+            </strong>
+
+        </div>
+
+
+        <h3>🔥 Must Study Before Exam</h3>
+
+        <ol>
+
+            <li>Software Quality</li>
+
+            <li>Place of Quality in Project Management</li>
+
+            <li>Software Quality Models</li>
+
+            <li>Product vs Process Quality Management</li>
+
+            <li>Decomposition Techniques</li>
+
+            <li>Empirical Estimation Model</li>
+
+            <li>LOC-Based Estimation</li>
+
+            <li>Function Point Estimation</li>
+
+            <li>COCOMO</li>
+
+            <li>Observations on Project Estimation</li>
+
+        </ol>
+
+
+        <div class="danger">
+
+            <strong>Boss Exam Tip 😎:</strong>
+
+            Module 5 has two big areas:
+
+            <br><br>
+
+            <strong>
+            QUALITY + ESTIMATION
+            </strong>
+
+            <br><br>
+
+            If a long-answer question comes from Quality,
+            start with the definition and draw the
+            Quality Management diagram.
+
+            <br><br>
+
+            If it comes from Estimation,
+            explain the technique/model and give the appropriate
+            formula or flow diagram.
+
+        </div>
+
+    </section>
+
+
+    <!-- TEXTBOOK -->
+
+    <section class="card">
+
+        <h2>📖 Textbook Study Guide</h2>
+
+        <p>
+            The prescribed BCS501 textbook should be used for deeper
+            explanations, examples and terminology.
+        </p>
+
+        <p>
+            This page is an original exam-oriented study resource.
+            It does not reproduce the copyrighted textbook.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Study Pattern:</strong>
+
+            <br><br>
+
+            Understand → Diagram → Keywords → Formula →
+            Practice VTU Question
+
+        </div>
+
+    </section>
+
+
+    <!-- OFFICIAL -->
+
+    <section class="card">
+
+        <h2>🔗 Official VTU Resources</h2>
+
+        <p>
+            <strong>VTU Model Question Papers:</strong><br>
+            https://vtu.ac.in/model-question-paper-b-e-b-tech-b-arch/
+        </p>
+
+        <p>
+            <strong>BCS501 Model Question Paper:</strong><br>
+            https://vtu.ac.in/pdf/QP/BCS501.pdf
+        </p>
+
+        <p>
+            <strong>BCS501 Model Question Paper 1:</strong><br>
+            https://vtu.ac.in/pdf/QP/BCS5011.pdf
+        </p>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        📚 BCS501 • Module 5 • Software Quality & Estimation
+    </p>
+
+    <p>
+        Made with ❤️ for learning
+    </p>
+
+</footer>
+
+
+<script>
+
+    // Discourage casual copying
+
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("dragstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("copy", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("cut", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("keydown", function(event) {
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
+```
