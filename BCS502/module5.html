@@ -1,0 +1,3496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#080808"
+>
+
+<meta
+    name="description"
+    content="BCS502 Computer Networks Module 5 - Application Layer - VTU 5th Semester Notes"
+>
+
+<title>BCS502 Module 5 | Application Layer</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #f2f2f2;
+    line-height: 1.7;
+    overflow-x: hidden;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(217, 164, 65, 0.09),
+        transparent 70%
+    );
+}
+
+.lion {
+    position: absolute;
+
+    right: -180px;
+    bottom: 12%;
+
+    font-size: 115px;
+
+    opacity: 0;
+
+    filter: grayscale(1);
+
+    animation: lionMove 24s linear infinite;
+}
+
+@keyframes lionMove {
+
+    0% {
+        right: -180px;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    10% {
+        opacity: 0.08;
+    }
+
+    35% {
+        opacity: 0.08;
+    }
+
+    50% {
+        right: 42%;
+        opacity: 0.06;
+        transform: scale(1);
+    }
+
+    75% {
+        right: 100%;
+        opacity: 0.07;
+        transform: scale(0.95);
+    }
+
+    88% {
+        opacity: 0;
+    }
+
+    100% {
+        right: 110%;
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    width: min(1050px, calc(100% - 30px));
+    margin: auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    padding: 45px 0 30px;
+}
+
+.back {
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: #999;
+
+    font-size: 13px;
+
+    margin-bottom: 28px;
+
+    transition: 0.25s ease;
+}
+
+.back:hover {
+    color: #d9a441;
+}
+
+.course-label {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border: 1px solid #333;
+
+    border-radius: 30px;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 18px;
+}
+
+header h1 {
+    font-size: clamp(35px, 6vw, 62px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+}
+
+header h1 span {
+    color: #d9a441;
+}
+
+.subtitle {
+    max-width: 760px;
+
+    margin-top: 18px;
+
+    color: #888;
+
+    font-size: 15px;
+}
+
+/* =========================================================
+   TABLE OF CONTENTS
+========================================================= */
+
+.toc {
+    margin: 25px 0 50px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 16px;
+
+    background: rgba(15, 15, 15, 0.9);
+}
+
+.toc h2 {
+    font-size: 21px;
+
+    margin-bottom: 15px;
+}
+
+.toc-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px 25px;
+}
+
+.toc-list a {
+    color: #999;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.toc-list a:hover {
+    color: #d9a441;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    margin-bottom: 55px;
+}
+
+.section-title {
+    padding-bottom: 12px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #252525;
+}
+
+.section-title h2 {
+    font-size: 30px;
+
+    line-height: 1.3;
+}
+
+.section-title p {
+    color: #777;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
+.card {
+    margin-bottom: 22px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 15px;
+
+    background: rgba(14, 14, 14, 0.92);
+}
+
+.card h3 {
+    color: #d9a441;
+
+    font-size: 21px;
+
+    margin-bottom: 13px;
+}
+
+.card h4 {
+    color: #ddd;
+
+    font-size: 17px;
+
+    margin-top: 20px;
+
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #aaa;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+.card ul,
+.card ol {
+    margin: 10px 0 15px 22px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.card li {
+    margin-bottom: 7px;
+}
+
+.card strong {
+    color: #ddd;
+}
+
+/* =========================================================
+   DEFINITION
+========================================================= */
+
+.definition {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border-left: 3px solid #d9a441;
+
+    background: #111;
+
+    border-radius: 0 10px 10px 0;
+}
+
+.definition p {
+    margin: 0;
+}
+
+/* =========================================================
+   IMPORTANT
+========================================================= */
+
+.important {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border: 1px solid #383838;
+
+    border-radius: 10px;
+
+    background: #121212;
+}
+
+.important-title {
+    color: #d9a441;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+/* =========================================================
+   EXAMPLE
+========================================================= */
+
+.example {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border: 1px solid #303030;
+
+    border-radius: 10px;
+
+    background: #0d0d0d;
+}
+
+.example-title {
+    color: #d9a441;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   DIAGRAM
+========================================================= */
+
+.diagram {
+    margin: 22px auto;
+
+    padding: 20px;
+
+    border: 1px solid #303030;
+
+    border-radius: 12px;
+
+    background: #0b0b0b;
+
+    text-align: center;
+
+    overflow-x: auto;
+}
+
+.diagram-row {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 600px;
+}
+
+.diagram-box {
+    min-width: 125px;
+
+    padding: 14px;
+
+    border: 1px solid #555;
+
+    border-radius: 9px;
+
+    color: #ddd;
+
+    font-size: 13px;
+}
+
+.arrow {
+    color: #d9a441;
+
+    font-size: 20px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap {
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+
+    font-size: 13px;
+}
+
+th,
+td {
+    border: 1px solid #303030;
+
+    padding: 11px;
+
+    text-align: left;
+
+    vertical-align: top;
+}
+
+th {
+    background: #151515;
+
+    color: #d9a441;
+}
+
+td {
+    color: #aaa;
+
+    background: #0d0d0d;
+}
+
+/* =========================================================
+   FORMULA / COMMAND
+========================================================= */
+
+.formula {
+    padding: 16px;
+
+    margin: 16px 0;
+
+    border-radius: 9px;
+
+    background: #050505;
+
+    border: 1px solid #282828;
+
+    color: #ddd;
+
+    font-family: Consolas, monospace;
+
+    overflow-x: auto;
+}
+
+/* =========================================================
+   EXAM ANSWERS
+========================================================= */
+
+.exam-answer {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    background: #101010;
+}
+
+.exam-answer h4 {
+    color: #d9a441;
+
+    margin-top: 0;
+
+    margin-bottom: 12px;
+}
+
+.marks {
+    display: inline-block;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    border: 1px solid #333;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   REVISION
+========================================================= */
+
+.revision {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 15px;
+
+    background: #101010;
+}
+
+.revision h3 {
+    color: #d9a441;
+
+    margin-bottom: 15px;
+}
+
+.revision ul {
+    margin-left: 20px;
+
+    color: #aaa;
+}
+
+/* =========================================================
+   GITHUB
+========================================================= */
+
+.github {
+    margin: 65px 0 25px;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid #252525;
+}
+
+.github h2 {
+    font-size: 26px;
+
+    margin-bottom: 8px;
+}
+
+.github p {
+    color: #777;
+
+    margin-bottom: 20px;
+}
+
+.github-btn {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #d9a441;
+
+    color: #080808;
+
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.25s ease;
+}
+
+.github-btn:hover {
+    background: #f0bd55;
+
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px 0 45px;
+
+    color: #555;
+
+    font-size: 12px;
+}
+
+footer span {
+    color: #d9a441;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: min(100% - 22px, 1050px);
+    }
+
+    header {
+        padding-top: 30px;
+    }
+
+    header h1 {
+        letter-spacing: -1px;
+    }
+
+    .toc-list {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .diagram-row {
+        justify-content: flex-start;
+    }
+
+    .lion {
+        font-size: 75px;
+    }
+}
+
+/* =========================================================
+   PRINT PROTECTION
+========================================================= */
+
+@media print {
+
+    body {
+        display: none !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="glow"></div>
+
+    <div class="lion">🦁</div>
+
+</div>
+
+
+<main class="container">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <a href="index.html" class="back">
+        ← Back to BCS502
+    </a>
+
+    <div>
+
+        <span class="course-label">
+            BCS502 • MODULE 5 • APPLICATION LAYER
+        </span>
+
+    </div>
+
+    <h1>
+
+        Application<br>
+
+        <span>Layer</span>
+
+    </h1>
+
+    <p class="subtitle">
+
+        Complete concept-wise and exam-oriented notes covering
+        client-server programming, HTTP, FTP, electronic mail,
+        DNS, TELNET and SSH.
+
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     TABLE OF CONTENTS
+===================================================== -->
+
+<section class="toc">
+
+    <h2>📚 Module 5 Contents</h2>
+
+    <div class="toc-list">
+
+        <a href="#introduction">
+            1. Introduction to Application Layer
+        </a>
+
+        <a href="#services">
+            2. Application Layer Services
+        </a>
+
+        <a href="#client-server">
+            3. Client-Server Programming
+        </a>
+
+        <a href="#http">
+            4. HTTP
+        </a>
+
+        <a href="#http-methods">
+            5. HTTP Methods and Messages
+        </a>
+
+        <a href="#ftp">
+            6. FTP
+        </a>
+
+        <a href="#email">
+            7. Electronic Mail
+        </a>
+
+        <a href="#email-protocols">
+            8. SMTP, POP3 and IMAP
+        </a>
+
+        <a href="#dns">
+            9. DNS
+        </a>
+
+        <a href="#dns-working">
+            10. DNS Working and Records
+        </a>
+
+        <a href="#telnet">
+            11. TELNET
+        </a>
+
+        <a href="#ssh">
+            12. SSH
+        </a>
+
+        <a href="#comparison">
+            13. Important Comparisons
+        </a>
+
+        <a href="#exam">
+            14. Important Exam Questions
+        </a>
+
+        <a href="#revision">
+            15. Quick Revision
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     1. INTRODUCTION
+===================================================== -->
+
+<section class="section" id="introduction">
+
+    <div class="section-title">
+
+        <h2>1. Introduction to Application Layer</h2>
+
+        <p>
+            Understanding the top layer of the TCP/IP protocol suite.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is the Application Layer?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                The <strong>Application Layer</strong> is the
+                highest layer in the TCP/IP protocol suite. It
+                provides network services directly to user
+                applications.
+
+            </p>
+
+        </div>
+
+        <p>
+
+            Users interact with applications such as web browsers,
+            email clients, file-transfer programs and remote-login
+            applications.
+
+        </p>
+
+        <p>
+
+            The application layer defines protocols that allow
+            these applications to communicate over a network.
+
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Application Layer in the TCP/IP Model</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Application Layer
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Transport Layer
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Internet Layer
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Network Access
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Examples of Application Layer Protocols</h3>
+
+        <ul>
+
+            <li>
+                <strong>HTTP</strong> – web communication
+            </li>
+
+            <li>
+                <strong>FTP</strong> – file transfer
+            </li>
+
+            <li>
+                <strong>SMTP</strong> – sending email
+            </li>
+
+            <li>
+                <strong>POP3</strong> – retrieving email
+            </li>
+
+            <li>
+                <strong>IMAP</strong> – accessing email
+            </li>
+
+            <li>
+                <strong>DNS</strong> – domain-name resolution
+            </li>
+
+            <li>
+                <strong>TELNET</strong> – remote terminal access
+            </li>
+
+            <li>
+                <strong>SSH</strong> – secure remote access
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     2. SERVICES
+===================================================== -->
+
+<section class="section" id="services">
+
+    <div class="section-title">
+
+        <h2>2. Application Layer Services</h2>
+
+        <p>
+            Major services provided to network applications.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Main Services</h3>
+
+        <ol>
+
+            <li>
+                <strong>Web access</strong>
+                – communication between browsers and web servers.
+            </li>
+
+            <li>
+                <strong>File transfer</strong>
+                – transferring files between hosts.
+            </li>
+
+            <li>
+                <strong>Email communication</strong>
+                – sending and receiving electronic mail.
+            </li>
+
+            <li>
+                <strong>Name resolution</strong>
+                – converting domain names into IP addresses.
+            </li>
+
+            <li>
+                <strong>Remote access</strong>
+                – accessing a remote computer over a network.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Application Protocol and Application</h3>
+
+        <p>
+
+            An application is a software program used by a user.
+            An application-layer protocol defines the rules used
+            by applications to exchange information.
+
+        </p>
+
+        <div class="example">
+
+            <div class="example-title">
+                Example
+            </div>
+
+            <p>
+
+                A web browser is an application. It uses HTTP or
+                HTTPS to communicate with a web server.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     3. CLIENT SERVER
+===================================================== -->
+
+<section class="section" id="client-server">
+
+    <div class="section-title">
+
+        <h2>3. Client-Server Programming</h2>
+
+        <p>
+            Basic architecture used by many network applications.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Client-Server Model</h3>
+
+        <div class="definition">
+
+            <p>
+
+                The <strong>client-server model</strong> is a
+                communication model in which a client requests
+                a service and a server provides that service.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Client</h3>
+
+        <p>
+
+            A client is a program that initiates communication
+            by sending a request to a server.
+
+        </p>
+
+        <p>
+            Examples include:
+        </p>
+
+        <ul>
+
+            <li>Web browser</li>
+
+            <li>Email client</li>
+
+            <li>FTP client</li>
+
+            <li>SSH client</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Server</h3>
+
+        <p>
+
+            A server is a program that listens for requests and
+            provides the requested service.
+
+        </p>
+
+        <p>
+            Examples include:
+        </p>
+
+        <ul>
+
+            <li>Web server</li>
+
+            <li>Mail server</li>
+
+            <li>DNS server</li>
+
+            <li>FTP server</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Client-Server Communication</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Client
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Request
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Server
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Client
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    Response
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    Server
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Basic Steps</h3>
+
+        <ol>
+
+            <li>
+                Client starts and contacts the server.
+            </li>
+
+            <li>
+                Client sends a request.
+            </li>
+
+            <li>
+                Server receives the request.
+            </li>
+
+            <li>
+                Server processes the request.
+            </li>
+
+            <li>
+                Server sends a response.
+            </li>
+
+            <li>
+                Client receives and processes the response.
+            </li>
+
+        </ol>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     4. HTTP
+===================================================== -->
+
+<section class="section" id="http">
+
+    <div class="section-title">
+
+        <h2>4. HTTP — Hypertext Transfer Protocol</h2>
+
+        <p>
+            Protocol used for communication on the World Wide Web.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is HTTP?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>HTTP</strong> stands for
+                <strong>Hypertext Transfer Protocol</strong>.
+                It is an application-layer protocol used for
+                transferring web resources between clients and servers.
+
+            </p>
+
+        </div>
+
+        <p>
+
+            A web browser acts as an HTTP client and a web server
+            responds to HTTP requests.
+
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>HTTP Communication</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Browser
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    HTTP Request
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Web Server
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Browser
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    HTTP Response
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    Web Server
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Characteristics of HTTP</h3>
+
+        <ul>
+
+            <li>Application-layer protocol</li>
+
+            <li>Request-response communication</li>
+
+            <li>Client-server based</li>
+
+            <li>Stateless protocol</li>
+
+            <li>Can transfer different types of resources</li>
+
+            <li>Commonly used with TCP in traditional HTTP deployments</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>HTTP Request</h3>
+
+        <p>
+
+            An HTTP request is sent by the client to ask the
+            server for a resource or to perform an operation.
+
+        </p>
+
+        <div class="formula">
+
+            Request Line + Headers + Optional Message Body
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>HTTP Response</h3>
+
+        <p>
+
+            An HTTP response is sent by the server after processing
+            the client request.
+
+        </p>
+
+        <div class="formula">
+
+            Status Line + Headers + Optional Message Body
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     5. HTTP METHODS
+===================================================== -->
+
+<section class="section" id="http-methods">
+
+    <div class="section-title">
+
+        <h2>5. HTTP Methods and Messages</h2>
+
+        <p>
+            Important HTTP methods and status codes.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Important HTTP Methods</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Method</th>
+
+                    <th>Purpose</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>GET</td>
+
+                    <td>
+                        Requests a representation of a resource.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>POST</td>
+
+                    <td>
+                        Submits data to the server for processing.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>PUT</td>
+
+                    <td>
+                        Creates or replaces a resource representation
+                        at a specified target.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>DELETE</td>
+
+                    <td>
+                        Requests deletion of a specified resource.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>HEAD</td>
+
+                    <td>
+                        Requests response headers without the response body.
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>HTTP Status Codes</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Code</th>
+
+                    <th>Meaning</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>200</td>
+
+                    <td>OK</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>201</td>
+
+                    <td>Created</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>301</td>
+
+                    <td>Moved Permanently</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>400</td>
+
+                    <td>Bad Request</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>401</td>
+
+                    <td>Unauthorized</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>403</td>
+
+                    <td>Forbidden</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>404</td>
+
+                    <td>Not Found</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>500</td>
+
+                    <td>Internal Server Error</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Stateless Nature of HTTP</h3>
+
+        <p>
+
+            HTTP is described as stateless because each request
+            can be treated independently and the protocol itself
+            does not require the server to retain application state
+            from previous requests.
+
+        </p>
+
+        <div class="important">
+
+            <div class="important-title">
+                Example
+            </div>
+
+            <p>
+
+                Login sessions and shopping carts can maintain
+                application state using mechanisms such as cookies,
+                session identifiers or server-side storage.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     6. FTP
+===================================================== -->
+
+<section class="section" id="ftp">
+
+    <div class="section-title">
+
+        <h2>6. FTP — File Transfer Protocol</h2>
+
+        <p>
+            Application-layer protocol for file transfer.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is FTP?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>FTP</strong> stands for
+                <strong>File Transfer Protocol</strong>.
+                It is an application-layer protocol designed
+                for transferring files between a client and server.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>FTP Client-Server Model</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    FTP Client
+                </div>
+
+                <div class="arrow">
+                    ↔
+                </div>
+
+                <div class="diagram-box">
+                    FTP Server
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>FTP Connections</h3>
+
+        <p>
+
+            Traditional FTP uses separate connections for
+            control information and file/data transfer.
+
+        </p>
+
+        <ul>
+
+            <li>
+                <strong>Control connection</strong>
+                – used for commands and responses.
+            </li>
+
+            <li>
+                <strong>Data connection</strong>
+                – used for transferring files and directory data.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>FTP Operations</h3>
+
+        <ul>
+
+            <li>Uploading files</li>
+
+            <li>Downloading files</li>
+
+            <li>Listing directories</li>
+
+            <li>Creating directories</li>
+
+            <li>Deleting files</li>
+
+            <li>Renaming files</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     7. EMAIL
+===================================================== -->
+
+<section class="section" id="email">
+
+    <div class="section-title">
+
+        <h2>7. Electronic Mail</h2>
+
+        <p>
+            Architecture and components of email communication.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is Electronic Mail?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                Electronic mail, or <strong>email</strong>, is an
+                application-layer service used to send and receive
+                electronic messages over computer networks.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Email Components</h3>
+
+        <ul>
+
+            <li>
+                <strong>User Agent</strong>
+                – application used by a user to compose and read email.
+            </li>
+
+            <li>
+                <strong>Mail Server</strong>
+                – stores and processes email messages.
+            </li>
+
+            <li>
+                <strong>SMTP</strong>
+                – used for sending and transferring email.
+            </li>
+
+            <li>
+                <strong>POP3 / IMAP</strong>
+                – used for retrieving or accessing email.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Email Architecture</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Sender
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Sender Mail Server
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Receiver Mail Server
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Receiver
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     8. EMAIL PROTOCOLS
+===================================================== -->
+
+<section class="section" id="email-protocols">
+
+    <div class="section-title">
+
+        <h2>8. SMTP, POP3 and IMAP</h2>
+
+        <p>
+            Important protocols used in email systems.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>SMTP</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>SMTP</strong> stands for
+                <strong>Simple Mail Transfer Protocol</strong>.
+                It is primarily used for sending and relaying
+                email messages.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>POP3</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>POP3</strong> stands for
+                <strong>Post Office Protocol version 3</strong>.
+                It is used by a mail client to retrieve messages
+                from a mail server.
+
+            </p>
+
+        </div>
+
+        <p>
+
+            POP3 is traditionally associated with downloading
+            messages from the server to a client.
+
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>IMAP</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>IMAP</strong> stands for
+                <strong>Internet Message Access Protocol</strong>.
+                It allows a client to access and manage messages
+                stored on a mail server.
+
+            </p>
+
+        </div>
+
+        <p>
+
+            IMAP is useful when the same mailbox needs to be
+            accessed from multiple devices while keeping messages
+            managed on the server.
+
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>SMTP vs POP3 vs IMAP</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Protocol</th>
+
+                    <th>Main Purpose</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>SMTP</td>
+
+                    <td>
+                        Sending and relaying email
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>POP3</td>
+
+                    <td>
+                        Retrieving email messages
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>IMAP</td>
+
+                    <td>
+                        Accessing and managing messages on a mail server
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     9. DNS
+========================================================= -->
+
+<section class="section" id="dns">
+
+    <div class="section-title">
+
+        <h2>9. DNS — Domain Name System</h2>
+
+        <p>
+            Translating domain names into IP addresses.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is DNS?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>DNS</strong> stands for
+                <strong>Domain Name System</strong>.
+                It is a distributed naming system used to map
+                human-readable domain names to IP addresses and
+                provide other information about domain names.
+
+            </p>
+
+        </div>
+
+        <p>
+
+            Humans prefer names such as:
+
+        </p>
+
+        <div class="formula">
+            www.example.com
+        </div>
+
+        <p>
+
+            Computers use IP addresses for network communication.
+            DNS helps applications obtain the required IP address.
+
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Why DNS is Required</h3>
+
+        <ul>
+
+            <li>
+                Domain names are easier for humans to remember.
+            </li>
+
+            <li>
+                IP addresses can change while domain names remain
+                stable.
+            </li>
+
+            <li>
+                DNS provides a scalable distributed naming system.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     10. DNS WORKING
+===================================================== -->
+
+<section class="section" id="dns-working">
+
+    <div class="section-title">
+
+        <h2>10. DNS Working and Records</h2>
+
+        <p>
+            Basic DNS resolution process and important record types.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>DNS Name Resolution</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    User
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    DNS Resolver
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    DNS Servers
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    IP Address
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Basic DNS Resolution Steps</h3>
+
+        <ol>
+
+            <li>
+                User enters a domain name.
+            </li>
+
+            <li>
+                The application asks the configured DNS resolver.
+            </li>
+
+            <li>
+                The resolver finds the required DNS information.
+            </li>
+
+            <li>
+                The corresponding IP address is returned.
+            </li>
+
+            <li>
+                The application can then communicate with the destination.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>DNS Hierarchy</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Root
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    TLD
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Authoritative
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Domain
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Important DNS Record Types</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Record</th>
+
+                    <th>Purpose</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>A</td>
+
+                    <td>
+                        Maps a hostname to an IPv4 address.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>AAAA</td>
+
+                    <td>
+                        Maps a hostname to an IPv6 address.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>MX</td>
+
+                    <td>
+                        Identifies mail servers for a domain.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>NS</td>
+
+                    <td>
+                        Identifies authoritative name servers.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>CNAME</td>
+
+                    <td>
+                        Provides an alias for another hostname.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>TXT</td>
+
+                    <td>
+                        Stores text information associated with a domain.
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     11. TELNET
+========================================================= -->
+
+<section class="section" id="telnet">
+
+    <div class="section-title">
+
+        <h2>11. TELNET</h2>
+
+        <p>
+            Remote terminal access protocol.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is TELNET?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>TELNET</strong> is an application-layer
+                protocol that provides interactive remote terminal
+                access to another computer over a network.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Working of TELNET</h3>
+
+        <ol>
+
+            <li>
+                Client establishes a connection with the remote host.
+            </li>
+
+            <li>
+                User enters commands.
+            </li>
+
+            <li>
+                Commands are transmitted to the remote system.
+            </li>
+
+            <li>
+                Remote system processes the commands.
+            </li>
+
+            <li>
+                Output is returned to the client.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Limitation of TELNET</h3>
+
+        <p>
+
+            Traditional TELNET does not provide the strong
+            confidentiality expected from modern secure remote-access
+            systems. Data, including credentials in typical TELNET
+            use, can be exposed to network interception.
+
+        </p>
+
+        <div class="important">
+
+            <div class="important-title">
+                Exam Point
+            </div>
+
+            <p>
+
+                TELNET is generally considered insecure for
+                sensitive remote administration because it does
+                not provide encrypted communication like SSH.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     12. SSH
+========================================================= -->
+
+<section class="section" id="ssh">
+
+    <div class="section-title">
+
+        <h2>12. SSH — Secure Shell</h2>
+
+        <p>
+            Secure remote login and command execution.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is SSH?</h3>
+
+        <div class="definition">
+
+            <p>
+
+                <strong>SSH</strong> stands for
+                <strong>Secure Shell</strong>.
+                It is a protocol used for secure remote login,
+                command execution and related secure network services.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Features of SSH</h3>
+
+        <ul>
+
+            <li>Encrypted communication</li>
+
+            <li>Secure remote login</li>
+
+            <li>Authentication</li>
+
+            <li>Integrity protection</li>
+
+            <li>Secure command execution</li>
+
+            <li>Secure file-transfer mechanisms can be built around SSH</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TELNET vs SSH</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Feature</th>
+
+                    <th>TELNET</th>
+
+                    <th>SSH</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Security</td>
+
+                    <td>Not designed for encrypted secure administration</td>
+
+                    <td>Provides secure encrypted communication</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Remote Login</td>
+
+                    <td>Yes</td>
+
+                    <td>Yes</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Authentication</td>
+
+                    <td>Basic mechanisms</td>
+
+                    <td>Strong authentication mechanisms</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Typical Use</td>
+
+                    <td>Legacy/testing environments</td>
+
+                    <td>Secure remote administration</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     13. COMPARISONS
+========================================================= -->
+
+<section class="section" id="comparison">
+
+    <div class="section-title">
+
+        <h2>13. Important Comparisons</h2>
+
+        <p>
+            High-value comparison questions for examination.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>HTTP vs FTP</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Feature</th>
+
+                    <th>HTTP</th>
+
+                    <th>FTP</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Main Purpose</td>
+
+                    <td>Web resource transfer</td>
+
+                    <td>File transfer</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Architecture</td>
+
+                    <td>Client-server</td>
+
+                    <td>Client-server</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Communication</td>
+
+                    <td>Request-response</td>
+
+                    <td>Control and data transfer</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Typical Use</td>
+
+                    <td>Web browsing and web APIs</td>
+
+                    <td>File upload/download</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TELNET vs SSH</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Feature</th>
+
+                    <th>TELNET</th>
+
+                    <th>SSH</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Purpose</td>
+
+                    <td>Remote terminal access</td>
+
+                    <td>Secure remote access</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Encryption</td>
+
+                    <td>No secure encryption by design</td>
+
+                    <td>Encrypted communication</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Security</td>
+
+                    <td>Weak for modern sensitive use</td>
+
+                    <td>Designed for secure use</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>SMTP vs POP3 vs IMAP</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Protocol</th>
+
+                    <th>Function</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>SMTP</td>
+
+                    <td>Send and relay email</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>POP3</td>
+
+                    <td>Retrieve email</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>IMAP</td>
+
+                    <td>Access and manage email on server</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     14. EXAM QUESTIONS
+========================================================= -->
+
+<section class="section" id="exam">
+
+    <div class="section-title">
+
+        <h2>14. Important Exam Questions & Answers</h2>
+
+        <p>
+            2-mark, 5-mark and 10-mark preparation.
+        </p>
+
+    </div>
+
+
+    <!-- 2 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 2-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                1. What is the application layer?
+            </h4>
+
+            <p>
+
+                The application layer is the highest layer of
+                the TCP/IP protocol suite. It provides network
+                services directly to user applications.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                2. What is HTTP?
+            </h4>
+
+            <p>
+
+                HTTP stands for Hypertext Transfer Protocol.
+                It is an application-layer protocol used for
+                communication between web clients and servers.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                3. What is FTP?
+            </h4>
+
+            <p>
+
+                FTP stands for File Transfer Protocol.
+                It is used for transferring files between
+                a client and a server.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                4. What is DNS?
+            </h4>
+
+            <p>
+
+                DNS stands for Domain Name System. It is a
+                distributed naming system that provides mappings
+                such as domain names to IP addresses.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                5. What is SMTP?
+            </h4>
+
+            <p>
+
+                SMTP stands for Simple Mail Transfer Protocol.
+                It is primarily used for sending and relaying
+                electronic mail.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>
+                6. What is SSH?
+            </h4>
+
+            <p>
+
+                SSH stands for Secure Shell. It provides secure
+                remote login and command execution over a network.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- 5 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 5-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                1. Explain the client-server model.
+            </h4>
+
+            <p>
+
+                The client-server model consists of a client and
+                a server. The client sends a request for a service,
+                while the server processes the request and returns
+                a response.
+
+            </p>
+
+            <ol>
+
+                <li>Client initiates communication.</li>
+
+                <li>Client sends request.</li>
+
+                <li>Server receives request.</li>
+
+                <li>Server processes request.</li>
+
+                <li>Server sends response.</li>
+
+                <li>Client processes response.</li>
+
+            </ol>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                2. Explain HTTP request and response.
+            </h4>
+
+            <p>
+
+                An HTTP client sends a request containing a request
+                method, target and headers, with an optional body.
+                The server processes the request and returns a
+                response containing a status code, headers and,
+                when applicable, a response body.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                3. Explain FTP.
+            </h4>
+
+            <p>
+
+                FTP is an application-layer protocol designed for
+                file transfer. Traditional FTP separates the
+                control connection used for commands from the
+                data connection used for file and directory transfer.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                4. Explain DNS and its purpose.
+            </h4>
+
+            <p>
+
+                DNS is a distributed naming system. It allows
+                applications to obtain information associated with
+                domain names, commonly including the IP address
+                needed to contact a destination.
+
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                5. Differentiate TELNET and SSH.
+            </h4>
+
+            <p>
+
+                TELNET provides remote terminal access but does not
+                provide the secure encrypted communication expected
+                for modern remote administration. SSH provides
+                encrypted communication and secure authentication,
+                making it suitable for secure remote access.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- 10 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 10-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                1. Explain HTTP in detail.
+            </h4>
+
+            <p>
+
+                HTTP is an application-layer protocol used for
+                transferring web resources between clients and
+                servers.
+
+            </p>
+
+            <h4>Client-Server Communication</h4>
+
+            <ol>
+
+                <li>
+                    Browser acts as HTTP client.
+                </li>
+
+                <li>
+                    Client sends HTTP request.
+                </li>
+
+                <li>
+                    Web server receives the request.
+                </li>
+
+                <li>
+                    Server processes the request.
+                </li>
+
+                <li>
+                    Server returns HTTP response.
+                </li>
+
+                <li>
+                    Browser processes and displays the resource.
+                </li>
+
+            </ol>
+
+            <h4>Important Methods</h4>
+
+            <ul>
+
+                <li>GET</li>
+
+                <li>POST</li>
+
+                <li>PUT</li>
+
+                <li>DELETE</li>
+
+                <li>HEAD</li>
+
+            </ul>
+
+            <h4>Important Status Codes</h4>
+
+            <ul>
+
+                <li>200 – OK</li>
+
+                <li>201 – Created</li>
+
+                <li>301 – Moved Permanently</li>
+
+                <li>400 – Bad Request</li>
+
+                <li>404 – Not Found</li>
+
+                <li>500 – Internal Server Error</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                2. Explain electronic mail architecture and protocols.
+            </h4>
+
+            <p>
+
+                Email systems contain user agents, mail servers and
+                protocols for sending and retrieving messages.
+
+            </p>
+
+            <h4>Components</h4>
+
+            <ul>
+
+                <li>User Agent</li>
+
+                <li>Mail Server</li>
+
+                <li>SMTP</li>
+
+                <li>POP3</li>
+
+                <li>IMAP</li>
+
+            </ul>
+
+            <h4>Protocol Roles</h4>
+
+            <ul>
+
+                <li>
+                    SMTP – sending and relaying email
+                </li>
+
+                <li>
+                    POP3 – retrieving email
+                </li>
+
+                <li>
+                    IMAP – accessing and managing email on the server
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                3. Explain DNS architecture and working.
+            </h4>
+
+            <p>
+
+                DNS is a distributed hierarchical naming system.
+                It allows clients to obtain information associated
+                with domain names.
+
+            </p>
+
+            <h4>Working</h4>
+
+            <ol>
+
+                <li>
+                    User enters a domain name.
+                </li>
+
+                <li>
+                    Application asks the configured resolver.
+                </li>
+
+                <li>
+                    Resolver obtains the required DNS information.
+                </li>
+
+                <li>
+                    IP address or other DNS information is returned.
+                </li>
+
+                <li>
+                    Application uses the result for communication.
+                </li>
+
+            </ol>
+
+            <h4>Important Records</h4>
+
+            <ul>
+
+                <li>A</li>
+
+                <li>AAAA</li>
+
+                <li>MX</li>
+
+                <li>NS</li>
+
+                <li>CNAME</li>
+
+                <li>TXT</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                4. Explain FTP and its connections.
+            </h4>
+
+            <p>
+
+                FTP is an application-layer protocol used for file
+                transfer between a client and server.
+
+            </p>
+
+            <h4>Connections</h4>
+
+            <ol>
+
+                <li>
+                    Control connection carries commands and responses.
+                </li>
+
+                <li>
+                    Data connection carries files and directory data.
+                </li>
+
+            </ol>
+
+            <h4>Operations</h4>
+
+            <ul>
+
+                <li>Upload</li>
+
+                <li>Download</li>
+
+                <li>Directory listing</li>
+
+                <li>File management</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     15. QUICK REVISION
+===================================================== -->
+
+<section class="section" id="revision">
+
+    <div class="section-title">
+
+        <h2>15. Quick Revision</h2>
+
+        <p>
+            Last-minute revision points for Module 5.
+        </p>
+
+    </div>
+
+
+    <div class="revision">
+
+        <h3>🔥 Remember These Points</h3>
+
+        <ul>
+
+            <li>
+                Application layer = highest layer of the TCP/IP model.
+            </li>
+
+            <li>
+                Client requests a service; server provides the service.
+            </li>
+
+            <li>
+                HTTP = web communication.
+            </li>
+
+            <li>
+                HTTP uses request-response communication.
+            </li>
+
+            <li>
+                GET retrieves a representation of a resource.
+            </li>
+
+            <li>
+                POST submits data for processing.
+            </li>
+
+            <li>
+                FTP = file transfer.
+            </li>
+
+            <li>
+                Traditional FTP separates control and data connections.
+            </li>
+
+            <li>
+                SMTP = sending and relaying email.
+            </li>
+
+            <li>
+                POP3 = retrieving email.
+            </li>
+
+            <li>
+                IMAP = accessing and managing email on the server.
+            </li>
+
+            <li>
+                DNS = distributed domain-name system.
+            </li>
+
+            <li>
+                A record = IPv4 address.
+            </li>
+
+            <li>
+                AAAA record = IPv6 address.
+            </li>
+
+            <li>
+                MX record = mail server information.
+            </li>
+
+            <li>
+                TELNET = remote terminal access.
+            </li>
+
+            <li>
+                SSH = secure remote access.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="revision">
+
+        <h3>🧠 One-Line Memory Trick</h3>
+
+        <div class="formula">
+
+            HTTP → Web
+
+            <br><br>
+
+            FTP → Files
+
+            <br><br>
+
+            SMTP → Send Mail
+
+            <br><br>
+
+            POP3 / IMAP → Receive / Access Mail
+
+            <br><br>
+
+            DNS → Name → Network Information
+
+            <br><br>
+
+            TELNET → Remote Terminal
+
+            <br><br>
+
+            SSH → Secure Remote Terminal
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GITHUB
+===================================================== -->
+
+<section class="github">
+
+    <h2>🐙 MAHALAKSHMI'S GITHUB</h2>
+
+    <p>
+        Explore my projects, source code and development work.
+    </p>
+
+    <a
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-btn"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        BCS502 • Computer Networks • Module 5
+    </p>
+
+    <p>
+        Made with ❤️ by <span>Mahalakshmi</span>
+    </p>
+
+</footer>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   BASIC COPY / SELECTION PROTECTION
+========================================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "selectstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "dragstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "copy",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "cut",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key = event.key.toLowerCase();
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(key)
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

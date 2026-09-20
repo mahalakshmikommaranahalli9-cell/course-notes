@@ -1,0 +1,3043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="theme-color"
+    content="#080808"
+>
+
+<meta
+    name="description"
+    content="BCS502 Computer Networks Module 4 - Transport Layer - VTU 5th Semester Notes"
+>
+
+<title>BCS502 Module 4 | Transport Layer</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #f2f2f2;
+    line-height: 1.7;
+    overflow-x: hidden;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(217, 164, 65, 0.09),
+        transparent 70%
+    );
+}
+
+.lion {
+    position: absolute;
+
+    right: -180px;
+    bottom: 12%;
+
+    font-size: 115px;
+
+    opacity: 0;
+
+    filter: grayscale(1);
+
+    animation: lionMove 24s linear infinite;
+}
+
+@keyframes lionMove {
+
+    0% {
+        right: -180px;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    10% {
+        opacity: 0.08;
+    }
+
+    35% {
+        opacity: 0.08;
+    }
+
+    50% {
+        right: 42%;
+        opacity: 0.06;
+        transform: scale(1);
+    }
+
+    75% {
+        right: 100%;
+        opacity: 0.07;
+        transform: scale(0.95);
+    }
+
+    88% {
+        opacity: 0;
+    }
+
+    100% {
+        right: 110%;
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+    width: min(1050px, calc(100% - 30px));
+    margin: auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    padding: 45px 0 30px;
+}
+
+.back {
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: #999;
+
+    font-size: 13px;
+
+    margin-bottom: 28px;
+
+    transition: 0.25s ease;
+}
+
+.back:hover {
+    color: #d9a441;
+}
+
+.course-label {
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    border: 1px solid #333;
+
+    border-radius: 30px;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 18px;
+}
+
+header h1 {
+    font-size: clamp(35px, 6vw, 62px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+}
+
+header h1 span {
+    color: #d9a441;
+}
+
+.subtitle {
+    max-width: 760px;
+
+    margin-top: 18px;
+
+    color: #888;
+
+    font-size: 15px;
+}
+
+/* =========================================================
+   TABLE OF CONTENTS
+========================================================= */
+
+.toc {
+    margin: 25px 0 50px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 16px;
+
+    background: rgba(15, 15, 15, 0.9);
+}
+
+.toc h2 {
+    font-size: 21px;
+
+    margin-bottom: 15px;
+}
+
+.toc-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 8px 25px;
+}
+
+.toc-list a {
+    color: #999;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.toc-list a:hover {
+    color: #d9a441;
+}
+
+/* =========================================================
+   CONTENT SECTION
+========================================================= */
+
+.section {
+    margin-bottom: 55px;
+}
+
+.section-title {
+    padding-bottom: 12px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #252525;
+}
+
+.section-title h2 {
+    font-size: 30px;
+
+    line-height: 1.3;
+}
+
+.section-title p {
+    color: #777;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
+.card {
+    margin-bottom: 22px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 15px;
+
+    background: rgba(14, 14, 14, 0.92);
+}
+
+.card h3 {
+    color: #d9a441;
+
+    font-size: 21px;
+
+    margin-bottom: 13px;
+}
+
+.card h4 {
+    color: #ddd;
+
+    font-size: 17px;
+
+    margin-top: 20px;
+
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #aaa;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+.card ul,
+.card ol {
+    margin: 10px 0 15px 22px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.card li {
+    margin-bottom: 7px;
+}
+
+.card strong {
+    color: #ddd;
+}
+
+/* =========================================================
+   DEFINITION
+========================================================= */
+
+.definition {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border-left: 3px solid #d9a441;
+
+    background: #111;
+
+    border-radius: 0 10px 10px 0;
+}
+
+.definition p {
+    margin: 0;
+}
+
+/* =========================================================
+   IMPORTANT BOX
+========================================================= */
+
+.important {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border: 1px solid #383838;
+
+    border-radius: 10px;
+
+    background: #121212;
+}
+
+.important-title {
+    color: #d9a441;
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+}
+
+/* =========================================================
+   EXAMPLE
+========================================================= */
+
+.example {
+    margin: 18px 0;
+
+    padding: 18px;
+
+    border: 1px solid #303030;
+
+    border-radius: 10px;
+
+    background: #0d0d0d;
+}
+
+.example-title {
+    color: #d9a441;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   DIAGRAM
+========================================================= */
+
+.diagram {
+    margin: 22px auto;
+
+    padding: 20px;
+
+    border: 1px solid #303030;
+
+    border-radius: 12px;
+
+    background: #0b0b0b;
+
+    text-align: center;
+
+    overflow-x: auto;
+}
+
+.diagram-row {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 600px;
+}
+
+.diagram-box {
+    min-width: 125px;
+
+    padding: 14px;
+
+    border: 1px solid #555;
+
+    border-radius: 9px;
+
+    color: #ddd;
+
+    font-size: 13px;
+}
+
+.arrow {
+    color: #d9a441;
+
+    font-size: 20px;
+}
+
+/* =========================================================
+   COMPARISON TABLE
+========================================================= */
+
+.table-wrap {
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+
+    font-size: 13px;
+}
+
+th,
+td {
+    border: 1px solid #303030;
+
+    padding: 11px;
+
+    text-align: left;
+
+    vertical-align: top;
+}
+
+th {
+    background: #151515;
+
+    color: #d9a441;
+}
+
+td {
+    color: #aaa;
+
+    background: #0d0d0d;
+}
+
+/* =========================================================
+   FORMULA / CODE STYLE
+========================================================= */
+
+.formula {
+    padding: 16px;
+
+    margin: 16px 0;
+
+    border-radius: 9px;
+
+    background: #050505;
+
+    border: 1px solid #282828;
+
+    color: #ddd;
+
+    font-family: Consolas, monospace;
+
+    overflow-x: auto;
+}
+
+/* =========================================================
+   EXAM ANSWER
+========================================================= */
+
+.exam-answer {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    background: #101010;
+}
+
+.exam-answer h4 {
+    color: #d9a441;
+
+    margin-top: 0;
+
+    margin-bottom: 12px;
+}
+
+.marks {
+    display: inline-block;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    border: 1px solid #333;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   QUICK REVISION
+========================================================= */
+
+.revision {
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border: 1px solid #292929;
+
+    border-radius: 15px;
+
+    background: #101010;
+}
+
+.revision h3 {
+    color: #d9a441;
+
+    margin-bottom: 15px;
+}
+
+.revision ul {
+    margin-left: 20px;
+
+    color: #aaa;
+}
+
+/* =========================================================
+   GITHUB
+========================================================= */
+
+.github {
+    margin: 65px 0 25px;
+
+    padding: 38px 20px;
+
+    text-align: center;
+
+    border-top: 1px solid #252525;
+}
+
+.github h2 {
+    font-size: 26px;
+
+    margin-bottom: 8px;
+}
+
+.github p {
+    color: #777;
+
+    margin-bottom: 20px;
+}
+
+.github-btn {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #d9a441;
+
+    color: #080808;
+
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.25s ease;
+}
+
+.github-btn:hover {
+    background: #f0bd55;
+
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px 0 45px;
+
+    color: #555;
+
+    font-size: 12px;
+}
+
+footer span {
+    color: #d9a441;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: min(100% - 22px, 1050px);
+    }
+
+    header {
+        padding-top: 30px;
+    }
+
+    header h1 {
+        letter-spacing: -1px;
+    }
+
+    .toc-list {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .diagram-row {
+        justify-content: flex-start;
+    }
+
+    .lion {
+        font-size: 75px;
+    }
+}
+
+/* =========================================================
+   PRINT / COPY PROTECTION
+========================================================= */
+
+@media print {
+    body {
+        display: none !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="glow"></div>
+    <div class="lion">🦁</div>
+</div>
+
+<main class="container">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <a href="index.html" class="back">
+        ← Back to BCS502
+    </a>
+
+    <div>
+        <span class="course-label">
+            BCS502 • MODULE 4 • TRANSPORT LAYER
+        </span>
+    </div>
+
+    <h1>
+        Transport<br>
+        <span>Layer</span>
+    </h1>
+
+    <p class="subtitle">
+        Complete concept-wise and exam-oriented notes covering
+        Transport Layer services, UDP, TCP, flow control,
+        error control and congestion control.
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     TABLE OF CONTENTS
+===================================================== -->
+
+<section class="toc">
+
+    <h2>📚 Module 4 Contents</h2>
+
+    <div class="toc-list">
+
+        <a href="#introduction">
+            1. Introduction to Transport Layer
+        </a>
+
+        <a href="#services">
+            2. Transport Layer Services
+        </a>
+
+        <a href="#process">
+            3. Process-to-Process Delivery
+        </a>
+
+        <a href="#udp">
+            4. User Datagram Protocol (UDP)
+        </a>
+
+        <a href="#tcp">
+            5. Transmission Control Protocol (TCP)
+        </a>
+
+        <a href="#tcp-services">
+            6. TCP Services and Features
+        </a>
+
+        <a href="#segment">
+            7. TCP Segment
+        </a>
+
+        <a href="#connection">
+            8. TCP Connection
+        </a>
+
+        <a href="#flow">
+            9. TCP Flow Control
+        </a>
+
+        <a href="#error">
+            10. TCP Error Control
+        </a>
+
+        <a href="#congestion">
+            11. TCP Congestion Control
+        </a>
+
+        <a href="#comparison">
+            12. TCP vs UDP
+        </a>
+
+        <a href="#exam">
+            13. Important Exam Questions
+        </a>
+
+        <a href="#revision">
+            14. Quick Revision
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     1. INTRODUCTION
+===================================================== -->
+
+<section class="section" id="introduction">
+
+    <div class="section-title">
+
+        <h2>1. Introduction to Transport Layer</h2>
+
+        <p>
+            Understanding the role of the transport layer in
+            process-to-process communication.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is the Transport Layer?</h3>
+
+        <div class="definition">
+
+            <p>
+                The <strong>Transport Layer</strong> is the fourth
+                layer of the OSI model. It provides
+                <strong>end-to-end, process-to-process communication</strong>
+                between applications running on different hosts.
+            </p>
+
+        </div>
+
+        <p>
+            The network layer is responsible for delivering packets
+            from one host to another. However, a computer may run
+            many applications simultaneously.
+        </p>
+
+        <p>
+            Therefore, the transport layer identifies the correct
+            application or process using <strong>port numbers</strong>.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Position of Transport Layer</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Application
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Transport
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Network
+                </div>
+
+                <div class="arrow">
+                    ↓
+                </div>
+
+                <div class="diagram-box">
+                    Data Link
+                </div>
+
+            </div>
+
+        </div>
+
+        <p>
+            The transport layer receives data from the application
+            layer and passes it to the network layer after performing
+            transport-level operations.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Main Responsibilities</h3>
+
+        <ul>
+
+            <li>
+                Process-to-process delivery
+            </li>
+
+            <li>
+                Service-point addressing using port numbers
+            </li>
+
+            <li>
+                Segmentation and reassembly
+            </li>
+
+            <li>
+                Flow control
+            </li>
+
+            <li>
+                Error control
+            </li>
+
+            <li>
+                Congestion control
+            </li>
+
+            <li>
+                Connection management
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     2. TRANSPORT SERVICES
+===================================================== -->
+
+<section class="section" id="services">
+
+    <div class="section-title">
+
+        <h2>2. Transport Layer Services</h2>
+
+        <p>
+            Services provided by the transport layer to applications.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Major Transport Layer Services</h3>
+
+        <ol>
+
+            <li>
+                <strong>Process-to-process delivery</strong>
+                – delivers data to the correct application process.
+            </li>
+
+            <li>
+                <strong>Service-point addressing</strong>
+                – uses port numbers to identify applications.
+            </li>
+
+            <li>
+                <strong>Segmentation</strong>
+                – divides large application messages into smaller
+                transport-layer units.
+            </li>
+
+            <li>
+                <strong>Reassembly</strong>
+                – combines received segments to reconstruct the
+                original message.
+            </li>
+
+            <li>
+                <strong>Flow control</strong>
+                – prevents a fast sender from overwhelming a slow receiver.
+            </li>
+
+            <li>
+                <strong>Error control</strong>
+                – detects and handles lost or corrupted data.
+            </li>
+
+            <li>
+                <strong>Congestion control</strong>
+                – reduces traffic when the network becomes congested.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Connection-Oriented and Connectionless Service</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Feature</th>
+                    <th>Connection-Oriented</th>
+                    <th>Connectionless</th>
+                </tr>
+
+                <tr>
+                    <td>Connection</td>
+                    <td>Established before data transfer</td>
+                    <td>No connection establishment</td>
+                </tr>
+
+                <tr>
+                    <td>Reliability</td>
+                    <td>Usually reliable</td>
+                    <td>No guaranteed delivery</td>
+                </tr>
+
+                <tr>
+                    <td>Ordering</td>
+                    <td>Maintains ordered delivery</td>
+                    <td>No guaranteed ordering</td>
+                </tr>
+
+                <tr>
+                    <td>Example</td>
+                    <td>TCP</td>
+                    <td>UDP</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     3. PROCESS TO PROCESS
+===================================================== -->
+
+<section class="section" id="process">
+
+    <div class="section-title">
+
+        <h2>3. Process-to-Process Delivery</h2>
+
+        <p>
+            Host-to-host delivery versus process-to-process delivery.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Host-to-Host Delivery</h3>
+
+        <p>
+            The network layer provides delivery of packets from
+            one host to another host.
+        </p>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Host A
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Network
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Host B
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Process-to-Process Delivery</h3>
+
+        <p>
+            A host can run many processes simultaneously.
+            The transport layer ensures that the received data
+            reaches the correct application process.
+        </p>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Host A<br>
+                    Process
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Network
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Host B<br>
+                    Correct Process
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="important">
+
+            <div class="important-title">
+                Important
+            </div>
+
+            <p>
+                The transport layer uses <strong>port numbers</strong>
+                to identify processes.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Port Number</h3>
+
+        <p>
+            A port number is a logical address used to identify
+            a specific application or process on a host.
+        </p>
+
+        <div class="example">
+
+            <div class="example-title">
+                Example
+            </div>
+
+            <p>
+                A web browser communicates with an HTTP server
+                using a server port such as <strong>80</strong>.
+            </p>
+
+            <p>
+                HTTPS commonly uses port <strong>443</strong>.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     4. UDP
+===================================================== -->
+
+<section class="section" id="udp">
+
+    <div class="section-title">
+
+        <h2>4. User Datagram Protocol (UDP)</h2>
+
+        <p>
+            A simple connectionless transport protocol.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is UDP?</h3>
+
+        <div class="definition">
+
+            <p>
+                <strong>UDP (User Datagram Protocol)</strong> is a
+                connectionless and lightweight transport-layer protocol.
+            </p>
+
+        </div>
+
+        <p>
+            UDP does not establish a connection before transmitting
+            data. It simply sends datagrams toward the destination.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Characteristics of UDP</h3>
+
+        <ul>
+
+            <li>Connectionless protocol</li>
+
+            <li>Unreliable delivery</li>
+
+            <li>No sequencing guarantee</li>
+
+            <li>No flow control</li>
+
+            <li>No congestion control</li>
+
+            <li>Low overhead</li>
+
+            <li>Fast transmission</li>
+
+            <li>Uses port numbers</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>UDP Datagram Format</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Source Port
+                </div>
+
+                <div class="diagram-box">
+                    Destination Port
+                </div>
+
+                <div class="diagram-box">
+                    Length
+                </div>
+
+                <div class="diagram-box">
+                    Checksum
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box" style="min-width:520px;">
+                    Data / Payload
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>UDP Header Fields</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Field</th>
+                    <th>Purpose</th>
+                </tr>
+
+                <tr>
+                    <td>Source Port</td>
+                    <td>Identifies the sending application.</td>
+                </tr>
+
+                <tr>
+                    <td>Destination Port</td>
+                    <td>Identifies the receiving application.</td>
+                </tr>
+
+                <tr>
+                    <td>Length</td>
+                    <td>Specifies the total length of UDP datagram.</td>
+                </tr>
+
+                <tr>
+                    <td>Checksum</td>
+                    <td>Used for error detection.</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Applications of UDP</h3>
+
+        <ul>
+
+            <li>DNS</li>
+
+            <li>DHCP</li>
+
+            <li>Online gaming</li>
+
+            <li>Voice communication</li>
+
+            <li>Video streaming</li>
+
+            <li>Real-time applications</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     5. TCP
+===================================================== -->
+
+<section class="section" id="tcp">
+
+    <div class="section-title">
+
+        <h2>5. Transmission Control Protocol (TCP)</h2>
+
+        <p>
+            Reliable connection-oriented transport protocol.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is TCP?</h3>
+
+        <div class="definition">
+
+            <p>
+                <strong>TCP (Transmission Control Protocol)</strong>
+                is a connection-oriented, reliable and
+                byte-stream-oriented transport protocol.
+            </p>
+
+        </div>
+
+        <p>
+            TCP establishes a logical connection between sender and
+            receiver before transferring application data.
+        </p>
+
+        <p>
+            It provides mechanisms for flow control, error control
+            and congestion control.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Basic TCP Communication</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Sender
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    TCP
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Network
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Receiver
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     6. TCP SERVICES AND FEATURES
+===================================================== -->
+
+<section class="section" id="tcp-services">
+
+    <div class="section-title">
+
+        <h2>6. TCP Services and Features</h2>
+
+        <p>
+            Major features provided by TCP.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Services</h3>
+
+        <ol>
+
+            <li>
+                <strong>Process-to-process communication</strong>
+            </li>
+
+            <li>
+                <strong>Stream delivery service</strong>
+            </li>
+
+            <li>
+                <strong>Full-duplex communication</strong>
+            </li>
+
+            <li>
+                <strong>Connection-oriented service</strong>
+            </li>
+
+            <li>
+                <strong>Reliable delivery</strong>
+            </li>
+
+            <li>
+                <strong>Flow control</strong>
+            </li>
+
+            <li>
+                <strong>Error control</strong>
+            </li>
+
+            <li>
+                <strong>Congestion control</strong>
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Important TCP Features</h3>
+
+        <ul>
+
+            <li>Reliable communication</li>
+
+            <li>Connection-oriented communication</li>
+
+            <li>Byte-oriented data transfer</li>
+
+            <li>Full-duplex communication</li>
+
+            <li>Flow control</li>
+
+            <li>Error control</li>
+
+            <li>Congestion control</li>
+
+            <li>Sequencing and acknowledgements</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     7. TCP SEGMENT
+===================================================== -->
+
+<section class="section" id="segment">
+
+    <div class="section-title">
+
+        <h2>7. TCP Segment</h2>
+
+        <p>
+            Structure and important fields of a TCP segment.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Segment Format</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Source Port
+                </div>
+
+                <div class="diagram-box">
+                    Destination Port
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Sequence Number
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Acknowledgement Number
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Header<br>
+                    Length
+                </div>
+
+                <div class="diagram-box">
+                    Flags
+                </div>
+
+                <div class="diagram-box">
+                    Window Size
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Checksum
+                </div>
+
+                <div class="diagram-box">
+                    Urgent Pointer
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box" style="min-width:520px;">
+                    Options + Padding
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box" style="min-width:520px;">
+                    Data
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Important TCP Segment Fields</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Field</th>
+                    <th>Purpose</th>
+                </tr>
+
+                <tr>
+                    <td>Source Port</td>
+                    <td>Identifies the sending process.</td>
+                </tr>
+
+                <tr>
+                    <td>Destination Port</td>
+                    <td>Identifies the receiving process.</td>
+                </tr>
+
+                <tr>
+                    <td>Sequence Number</td>
+                    <td>Identifies the position of data in the byte stream.</td>
+                </tr>
+
+                <tr>
+                    <td>Acknowledgement Number</td>
+                    <td>Indicates the next byte expected by the receiver.</td>
+                </tr>
+
+                <tr>
+                    <td>Window Size</td>
+                    <td>Used for flow control.</td>
+                </tr>
+
+                <tr>
+                    <td>Checksum</td>
+                    <td>Used for error detection.</td>
+                </tr>
+
+                <tr>
+                    <td>Flags</td>
+                    <td>Used for connection management and control.</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Important TCP Flags</h3>
+
+        <ul>
+
+            <li>
+                <strong>SYN</strong> – used to establish a connection.
+            </li>
+
+            <li>
+                <strong>ACK</strong> – acknowledgement field is valid.
+            </li>
+
+            <li>
+                <strong>FIN</strong> – used to terminate a connection.
+            </li>
+
+            <li>
+                <strong>RST</strong> – resets a connection.
+            </li>
+
+            <li>
+                <strong>PSH</strong> – requests immediate delivery of data.
+            </li>
+
+            <li>
+                <strong>URG</strong> – indicates urgent data.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     8. TCP CONNECTION
+===================================================== -->
+
+<section class="section" id="connection">
+
+    <div class="section-title">
+
+        <h2>8. TCP Connection</h2>
+
+        <p>
+            Connection establishment and termination.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Three-Way Handshake</h3>
+
+        <p>
+            TCP uses a three-way handshake to establish a
+            connection between client and server.
+        </p>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Client
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    SYN
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Server
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Client
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    SYN + ACK
+                </div>
+
+                <div class="arrow">
+                    ←
+                </div>
+
+                <div class="diagram-box">
+                    Server
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Client
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    ACK
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Server
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Steps in Three-Way Handshake</h3>
+
+        <ol>
+
+            <li>
+                Client sends a <strong>SYN</strong> segment to the server.
+            </li>
+
+            <li>
+                Server responds with <strong>SYN + ACK</strong>.
+            </li>
+
+            <li>
+                Client sends an <strong>ACK</strong>.
+            </li>
+
+        </ol>
+
+        <div class="important">
+
+            <div class="important-title">
+                Result
+            </div>
+
+            <p>
+                After these three steps, the TCP connection
+                is established and data transfer can begin.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Connection Termination</h3>
+
+        <p>
+            TCP normally uses FIN and ACK messages to terminate
+            a connection gracefully.
+        </p>
+
+        <ol>
+
+            <li>One side sends FIN.</li>
+
+            <li>The other side sends ACK.</li>
+
+            <li>The other side sends FIN.</li>
+
+            <li>The first side sends ACK.</li>
+
+        </ol>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     9. FLOW CONTROL
+===================================================== -->
+
+<section class="section" id="flow">
+
+    <div class="section-title">
+
+        <h2>9. TCP Flow Control</h2>
+
+        <p>
+            Preventing the sender from overwhelming the receiver.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is Flow Control?</h3>
+
+        <div class="definition">
+
+            <p>
+                <strong>Flow control</strong> is a mechanism that
+                controls the rate at which a sender transmits data
+                so that a receiver can process the incoming data
+                without being overwhelmed.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Sliding Window</h3>
+
+        <p>
+            TCP uses a variable-size sliding window mechanism
+            for flow control.
+        </p>
+
+        <div class="diagram">
+
+            <div class="diagram-row">
+
+                <div class="diagram-box">
+                    Sender
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Network
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+                <div class="diagram-box">
+                    Receiver
+                </div>
+
+            </div>
+
+        </div>
+
+        <p>
+            The receiver advertises how much data it can currently
+            accept using the <strong>receive window</strong>.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Receive Window</h3>
+
+        <p>
+            The receiver communicates its available buffer space
+            to the sender through the window-size field in the TCP header.
+        </p>
+
+        <div class="formula">
+            Sender's outstanding data ≤ Advertised Receive Window
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     10. ERROR CONTROL
+===================================================== -->
+
+<section class="section" id="error">
+
+    <div class="section-title">
+
+        <h2>10. TCP Error Control</h2>
+
+        <p>
+            Detection and recovery of lost or corrupted segments.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is Error Control?</h3>
+
+        <p>
+            Error control ensures reliable delivery by detecting
+            corrupted or lost segments and retransmitting them when necessary.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Error Control Mechanisms</h3>
+
+        <ul>
+
+            <li>
+                Checksum
+            </li>
+
+            <li>
+                Sequence numbers
+            </li>
+
+            <li>
+                Acknowledgements
+            </li>
+
+            <li>
+                Retransmission
+            </li>
+
+            <li>
+                Timeout
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Acknowledgement</h3>
+
+        <p>
+            TCP uses acknowledgements to inform the sender that
+            data has been received.
+        </p>
+
+        <div class="example">
+
+            <div class="example-title">
+                Example
+            </div>
+
+            <p>
+                If the receiver has correctly received bytes up to
+                byte 500, it can acknowledge the next expected byte.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Retransmission</h3>
+
+        <p>
+            If an acknowledgement does not arrive within an
+            appropriate period, TCP assumes that the segment
+            may have been lost and retransmits the data.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     11. CONGESTION CONTROL
+===================================================== -->
+
+<section class="section" id="congestion">
+
+    <div class="section-title">
+
+        <h2>11. TCP Congestion Control</h2>
+
+        <p>
+            Controlling traffic when the network becomes overloaded.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>What is Congestion?</h3>
+
+        <div class="definition">
+
+            <p>
+                <strong>Congestion</strong> occurs when the amount
+                of data entering a network becomes greater than
+                the network's ability to handle it.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Effects of Congestion</h3>
+
+        <ul>
+
+            <li>Packet loss</li>
+
+            <li>Longer delays</li>
+
+            <li>Reduced throughput</li>
+
+            <li>Retransmissions</li>
+
+            <li>Network performance degradation</li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>TCP Congestion Control Techniques</h3>
+
+        <ol>
+
+            <li>
+                <strong>Slow Start</strong>
+            </li>
+
+            <li>
+                <strong>Congestion Avoidance</strong>
+            </li>
+
+            <li>
+                <strong>Fast Retransmit</strong>
+            </li>
+
+            <li>
+                <strong>Fast Recovery</strong>
+            </li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Slow Start</h3>
+
+        <p>
+            TCP initially starts with a small congestion window.
+            The congestion window increases rapidly as successful
+            acknowledgements are received, subject to the applicable
+            congestion-control rules.
+        </p>
+
+        <div class="formula">
+            cwnd → increases as ACKs arrive
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Congestion Avoidance</h3>
+
+        <p>
+            After the congestion window reaches an appropriate
+            threshold, TCP changes to a slower growth mechanism
+            to reduce the possibility of congestion.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Fast Retransmit</h3>
+
+        <p>
+            When TCP receives multiple duplicate acknowledgements,
+            it can infer that a segment may have been lost and
+            retransmit it without waiting for the normal timeout.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>Fast Recovery</h3>
+
+        <p>
+            Fast recovery allows TCP to reduce its sending rate
+            after detecting packet loss while avoiding a complete
+            restart of the congestion-control process in applicable
+            TCP variants.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     12. TCP VS UDP
+===================================================== -->
+
+<section class="section" id="comparison">
+
+    <div class="section-title">
+
+        <h2>12. TCP vs UDP</h2>
+
+        <p>
+            Important comparison for VTU examinations.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+
+                    <th>Feature</th>
+
+                    <th>TCP</th>
+
+                    <th>UDP</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Connection</td>
+
+                    <td>Connection-oriented</td>
+
+                    <td>Connectionless</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Reliability</td>
+
+                    <td>Reliable</td>
+
+                    <td>No guaranteed delivery</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Ordering</td>
+
+                    <td>Ordered byte stream</td>
+
+                    <td>No ordering guarantee</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Flow Control</td>
+
+                    <td>Yes</td>
+
+                    <td>No</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Error Control</td>
+
+                    <td>Yes</td>
+
+                    <td>Checksum provides error detection;
+                        reliability/retransmission are not provided
+                        by UDP itself</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Congestion Control</td>
+
+                    <td>Yes</td>
+
+                    <td>No</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Overhead</td>
+
+                    <td>Higher</td>
+
+                    <td>Lower</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Speed</td>
+
+                    <td>Generally more overhead</td>
+
+                    <td>Generally lower protocol overhead</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Applications</td>
+
+                    <td>Web, file transfer, email</td>
+
+                    <td>DNS, streaming, real-time applications</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     13. IMPORTANT EXAM QUESTIONS
+===================================================== -->
+
+<section class="section" id="exam">
+
+    <div class="section-title">
+
+        <h2>13. Important Exam Questions & Answers</h2>
+
+        <p>
+            VTU-oriented 2-mark, 5-mark and 10-mark preparation.
+        </p>
+
+    </div>
+
+
+    <!-- 2 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 2-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>1. What is the transport layer?</h4>
+
+            <p>
+                The transport layer is the fourth layer of the
+                OSI model. It provides process-to-process delivery
+                and can provide services such as reliability,
+                flow control, error control and congestion control.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>2. What is a port number?</h4>
+
+            <p>
+                A port number is a logical address used by the
+                transport layer to identify a particular process
+                or application running on a host.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>3. What is UDP?</h4>
+
+            <p>
+                UDP is a connectionless transport-layer protocol
+                that provides a lightweight datagram service without
+                built-in reliable delivery, flow control or congestion control.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>4. What is TCP?</h4>
+
+            <p>
+                TCP is a connection-oriented transport-layer protocol
+                that provides reliable, ordered and full-duplex
+                byte-stream communication.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>5. What is flow control?</h4>
+
+            <p>
+                Flow control is the mechanism used to prevent a
+                fast sender from overwhelming a slower receiver.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">2 Marks</span>
+
+            <h4>6. What is congestion control?</h4>
+
+            <p>
+                Congestion control regulates the amount of traffic
+                entering the network to reduce overload and packet loss.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- 5 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 5-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                1. Explain the services provided by the transport layer.
+            </h4>
+
+            <ol>
+
+                <li>
+                    Process-to-process delivery
+                </li>
+
+                <li>
+                    Service-point addressing
+                </li>
+
+                <li>
+                    Segmentation and reassembly
+                </li>
+
+                <li>
+                    Flow control
+                </li>
+
+                <li>
+                    Error control
+                </li>
+
+                <li>
+                    Congestion control
+                </li>
+
+                <li>
+                    Connection management
+                </li>
+
+            </ol>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                2. Explain UDP and its header.
+            </h4>
+
+            <p>
+                UDP is a connectionless and lightweight transport
+                protocol. It does not establish a connection before
+                transmission and does not provide reliability,
+                flow control or congestion control.
+            </p>
+
+            <p>
+                The UDP header contains Source Port, Destination Port,
+                Length and Checksum fields.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                3. Explain TCP three-way handshake.
+            </h4>
+
+            <ol>
+
+                <li>
+                    Client sends SYN.
+                </li>
+
+                <li>
+                    Server responds with SYN + ACK.
+                </li>
+
+                <li>
+                    Client sends ACK.
+                </li>
+
+            </ol>
+
+            <p>
+                After these three steps, the TCP connection is established.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">5 Marks</span>
+
+            <h4>
+                4. Explain TCP flow control.
+            </h4>
+
+            <p>
+                TCP uses a sliding-window mechanism for flow control.
+                The receiver advertises the amount of buffer space
+                available through the receive window. The sender
+                limits outstanding data according to the advertised window.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- 10 MARK -->
+
+    <div class="card">
+
+        <h3>⭐ 10-Mark Questions</h3>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                1. Explain TCP services, features and segment format.
+            </h4>
+
+            <p>
+                TCP is a connection-oriented and reliable transport
+                protocol. It provides process-to-process communication
+                using port numbers.
+            </p>
+
+            <h4>Services and Features</h4>
+
+            <ul>
+
+                <li>Process-to-process delivery</li>
+
+                <li>Reliable delivery</li>
+
+                <li>Stream delivery</li>
+
+                <li>Full-duplex communication</li>
+
+                <li>Flow control</li>
+
+                <li>Error control</li>
+
+                <li>Congestion control</li>
+
+                <li>Connection management</li>
+
+            </ul>
+
+            <h4>Important Segment Fields</h4>
+
+            <ul>
+
+                <li>Source Port</li>
+
+                <li>Destination Port</li>
+
+                <li>Sequence Number</li>
+
+                <li>Acknowledgement Number</li>
+
+                <li>Window Size</li>
+
+                <li>Checksum</li>
+
+                <li>Flags</li>
+
+                <li>Options</li>
+
+                <li>Data</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                2. Explain TCP connection establishment and termination.
+            </h4>
+
+            <h4>Connection Establishment</h4>
+
+            <ol>
+
+                <li>
+                    Client sends SYN.
+                </li>
+
+                <li>
+                    Server sends SYN + ACK.
+                </li>
+
+                <li>
+                    Client sends ACK.
+                </li>
+
+            </ol>
+
+            <h4>Connection Termination</h4>
+
+            <ol>
+
+                <li>
+                    One endpoint sends FIN.
+                </li>
+
+                <li>
+                    Other endpoint sends ACK.
+                </li>
+
+                <li>
+                    Other endpoint sends FIN.
+                </li>
+
+                <li>
+                    First endpoint sends ACK.
+                </li>
+
+            </ol>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                3. Explain TCP flow control, error control
+                and congestion control.
+            </h4>
+
+            <h4>Flow Control</h4>
+
+            <p>
+                Flow control prevents the sender from overwhelming
+                the receiver. TCP uses a receive-window mechanism.
+            </p>
+
+            <h4>Error Control</h4>
+
+            <p>
+                TCP uses checksums, sequence numbers, acknowledgements,
+                timeouts and retransmission to provide reliable delivery.
+            </p>
+
+            <h4>Congestion Control</h4>
+
+            <p>
+                TCP controls the sending rate when the network becomes
+                congested. Important mechanisms include slow start,
+                congestion avoidance, fast retransmit and fast recovery.
+            </p>
+
+        </div>
+
+
+        <div class="exam-answer">
+
+            <span class="marks">10 Marks</span>
+
+            <h4>
+                4. Compare TCP and UDP.
+            </h4>
+
+            <p>
+                TCP is connection-oriented and reliable, whereas UDP
+                is connectionless and provides a lightweight datagram
+                service without built-in reliable delivery.
+            </p>
+
+            <p>
+                TCP provides sequencing, acknowledgements, flow control,
+                error control and congestion control. UDP has much lower
+                protocol overhead and is commonly used where low latency
+                or application-controlled reliability is preferred.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     14. QUICK REVISION
+===================================================== -->
+
+<section class="section" id="revision">
+
+    <div class="section-title">
+
+        <h2>14. Quick Revision</h2>
+
+        <p>
+            Last-minute revision points for Module 4.
+        </p>
+
+    </div>
+
+
+    <div class="revision">
+
+        <h3>🔥 Remember These Points</h3>
+
+        <ul>
+
+            <li>
+                Transport layer = <strong>Layer 4</strong>
+            </li>
+
+            <li>
+                Main purpose = <strong>process-to-process delivery</strong>
+            </li>
+
+            <li>
+                Port numbers identify applications/processes.
+            </li>
+
+            <li>
+                UDP = <strong>connectionless + lightweight</strong>
+            </li>
+
+            <li>
+                TCP = <strong>connection-oriented + reliable</strong>
+            </li>
+
+            <li>
+                TCP uses sequence numbers and acknowledgements.
+            </li>
+
+            <li>
+                TCP connection establishment = <strong>three-way handshake</strong>
+            </li>
+
+            <li>
+                TCP flow control uses a receive-window mechanism.
+            </li>
+
+            <li>
+                TCP error control uses checksum, ACKs,
+                sequence numbers and retransmission.
+            </li>
+
+            <li>
+                TCP congestion control includes slow start,
+                congestion avoidance, fast retransmit and fast recovery.
+            </li>
+
+            <li>
+                UDP header fields = Source Port, Destination Port,
+                Length and Checksum.
+            </li>
+
+            <li>
+                Important TCP fields = Sequence Number,
+                Acknowledgement Number, Window Size, Checksum and Flags.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="revision">
+
+        <h3>🧠 One-Line Memory Trick</h3>
+
+        <div class="formula">
+
+            TCP → Reliable + Ordered + Connection + Flow + Error + Congestion
+
+            <br><br>
+
+            UDP → Simple + Fast + Connectionless + Low Overhead
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GITHUB
+===================================================== -->
+
+<section class="github">
+
+    <h2>🐙 MAHALAKSHMI'S GITHUB</h2>
+
+    <p>
+        Explore my projects, source code and development work.
+    </p>
+
+    <a
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-btn"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        BCS502 • Computer Networks • Module 4
+    </p>
+
+    <p>
+        Made with ❤️ by <span>Mahalakshmi</span>
+    </p>
+
+</footer>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   COPY / SELECTION PROTECTION
+========================================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "selectstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "dragstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "copy",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "cut",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key = event.key.toLowerCase();
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(key)
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,399 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="Mahalakshmi's VTU Course Notes - 5th Semester CSE">
 
-    <meta name="theme-color" content="#111827">
+<title>Course Notes | 5th Semester CSE</title>
 
-    <meta name="description"
-          content="5th Semester CSE VTU Notes - 2022 Scheme">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <link rel="manifest" href="manifest.json">
+html {
+    scroll-behavior: smooth;
+}
 
-    <title>5th Semester CSE | VTU Notes</title>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #f5f5f5;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-    <link rel="stylesheet" href="style.css">
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 190, 70, 0.09),
+        transparent 70%
+    );
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lion {
+    position: absolute;
+    font-size: 115px;
+    opacity: 0;
+    right: -150px;
+    bottom: 13%;
+    filter: grayscale(1);
+    animation: lionMove 22s linear infinite;
+}
+
+@keyframes lionMove {
+    0% {
+        right: -150px;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    10% {
+        opacity: 0.08;
+    }
+
+    35% {
+        opacity: 0.09;
+    }
+
+    50% {
+        right: 42%;
+        opacity: 0.06;
+        transform: scale(1);
+    }
+
+    75% {
+        right: 100%;
+        opacity: 0.07;
+        transform: scale(0.95);
+    }
+
+    88% {
+        opacity: 0;
+    }
+
+    100% {
+        right: 110%;
+        opacity: 0;
+    }
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: min(1100px, calc(100% - 32px));
+    margin: auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    padding: 65px 0 35px;
+    text-align: center;
+}
+
+.logo {
+    display: inline-block;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #bbb;
+    margin-bottom: 22px;
+}
+
+header h1 {
+    font-size: clamp(34px, 6vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    font-weight: 800;
+}
+
+header h1 span {
+    color: #d9a441;
+}
+
+.subtitle {
+    max-width: 680px;
+    margin: 20px auto 0;
+    color: #999;
+    font-size: 16px;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome {
+    margin: 25px auto 45px;
+    padding: 30px;
+    border: 1px solid #292929;
+    border-radius: 18px;
+    background: rgba(17, 17, 17, 0.82);
+    backdrop-filter: blur(10px);
+}
+
+.welcome h2 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.welcome-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 25px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.welcome-list div::before {
+    content: "✓";
+    color: #d9a441;
+    margin-right: 8px;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-heading {
+    margin: 50px 0 22px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+}
+
+.section-heading p {
+    color: #777;
+    margin-top: 4px;
+}
+
+/* =========================
+   SUBJECTS
+========================= */
+
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.subject {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    padding: 25px;
+    border: 1px solid #292929;
+    border-radius: 16px;
+    background: rgba(14, 14, 14, 0.9);
+    transition: 0.3s ease;
+}
+
+.subject:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+    background: #111;
+}
+
+.code {
+    color: #d9a441;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.subject h3 {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.subject p {
+    color: #888;
+    font-size: 14px;
+    flex: 1;
+}
+
+.modules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 18px 0;
+}
+
+.modules span {
+    border: 1px solid #303030;
+    border-radius: 20px;
+    padding: 4px 9px;
+    color: #999;
+    font-size: 11px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+    display: inline-block;
+    width: fit-content;
+    text-decoration: none;
+    color: #080808;
+    background: #d9a441;
+    padding: 9px 17px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: #f0bd55;
+}
+
+/* =========================
+   STUDY GUIDE
+========================= */
+
+.study {
+    margin-top: 55px;
+    padding: 30px;
+    border: 1px solid #292929;
+    border-radius: 18px;
+    background: #101010;
+}
+
+.study h2 {
+    margin-bottom: 20px;
+}
+
+.study-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.study-card {
+    border: 1px solid #252525;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.study-card strong {
+    display: block;
+    color: #d9a441;
+    margin-bottom: 6px;
+}
+
+.study-card p {
+    color: #888;
+    font-size: 13px;
+}
+
+/* =========================
+   GITHUB
+========================= */
+
+.github {
+    margin: 60px 0 30px;
+    text-align: center;
+    padding: 38px 20px;
+    border-top: 1px solid #252525;
+}
+
+.github h2 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.github p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 25px 0 45px;
+    color: #555;
+    font-size: 12px;
+}
+
+footer span {
+    color: #d9a441;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: min(100% - 22px, 1100px);
+    }
+
+    header {
+        padding-top: 40px;
+    }
+
+    header h1 {
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .welcome {
+        padding: 22px;
+    }
+
+    .welcome-list {
+        grid-template-columns: 1fr;
+    }
+
+    .subjects {
+        grid-template-columns: 1fr;
+    }
+
+    .subject {
+        min-height: 205px;
+        padding: 21px;
+    }
+
+    .study {
+        padding: 22px;
+    }
+
+    .study-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lion {
+        font-size: 75px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-        <a href="index.html" class="logo">
-            📚 VTU Notes
-        </a>
-
-        <button id="themeButton"
-                class="theme-btn"
-                aria-label="Toggle theme">
-            🌙
-        </button>
-
-    </div>
-
-</header>
-
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <span class="badge">
-            2022 SCHEME
-        </span>
-
-        <h1>
-            5th Semester
-            <span>CSE</span>
-        </h1>
-
-        <p>
-            VTU Notes, Important Questions & Answers
-        </p>
-
-        <div class="search-box">
-
-            <span>🔍</span>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search subject or course code..."
-                autocomplete="off"
-            >
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= MAIN ================= -->
+<div class="background">
+    <div class="glow"></div>
+    <div class="lion">🦁</div>
+</div>
 
 <main class="container">
 
-    <div class="section-heading">
+    <!-- HEADER -->
 
-        <div>
-            <h2>Courses</h2>
+    <header>
+        <div class="logo">VTU • 5TH SEMESTER • CSE</div>
 
-            <p>
-                Select a subject to view all modules
-            </p>
-        </div>
+        <h1>
+            MAHALAKSHMI'S<br>
+            <span>COURSE NOTES</span>
+        </h1>
 
-        <span id="courseCount"></span>
+        <p class="subtitle">
+            Simple, organized and exam-oriented notes for
+            5th Semester Computer Science & Engineering.
+        </p>
+    </header>
 
-    </div>
 
+    <!-- WELCOME -->
 
-    <!-- ================= COURSE GRID ================= -->
+    <section class="welcome">
 
-    <div id="courseGrid" class="course-grid">
-
-
-        <!-- BCS501 -->
-
-        <article class="course-card"
-                 data-search="BCS501 Software Engineering Project Management">
-
-            <div class="course-code">
-                BCS501
-            </div>
-
-            <h3>
-                Software Engineering and
-                Project Management
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BCS501/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BCS502 -->
-
-        <article class="course-card"
-                 data-search="BCS502 Computer Networks">
-
-            <div class="course-code">
-                BCS502
-            </div>
-
-            <h3>
-                Computer Networks
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BCS502/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BCS503 -->
-
-        <article class="course-card"
-                 data-search="BCS503 Theory of Computation">
-
-            <div class="course-code">
-                BCS503
-            </div>
-
-            <h3>
-                Theory of Computation
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BCS503/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BCS515B -->
-
-        <article class="course-card"
-                 data-search="BCS515B Artificial Intelligence">
-
-            <div class="course-code">
-                BCS515B
-            </div>
-
-            <h3>
-                Artificial Intelligence
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BCS515B/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BCSL504 -->
-
-        <article class="course-card"
-                 data-search="BCSL504 Web Technology Lab">
-
-            <div class="course-code">
-                BCSL504
-            </div>
-
-            <h3>
-                Web Technology Laboratory
-            </h3>
-
-            <p>
-                Programs • Viva Questions • Answers
-            </p>
-
-            <a href="BCSL504/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BCS586 -->
-
-        <article class="course-card"
-                 data-search="BCS586 Mini Project">
-
-            <div class="course-code">
-                BCS586
-            </div>
-
-            <h3>
-                Mini Project
-            </h3>
-
-            <p>
-                Guidelines • Ideas • Documentation
-            </p>
-
-            <a href="BCS586/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BRMK557 -->
-
-        <article class="course-card"
-                 data-search="BRMK557 Research Methodology IPR">
-
-            <div class="course-code">
-                BRMK557
-            </div>
-
-            <h3>
-                Research Methodology and IPR
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BRMK557/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BESK508 -->
-
-        <article class="course-card"
-                 data-search="BESK508 Environmental Studies">
-
-            <div class="course-code">
-                BESK508
-            </div>
-
-            <h3>
-                Environmental Studies
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BESK508/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-
-        <!-- BNSK559 -->
-
-        <article class="course-card"
-                 data-search="BNSK559 NSS National Service Scheme">
-
-            <div class="course-code">
-                BNSK559
-            </div>
-
-            <h3>
-                National Service Scheme
-            </h3>
-
-            <p>
-                Notes • Important Questions • Answers
-            </p>
-
-            <a href="BNSK559/index.html"
-               class="view-btn">
-
-                View Course
-                <span>→</span>
-
-            </a>
-
-        </article>
-
-    </div>
-
-
-    <!-- NO RESULTS -->
-
-    <div id="noResults" class="no-results">
-
-        <div>🔎</div>
-
-        <h3>No subject found</h3>
+        <h2>👋 Welcome to Course Notes</h2>
 
         <p>
-            Try another subject name or course code.
+            Welcome to <strong>Mahalakshmi's VTU Course Notes</strong>.
+            This website is created to help 5th Semester CSE students
+            understand concepts, revise quickly and prepare for VTU
+            examinations in an organized way.
         </p>
 
-    </div>
+        <div class="welcome-list">
+            <div>Module-wise notes</div>
+            <div>Concept-wise explanations</div>
+            <div>2, 5 and 10 mark answers</div>
+            <div>Important questions</div>
+            <div>Diagrams and examples</div>
+            <div>Quick revision points</div>
+            <div>VTU model-paper guidance</div>
+            <div>Subject-wise navigation</div>
+        </div>
+
+    </section>
+
+
+    <!-- SUBJECTS -->
+
+    <section>
+
+        <div class="section-heading">
+            <h2>📚 5th Semester Subjects</h2>
+            <p>Select a subject to explore its modules and notes.</p>
+        </div>
+
+
+        <div class="subjects">
+
+            <!-- BCS501 -->
+
+            <article class="subject">
+
+                <div class="code">BCS501</div>
+
+                <h3>
+                    Software Engineering and Project Management
+                </h3>
+
+                <p>
+                    Software engineering concepts, requirements,
+                    agile development, project management, quality
+                    and estimation.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="BCS501/index.html" class="btn">
+                    Open BCS501 →
+                </a>
+
+            </article>
+
+
+            <!-- BCS502 -->
+
+            <article class="subject">
+
+                <div class="code">BCS502</div>
+
+                <h3>
+                    Computer Networks
+                </h3>
+
+                <p>
+                    Network models, data link layer, network layer,
+                    transport layer and application layer.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="BCS502/index.html" class="btn">
+                    Open BCS502 →
+                </a>
+
+            </article>
+
+
+            <!-- BCS503 -->
+
+            <article class="subject">
+
+                <div class="code">BCS503</div>
+
+                <h3>
+                    Theory of Computation
+                </h3>
+
+                <p>
+                    Automata theory, regular languages, finite automata,
+                    grammars, pushdown automata and Turing machines.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="BCS503/index.html" class="btn">
+                    Open BCS503 →
+                </a>
+
+            </article>
+
+
+            <!-- BCS515B -->
+
+            <article class="subject">
+
+                <div class="code">BCS515B</div>
+
+                <h3>
+                    Artificial Intelligence
+                </h3>
+
+                <p>
+                    Intelligent agents, problem solving, search,
+                    knowledge representation, reasoning and learning.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+
+            <!-- BCSL504 -->
+
+            <article class="subject">
+
+                <div class="code">BCSL504</div>
+
+                <h3>
+                    Web Technology Laboratory
+                </h3>
+
+                <p>
+                    HTML, CSS, JavaScript, web programming,
+                    practical experiments and viva preparation.
+                </p>
+
+                <div class="modules">
+                    <span>Programs</span>
+                    <span>Experiments</span>
+                    <span>Viva</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+
+            <!-- BCS586 -->
+
+            <article class="subject">
+
+                <div class="code">BCS586</div>
+
+                <h3>
+                    Mini Project
+                </h3>
+
+                <p>
+                    Project planning, development, documentation,
+                    presentation and project evaluation guidance.
+                </p>
+
+                <div class="modules">
+                    <span>Planning</span>
+                    <span>Development</span>
+                    <span>Report</span>
+                    <span>Presentation</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+
+            <!-- BRMK557 -->
+
+            <article class="subject">
+
+                <div class="code">BRMK557</div>
+
+                <h3>
+                    Research Methodology and IPR
+                </h3>
+
+                <p>
+                    Research process, literature review, research
+                    methods, intellectual property and patents.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+
+            <!-- BESK508 -->
+
+            <article class="subject">
+
+                <div class="code">BESK508</div>
+
+                <h3>
+                    Environmental Studies
+                </h3>
+
+                <p>
+                    Environmental systems, natural resources,
+                    pollution, sustainability and environmental protection.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+
+            <!-- BNSK559 -->
+
+            <article class="subject">
+
+                <div class="code">BNSK559</div>
+
+                <h3>
+                    NSS
+                </h3>
+
+                <p>
+                    National Service Scheme activities, social
+                    responsibility, community service and awareness.
+                </p>
+
+                <div class="modules">
+                    <span>Module 1</span>
+                    <span>Module 2</span>
+                    <span>Module 3</span>
+                    <span>Module 4</span>
+                    <span>Module 5</span>
+                </div>
+
+                <a href="#" class="btn">
+                    Coming Soon →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDY GUIDE -->
+
+    <section class="study">
+
+        <h2>🎯 How to Use These Notes</h2>
+
+        <div class="study-grid">
+
+            <div class="study-card">
+                <strong>01 — Understand</strong>
+                <p>
+                    Read the concept explanation and examples
+                    before memorizing answers.
+                </p>
+            </div>
+
+            <div class="study-card">
+                <strong>02 — Revise</strong>
+                <p>
+                    Use the quick revision points and important
+                    questions before the examination.
+                </p>
+            </div>
+
+            <div class="study-card">
+                <strong>03 — Practice</strong>
+                <p>
+                    Practice diagrams and 5-mark and 10-mark
+                    answers for better exam preparation.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+
+    <section class="github">
+
+        <h2>🐙 MAHALAKSHMI'S GITHUB</h2>
+
+        <p>
+            Explore my projects, code and development work.
+        </p>
+
+        <a
+            href="https://github.com/mahalakshmikommaranahalli9-cell"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            🐙 Visit Mahalakshmi's GitHub
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>
+            Made for learning • Built with ❤️ by
+            <span>Mahalakshmi</span>
+        </p>
+
+        <p>
+            5th Semester CSE • VTU
+        </p>
+    </footer>
 
 </main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
-    <p>
-        5th Semester CSE • VTU 2022 Scheme
-    </p>
-
-    <p>
-        Made with ❤️ by
-        <strong>Mahalakshmi Kommaranahalli</strong>
-    </p>
-
-</footer>
-
-
-<!-- ================= SCRIPT ================= -->
-
-<script src="script.js"></script>
 
 </body>
 </html>
