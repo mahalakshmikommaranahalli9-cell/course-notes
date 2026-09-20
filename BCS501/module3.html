@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+
+    <title>BCS501 Module 3 | Agile Development</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #1e3a8a);
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #dbeafe;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 25px auto;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #2563eb;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 25px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2563eb;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #374151;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul, ol {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #111827;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .important {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .exam {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .danger {
+            background: #fef2f2;
+            border-left: 5px solid #dc2626;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .diagram {
+            background: #111827;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 3px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .two-mark {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 7px;
+        }
+
+        .answer {
+            background: #f9fafb;
+            padding: 14px;
+            margin-top: 8px;
+            border-radius: 7px;
+        }
+
+        .toc a {
+            display: block;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: normal;
+            }
+
+            .diagram {
+                font-size: 12px;
+            }
+        }
+
+        /* Discourage casual copying */
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>BCS501 — Module 3</h1>
+
+    <p>
+        Software Engineering & Project Management
+        • Agile Development
+    </p>
+
+</header>
+
+
+<div class="container">
+
+    <a href="index.html" class="back">
+        ← Back to BCS501
+    </a>
+
+
+    <!-- MODULE OVERVIEW -->
+
+    <section class="card">
+
+        <h2>📚 Module 3 — Agile Development</h2>
+
+        <p>
+            Agile development is an approach to software development
+            that focuses on <strong>continuous delivery, customer
+            collaboration, adaptability and frequent feedback</strong>.
+        </p>
+
+        <div class="highlight">
+
+            <strong>VTU Focus:</strong>
+
+            This module covers Agility, cost of change, Agile process,
+            Extreme Programming (XP), other Agile process models,
+            Agile process tool set, software engineering knowledge,
+            core principles and principles that guide framework activities.
+
+        </div>
+
+        <h3>Important Topics</h3>
+
+        <span class="tag">Agility</span>
+        <span class="tag">Cost of Change</span>
+        <span class="tag">Agile Process</span>
+        <span class="tag">XP</span>
+        <span class="tag">Scrum</span>
+        <span class="tag">Other Agile Models</span>
+        <span class="tag">Agile Tools</span>
+        <span class="tag">Core Principles</span>
+        <span class="tag">Framework Activities</span>
+
+    </section>
+
+
+    <!-- TABLE OF CONTENTS -->
+
+    <section class="card toc">
+
+        <h2>📑 Contents</h2>
+
+        <a href="#agility">1. What is Agility?</a>
+
+        <a href="#cost">2. Agility and Cost of Change</a>
+
+        <a href="#process">3. What is an Agile Process?</a>
+
+        <a href="#principles">4. Principles of Agile Software Development</a>
+
+        <a href="#xp">5. Extreme Programming (XP)</a>
+
+        <a href="#scrum">6. Scrum Process</a>
+
+        <a href="#other">7. Other Agile Process Models</a>
+
+        <a href="#tools">8. Agile Process Tool Set</a>
+
+        <a href="#knowledge">9. Software Engineering Knowledge</a>
+
+        <a href="#core">10. Core Principles</a>
+
+        <a href="#framework">11. Principles Guiding Framework Activities</a>
+
+        <a href="#comparison">12. Agile vs Traditional</a>
+
+        <a href="#questions">13. VTU Important Questions</a>
+
+        <a href="#twomark">14. 2-Mark Questions</a>
+
+        <a href="#tenmark">15. 10-Mark Answer Preparation</a>
+
+        <a href="#revision">16. Last-Minute Revision</a>
+
+    </section>
+
+
+    <!-- AGILITY -->
+
+    <section class="card" id="agility">
+
+        <h2>1. What is Agility?</h2>
+
+        <p>
+            <strong>Agility</strong> is the ability of a software
+            development team to respond effectively and quickly to
+            changes in requirements, technology, customer needs and
+            business conditions.
+        </p>
+
+        <h3>Simple Definition</h3>
+
+        <div class="highlight">
+
+            <strong>Agility = Ability to adapt to change quickly
+            while continuously delivering useful software.</strong>
+
+        </div>
+
+        <h3>Why is Agility Required?</h3>
+
+        <ul>
+
+            <li>Customer requirements may change.</li>
+
+            <li>Business requirements may change.</li>
+
+            <li>New technologies may appear.</li>
+
+            <li>Competitors may introduce new features.</li>
+
+            <li>Users may provide new feedback.</li>
+
+            <li>Errors may be discovered during development.</li>
+
+        </ul>
+
+        <h3>Characteristics of an Agile Team</h3>
+
+        <ol>
+
+            <li>Fast response to change.</li>
+
+            <li>Frequent software delivery.</li>
+
+            <li>Continuous customer involvement.</li>
+
+            <li>Team collaboration.</li>
+
+            <li>Continuous testing.</li>
+
+            <li>Continuous improvement.</li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- COST OF CHANGE -->
+
+    <section class="card" id="cost">
+
+        <h2>2. Agility and the Cost of Change</h2>
+
+        <p>
+            A software project can experience changes at any stage.
+            The cost of implementing a change generally increases
+            when the change is discovered later in the development
+            process.
+        </p>
+
+        <div class="diagram">
+
+Traditional Development
+
+Cost
+  ^
+  |
+  |                         /
+  |                      /
+  |                   /
+  |                /
+  |             /
+  |          /
+  |_______/________________________> Time
+       Requirements        Maintenance
+
+Agile Development
+
+Cost
+  ^
+  |
+  |        _________
+  |      /
+  |    /
+  |  /
+  | /
+  |______________________________> Time
+       Continuous feedback
+       and adaptation
+
+        </div>
+
+        <h3>Why Does Cost Increase?</h3>
+
+        <p>
+            If a requirement changes after design, coding, testing
+            and deployment, several completed activities may have to
+            be modified.
+        </p>
+
+        <ul>
+
+            <li>Requirements may need modification.</li>
+
+            <li>Design may need modification.</li>
+
+            <li>Source code may need modification.</li>
+
+            <li>Testing must be repeated.</li>
+
+            <li>Documentation may need modification.</li>
+
+            <li>Deployment may be affected.</li>
+
+        </ul>
+
+        <div class="important">
+
+            <strong>Exam Point:</strong>
+
+            Agile methods attempt to reduce the impact of change by
+            using short iterations, frequent customer feedback and
+            continuous testing.
+
+        </div>
+
+    </section>
+
+
+    <!-- AGILE PROCESS -->
+
+    <section class="card" id="process">
+
+        <h2>3. What is an Agile Process?</h2>
+
+        <p>
+            An <strong>Agile process</strong> is an iterative and
+            incremental software development process in which software
+            is developed in small releases and continuously improved
+            using customer feedback.
+        </p>
+
+        <h3>Basic Agile Process</h3>
+
+        <div class="diagram">
+
+        Customer Requirements
+                 ↓
+          Product Backlog
+                 ↓
+          Select Features
+                 ↓
+             Iteration
+                 ↓
+       Design → Code → Test
+                 ↓
+          Working Software
+                 ↓
+        Customer Feedback
+                 ↓
+          Improve / Change
+                 ↓
+             Next Iteration
+
+        </div>
+
+        <h3>Main Characteristics</h3>
+
+        <ol>
+
+            <li>
+                <strong>Iterative development:</strong>
+                Development occurs through repeated cycles.
+            </li>
+
+            <li>
+                <strong>Incremental delivery:</strong>
+                New functionality is added incrementally.
+            </li>
+
+            <li>
+                <strong>Customer collaboration:</strong>
+                Customers provide regular feedback.
+            </li>
+
+            <li>
+                <strong>Continuous testing:</strong>
+                Testing is performed throughout development.
+            </li>
+
+            <li>
+                <strong>Adaptability:</strong>
+                Requirements can be changed when necessary.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- PRINCIPLES -->
+
+    <section class="card" id="principles">
+
+        <h2>4. Principles of Agile Software Development</h2>
+
+        <p>
+            Agile development is guided by principles that encourage
+            customer collaboration, working software, communication,
+            adaptability and continuous improvement.
+        </p>
+
+        <h3>Important Agile Principles</h3>
+
+        <ol>
+
+            <li>
+                <strong>Customer satisfaction:</strong>
+                Deliver useful software early and continuously.
+            </li>
+
+            <li>
+                <strong>Welcome changing requirements:</strong>
+                Changes can be accepted even during development.
+            </li>
+
+            <li>
+                <strong>Frequent delivery:</strong>
+                Deliver working software frequently.
+            </li>
+
+            <li>
+                <strong>Customer and developer collaboration:</strong>
+                Developers and customers should work together.
+            </li>
+
+            <li>
+                <strong>Motivated individuals:</strong>
+                Give teams the environment and support they need.
+            </li>
+
+            <li>
+                <strong>Face-to-face communication:</strong>
+                Direct communication improves understanding.
+            </li>
+
+            <li>
+                <strong>Working software:</strong>
+                Working software is an important measure of progress.
+            </li>
+
+            <li>
+                <strong>Sustainable development:</strong>
+                Development should continue at a sustainable pace.
+            </li>
+
+            <li>
+                <strong>Technical excellence:</strong>
+                Good design and technical practices improve agility.
+            </li>
+
+            <li>
+                <strong>Simplicity:</strong>
+                Avoid unnecessary work and complexity.
+            </li>
+
+            <li>
+                <strong>Self-organizing teams:</strong>
+                Teams organize their work effectively.
+            </li>
+
+            <li>
+                <strong>Continuous improvement:</strong>
+                Teams regularly examine their work and improve it.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- XP -->
+
+    <section class="card" id="xp">
+
+        <h2>5. Extreme Programming (XP)</h2>
+
+        <p>
+            <strong>Extreme Programming (XP)</strong> is an Agile
+            software development method that emphasizes frequent
+            releases, customer involvement, continuous feedback,
+            testing and simple design.
+        </p>
+
+        <h3>Goals of XP</h3>
+
+        <ul>
+
+            <li>Deliver software quickly.</li>
+
+            <li>Respond to changing requirements.</li>
+
+            <li>Improve software quality.</li>
+
+            <li>Maintain continuous customer involvement.</li>
+
+            <li>Reduce development risks.</li>
+
+        </ul>
+
+        <h3>XP Process</h3>
+
+        <div class="diagram">
+
+              USER STORIES
+                    ↓
+             RELEASE PLANNING
+                    ↓
+          ┌───────────────────┐
+          │ ITERATION PLANNING│
+          └─────────┬─────────┘
+                    ↓
+              SIMPLE DESIGN
+                    ↓
+               CODING
+                    ↓
+             UNIT TESTING
+                    ↓
+          CUSTOMER ACCEPTANCE
+                 TESTING
+                    ↓
+             SMALL RELEASE
+                    ↓
+              FEEDBACK
+                    ↓
+             NEXT ITERATION
+
+        </div>
+
+        <h3>Important XP Practices</h3>
+
+        <table>
+
+            <tr>
+                <th>Practice</th>
+                <th>Meaning</th>
+            </tr>
+
+            <tr>
+                <td>Pair Programming</td>
+                <td>
+                    Two developers work together on the same code.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Test-Driven Development</td>
+                <td>
+                    Tests are created and used continuously during
+                    development.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Continuous Integration</td>
+                <td>
+                    Code changes are integrated frequently.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Simple Design</td>
+                <td>
+                    Keep the design as simple as possible.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Refactoring</td>
+                <td>
+                    Improve internal code structure without changing
+                    its external behavior.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Small Releases</td>
+                <td>
+                    Deliver useful software in small increments.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Customer Involvement</td>
+                <td>
+                    Customer feedback is obtained throughout development.
+                </td>
+            </tr>
+
+        </table>
+
+        <h3>Advantages of XP</h3>
+
+        <ul>
+
+            <li>Handles changing requirements.</li>
+
+            <li>Improves software quality.</li>
+
+            <li>Provides frequent feedback.</li>
+
+            <li>Detects defects early.</li>
+
+            <li>Encourages communication.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- SCRUM -->
+
+    <section class="card" id="scrum">
+
+        <h2>6. Scrum Process</h2>
+
+        <p>
+            <strong>Scrum</strong> is an Agile framework in which
+            software development is performed through short,
+            time-boxed iterations called <strong>Sprints</strong>.
+        </p>
+
+        <h3>Scrum Flow</h3>
+
+        <div class="diagram">
+
+                 PRODUCT BACKLOG
+                        ↓
+                SPRINT PLANNING
+                        ↓
+                SPRINT BACKLOG
+                        ↓
+              ┌─────────────────┐
+              │     SPRINT      │
+              │                 │
+              │ Plan → Develop  │
+              │ Test → Review   │
+              └────────┬────────┘
+                       ↓
+                WORKING PRODUCT
+                       ↓
+                SPRINT REVIEW
+                       ↓
+             SPRINT RETROSPECTIVE
+                       ↓
+                PRODUCT BACKLOG
+                       ↓
+                 NEXT SPRINT
+
+        </div>
+
+        <h3>Scrum Roles</h3>
+
+        <table>
+
+            <tr>
+                <th>Role</th>
+                <th>Responsibility</th>
+            </tr>
+
+            <tr>
+                <td>Product Owner</td>
+                <td>
+                    Represents product requirements and manages
+                    product priorities.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Scrum Master</td>
+                <td>
+                    Helps the team follow Scrum practices and removes
+                    obstacles.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Development Team</td>
+                <td>
+                    Builds and tests the product increment.
+                </td>
+            </tr>
+
+        </table>
+
+        <h3>Important Scrum Events</h3>
+
+        <ul>
+
+            <li>Sprint Planning</li>
+
+            <li>Daily Scrum</li>
+
+            <li>Sprint Review</li>
+
+            <li>Sprint Retrospective</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- OTHER AGILE -->
+
+    <section class="card" id="other">
+
+        <h2>7. Other Agile Process Models</h2>
+
+        <p>
+            Apart from XP and Scrum, several Agile approaches can be
+            used depending on project requirements and team structure.
+        </p>
+
+        <h3>1. Adaptive Software Development (ASD)</h3>
+
+        <p>
+            ASD focuses on adapting to changing requirements.
+            Its basic activities can be viewed as:
+        </p>
+
+        <div class="diagram">
+
+              SPECULATE
+                  ↓
+               COLLABORATE
+                  ↓
+               LEARN
+                  ↓
+            NEXT ITERATION
+
+        </div>
+
+        <h3>2. Dynamic Systems Development Method (DSDM)</h3>
+
+        <p>
+            DSDM is an Agile approach that emphasizes business needs,
+            active user involvement and frequent delivery.
+        </p>
+
+        <h3>3. Scrum</h3>
+
+        <p>
+            Scrum uses Sprints, product backlog, sprint backlog,
+            reviews and retrospectives.
+        </p>
+
+        <h3>4. Crystal</h3>
+
+        <p>
+            Crystal is a family of Agile methods that gives importance
+            to communication, teamwork and frequent delivery.
+        </p>
+
+        <h3>5. Feature-Driven Development (FDD)</h3>
+
+        <p>
+            FDD organizes development around designing and building
+            features.
+        </p>
+
+        <h3>6. Agile Modeling</h3>
+
+        <p>
+            Agile modeling uses lightweight modeling techniques to
+            support Agile development without unnecessary documentation.
+        </p>
+
+    </section>
+
+
+    <!-- TOOLS -->
+
+    <section class="card" id="tools">
+
+        <h2>8. Tool Set for Agile Process</h2>
+
+        <p>
+            Agile teams use different tools to support planning,
+            communication, coding, testing, integration and tracking.
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Tool Category</th>
+                <th>Purpose</th>
+            </tr>
+
+            <tr>
+                <td>Task Management</td>
+                <td>
+                    Track user stories, tasks and project progress.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Version Control</td>
+                <td>
+                    Manage source code changes and collaboration.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Continuous Integration</td>
+                <td>
+                    Automatically build and test code changes.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Testing Tools</td>
+                <td>
+                    Automate software testing and defect detection.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Communication Tools</td>
+                <td>
+                    Support team communication and collaboration.
+                </td>
+            </tr>
+
+            <tr>
+                <td>Issue Tracking</td>
+                <td>
+                    Record, assign and monitor defects and tasks.
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="highlight">
+
+            <strong>Simple memory trick:</strong>
+
+            Plan → Code → Test → Integrate → Track → Communicate
+
+        </div>
+
+    </section>
+
+
+    <!-- KNOWLEDGE -->
+
+    <section class="card" id="knowledge">
+
+        <h2>9. Software Engineering Knowledge</h2>
+
+        <p>
+            Software engineering knowledge refers to the principles,
+            methods, techniques and practices used to develop and
+            maintain high-quality software.
+        </p>
+
+        <h3>Important Areas</h3>
+
+        <ul>
+
+            <li>Requirements engineering</li>
+
+            <li>Software design</li>
+
+            <li>Software construction</li>
+
+            <li>Software testing</li>
+
+            <li>Software maintenance</li>
+
+            <li>Project management</li>
+
+            <li>Configuration management</li>
+
+            <li>Quality management</li>
+
+        </ul>
+
+        <div class="exam">
+
+            <strong>Exam idea:</strong>
+
+            Software engineering knowledge helps developers choose
+            suitable processes and technical practices for solving
+            software problems systematically.
+
+        </div>
+
+    </section>
+
+
+    <!-- CORE -->
+
+    <section class="card" id="core">
+
+        <h2>10. Core Principles</h2>
+
+        <p>
+            Core principles provide general guidance for developing
+            software effectively.
+        </p>
+
+        <h3>Important Core Principles</h3>
+
+        <ol>
+
+            <li>
+                <strong>Be agile:</strong>
+                Accept and manage changes effectively.
+            </li>
+
+            <li>
+                <strong>Focus on quality:</strong>
+                Build quality into every development activity.
+            </li>
+
+            <li>
+                <strong>Keep it simple:</strong>
+                Avoid unnecessary complexity.
+            </li>
+
+            <li>
+                <strong>Communicate:</strong>
+                Maintain effective communication among stakeholders.
+            </li>
+
+            <li>
+                <strong>Plan:</strong>
+                Establish objectives, tasks and priorities.
+            </li>
+
+            <li>
+                <strong>Build for reuse:</strong>
+                Reusable components can reduce development effort.
+            </li>
+
+            <li>
+                <strong>Review:</strong>
+                Regularly evaluate work products.
+            </li>
+
+            <li>
+                <strong>Test continuously:</strong>
+                Testing should not be postponed until the end.
+            </li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- FRAMEWORK -->
+
+    <section class="card" id="framework">
+
+        <h2>11. Principles Guiding Each Framework Activity</h2>
+
+        <p>
+            Software engineering framework activities provide a
+            structured way of developing software.
+        </p>
+
+        <h3>1. Communication</h3>
+
+        <ul>
+
+            <li>Listen carefully to stakeholders.</li>
+
+            <li>Identify the actual problem.</li>
+
+            <li>Encourage collaboration.</li>
+
+            <li>Clarify requirements.</li>
+
+        </ul>
+
+        <h3>2. Planning</h3>
+
+        <ul>
+
+            <li>Understand project objectives.</li>
+
+            <li>Identify tasks.</li>
+
+            <li>Estimate resources.</li>
+
+            <li>Identify risks.</li>
+
+            <li>Establish schedules.</li>
+
+        </ul>
+
+        <h3>3. Modeling</h3>
+
+        <ul>
+
+            <li>Keep models understandable.</li>
+
+            <li>Model the problem before implementation.</li>
+
+            <li>Avoid unnecessary modeling.</li>
+
+            <li>Maintain consistency.</li>
+
+        </ul>
+
+        <h3>4. Construction</h3>
+
+        <ul>
+
+            <li>Write understandable code.</li>
+
+            <li>Follow coding standards.</li>
+
+            <li>Perform continuous testing.</li>
+
+            <li>Review code regularly.</li>
+
+        </ul>
+
+        <h3>5. Deployment</h3>
+
+        <ul>
+
+            <li>Deliver useful software.</li>
+
+            <li>Collect customer feedback.</li>
+
+            <li>Correct defects.</li>
+
+            <li>Improve future releases.</li>
+
+        </ul>
+
+        <div class="diagram">
+
+       COMMUNICATION
+              ↓
+           PLANNING
+              ↓
+           MODELING
+              ↓
+         CONSTRUCTION
+              ↓
+          DEPLOYMENT
+              ↓
+          FEEDBACK
+              ↓
+        NEXT ITERATION
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPARISON -->
+
+    <section class="card" id="comparison">
+
+        <h2>12. Agile vs Traditional Development</h2>
+
+        <table>
+
+            <tr>
+                <th>Agile</th>
+                <th>Traditional</th>
+            </tr>
+
+            <tr>
+                <td>Iterative and incremental</td>
+                <td>Usually sequential and plan-driven</td>
+            </tr>
+
+            <tr>
+                <td>Welcomes changing requirements</td>
+                <td>Changes may require formal processes</td>
+            </tr>
+
+            <tr>
+                <td>Frequent releases</td>
+                <td>Often larger releases</td>
+            </tr>
+
+            <tr>
+                <td>Continuous customer feedback</td>
+                <td>Customer involvement may be concentrated in specific phases</td>
+            </tr>
+
+            <tr>
+                <td>Continuous testing</td>
+                <td>Testing may be concentrated later in the lifecycle</td>
+            </tr>
+
+            <tr>
+                <td>Flexible planning</td>
+                <td>More emphasis on upfront planning</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- VTU QUESTIONS -->
+
+    <section class="card" id="questions">
+
+        <h2>13. ⭐ VTU Important Questions</h2>
+
+        <div class="important">
+
+            These questions are aligned with the official VTU
+            BCS501 model papers.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q1.</strong>
+            Explain Agile Process and its principles.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q2.</strong>
+            Demonstrate Extreme Programming Process with a neat,
+            labelled diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q3.</strong>
+            Write short notes on tool set for Agile Process.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q4.</strong>
+            Explain the principles that guide each framework activity
+            in the software engineering process.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q5.</strong>
+            Describe software engineering knowledge and its core
+            principles.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q6.</strong>
+            Write short notes on other Agile software processes.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q7.</strong>
+            What is Agility? Explain Agility with the cost of change
+            with diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q8.</strong>
+            Explain the principles of Agile Software Development.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q9.</strong>
+            Explain Extreme Programming (XP) with its functional
+            diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q10.</strong>
+            Explain Scrum process with a neat diagram.
+
+        </div>
+
+    </section>
+
+
+    <!-- 2 MARK -->
+
+    <section class="card" id="twomark">
+
+        <h2>14. ✍️ 2-Mark Questions & Answers</h2>
+
+        <div class="two-mark">
+
+            <strong>1. What is Agility?</strong>
+
+            <div class="answer">
+                Agility is the ability of a software team to respond
+                quickly and effectively to changing requirements,
+                technology and customer needs.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>2. What is Agile Process?</strong>
+
+            <div class="answer">
+                Agile process is an iterative and incremental software
+                development process that emphasizes frequent delivery,
+                customer collaboration and adaptation to change.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>3. What is XP?</strong>
+
+            <div class="answer">
+                Extreme Programming is an Agile software development
+                method that emphasizes customer involvement,
+                continuous testing, simple design and frequent releases.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>4. What is Scrum?</strong>
+
+            <div class="answer">
+                Scrum is an Agile framework that organizes development
+                into short iterations called Sprints.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>5. What is pair programming?</strong>
+
+            <div class="answer">
+                Pair programming is an XP practice in which two
+                developers work together on the same programming task.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>6. What is refactoring?</strong>
+
+            <div class="answer">
+                Refactoring is the process of improving the internal
+                structure of code without changing its external behavior.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>7. What is a Sprint?</strong>
+
+            <div class="answer">
+                A Sprint is a short, fixed development period in Scrum
+                during which a usable product increment is created.
+            </div>
+
+        </div>
+
+        <div class="two-mark">
+
+            <strong>8. What is continuous integration?</strong>
+
+            <div class="answer">
+                Continuous integration is the frequent integration of
+                code changes into a shared codebase followed by automated
+                or regular verification.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 10 MARK -->
+
+    <section class="card" id="tenmark">
+
+        <h2>15. 📝 10-Mark Answer Preparation</h2>
+
+        <h3>Question: Explain Agile Process and its Principles.</h3>
+
+        <div class="exam">
+
+            <strong>Write in this order:</strong>
+
+            <ol>
+
+                <li>Definition of Agile.</li>
+
+                <li>Definition of Agile Process.</li>
+
+                <li>Need for Agile development.</li>
+
+                <li>Agile process diagram.</li>
+
+                <li>Characteristics of Agile process.</li>
+
+                <li>Agile principles.</li>
+
+                <li>Advantages.</li>
+
+                <li>Conclusion.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Question: Explain XP with neat diagram.</h3>
+
+        <div class="exam">
+
+            <strong>Write in this order:</strong>
+
+            <ol>
+
+                <li>Definition of XP.</li>
+
+                <li>Objectives of XP.</li>
+
+                <li>XP process diagram.</li>
+
+                <li>User stories.</li>
+
+                <li>Release planning.</li>
+
+                <li>Iteration.</li>
+
+                <li>Coding and testing.</li>
+
+                <li>Customer acceptance testing.</li>
+
+                <li>Small release.</li>
+
+                <li>XP practices.</li>
+
+                <li>Advantages.</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Question: Explain Scrum Process.</h3>
+
+        <div class="exam">
+
+            <strong>Write in this order:</strong>
+
+            <ol>
+
+                <li>Definition of Scrum.</li>
+
+                <li>Scrum process diagram.</li>
+
+                <li>Product backlog.</li>
+
+                <li>Sprint planning.</li>
+
+                <li>Sprint backlog.</li>
+
+                <li>Sprint execution.</li>
+
+                <li>Daily Scrum.</li>
+
+                <li>Sprint review.</li>
+
+                <li>Retrospective.</li>
+
+                <li>Next Sprint.</li>
+
+                <li>Scrum roles.</li>
+
+            </ol>
+
+        </div>
+
+    </section>
+
+
+    <!-- REVISION -->
+
+    <section class="card" id="revision">
+
+        <h2>16. 🚀 Last-Minute Revision</h2>
+
+        <h3>Remember These Keywords</h3>
+
+        <div class="highlight">
+
+            <strong>Agility</strong>
+            → Respond to change
+
+            <br><br>
+
+            <strong>Agile</strong>
+            → Iterative + Incremental
+
+            <br><br>
+
+            <strong>XP</strong>
+            → Pair Programming + Testing + Small Releases
+
+            <br><br>
+
+            <strong>Scrum</strong>
+            → Product Backlog + Sprint + Review
+
+            <br><br>
+
+            <strong>Agile Tools</strong>
+            → Plan + Code + Test + Integrate + Track
+
+            <br><br>
+
+            <strong>Framework</strong>
+            → Communication + Planning + Modeling +
+            Construction + Deployment
+
+        </div>
+
+
+        <h3>🔥 Must Study Before Exam</h3>
+
+        <ol>
+
+            <li>Agility and Cost of Change</li>
+
+            <li>Agile Process and Principles</li>
+
+            <li>Extreme Programming (XP)</li>
+
+            <li>XP Functional Diagram</li>
+
+            <li>Scrum Process</li>
+
+            <li>Other Agile Process Models</li>
+
+            <li>Agile Process Tool Set</li>
+
+            <li>Software Engineering Knowledge</li>
+
+            <li>Core Principles</li>
+
+            <li>Principles Guiding Framework Activities</li>
+
+        </ol>
+
+
+        <div class="danger">
+
+            <strong>Boss Exam Tip 😎:</strong>
+
+            For a 10-mark Agile question, don't write only paragraphs.
+
+            <br><br>
+
+            Use:
+
+            <strong>
+                Definition → Diagram → Explanation → Points →
+                Advantages → Conclusion
+            </strong>
+
+            <br><br>
+
+            A neat labelled diagram can make the answer much easier
+            for the examiner to follow.
+
+        </div>
+
+    </section>
+
+
+    <!-- TEXTBOOK -->
+
+    <section class="card">
+
+        <h2>📖 Textbook Study Guide</h2>
+
+        <p>
+            The prescribed textbook for BCS501 is
+            <strong>Roger S. Pressman, Software Engineering:
+            A Practitioner's Approach</strong>.
+        </p>
+
+        <p>
+            Use the textbook for deeper explanation and examples,
+            while this page is designed as an original,
+            exam-oriented revision resource.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Study Method:</strong>
+
+            First understand the concept → then study the diagram →
+            then memorize keywords → finally practice the VTU question.
+
+        </div>
+
+    </section>
+
+
+    <!-- OFFICIAL SOURCES -->
+
+    <section class="card">
+
+        <h2>🔗 Official VTU Resources</h2>
+
+        <p>
+            <strong>VTU Scheme & Syllabus:</strong><br>
+            https://vtu.ac.in/b-e-scheme-syllabus/
+        </p>
+
+        <p>
+            <strong>VTU Model Question Papers:</strong><br>
+            https://vtu.ac.in/model-question-paper-b-e-b-tech-b-arch/
+        </p>
+
+        <p>
+            <strong>BCS501 Official Model Question Paper:</strong><br>
+            https://vtu.ac.in/pdf/QP/BCS5011.pdf
+        </p>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        📚 BCS501 • Module 3 • Agile Development
+    </p>
+
+    <p>
+        Made with ❤️ for learning
+    </p>
+
+</footer>
+
+
+<script>
+
+    // Disable right click
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+    });
+
+
+    // Disable selection
+    document.addEventListener("selectstart", function(event) {
+        event.preventDefault();
+    });
+
+
+    // Disable drag
+    document.addEventListener("dragstart", function(event) {
+        event.preventDefault();
+    });
+
+
+    // Disable copy/cut
+    document.addEventListener("copy", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("cut", function(event) {
+        event.preventDefault();
+    });
+
+
+    // Discourage common shortcuts
+    document.addEventListener("keydown", function(event) {
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>
