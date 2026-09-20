@@ -1,0 +1,3713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111827">
+
+    <title>BCS502 Module 1 | Computer Networks</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.75;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #1d4ed8);
+            color: white;
+            padding: 42px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #dbeafe;
+            font-size: 17px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 28px auto;
+        }
+
+        .back {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 9px;
+            margin-bottom: 22px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #2563eb;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 24px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        h2 {
+            color: #1e3a8a;
+            font-size: 26px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #2563eb;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        h4 {
+            color: #374151;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 13px;
+        }
+
+        ul,
+        ol {
+            margin: 10px 0 16px 25px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #111827;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 17px;
+            border-radius: 8px;
+            margin: 17px 0;
+        }
+
+        .example {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 17px;
+            border-radius: 8px;
+            margin: 17px 0;
+        }
+
+        .important {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 17px;
+            border-radius: 8px;
+            margin: 17px 0;
+        }
+
+        .exam {
+            background: #fefce8;
+            border-left: 5px solid #eab308;
+            padding: 17px;
+            border-radius: 8px;
+            margin: 17px 0;
+        }
+
+        .danger {
+            background: #fef2f2;
+            border-left: 5px solid #dc2626;
+            padding: 17px;
+            border-radius: 8px;
+            margin: 17px 0;
+        }
+
+        .diagram {
+            background: #111827;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 18px 0;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: "Courier New", monospace;
+            line-height: 1.55;
+        }
+
+        .formula {
+            background: #172554;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            margin: 18px 0;
+            font-size: 17px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .toc a {
+            display: block;
+            color: #2563eb;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 11px;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 9px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .answer {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 8px;
+        }
+
+        .two-mark {
+            background: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 14px;
+            border-radius: 7px;
+            margin: 10px 0;
+        }
+
+        .layer {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 12px 0;
+        }
+
+        .layer-number {
+            display: inline-block;
+            background: #1e3a8a;
+            color: white;
+            padding: 4px 9px;
+            border-radius: 5px;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b7280;
+            padding: 30px;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 26px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .diagram {
+                font-size: 12px;
+            }
+        }
+
+        /* Discourage casual copying */
+
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>BCS502 — Module 1</h1>
+
+    <p>
+        Computer Networks • Complete VTU Theory Notes
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <a href="index.html" class="back">
+        ← Back to BCS502
+    </a>
+
+
+    <!-- INTRODUCTION -->
+
+    <section class="card">
+
+        <h2>📘 Module 1 — Introduction to Computer Networks</h2>
+
+        <p>
+            Computer Networks is the study of how computers and other
+            devices communicate with each other and exchange information
+            through communication networks.
+        </p>
+
+        <p>
+            This module establishes the foundation for understanding
+            network architecture, protocol layering, TCP/IP, OSI,
+            transmission media and packet switching.
+        </p>
+
+        <div class="highlight">
+
+            <strong>VTU Module 1 Scope</strong>
+
+            <br><br>
+
+            Data Communications → Networks → Network Types →
+            Protocol Layering → TCP/IP → OSI →
+            Transmission Media → Guided/Unguided Media →
+            Packet Switching
+
+        </div>
+
+        <span class="tag">Data Communication</span>
+        <span class="tag">Networks</span>
+        <span class="tag">Topologies</span>
+        <span class="tag">TCP/IP</span>
+        <span class="tag">OSI</span>
+        <span class="tag">Transmission Media</span>
+        <span class="tag">Switching</span>
+
+    </section>
+
+
+    <!-- TOC -->
+
+    <section class="card toc">
+
+        <h2>📑 Contents</h2>
+
+        <a href="#data">1. Data Communication</a>
+
+        <a href="#components">2. Components of Data Communication</a>
+
+        <a href="#characteristics">3. Characteristics of Data Communication</a>
+
+        <a href="#flow">4. Data Flow</a>
+
+        <a href="#network">5. Computer Networks</a>
+
+        <a href="#criteria">6. Network Criteria</a>
+
+        <a href="#types">7. Types of Networks</a>
+
+        <a href="#topology">8. Network Topologies</a>
+
+        <a href="#protocol">9. Protocols</a>
+
+        <a href="#layering">10. Protocol Layering</a>
+
+        <a href="#tcpip">11. TCP/IP Protocol Suite</a>
+
+        <a href="#logical">12. Logical Connection in TCP/IP</a>
+
+        <a href="#osi">13. OSI Model</a>
+
+        <a href="#comparison">14. OSI vs TCP/IP</a>
+
+        <a href="#physical">15. Physical Layer</a>
+
+        <a href="#media">16. Transmission Media</a>
+
+        <a href="#guided">17. Guided Media</a>
+
+        <a href="#twisted">18. Twisted Pair Cable</a>
+
+        <a href="#coaxial">19. Coaxial Cable</a>
+
+        <a href="#fiber">20. Optical Fiber</a>
+
+        <a href="#wireless">21. Unguided / Wireless Media</a>
+
+        <a href="#switching">22. Switching</a>
+
+        <a href="#packet">23. Packet Switching</a>
+
+        <a href="#datagram">24. Datagram Network</a>
+
+        <a href="#virtual">25. Virtual Circuit Network</a>
+
+        <a href="#questions">26. VTU Important Questions</a>
+
+        <a href="#twomark">27. 2-Mark Questions</a>
+
+        <a href="#tenmark">28. 7/10-Mark Answer Preparation</a>
+
+        <a href="#revision">29. Last-Minute Revision</a>
+
+        <a href="#textbook">30. Textbook Guide</a>
+
+    </section>
+
+
+    <!-- DATA COMMUNICATION -->
+
+    <section class="card" id="data">
+
+        <h2>1. Data Communication</h2>
+
+        <h3>What is Data Communication?</h3>
+
+        <p>
+            <strong>Data communication</strong> is the exchange of data
+            between two or more devices through some form of transmission
+            medium.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Simple Meaning:</strong>
+
+            <br><br>
+
+            One device has information → it sends the information →
+            another device receives it.
+
+        </div>
+
+        <h3>Why is Data Communication Needed?</h3>
+
+        <p>
+            Modern computing rarely happens on a completely isolated
+            computer. Computers need to exchange files, messages,
+            commands, multimedia and other information.
+        </p>
+
+        <div class="example">
+
+            <strong>Real-Life Example:</strong>
+
+            <br><br>
+
+            When you send a photo from your phone to a friend:
+
+            <br><br>
+
+            Your phone sends data → network carries the data →
+            friend's phone receives the data.
+
+        </div>
+
+        <h3>Basic Data Communication Model</h3>
+
+        <div class="diagram">
+
+        ┌──────────┐
+        │  SENDER  │
+        └────┬─────┘
+             │
+             │ Message
+             ↓
+        ┌──────────────┐
+        │ Transmission │
+        │    Medium    │
+        └──────┬───────┘
+               │
+               ↓
+        ┌──────────┐
+        │ RECEIVER │
+        └──────────┘
+
+        </div>
+
+        <p>
+            Communication rules are controlled by a
+            <strong>protocol</strong>.
+        </p>
+
+    </section>
+
+
+    <!-- COMPONENTS -->
+
+    <section class="card" id="components">
+
+        <h2>2. Components of Data Communication</h2>
+
+        <p>
+            A data communication system has five fundamental components.
+        </p>
+
+        <div class="diagram">
+
+                  DATA COMMUNICATION
+
+                         │
+        ┌────────────────┼────────────────┐
+        ↓                ↓                ↓
+      Sender           Message         Receiver
+                         │
+                         ↓
+                  Transmission
+                     Medium
+                         │
+                         ↓
+                     Protocol
+
+        </div>
+
+        <h3>1. Message</h3>
+
+        <p>
+            The <strong>message</strong> is the information being
+            communicated.
+        </p>
+
+        <p>It may be:</p>
+
+        <ul>
+
+            <li>Text</li>
+            <li>Numbers</li>
+            <li>Images</li>
+            <li>Audio</li>
+            <li>Video</li>
+            <li>Computer files</li>
+
+        </ul>
+
+        <div class="example">
+
+            Example:
+
+            <br>
+
+            A WhatsApp text message is a message.
+
+        </div>
+
+
+        <h3>2. Sender</h3>
+
+        <p>
+            The <strong>sender</strong> is the device that sends the
+            data.
+        </p>
+
+        <p>
+            Examples: computer, mobile phone, server, sensor.
+        </p>
+
+
+        <h3>3. Receiver</h3>
+
+        <p>
+            The <strong>receiver</strong> is the device that receives
+            the data.
+        </p>
+
+        <p>
+            Examples: laptop, smartphone, server, IoT device.
+        </p>
+
+
+        <h3>4. Transmission Medium</h3>
+
+        <p>
+            The transmission medium is the physical or wireless path
+            through which data travels.
+        </p>
+
+        <p>
+            Examples include copper cable, optical fiber and radio waves.
+        </p>
+
+
+        <h3>5. Protocol</h3>
+
+        <p>
+            A <strong>protocol</strong> is a set of rules that controls
+            communication between devices.
+        </p>
+
+        <div class="example">
+
+            <strong>Easy Example:</strong>
+
+            <br><br>
+
+            Human conversation also follows rules.
+
+            <br>
+
+            One person speaks → another listens → response is given.
+
+            <br><br>
+
+            Computer networks similarly require communication rules.
+
+        </div>
+
+    </section>
+
+
+    <!-- CHARACTERISTICS -->
+
+    <section class="card" id="characteristics">
+
+        <h2>3. Characteristics of Data Communication</h2>
+
+        <p>
+            A good data communication system should satisfy important
+            characteristics.
+        </p>
+
+        <h3>1. Delivery</h3>
+
+        <p>
+            Data must reach the correct destination.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            If you send an email to your friend, it should reach your
+            friend's email account and not another user's account.
+
+        </div>
+
+
+        <h3>2. Accuracy</h3>
+
+        <p>
+            Data should arrive without unacceptable errors or unwanted
+            changes.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            If you send:
+
+            <br><br>
+
+            <strong>1000</strong>
+
+            <br><br>
+
+            the receiver should not incorrectly receive:
+
+            <br><br>
+
+            <strong>1001</strong>
+
+        </div>
+
+
+        <h3>3. Timeliness</h3>
+
+        <p>
+            Data should arrive at the appropriate time.
+        </p>
+
+        <div class="example">
+
+            Timeliness is particularly important for live applications
+            such as video calls and online gaming.
+
+        </div>
+
+
+        <h3>4. Jitter</h3>
+
+        <p>
+            <strong>Jitter</strong> refers to variation in the arrival
+            time of packets.
+        </p>
+
+        <div class="example">
+
+            Suppose packets of a voice call arrive at:
+
+            <br><br>
+
+            10 ms → 10 ms → 10 ms → 100 ms
+
+            <br><br>
+
+            The large variation can produce poor audio quality.
+
+        </div>
+
+    </section>
+
+
+    <!-- DATA FLOW -->
+
+    <section class="card" id="flow">
+
+        <h2>4. Data Flow</h2>
+
+        <p>
+            Data flow describes the direction in which data travels
+            between devices.
+        </p>
+
+        <h3>1. Simplex</h3>
+
+        <p>
+            In simplex communication, communication occurs in only
+            one direction.
+        </p>
+
+        <div class="diagram">
+
+        Sender ─────────────────────► Receiver
+
+        </div>
+
+        <div class="example">
+
+            Example:
+
+            <br>
+
+            Traditional television broadcasting.
+
+            <br>
+
+            TV station → viewer.
+
+        </div>
+
+
+        <h3>2. Half-Duplex</h3>
+
+        <p>
+            Both devices can communicate, but not at the same time.
+        </p>
+
+        <div class="diagram">
+
+        Device A ─────────────► Device B
+        Device A ◄───────────── Device B
+
+        One direction at a time.
+
+        </div>
+
+        <div class="example">
+
+            Example:
+
+            Walkie-talkie communication.
+
+            One person speaks while the other waits.
+
+        </div>
+
+
+        <h3>3. Full-Duplex</h3>
+
+        <p>
+            Both devices can communicate simultaneously.
+        </p>
+
+        <div class="diagram">
+
+        Device A ◄════════════════► Device B
+
+             Both directions simultaneously
+
+        </div>
+
+        <div class="example">
+
+            Example:
+
+            Telephone or modern voice communication.
+
+        </div>
+
+
+        <table>
+
+            <tr>
+                <th>Mode</th>
+                <th>Direction</th>
+                <th>Example</th>
+            </tr>
+
+            <tr>
+                <td>Simplex</td>
+                <td>One direction</td>
+                <td>Broadcast TV</td>
+            </tr>
+
+            <tr>
+                <td>Half-Duplex</td>
+                <td>Both directions, one at a time</td>
+                <td>Walkie-talkie</td>
+            </tr>
+
+            <tr>
+                <td>Full-Duplex</td>
+                <td>Both directions simultaneously</td>
+                <td>Telephone</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- NETWORK -->
+
+    <section class="card" id="network">
+
+        <h2>5. Computer Networks</h2>
+
+        <h3>Definition</h3>
+
+        <p>
+            A <strong>computer network</strong> is a collection of
+            interconnected computing devices that communicate and
+            exchange data and resources.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Simple idea:</strong>
+
+            <br><br>
+
+            Devices + Communication Links + Protocols = Network
+
+        </div>
+
+        <h3>Why do we need Computer Networks?</h3>
+
+        <ul>
+
+            <li>Resource sharing</li>
+
+            <li>File sharing</li>
+
+            <li>Communication</li>
+
+            <li>Internet access</li>
+
+            <li>Hardware sharing</li>
+
+            <li>Centralized services</li>
+
+            <li>Remote access</li>
+
+        </ul>
+
+        <div class="example">
+
+            <strong>College Example:</strong>
+
+            <br><br>
+
+            Computers in a college laboratory can be connected through
+            a LAN so that they can access common servers, printers,
+            storage and Internet services.
+
+        </div>
+
+    </section>
+
+
+    <!-- CRITERIA -->
+
+    <section class="card" id="criteria">
+
+        <h2>6. Network Criteria</h2>
+
+        <p>
+            A network can be evaluated using important criteria.
+        </p>
+
+        <h3>1. Performance</h3>
+
+        <p>
+            Performance describes how quickly and efficiently a network
+            can deliver data.
+        </p>
+
+        <p>
+            Important measures include throughput and delay.
+        </p>
+
+
+        <h3>2. Reliability</h3>
+
+        <p>
+            Reliability indicates how consistently the network operates
+            and how quickly it can recover from failures.
+        </p>
+
+
+        <h3>3. Security</h3>
+
+        <p>
+            Security protects data and network resources from
+            unauthorized access, modification and attacks.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            <br>
+
+            A banking network must provide strong security because
+            financial information is sensitive.
+
+        </div>
+
+    </section>
+
+
+    <!-- TYPES -->
+
+    <section class="card" id="types">
+
+        <h2>7. Types of Networks</h2>
+
+        <h3>1. PAN — Personal Area Network</h3>
+
+        <p>
+            A PAN covers a very small area around an individual.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            <br>
+
+            Smartphone connected to wireless earbuds or smartwatch.
+
+        </div>
+
+
+        <h3>2. LAN — Local Area Network</h3>
+
+        <p>
+            A LAN covers a limited geographical area such as a room,
+            building, laboratory or office.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            College computer laboratory network.
+
+        </div>
+
+
+        <h3>3. MAN — Metropolitan Area Network</h3>
+
+        <p>
+            A MAN generally covers a city or metropolitan area and is
+            larger than a LAN.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            A network connecting branches of an organization across
+            a city.
+
+        </div>
+
+
+        <h3>4. WAN — Wide Area Network</h3>
+
+        <p>
+            A WAN covers large geographical areas such as countries
+            or continents.
+        </p>
+
+        <div class="example">
+
+            Example:
+
+            The Internet is the most prominent example of a large
+            interconnected network.
+
+        </div>
+
+
+        <table>
+
+            <tr>
+
+                <th>Network</th>
+                <th>Coverage</th>
+                <th>Example</th>
+
+            </tr>
+
+            <tr>
+
+                <td>PAN</td>
+                <td>Very small personal area</td>
+                <td>Phone + smartwatch</td>
+
+            </tr>
+
+            <tr>
+
+                <td>LAN</td>
+                <td>Room/building/campus</td>
+                <td>College lab</td>
+
+            </tr>
+
+            <tr>
+
+                <td>MAN</td>
+                <td>City</td>
+                <td>City-wide organization network</td>
+
+            </tr>
+
+            <tr>
+
+                <td>WAN</td>
+                <td>Country/continent/world</td>
+                <td>Internet</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- TOPOLOGY -->
+
+    <section class="card" id="topology">
+
+        <h2>8. Network Topologies</h2>
+
+        <p>
+            <strong>Network topology</strong> describes the physical or
+            logical arrangement of devices and communication links in
+            a network.
+        </p>
+
+
+        <h3>1. Mesh Topology</h3>
+
+        <p>
+            In a mesh topology, devices are connected to multiple or
+            all other devices.
+        </p>
+
+        <div class="diagram">
+
+             A────────────B
+             │╲          ╱│
+             │ ╲        ╱ │
+             │  ╲      ╱  │
+             │   ╲    ╱   │
+             │    ╲  ╱    │
+             │     ╲╱     │
+             C────────────D
+
+        </div>
+
+        <h4>Advantages</h4>
+
+        <ul>
+
+            <li>High reliability.</li>
+            <li>Multiple paths are available.</li>
+            <li>Failure of one link may not stop communication.</li>
+            <li>Good fault tolerance.</li>
+
+        </ul>
+
+        <h4>Disadvantages</h4>
+
+        <ul>
+
+            <li>Large amount of cabling.</li>
+            <li>Expensive.</li>
+            <li>Complex installation.</li>
+
+        </ul>
+
+
+        <h3>2. Star Topology</h3>
+
+        <p>
+            Every device is connected to a central device such as a
+            switch.
+        </p>
+
+        <div class="diagram">
+
+                       PC
+                       │
+                       │
+             PC ─── SWITCH ─── PC
+                       │
+                       │
+                      PC
+
+        </div>
+
+        <h4>Advantages</h4>
+
+        <ul>
+
+            <li>Easy to install.</li>
+            <li>Easy to troubleshoot.</li>
+            <li>Easy to add devices.</li>
+            <li>Failure of one cable usually affects one device.</li>
+
+        </ul>
+
+        <h4>Disadvantage</h4>
+
+        <p>
+            Failure of the central device can affect the entire network.
+        </p>
+
+
+        <h3>3. Bus Topology</h3>
+
+        <p>
+            All devices share a common backbone cable.
+        </p>
+
+        <div class="diagram">
+
+        PC ───── PC ───── PC ───── PC
+        ═══════════════════════════════
+                Backbone
+
+        </div>
+
+        <h4>Advantages</h4>
+
+        <ul>
+
+            <li>Simple design.</li>
+            <li>Requires less cable than mesh.</li>
+            <li>Can be inexpensive for small networks.</li>
+
+        </ul>
+
+        <h4>Disadvantages</h4>
+
+        <ul>
+
+            <li>Backbone failure can affect the network.</li>
+            <li>Performance can decrease as traffic increases.</li>
+            <li>Fault detection can be difficult.</li>
+
+        </ul>
+
+
+        <h3>4. Ring Topology</h3>
+
+        <p>
+            Each device is connected to two neighboring devices,
+            forming a closed loop.
+        </p>
+
+        <div class="diagram">
+
+                 ┌──────── PC ────────┐
+                 │                    │
+                PC                    PC
+                 │                    │
+                 └──────── PC ────────┘
+
+        </div>
+
+        <h4>Advantages</h4>
+
+        <ul>
+
+            <li>Organized access to the medium.</li>
+            <li>Can provide predictable transmission behavior.</li>
+
+        </ul>
+
+        <h4>Disadvantages</h4>
+
+        <ul>
+
+            <li>Failure can affect communication depending on design.</li>
+            <li>Adding/removing nodes can be more difficult.</li>
+
+        </ul>
+
+
+        <h3>Topology Comparison</h3>
+
+        <table>
+
+            <tr>
+
+                <th>Topology</th>
+                <th>Main Feature</th>
+                <th>Major Advantage</th>
+                <th>Major Disadvantage</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Mesh</td>
+                <td>Many direct links</td>
+                <td>High reliability</td>
+                <td>Expensive</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Star</td>
+                <td>Central device</td>
+                <td>Easy management</td>
+                <td>Central-device dependency</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Bus</td>
+                <td>Common backbone</td>
+                <td>Simple</td>
+                <td>Backbone failure</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Ring</td>
+                <td>Closed loop</td>
+                <td>Organized communication</td>
+                <td>Failure can affect the ring</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- PROTOCOL -->
+
+    <section class="card" id="protocol">
+
+        <h2>9. Protocols</h2>
+
+        <h3>What is a Protocol?</h3>
+
+        <p>
+            A <strong>protocol</strong> is a set of rules that governs
+            communication between network devices.
+        </p>
+
+        <p>
+            Two devices need common rules so that the receiver can
+            correctly understand the information sent by the sender.
+        </p>
+
+        <h3>Important Elements of a Protocol</h3>
+
+        <ol>
+
+            <li>
+                <strong>Syntax:</strong>
+                Structure or format of data.
+            </li>
+
+            <li>
+                <strong>Semantics:</strong>
+                Meaning of each section of the data.
+            </li>
+
+            <li>
+                <strong>Timing:</strong>
+                When data should be sent and how quickly it should be
+                processed.
+            </li>
+
+        </ol>
+
+        <div class="example">
+
+            <strong>Example:</strong>
+
+            <br><br>
+
+            HTTP defines rules used for communication between web
+            clients and web servers.
+
+        </div>
+
+    </section>
+
+
+    <!-- LAYERING -->
+
+    <section class="card" id="layering">
+
+        <h2>10. Protocol Layering</h2>
+
+        <p>
+            Network communication is complex. Instead of handling
+            everything as one huge task, networking functions are
+            divided into layers.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Basic Idea:</strong>
+
+            <br><br>
+
+            Break a complex communication problem into smaller,
+            manageable responsibilities.
+
+        </div>
+
+        <h3>Why Layering?</h3>
+
+        <ul>
+
+            <li>Reduces complexity.</li>
+
+            <li>Makes design easier.</li>
+
+            <li>Allows independent development of layers.</li>
+
+            <li>Makes troubleshooting easier.</li>
+
+            <li>Supports standardization.</li>
+
+            <li>Allows technologies to evolve independently.</li>
+
+        </ul>
+
+
+        <h3>Simple Layering Example</h3>
+
+        <div class="diagram">
+
+              APPLICATION
+                   │
+                   ↓
+               TRANSPORT
+                   │
+                   ↓
+                NETWORK
+                   │
+                   ↓
+              DATA LINK
+                   │
+                   ↓
+               PHYSICAL
+
+        </div>
+
+        <p>
+            Each layer performs its own task and provides services to
+            the layer above it.
+        </p>
+
+    </section>
+
+
+    <!-- TCP IP -->
+
+    <section class="card" id="tcpip">
+
+        <h2>11. TCP/IP Protocol Suite</h2>
+
+        <p>
+            TCP/IP is the protocol architecture used by the Internet
+            and many modern computer networks.
+        </p>
+
+        <h3>TCP/IP Layers</h3>
+
+        <div class="diagram">
+
+             ┌──────────────────────────┐
+             │      APPLICATION         │
+             ├──────────────────────────┤
+             │       TRANSPORT          │
+             ├──────────────────────────┤
+             │        INTERNET          │
+             ├──────────────────────────┤
+             │    NETWORK ACCESS /      │
+             │    LINK + PHYSICAL       │
+             └──────────────────────────┘
+
+        </div>
+
+
+        <h3>1. Application Layer</h3>
+
+        <p>
+            The application layer provides services used by network
+            applications.
+        </p>
+
+        <p>Examples include:</p>
+
+        <ul>
+
+            <li>HTTP / HTTPS</li>
+            <li>FTP</li>
+            <li>DNS</li>
+            <li>SMTP</li>
+
+        </ul>
+
+        <div class="example">
+
+            When you open a website, application-level protocols help
+            your browser communicate with the web server.
+
+        </div>
+
+
+        <h3>2. Transport Layer</h3>
+
+        <p>
+            The transport layer provides communication between
+            application processes.
+        </p>
+
+        <p>
+            Important protocols include:
+        </p>
+
+        <ul>
+
+            <li>TCP — Transmission Control Protocol</li>
+            <li>UDP — User Datagram Protocol</li>
+
+        </ul>
+
+        <p>
+            TCP provides reliable, connection-oriented transport,
+            while UDP provides a simpler connectionless transport
+            service.
+        </p>
+
+
+        <h3>3. Internet Layer</h3>
+
+        <p>
+            The Internet layer is responsible for logical addressing
+            and delivery of packets across interconnected networks.
+        </p>
+
+        <p>
+            IP is the central protocol of this layer.
+        </p>
+
+
+        <h3>4. Network Access Layer</h3>
+
+        <p>
+            This layer handles communication over the local network
+            technology and the physical transmission medium.
+        </p>
+
+        <p>
+            Examples include Ethernet and Wi-Fi technologies.
+        </p>
+
+
+        <div class="important">
+
+            <strong>Exam Memory:</strong>
+
+            <br><br>
+
+            Application → User/network services
+
+            <br>
+
+            Transport → Process-to-process communication
+
+            <br>
+
+            Internet → Packet delivery between networks
+
+            <br>
+
+            Network Access → Local delivery and physical transmission
+
+        </div>
+
+    </section>
+
+
+    <!-- LOGICAL CONNECTION -->
+
+    <section class="card" id="logical">
+
+        <h2>12. Logical Connection in TCP/IP</h2>
+
+        <p>
+            A logical connection means that corresponding entities at
+            the same layer in communicating systems conceptually
+            interact with each other.
+        </p>
+
+        <p>
+            The actual data does not physically travel directly between
+            the same-layer entities. It moves downward through the
+            sender's layers, across the network, and upward through
+            the receiver's layers.
+        </p>
+
+        <div class="diagram">
+
+             SENDER                         RECEIVER
+
+        Application  ◄══════════════════►  Application
+             │                                │
+        Transport    ◄══════════════════►  Transport
+             │                                │
+        Internet     ◄══════════════════►  Internet
+             │                                │
+        Network      ◄══════════════════►  Network
+        Access                            Access
+             │                                │
+             └────────── PHYSICAL ────────────┘
+
+        Actual data:
+        
+        Sender ↓↓↓
+        Layer by layer
+        ↓↓↓
+        Network
+        ↓↓↓
+        Receiver ↑↑↑
+        Layer by layer
+
+        </div>
+
+        <div class="exam">
+
+            <strong>VTU Point:</strong>
+
+            When explaining logical connection, clearly distinguish
+            between:
+
+            <br><br>
+
+            <strong>Logical interaction</strong> between peer layers
+
+            <br>
+
+            and
+
+            <br>
+
+            <strong>Actual physical transmission</strong> through lower
+            layers and the communication network.
+
+        </div>
+
+    </section>
+
+
+    <!-- OSI -->
+
+    <section class="card" id="osi">
+
+        <h2>13. OSI Reference Model</h2>
+
+        <p>
+            OSI stands for <strong>Open Systems Interconnection</strong>.
+            It is a seven-layer reference model used to describe
+            network communication functions.
+        </p>
+
+        <div class="diagram">
+
+                 OSI MODEL
+
+          7 ┌─────────────────┐
+            │   Application   │
+          6 ├─────────────────┤
+            │  Presentation   │
+          5 ├─────────────────┤
+            │     Session     │
+          4 ├─────────────────┤
+            │    Transport    │
+          3 ├─────────────────┤
+            │     Network     │
+          2 ├─────────────────┤
+            │   Data Link     │
+          1 └─────────────────┘
+            │     Physical    │
+            └─────────────────┘
+
+        </div>
+
+
+        <!-- Layer 7 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">7</span>
+                Application Layer
+            </h3>
+
+            <p>
+                Provides network services directly to applications.
+            </p>
+
+            <p>
+                Examples include web, email and file-transfer services.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Services used by applications."
+
+        </div>
+
+
+        <!-- Layer 6 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">6</span>
+                Presentation Layer
+            </h3>
+
+            <p>
+                Handles representation-related functions such as
+                translation, encryption and compression.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "How data is represented."
+
+        </div>
+
+
+        <!-- Layer 5 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">5</span>
+                Session Layer
+            </h3>
+
+            <p>
+                Establishes, manages and terminates communication
+                sessions between applications.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Manages conversations."
+
+        </div>
+
+
+        <!-- Layer 4 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">4</span>
+                Transport Layer
+            </h3>
+
+            <p>
+                Provides end-to-end or process-to-process communication.
+            </p>
+
+            <p>
+                It can provide functions such as segmentation,
+                reassembly, flow control and reliability.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Delivery between processes."
+
+        </div>
+
+
+        <!-- Layer 3 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">3</span>
+                Network Layer
+            </h3>
+
+            <p>
+                Responsible for logical addressing and routing packets
+                between networks.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Which path should the packet take?"
+
+        </div>
+
+
+        <!-- Layer 2 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">2</span>
+                Data Link Layer
+            </h3>
+
+            <p>
+                Provides node-to-node delivery over a data-link and
+                handles framing and other link-level functions.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Reliable link-level transfer."
+
+        </div>
+
+
+        <!-- Layer 1 -->
+
+        <div class="layer">
+
+            <h3>
+                <span class="layer-number">1</span>
+                Physical Layer
+            </h3>
+
+            <p>
+                Transmits raw bits over the physical communication
+                medium.
+            </p>
+
+            <strong>Easy memory:</strong>
+            "Signals and bits."
+
+        </div>
+
+
+        <h3>OSI Layer Memory Trick</h3>
+
+        <div class="highlight">
+
+            <strong>
+                All People Seem To Need Data Processing
+            </strong>
+
+            <br><br>
+
+            Application
+
+            <br>
+
+            Presentation
+
+            <br>
+
+            Session
+
+            <br>
+
+            Transport
+
+            <br>
+
+            Network
+
+            <br>
+
+            Data Link
+
+            <br>
+
+            Physical
+
+        </div>
+
+    </section>
+
+
+    <!-- ENCAPSULATION -->
+
+    <section class="card">
+
+        <h2>14. Encapsulation and Decapsulation</h2>
+
+        <h3>Encapsulation</h3>
+
+        <p>
+            Encapsulation is the process in which each lower layer adds
+            its own control information to data received from the layer
+            above.
+        </p>
+
+        <div class="diagram">
+
+        Application
+             │
+             ↓
+        [ DATA ]
+             │
+             ↓
+        Transport
+             │
+             ↓
+        [ HEADER | DATA ]
+             │
+             ↓
+        Network
+             │
+             ↓
+        [ HEADER | HEADER | DATA ]
+             │
+             ↓
+        Data Link
+             │
+             ↓
+        [ HEADER | DATA | TRAILER ]
+             │
+             ↓
+        Physical
+             │
+             ↓
+        Bits
+
+        </div>
+
+
+        <h3>Decapsulation</h3>
+
+        <p>
+            At the receiving system, the process is reversed. Each layer
+            removes and processes the information intended for it.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Sender → Encapsulation
+            </strong>
+
+            <br><br>
+
+            <strong>
+                Receiver → Decapsulation
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- OSI TCP COMPARISON -->
+
+    <section class="card" id="comparison">
+
+        <h2>15. OSI vs TCP/IP</h2>
+
+        <table>
+
+            <tr>
+
+                <th>OSI</th>
+                <th>TCP/IP</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Seven layers</td>
+
+                <td>Commonly represented using four layers</td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Application, Presentation and Session are
+                    separate layers.
+                </td>
+
+                <td>
+                    These functions are largely included in the
+                    Application layer.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Data Link and Physical are separate.
+                </td>
+
+                <td>
+                    Common four-layer representation combines
+                    lower-layer functions as Network Access.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Developed as a general reference model.
+                </td>
+
+                <td>
+                    Developed around the Internet protocol suite.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Useful for conceptual understanding and
+                    standardization.
+                </td>
+
+                <td>
+                    Widely used in practical Internet networking.
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <h3>Why did OSI not become the dominant practical protocol suite?</h3>
+
+        <p>
+            The OSI reference model remains important for understanding
+            networking, but the TCP/IP protocol suite became dominant
+            in the Internet.
+        </p>
+
+        <p>
+            Commonly discussed reasons include the earlier practical
+            deployment and widespread adoption of TCP/IP, availability
+            of working implementations, and the complexity and timing
+            of OSI standardization.
+        </p>
+
+        <div class="exam">
+
+            <strong>Exam Tip:</strong>
+
+            For the VTU question "Compare OSI and TCP/IP Models",
+            first draw both models and then give a comparison table.
+
+        </div>
+
+    </section>
+
+
+    <!-- PHYSICAL -->
+
+    <section class="card" id="physical">
+
+        <h2>16. Introduction to Physical Layer</h2>
+
+        <p>
+            The physical layer is responsible for transmitting raw
+            bits over a physical communication medium.
+        </p>
+
+        <h3>Major Concerns</h3>
+
+        <ul>
+
+            <li>Representation of bits</li>
+
+            <li>Data rate</li>
+
+            <li>Synchronization</li>
+
+            <li>Physical characteristics of interfaces</li>
+
+            <li>Transmission medium</li>
+
+        </ul>
+
+        <div class="example">
+
+            Example:
+
+            <br><br>
+
+            When a computer sends binary data through a cable,
+            the physical layer determines how those bits are
+            represented as physical signals.
+
+        </div>
+
+    </section>
+
+
+    <!-- MEDIA -->
+
+    <section class="card" id="media">
+
+        <h2>17. Transmission Media</h2>
+
+        <p>
+            Transmission media is the path through which data signals
+            travel from one device to another.
+        </p>
+
+        <div class="diagram">
+
+                  TRANSMISSION MEDIA
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+          GUIDED                 UNGUIDED
+             │                       │
+       ┌─────┼─────┐          Wireless Signals
+       │     │     │
+    Twisted Coaxial Fiber
+     Pair    Cable  Optic
+
+        </div>
+
+        <h3>Two Major Categories</h3>
+
+        <p>
+            <strong>Guided media:</strong>
+            Signal travels through a physical path.
+        </p>
+
+        <p>
+            <strong>Unguided media:</strong>
+            Signal travels through air or free space.
+        </p>
+
+    </section>
+
+
+    <!-- GUIDED -->
+
+    <section class="card" id="guided">
+
+        <h2>18. Guided Transmission Media</h2>
+
+        <p>
+            In guided media, signals travel through a physical medium
+            such as copper cable or optical fiber.
+        </p>
+
+        <h3>Main Types</h3>
+
+        <ol>
+
+            <li>Twisted Pair Cable</li>
+
+            <li>Coaxial Cable</li>
+
+            <li>Fiber-Optic Cable</li>
+
+        </ol>
+
+        <div class="important">
+
+            <strong>VTU Important:</strong>
+
+            Guided transmission media and twisted pair cable are
+            specifically asked in the official BCS502 model paper.
+
+        </div>
+
+    </section>
+
+
+    <!-- TWISTED -->
+
+    <section class="card" id="twisted">
+
+        <h2>19. Twisted Pair Cable</h2>
+
+        <h3>Concept</h3>
+
+        <p>
+            A twisted pair cable consists of two insulated copper wires
+            twisted around each other.
+        </p>
+
+        <div class="diagram">
+
+             Wire 1  ~~~~~~~
+                    ╲ ╱
+                     X
+                    ╱ ╲
+             Wire 2  ~~~~~~~
+
+            Two insulated copper wires
+            are twisted together.
+
+        </div>
+
+        <h3>Why are wires twisted?</h3>
+
+        <p>
+            Twisting helps reduce electromagnetic interference and
+            crosstalk between nearby pairs.
+        </p>
+
+        <h3>Types</h3>
+
+        <h4>1. UTP — Unshielded Twisted Pair</h4>
+
+        <p>
+            UTP does not use an additional metallic shield around the
+            twisted pairs.
+        </p>
+
+        <h4>2. STP — Shielded Twisted Pair</h4>
+
+        <p>
+            STP includes shielding that provides additional protection
+            against electromagnetic interference.
+        </p>
+
+        <table>
+
+            <tr>
+
+                <th>UTP</th>
+                <th>STP</th>
+
+            </tr>
+
+            <tr>
+
+                <td>No additional shielding</td>
+
+                <td>Uses shielding</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Lower cost</td>
+
+                <td>Generally more expensive</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Easy installation</td>
+
+                <td>More complex installation</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Common in Ethernet networks</td>
+
+                <td>Useful where greater interference protection is needed</td>
+
+            </tr>
+
+        </table>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Low cost.</li>
+
+            <li>Easy to install.</li>
+
+            <li>Flexible.</li>
+
+            <li>Widely available.</li>
+
+        </ul>
+
+        <h3>Disadvantages</h3>
+
+        <ul>
+
+            <li>More susceptible to interference than fiber.</li>
+
+            <li>Limited distance compared with fiber.</li>
+
+            <li>Signal quality can be affected by electromagnetic noise.</li>
+
+        </ul>
+
+        <div class="example">
+
+            <strong>Example:</strong>
+
+            Ethernet networks in homes, offices and computer labs
+            commonly use twisted-pair cabling.
+
+        </div>
+
+    </section>
+
+
+    <!-- COAXIAL -->
+
+    <section class="card" id="coaxial">
+
+        <h2>20. Coaxial Cable</h2>
+
+        <p>
+            Coaxial cable contains a central conductor surrounded by
+            insulation, shielding and an outer protective layer.
+        </p>
+
+        <div class="diagram">
+
+              ┌─────────────────────┐
+              │ Outer Jacket       │
+              │ ┌────────────────┐ │
+              │ │ Shield         │ │
+              │ │ ┌────────────┐ │ │
+              │ │ │ Insulation │ │ │
+              │ │ │ ┌────────┐ │ │ │
+              │ │ │ │Conductor│ │ │ │
+              │ │ │ └────────┘ │ │ │
+              │ │ └────────────┘ │ │
+              │ └────────────────┘ │
+              └─────────────────────┘
+
+        </div>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Better shielding than ordinary twisted pair.</li>
+
+            <li>Can carry signals over longer distances than some
+                basic copper arrangements.</li>
+
+        </ul>
+
+        <h3>Applications</h3>
+
+        <ul>
+
+            <li>Cable television systems.</li>
+
+            <li>Some broadband communication systems.</li>
+
+            <li>Legacy network systems.</li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- FIBER -->
+
+    <section class="card" id="fiber">
+
+        <h2>21. Optical Fiber</h2>
+
+        <p>
+            Optical fiber uses light to transmit information through
+            a thin strand of glass or plastic.
+        </p>
+
+        <div class="diagram">
+
+        ┌───────────────────────────────────┐
+        │             JACKET                │
+        │    ┌─────────────────────────┐    │
+        │    │         CLADDING        │    │
+        │    │    ┌───────────────┐    │    │
+        │    │    │     CORE      │    │    │
+        │    │    │  LIGHT ───►   │    │    │
+        │    │    └───────────────┘    │    │
+        │    └─────────────────────────┘    │
+        └───────────────────────────────────┘
+
+        </div>
+
+        <h3>Basic Working</h3>
+
+        <p>
+            Information is converted into light signals. The light
+            travels through the fiber core and is detected at the
+            receiving end.
+        </p>
+
+        <h3>Main Parts</h3>
+
+        <ul>
+
+            <li><strong>Core:</strong> carries the light.</li>
+
+            <li><strong>Cladding:</strong> surrounds the core and helps
+                keep light confined within it.</li>
+
+            <li><strong>Jacket:</strong> provides physical protection.</li>
+
+        </ul>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Very high bandwidth.</li>
+
+            <li>Low attenuation over long distances.</li>
+
+            <li>Immune to electromagnetic interference.</li>
+
+            <li>Lightweight compared with many copper systems.</li>
+
+            <li>Good security characteristics.</li>
+
+        </ul>
+
+        <h3>Disadvantages</h3>
+
+        <ul>
+
+            <li>Higher installation cost.</li>
+
+            <li>More delicate than ordinary copper cable.</li>
+
+            <li>Splicing and repair require specialized equipment.</li>
+
+        </ul>
+
+        <div class="example">
+
+            <strong>Example:</strong>
+
+            Fiber-optic links are widely used in high-speed
+            telecommunications and Internet backbone networks.
+
+        </div>
+
+    </section>
+
+
+    <!-- WIRELESS -->
+
+    <section class="card" id="wireless">
+
+        <h2>22. Unguided / Wireless Media</h2>
+
+        <p>
+            In unguided transmission, electromagnetic signals travel
+            through free space rather than through a physical cable.
+        </p>
+
+        <h3>Common Wireless Media</h3>
+
+        <table>
+
+            <tr>
+
+                <th>Medium</th>
+                <th>Typical Idea</th>
+                <th>Example</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Radio Waves</td>
+
+                <td>
+                    Can propagate over relatively broad areas and may
+                    support mobility.
+                </td>
+
+                <td>
+                    Wireless communication
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Microwaves</td>
+
+                <td>
+                    Directional communication, often used for
+                    point-to-point links.
+                </td>
+
+                <td>
+                    Microwave backhaul
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Infrared</td>
+
+                <td>
+                    Short-range communication using infrared radiation.
+                </td>
+
+                <td>
+                    Remote controls
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="example">
+
+            <strong>Simple Example:</strong>
+
+            Wi-Fi is a wireless networking technology in which radio
+            waves are used to communicate between devices and access
+            points.
+
+        </div>
+
+    </section>
+
+
+    <!-- SWITCHING -->
+
+    <section class="card" id="switching">
+
+        <h2>23. Switching</h2>
+
+        <h3>What is Switching?</h3>
+
+        <p>
+            Switching is the process of selecting a path through a
+            network so that data can travel from a source to a
+            destination.
+        </p>
+
+        <div class="diagram">
+
+        Source
+           │
+           ↓
+        Router A
+        /      \
+       /        \
+    Router B   Router C
+       \        /
+        \      /
+        Router D
+           │
+           ↓
+       Destination
+
+        </div>
+
+        <h3>Main Switching Approaches</h3>
+
+        <ul>
+
+            <li>Circuit Switching</li>
+
+            <li>Packet Switching</li>
+
+            <li>Message Switching</li>
+
+        </ul>
+
+        <div class="highlight">
+
+            For the current VTU BCS502 Module 1 syllabus,
+            <strong>Packet Switching and its types</strong> are
+            specifically included.
+
+        </div>
+
+    </section>
+
+
+    <!-- PACKET -->
+
+    <section class="card" id="packet">
+
+        <h2>24. Packet Switching</h2>
+
+        <h3>Concept</h3>
+
+        <p>
+            In packet switching, a message is divided into smaller
+            units called <strong>packets</strong>.
+        </p>
+
+        <div class="diagram">
+
+        ORIGINAL MESSAGE
+
+        ┌─────────────────────────────┐
+        │       LARGE MESSAGE         │
+        └─────────────────────────────┘
+                     │
+                     ↓
+                 Divided
+                     │
+          ┌──────────┼──────────┐
+          ↓          ↓          ↓
+       Packet 1   Packet 2   Packet 3
+          │          │          │
+          └──────────┼──────────┘
+                     ↓
+                  Network
+                     ↓
+              Destination
+                     ↓
+               Reassembled
+
+        </div>
+
+        <h3>Why Packet Switching?</h3>
+
+        <ul>
+
+            <li>Efficient sharing of network links.</li>
+
+            <li>Suitable for bursty data traffic.</li>
+
+            <li>Multiple users can share network resources.</li>
+
+            <li>Does not require a dedicated physical path for every
+                communication session.</li>
+
+        </ul>
+
+        <h3>Types of Packet Switching</h3>
+
+        <ol>
+
+            <li>Connectionless Packet Switching — Datagram Network</li>
+
+            <li>Connection-Oriented Packet Switching — Virtual Circuit</li>
+
+        </ol>
+
+    </section>
+
+
+    <!-- DATAGRAM -->
+
+    <section class="card" id="datagram">
+
+        <h2>25. Connectionless Packet Switching — Datagram Network</h2>
+
+        <h3>Concept</h3>
+
+        <p>
+            In a datagram network, each packet is treated independently.
+        </p>
+
+        <p>
+            Packets belonging to the same message may potentially take
+            different routes.
+        </p>
+
+        <div class="diagram">
+
+                    ┌──── Router B ─────┐
+                    │                   │
+        Sender ─ Router A             Router D ─ Destination
+                    │                   │
+                    └──── Router C ─────┘
+
+        Packet 1 → B → D
+        Packet 2 → C → D
+        Packet 3 → B → D
+
+        </div>
+
+        <h3>Important Characteristics</h3>
+
+        <ul>
+
+            <li>No dedicated path is established before transmission.</li>
+
+            <li>Each packet contains destination information.</li>
+
+            <li>Packets are forwarded independently.</li>
+
+            <li>Different packets may take different paths.</li>
+
+        </ul>
+
+        <h3>Advantages</h3>
+
+        <ul>
+
+            <li>Flexible routing.</li>
+
+            <li>Efficient use of network resources.</li>
+
+            <li>No connection-establishment phase.</li>
+
+        </ul>
+
+        <h3>Disadvantages</h3>
+
+        <ul>
+
+            <li>Packets can experience different delays.</li>
+
+            <li>Packets may arrive out of order.</li>
+
+            <li>Packets may need reordering at the destination.</li>
+
+        </ul>
+
+        <div class="exam">
+
+            <strong>VTU 7-Mark Question:</strong>
+
+            Describe the operation of a connectionless packet-switched
+            network with a neat diagram.
+
+            <br><br>
+
+            For this answer, draw the network diagram and explain:
+
+            <br>
+
+            1. Message division
+
+            <br>
+
+            2. Independent packets
+
+            <br>
+
+            3. Destination addressing
+
+            <br>
+
+            4. Routing
+
+            <br>
+
+            5. Different possible paths
+
+            <br>
+
+            6. Reassembly
+
+        </div>
+
+    </section>
+
+
+    <!-- VIRTUAL -->
+
+    <section class="card" id="virtual">
+
+        <h2>26. Connection-Oriented Packet Switching — Virtual Circuit</h2>
+
+        <h3>Concept</h3>
+
+        <p>
+            In a virtual-circuit network, a logical path is established
+            before data packets are sent.
+        </p>
+
+        <div class="diagram">
+
+        Connection Setup
+
+        Sender
+           │
+           ▼
+        Router A
+           │
+           ▼
+        Router B
+           │
+           ▼
+        Destination
+
+              ↓
+
+        Virtual Circuit Established
+
+              ↓
+
+        Packets follow the logical path
+
+        </div>
+
+        <h3>Three General Phases</h3>
+
+        <ol>
+
+            <li>
+                <strong>Setup:</strong>
+                Establish the logical path.
+            </li>
+
+            <li>
+                <strong>Data Transfer:</strong>
+                Transfer packets using the established path.
+            </li>
+
+            <li>
+                <strong>Teardown:</strong>
+                Release the logical connection.
+            </li>
+
+        </ol>
+
+        <h3>Datagram vs Virtual Circuit</h3>
+
+        <table>
+
+            <tr>
+
+                <th>Datagram</th>
+                <th>Virtual Circuit</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Connectionless</td>
+
+                <td>Connection-oriented</td>
+
+            </tr>
+
+            <tr>
+
+                <td>No setup phase</td>
+
+                <td>Setup phase exists</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Each packet routed independently</td>
+
+                <td>Packets normally follow established logical path</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Packets may take different paths</td>
+
+                <td>Packets generally follow the same logical route</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Flexible</td>
+
+                <td>Provides connection-oriented behavior</td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <!-- VTU QUESTIONS -->
+
+    <section class="card" id="questions">
+
+        <h2>⭐ 27. Official VTU Important Questions</h2>
+
+        <div class="important">
+
+            The following questions are based on the official VTU
+            BCS502 model papers.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q1.</strong>
+
+            Describe the operation of connectionless packet-switched
+            network with the help of neat diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q2.</strong>
+
+            What is meant by logical connection in TCP/IP?
+            Explain TCP/IP reference model with diagram.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q3.</strong>
+
+            Explain the four basic topologies used in networks.
+            List advantages and disadvantages of each.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q4.</strong>
+
+            What are guided transmission media?
+            Explain twisted pair cable in detail.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q5.</strong>
+
+            Describe each layer of TCP/IP and its responsibility.
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q6.</strong>
+
+            Compare OSI and TCP/IP models.
+            What are the reasons for OSI model not becoming the
+            dominant practical Internet suite?
+
+        </div>
+
+        <div class="question">
+
+            <strong>Q7.</strong>
+
+            What is data communication?
+            Explain its characteristics and components.
+
+        </div>
+
+    </section>
+
+
+    <!-- 2 MARK -->
+
+    <section class="card" id="twomark">
+
+        <h2>✍️ 28. 2-Mark Questions and Answers</h2>
+
+
+        <div class="two-mark">
+
+            <strong>1. Define data communication.</strong>
+
+            <div class="answer">
+
+                Data communication is the exchange of data between two
+                or more devices through a communication medium.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>2. List the components of data communication.</strong>
+
+            <div class="answer">
+
+                Message, sender, receiver, transmission medium and
+                protocol.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>3. What is a protocol?</strong>
+
+            <div class="answer">
+
+                A protocol is a set of rules that governs communication
+                between network devices.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>4. What is topology?</strong>
+
+            <div class="answer">
+
+                Topology is the physical or logical arrangement of
+                devices and communication links in a network.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>5. What is LAN?</strong>
+
+            <div class="answer">
+
+                LAN is a Local Area Network that covers a relatively
+                limited geographical area such as a room, building,
+                laboratory or campus.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>6. What is TCP/IP?</strong>
+
+            <div class="answer">
+
+                TCP/IP is a suite of communication protocols used for
+                communication across interconnected networks and forms
+                the basis of Internet networking.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>7. What is OSI?</strong>
+
+            <div class="answer">
+
+                OSI stands for Open Systems Interconnection. It is a
+                seven-layer reference model for understanding network
+                communication functions.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>8. What is guided media?</strong>
+
+            <div class="answer">
+
+                Guided media is a transmission medium in which signals
+                travel through a physical path such as copper cable
+                or optical fiber.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>9. What is packet switching?</strong>
+
+            <div class="answer">
+
+                Packet switching is a method in which data is divided
+                into packets and packets are forwarded through a shared
+                network.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>10. What is a datagram network?</strong>
+
+            <div class="answer">
+
+                A datagram network is a connectionless packet-switched
+                network in which each packet is treated independently.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>11. What is jitter?</strong>
+
+            <div class="answer">
+
+                Jitter is the variation in packet arrival time.
+
+            </div>
+
+        </div>
+
+
+        <div class="two-mark">
+
+            <strong>12. What is full-duplex communication?</strong>
+
+            <div class="answer">
+
+                Full-duplex communication allows both devices to send
+                and receive data simultaneously.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- 7/10 MARK -->
+
+    <section class="card" id="tenmark">
+
+        <h2>📝 29. 7/10-Mark Answer Preparation</h2>
+
+        <h3>Q1. Data Communication</h3>
+
+        <div class="exam">
+
+            <strong>Answer order:</strong>
+
+            <ol>
+
+                <li>Definition</li>
+
+                <li>Diagram</li>
+
+                <li>Five components</li>
+
+                <li>Delivery</li>
+
+                <li>Accuracy</li>
+
+                <li>Timeliness</li>
+
+                <li>Jitter</li>
+
+                <li>Real-world example</li>
+
+            </ol>
+
+        </div>
+
+
+        <h3>Q2. Four Network Topologies</h3>
+
+        <div class="exam">
+
+            For each topology write:
+
+            <br><br>
+
+            <strong>
+            Definition → Diagram → Advantages →
+            Disadvantages → Example
+            </strong>
+
+            <br><br>
+
+            Cover:
+
+            <br>
+
+            Mesh → Star → Bus → Ring
+
+        </div>
+
+
+        <h3>Q3. TCP/IP Reference Model</h3>
+
+        <div class="exam">
+
+            Draw the four-layer model.
+
+            <br><br>
+
+            Then explain:
+
+            <br>
+
+            1. Application
+
+            <br>
+
+            2. Transport
+
+            <br>
+
+            3. Internet
+
+            <br>
+
+            4. Network Access
+
+            <br><br>
+
+            Finally explain logical connection and encapsulation.
+
+        </div>
+
+
+        <h3>Q4. OSI Model</h3>
+
+        <div class="exam">
+
+            Draw all seven layers.
+
+            <br><br>
+
+            Explain each layer's main responsibility.
+
+            <br><br>
+
+            Finish with an example of data moving from sender to receiver.
+
+        </div>
+
+
+        <h3>Q5. Guided Media — Twisted Pair</h3>
+
+        <div class="exam">
+
+            Write:
+
+            <br><br>
+
+            Definition → Construction → Need for twisting →
+            UTP → STP → Advantages → Disadvantages →
+            Applications
+
+        </div>
+
+
+        <h3>Q6. Connectionless Packet Switching</h3>
+
+        <div class="exam">
+
+            Draw:
+
+            <br><br>
+
+            Sender → Routers → Destination
+
+            <br><br>
+
+            Then explain:
+
+            <br>
+
+            Message → Packets → Independent forwarding →
+            Possible different routes → Destination → Reassembly
+
+        </div>
+
+    </section>
+
+
+    <!-- REVISION -->
+
+    <section class="card" id="revision">
+
+        <h2>🚀 30. Last-Minute Revision</h2>
+
+        <h3>Data Communication</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            Sender + Receiver + Message +
+            Medium + Protocol
+
+            </strong>
+
+        </div>
+
+
+        <h3>Characteristics</h3>
+
+        <div class="highlight">
+
+            <strong>
+            Delivery → Accuracy → Timeliness → Jitter
+            </strong>
+
+        </div>
+
+
+        <h3>Data Flow</h3>
+
+        <div class="highlight">
+
+            Simplex → One direction
+
+            <br>
+
+            Half-Duplex → Both directions, one at a time
+
+            <br>
+
+            Full-Duplex → Both directions simultaneously
+
+        </div>
+
+
+        <h3>Network Types</h3>
+
+        <div class="highlight">
+
+            PAN → LAN → MAN → WAN
+
+        </div>
+
+
+        <h3>Topologies</h3>
+
+        <div class="highlight">
+
+            Mesh → Star → Bus → Ring
+
+        </div>
+
+
+        <h3>OSI</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            Application
+
+            <br>
+
+            Presentation
+
+            <br>
+
+            Session
+
+            <br>
+
+            Transport
+
+            <br>
+
+            Network
+
+            <br>
+
+            Data Link
+
+            <br>
+
+            Physical
+
+            </strong>
+
+        </div>
+
+
+        <h3>TCP/IP</h3>
+
+        <div class="highlight">
+
+            Application → Transport → Internet →
+            Network Access
+
+        </div>
+
+
+        <h3>Transmission Media</h3>
+
+        <div class="highlight">
+
+            Guided:
+
+            <br>
+
+            Twisted Pair → Coaxial → Fiber
+
+            <br><br>
+
+            Unguided:
+
+            <br>
+
+            Radio → Microwave → Infrared
+
+        </div>
+
+
+        <h3>Packet Switching</h3>
+
+        <div class="highlight">
+
+            <strong>
+
+            Datagram = Connectionless
+
+            <br><br>
+
+            Virtual Circuit = Connection-oriented
+
+            </strong>
+
+        </div>
+
+
+        <div class="danger">
+
+            <strong>🔥 Boss's Exam Priority:</strong>
+
+            <br><br>
+
+            1. OSI Model
+
+            <br>
+
+            2. TCP/IP Model
+
+            <br>
+
+            3. OSI vs TCP/IP
+
+            <br>
+
+            4. Four Topologies
+
+            <br>
+
+            5. Data Communication
+
+            <br>
+
+            6. Twisted Pair
+
+            <br>
+
+            7. Packet Switching
+
+            <br>
+
+            8. Logical Connection
+
+        </div>
+
+    </section>
+
+
+    <!-- TEXTBOOK -->
+
+    <section class="card" id="textbook">
+
+        <h2>📖 31. VTU Textbook Guide</h2>
+
+        <p>
+            The prescribed textbook for BCS502 is:
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Behrouz A. Forouzan
+            </strong>
+
+            <br>
+
+            <em>
+                Data Communications and Networking
+            </em>
+
+            <br>
+
+            5th Edition
+
+            <br>
+
+            Tata McGraw-Hill
+
+        </div>
+
+        <p>
+            VTU maps Module 1 to the following textbook sections:
+        </p>
+
+        <ul>
+
+            <li>Chapter 1: Sections 1.1 – 1.3</li>
+
+            <li>Chapter 2: Sections 2.1 – 2.3</li>
+
+            <li>Chapter 7: Sections 7.1 – 7.3</li>
+
+            <li>Chapter 8: Section 8.3</li>
+
+        </ul>
+
+        <div class="important">
+
+            <strong>Study Method:</strong>
+
+            <br><br>
+
+            First understand these web notes concept-wise.
+
+            <br><br>
+
+            Then read the corresponding textbook section for
+            additional examples and diagrams.
+
+            <br><br>
+
+            Finally practice the VTU model-paper questions.
+
+        </div>
+
+        <p>
+            These notes are original exam-oriented explanations and do
+            not reproduce the copyrighted textbook.
+        </p>
+
+    </section>
+
+
+    <!-- FINAL -->
+
+    <section class="card">
+
+        <h2>🎯 Module 1 Complete Checklist</h2>
+
+        <ul>
+
+            <li>☑ Data Communication</li>
+
+            <li>☑ Components</li>
+
+            <li>☑ Characteristics</li>
+
+            <li>☑ Data Flow</li>
+
+            <li>☑ Computer Networks</li>
+
+            <li>☑ Network Criteria</li>
+
+            <li>☑ PAN / LAN / MAN / WAN</li>
+
+            <li>☑ Mesh / Star / Bus / Ring</li>
+
+            <li>☑ Protocols</li>
+
+            <li>☑ Protocol Layering</li>
+
+            <li>☑ TCP/IP</li>
+
+            <li>☑ Logical Connection</li>
+
+            <li>☑ OSI Model</li>
+
+            <li>☑ Encapsulation</li>
+
+            <li>☑ OSI vs TCP/IP</li>
+
+            <li>☑ Physical Layer</li>
+
+            <li>☑ Transmission Media</li>
+
+            <li>☑ Guided Media</li>
+
+            <li>☑ Twisted Pair</li>
+
+            <li>☑ Coaxial Cable</li>
+
+            <li>☑ Optical Fiber</li>
+
+            <li>☑ Wireless Media</li>
+
+            <li>☑ Packet Switching</li>
+
+            <li>☑ Datagram Network</li>
+
+            <li>☑ Virtual Circuit</li>
+
+            <li>☑ VTU Questions</li>
+
+            <li>☑ 2-Mark Questions</li>
+
+            <li>☑ Long-Answer Preparation</li>
+
+            <li>☑ Revision</li>
+
+        </ul>
+
+        <div class="highlight">
+
+            <strong>
+
+            BCS502 Module 1 = Understand the journey:
+
+            <br><br>
+
+            DATA → PROTOCOL → LAYERS → TCP/IP / OSI →
+            MEDIA → PACKETS → DESTINATION
+
+            </strong>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        🌐 BCS502 • Computer Networks • Module 1
+    </p>
+
+    <p>
+        Made with ❤️ for learning
+    </p>
+
+</footer>
+
+
+<script>
+
+    /*
+       Discourage casual copying.
+       This cannot prevent screenshots, OCR,
+       browser developer tools, or determined copying.
+    */
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "copy",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "cut",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                ["c", "x", "a", "u", "s", "p"].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+                event.preventDefault();
+            }
+
+            if (event.key === "PrintScreen") {
+                event.preventDefault();
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
