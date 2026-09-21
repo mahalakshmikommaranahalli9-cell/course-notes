@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>BCSL504 | Program 9</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+
+body{
+    background:#080808;
+    color:white;
+    font-family:Arial;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+a{
+    color:#d4af37;
+}
+
+h1,h2{
+    color:#d4af37;
+}
+
+.box{
+    background:#111;
+    padding:25px;
+    margin:20px 0;
+    border-radius:10px;
+}
+
+#demo{
+    width:150px;
+    height:150px;
+    background:#d4af37;
+    color:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:30px auto;
+    border-radius:10px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:0;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.github{
+    display:inline-block;
+    background:#d4af37;
+    color:#000;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html">← Back to BCSL504</a>
+
+<h1>BCSL504 • PROGRAM 9</h1>
+
+<h2>jQuery Operations</h2>
+
+<div class="box">
+
+<h2>🎯 Aim</h2>
+
+<p>
+To perform DOM manipulation and animation using jQuery.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>📖 Explanation</h2>
+
+<p>
+jQuery is a JavaScript library that simplifies DOM
+manipulation, event handling and animation.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🛠 Use of Program</h2>
+
+<ul>
+<li>Modify webpage content.</li>
+<li>Change CSS dynamically.</li>
+<li>Perform animations.</li>
+<li>Handle user events.</li>
+</ul>
+
+</div>
+
+<div class="box">
+
+<h2>💻 Complete Program</h2>
+
+<div id="demo">
+Hello jQuery!
+</div>
+
+<button id="hide">Hide</button>
+
+<button id="show">Show</button>
+
+<button id="animate">Animate</button>
+
+<button id="change">
+Change Text
+</button>
+
+<pre><code>$(document).ready(function(){
+
+    $("#hide").click(function(){
+        $("#demo").hide();
+    });
+
+    $("#show").click(function(){
+        $("#demo").show();
+    });
+
+    $("#animate").click(function(){
+        $("#demo").animate({
+            width: "300px",
+            height: "200px"
+        });
+    });
+
+    $("#change").click(function(){
+        $("#demo").text("jQuery is Easy!");
+    });
+
+});</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>🖥 Expected Output</h2>
+
+<p>
+The buttons hide, show, animate and change the content
+of the selected element.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🎓 Viva Questions</h2>
+
+<ol>
+<li>What is jQuery?</li>
+<li>What is the use of $ symbol?</li>
+<li>What is DOM manipulation?</li>
+<li>What does hide() do?</li>
+<li>What does animate() do?</li>
+</ol>
+
+</div>
+
+<h2>MAHALAKSHMI'S GITHUB</h2>
+
+<a class="github"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+    $("#hide").click(function(){
+        $("#demo").hide();
+    });
+
+    $("#show").click(function(){
+        $("#demo").show();
+    });
+
+    $("#animate").click(function(){
+        $("#demo").animate({
+            width:"300px",
+            height:"200px"
+        });
+    });
+
+    $("#change").click(function(){
+        $("#demo").text("jQuery is Easy!");
+    });
+
+});
+
+</script>
+
+</body>
+</html>

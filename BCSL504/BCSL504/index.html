@@ -1,0 +1,1316 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="BCSL504 Web Technology Laboratory Course Notes"
+    >
+
+    <title>BCSL504 | Web Technology Laboratory</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080706;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           ANIMATED LION
+        ========================= */
+
+        .lion {
+            position: fixed;
+            font-size: 45px;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+            animation: lionMove 18s linear infinite;
+        }
+
+        @keyframes lionMove {
+
+            0% {
+                transform: translate(-100px, 20vh) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(50vw, 65vh) rotate(8deg);
+            }
+
+            100% {
+                transform: translate(110vw, 15vh) rotate(-8deg);
+            }
+
+        }
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================
+           TOP NAV
+        ========================= */
+
+        nav {
+            padding: 22px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #29251b;
+        }
+
+        .logo {
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            text-align: center;
+            padding: 90px 20px 70px;
+        }
+
+        .course-code {
+            color: #d4af37;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 78px);
+            margin: 20px 0 15px;
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            color: #d4af37;
+        }
+
+        .hero p {
+            max-width: 780px;
+            margin: auto;
+            color: #bdbdbd;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            margin: 6px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #d4af37;
+            color: #080706;
+        }
+
+        .secondary {
+            border: 1px solid #d4af37;
+            color: #d4af37;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section {
+            padding: 65px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #999;
+        }
+
+        /* =========================
+           WELCOME NOTE
+        ========================= */
+
+        .welcome {
+            background: #11100e;
+            border: 1px solid #3b321d;
+            border-radius: 20px;
+            padding: 40px;
+            line-height: 1.9;
+            color: #ccc;
+        }
+
+        .welcome strong {
+            color: #d4af37;
+        }
+
+        /* =========================
+           TOPICS
+        ========================= */
+
+        .topics {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .topic {
+            background: #11100e;
+            border: 1px solid #29251b;
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .topic:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+        }
+
+        .topic-icon {
+            font-size: 32px;
+        }
+
+        .topic h3 {
+            color: #d4af37;
+        }
+
+        .topic p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           LEARNING FLOW
+        ========================= */
+
+        .flow {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .flow-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: #11100e;
+            border: 1px solid #29251b;
+            border-radius: 15px;
+        }
+
+        .flow-number {
+            width: 42px;
+            height: 42px;
+            margin: auto;
+            border-radius: 50%;
+            background: #d4af37;
+            color: #080706;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .flow-item h3 {
+            color: #ddd;
+        }
+
+        .flow-item p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           PROGRAMS
+        ========================= */
+
+        .programs {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        .program {
+            background: #11100e;
+            border: 1px solid #29251b;
+            border-radius: 18px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .program:hover {
+            transform: translateY(-6px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.08);
+        }
+
+        .program-number {
+            color: #d4af37;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .program h3 {
+            font-size: 22px;
+            margin: 12px 0;
+        }
+
+        .program p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .program a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 16px;
+            background: #d4af37;
+            color: #080706;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           LAB PREPARATION
+        ========================= */
+
+        .prep {
+            background: #11100e;
+            border: 1px solid #3b321d;
+            border-radius: 20px;
+            padding: 35px;
+        }
+
+        .prep ul {
+            color: #bbb;
+            line-height: 2;
+        }
+
+        .prep li::marker {
+            color: #d4af37;
+        }
+
+        /* =========================
+           VIVA
+        ========================= */
+
+        .viva-box {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .viva-card {
+            background: #11100e;
+            border: 1px solid #29251b;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .viva-card h3 {
+            color: #d4af37;
+        }
+
+        .viva-card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           GITHUB
+        ========================= */
+
+        .github {
+            text-align: center;
+            padding: 55px 25px;
+            background: #11100e;
+            border: 1px solid #3b321d;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+
+        .github h2 {
+            color: #d4af37;
+        }
+
+        .github p {
+            color: #aaa;
+        }
+
+        .github-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 14px 24px;
+            background: #d4af37;
+            color: #080706;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #29251b;
+            padding: 30px 0;
+            text-align: center;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            body {
+                font-size: 15px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            .welcome,
+            .prep {
+                padding: 25px;
+            }
+
+        }
+
+        /* =========================
+           PRINT PROTECTION
+        ========================= */
+
+        @media print {
+            body {
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="lion">🦁</div>
+
+<div class="container">
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            COURSE NOTES
+        </div>
+
+        <div>
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="#topics">
+                Topics
+            </a>
+
+            <a href="#programs">
+                Programs
+            </a>
+
+            <a href="#viva">
+                Viva
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="course-code">
+            BCSL504
+        </div>
+
+        <h1>
+            Web Technology <span>Laboratory</span>
+        </h1>
+
+        <p>
+            Learn how modern web pages and web applications
+            are created using HTML, CSS, JavaScript, JSON,
+            PHP, jQuery and AJAX through practical laboratory
+            programs.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#programs"
+                class="btn primary"
+            >
+                🧪 Explore Programs
+            </a>
+
+            <a
+                href="#topics"
+                class="btn secondary"
+            >
+                📖 Explore Topics
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- WELCOME -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>👋 Welcome</h2>
+
+            <p>
+                A practical learning space for BCSL504
+            </p>
+
+        </div>
+
+        <div class="welcome">
+
+            <p>
+                Welcome to the
+                <strong>BCSL504 Web Technology Laboratory</strong>
+                section of Mahalakshmi's Course Notes.
+            </p>
+
+            <p>
+                This section is designed to help you understand
+                the practical concepts of web technology through
+                simple explanations and working programs.
+            </p>
+
+            <p>
+                Each laboratory program contains an
+                <strong>Aim</strong>,
+                <strong>Explanation</strong>,
+                <strong>Use of the Program</strong>,
+                <strong>Complete Code</strong>,
+                <strong>Expected Output</strong>
+                and
+                <strong>Viva Questions</strong>.
+            </p>
+
+            <p>
+                Start with the fundamentals and gradually move
+                towards dynamic web technologies such as
+                JavaScript, PHP, jQuery and AJAX.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOPICS -->
+
+    <section id="topics">
+
+        <div class="section-title">
+
+            <h2>🌐 What You Will Learn</h2>
+
+            <p>
+                Core technologies covered in the laboratory
+            </p>
+
+        </div>
+
+        <div class="topics">
+
+            <div class="topic">
+
+                <div class="topic-icon">🧱</div>
+
+                <h3>HTML</h3>
+
+                <p>
+                    Learn how to structure web pages using
+                    headings, paragraphs, tables, forms and
+                    semantic elements.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">🎨</div>
+
+                <h3>CSS</h3>
+
+                <p>
+                    Learn how CSS controls the appearance,
+                    layout and presentation of web pages.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">⚡</div>
+
+                <h3>JavaScript</h3>
+
+                <p>
+                    Add calculations, interaction and dynamic
+                    behaviour to web pages.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">📦</div>
+
+                <h3>JSON</h3>
+
+                <p>
+                    Understand structured data and conversion
+                    between JSON and JavaScript objects.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">🐘</div>
+
+                <h3>PHP</h3>
+
+                <p>
+                    Learn server-side programming through
+                    visitor counters and sorting operations.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">✨</div>
+
+                <h3>jQuery</h3>
+
+                <p>
+                    Perform DOM operations, append content
+                    and create animations easily.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">🔄</div>
+
+                <h3>AJAX</h3>
+
+                <p>
+                    Load data from files and communicate with
+                    web resources without reloading the page.
+                </p>
+
+            </div>
+
+
+            <div class="topic">
+
+                <div class="topic-icon">📊</div>
+
+                <h3>CSV</h3>
+
+                <p>
+                    Understand conversion between structured
+                    JSON data and CSV format.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEARNING FLOW -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>🚀 Learning Flow</h2>
+
+            <p>
+                Move from basic web structure to dynamic content
+            </p>
+
+        </div>
+
+        <div class="flow">
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    1
+                </div>
+
+                <h3>Structure</h3>
+
+                <p>
+                    Build web pages using HTML.
+                </p>
+
+            </div>
+
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    2
+                </div>
+
+                <h3>Design</h3>
+
+                <p>
+                    Style pages using CSS.
+                </p>
+
+            </div>
+
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    3
+                </div>
+
+                <h3>Interaction</h3>
+
+                <p>
+                    Add functionality using JavaScript.
+                </p>
+
+            </div>
+
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    4
+                </div>
+
+                <h3>Data</h3>
+
+                <p>
+                    Work with JSON and CSV.
+                </p>
+
+            </div>
+
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    5
+                </div>
+
+                <h3>Server</h3>
+
+                <p>
+                    Understand basic PHP operations.
+                </p>
+
+            </div>
+
+
+            <div class="flow-item">
+
+                <div class="flow-number">
+                    6
+                </div>
+
+                <h3>Dynamic Web</h3>
+
+                <p>
+                    Use jQuery and AJAX.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROGRAMS -->
+
+    <section id="programs">
+
+        <div class="section-title">
+
+            <h2>🧪 Laboratory Programs</h2>
+
+            <p>
+                Complete programs with explanation and viva preparation
+            </p>
+
+        </div>
+
+        <div class="programs">
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 01
+                </div>
+
+                <h3>HTML Basic Tags</h3>
+
+                <p>
+                    Learn headings, paragraphs, formatting,
+                    blockquotes and preformatted text.
+                </p>
+
+                <a href="program1.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 02
+                </div>
+
+                <h3>Class Time Table</h3>
+
+                <p>
+                    Create a structured timetable using
+                    HTML table elements.
+                </p>
+
+                <a href="program2.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 03
+                </div>
+
+                <h3>External CSS</h3>
+
+                <p>
+                    Demonstrate styling of HTML elements
+                    using an external stylesheet.
+                </p>
+
+                <a href="program3.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 04
+                </div>
+
+                <h3>Registration Form</h3>
+
+                <p>
+                    Create a student registration form using
+                    different HTML form controls.
+                </p>
+
+                <a href="program4.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 05
+                </div>
+
+                <h3>Semantic HTML</h3>
+
+                <p>
+                    Understand semantic elements such as
+                    header, nav, section, article and footer.
+                </p>
+
+                <a href="program5.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 06
+                </div>
+
+                <h3>JavaScript Calculator</h3>
+
+                <p>
+                    Perform arithmetic operations using
+                    JavaScript.
+                </p>
+
+                <a href="program6.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 07
+                </div>
+
+                <h3>JSON, CSV & Hash</h3>
+
+                <p>
+                    Work with JSON objects, CSV conversion
+                    and SHA-256 hashing.
+                </p>
+
+                <a href="program7.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 08A
+                </div>
+
+                <h3>PHP Visitor Counter</h3>
+
+                <p>
+                    Create a PHP-based visitor counter
+                    using a local file.
+                </p>
+
+                <a href="program8a.php">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 08B
+                </div>
+
+                <h3>PHP Selection Sort</h3>
+
+                <p>
+                    Sort student records using the
+                    selection sort algorithm.
+                </p>
+
+                <a href="program8b.php">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 09
+                </div>
+
+                <h3>jQuery</h3>
+
+                <p>
+                    Demonstrate DOM manipulation, appending
+                    elements and animations.
+                </p>
+
+                <a href="program9.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+
+            <div class="program">
+
+                <div class="program-number">
+                    PROGRAM 10
+                </div>
+
+                <h3>AJAX & jQuery</h3>
+
+                <p>
+                    Load external data using AJAX,
+                    jQuery AJAX and JSON methods.
+                </p>
+
+                <a href="program10.html">
+                    Open Program →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PREPARATION -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>💡 Lab Preparation</h2>
+
+            <p>
+                Simple steps to prepare before your practical exam
+            </p>
+
+        </div>
+
+        <div class="prep">
+
+            <ul>
+
+                <li>
+                    Understand the aim of every program.
+                </li>
+
+                <li>
+                    Know what each major HTML, CSS or
+                    JavaScript element does.
+                </li>
+
+                <li>
+                    Practice typing the important portions
+                    of the programs without copying.
+                </li>
+
+                <li>
+                    Understand the expected output before
+                    running the program.
+                </li>
+
+                <li>
+                    Practice running HTML programs in a browser.
+                </li>
+
+                <li>
+                    Use XAMPP or another PHP environment
+                    for PHP programs.
+                </li>
+
+                <li>
+                    Be prepared to explain the logic during
+                    the viva.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- VIVA -->
+
+    <section id="viva">
+
+        <div class="section-title">
+
+            <h2>🎓 Viva Preparation</h2>
+
+            <p>
+                Important concepts to revise before the laboratory exam
+            </p>
+
+        </div>
+
+        <div class="viva-box">
+
+            <div class="viva-card">
+
+                <h3>HTML</h3>
+
+                <p>
+                    HTML tags, elements, attributes,
+                    forms, tables and semantic elements.
+                </p>
+
+            </div>
+
+
+            <div class="viva-card">
+
+                <h3>CSS</h3>
+
+                <p>
+                    Inline, internal and external CSS,
+                    selectors and basic styling.
+                </p>
+
+            </div>
+
+
+            <div class="viva-card">
+
+                <h3>JavaScript</h3>
+
+                <p>
+                    Variables, functions, events,
+                    DOM manipulation and calculations.
+                </p>
+
+            </div>
+
+
+            <div class="viva-card">
+
+                <h3>JSON</h3>
+
+                <p>
+                    JSON syntax, objects, arrays and
+                    JSON parsing.
+                </p>
+
+            </div>
+
+
+            <div class="viva-card">
+
+                <h3>PHP</h3>
+
+                <p>
+                    PHP syntax, variables, arrays,
+                    loops and server-side execution.
+                </p>
+
+            </div>
+
+
+            <div class="viva-card">
+
+                <h3>jQuery & AJAX</h3>
+
+                <p>
+                    Selectors, events, animation,
+                    AJAX requests and JSON loading.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+
+    <div class="github">
+
+        <h2>MAHALAKSHMI'S GITHUB</h2>
+
+        <p>
+            Explore the complete source code and projects.
+        </p>
+
+        <a
+            class="github-btn"
+            href="https://github.com/mahalakshmikommaranahalli9-cell"
+            target="_blank"
+        >
+            🐙 Visit Mahalakshmi's GitHub
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            BCSL504 • Web Technology Laboratory
+        </div>
+
+        <div>
+            MAHALAKSHMI'S COURSE NOTES
+        </div>
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    /* Simple anti-copy protection */
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                ["c", "x", "a", "u", "s", "p"].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+                event.preventDefault();
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>BCSL504 | Program 10</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+
+body{
+    background:#080808;
+    color:white;
+    font-family:Arial;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+a{
+    color:#d4af37;
+}
+
+h1,h2{
+    color:#d4af37;
+}
+
+.box{
+    background:#111;
+    padding:25px;
+    margin:20px 0;
+    border-radius:10px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    background:#d4af37;
+    color:#000;
+    border:0;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.output{
+    background:#050505;
+    padding:20px;
+    margin-top:15px;
+    min-height:40px;
+}
+
+pre{
+    background:#050505;
+    padding:20px;
+    overflow:auto;
+}
+
+.github{
+    display:inline-block;
+    background:#d4af37;
+    color:#000;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html">← Back to BCSL504</a>
+
+<h1>BCSL504 • PROGRAM 10</h1>
+
+<h2>AJAX and jQuery</h2>
+
+<div class="box">
+
+<h2>🎯 Aim</h2>
+
+<p>
+To demonstrate AJAX operations using JavaScript and jQuery
+without reloading the complete webpage.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>📖 Explanation</h2>
+
+<p>
+AJAX stands for Asynchronous JavaScript and XML.
+It allows a webpage to communicate with a server
+and receive data without refreshing the entire page.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🛠 Use of Program</h2>
+
+<ul>
+<li>Load data asynchronously.</li>
+<li>Communicate with server resources.</li>
+<li>Read JSON data.</li>
+<li>Update webpage content dynamically.</li>
+</ul>
+
+</div>
+
+<div class="box">
+
+<h2>💻 Complete Program</h2>
+
+<button onclick="plainAjax()">
+Plain AJAX
+</button>
+
+<button onclick="jqueryAjax()">
+jQuery AJAX
+</button>
+
+<button onclick="getJson()">
+getJSON
+</button>
+
+<button onclick="parseJson()">
+JSON.parse()
+</button>
+
+<div id="output" class="output">
+Output will appear here.
+</div>
+
+<pre><code>function plainAjax(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "data.txt", true);
+
+    xhr.onload = function(){
+
+        if(xhr.status === 200){
+
+            document.getElementById("output")
+            .innerHTML = xhr.responseText;
+
+        }
+
+    };
+
+    xhr.send();
+}
+
+
+function jqueryAjax(){
+
+    $.ajax({
+        url: "data.txt",
+        success: function(data){
+
+            $("#output").html(data);
+
+        }
+    });
+
+}
+
+
+function getJson(){
+
+    $.getJSON("data.json", function(data){
+
+        $("#output").html(
+            "Name: " + data.name +
+            "&lt;br&gt;" +
+            "Course: " + data.course +
+            "&lt;br&gt;" +
+            "Semester: " + data.semester
+        );
+
+    });
+
+}
+
+
+function parseJson(){
+
+    let text = '{"name":"Mahalakshmi","course":"CSE"}';
+
+    let data = JSON.parse(text);
+
+    $("#output").html(
+        "Name: " + data.name +
+        "&lt;br&gt;" +
+        "Course: " + data.course
+    );
+
+}</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>🖥 Expected Output</h2>
+
+<p>
+The requested data is loaded into the webpage without
+refreshing the complete page.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>⚠️ How to Run</h2>
+
+<p>
+Because AJAX requests local files, run this program through
+a local server such as VS Code Live Server or XAMPP.
+</p>
+
+<p>
+Do not simply double-click the HTML file and open it using
+<code>file://</code>.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🎓 Viva Questions</h2>
+
+<ol>
+<li>What is AJAX?</li>
+<li>What does asynchronous mean?</li>
+<li>What is XMLHttpRequest?</li>
+<li>What is $.ajax()?</li>
+<li>What is $.getJSON()?</li>
+<li>What is JSON.parse()?</li>
+</ol>
+
+</div>
+
+<h2>MAHALAKSHMI'S GITHUB</h2>
+
+<a class="github"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</div>
+
+<script>
+
+function plainAjax(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("GET","data.txt",true);
+
+    xhr.onload = function(){
+
+        if(xhr.status === 200){
+
+            document.getElementById("output")
+            .innerHTML = xhr.responseText;
+
+        }
+
+    };
+
+    xhr.send();
+}
+
+
+function jqueryAjax(){
+
+    $.ajax({
+
+        url:"data.txt",
+
+        success:function(data){
+
+            $("#output").html(data);
+
+        }
+
+    });
+
+}
+
+
+function getJson(){
+
+    $.getJSON("data.json",function(data){
+
+        $("#output").html(
+
+            "Name: " + data.name +
+            "<br>" +
+            "Course: " + data.course +
+            "<br>" +
+            "Semester: " + data.semester
+
+        );
+
+    });
+
+}
+
+
+function parseJson(){
+
+    let text =
+    '{"name":"Mahalakshmi","course":"CSE"}';
+
+    let data = JSON.parse(text);
+
+    $("#output").html(
+
+        "Name: " + data.name +
+        "<br>" +
+        "Course: " + data.course
+
+    );
+
+}
+
+</script>
+
+</body>
+</html>

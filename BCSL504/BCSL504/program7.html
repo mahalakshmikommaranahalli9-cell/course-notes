@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>BCSL504 | Program 7</title>
+
+<style>
+
+body{
+    background:#080808;
+    color:white;
+    font-family:Arial;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+a{
+    color:#d4af37;
+}
+
+h1,h2{
+    color:#d4af37;
+}
+
+.box{
+    background:#111;
+    padding:25px;
+    margin:20px 0;
+    border-radius:10px;
+}
+
+pre{
+    background:#050505;
+    padding:20px;
+    overflow:auto;
+}
+
+.github{
+    display:inline-block;
+    background:#d4af37;
+    color:#000;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html">← Back to BCSL504</a>
+
+<h1>BCSL504 • PROGRAM 7</h1>
+
+<h2>JSON, CSV and Hash</h2>
+
+<div class="box">
+
+<h2>🎯 Aim</h2>
+
+<p>
+To understand JSON and CSV data formats and generate
+a hash value using JavaScript/Node.js.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>📖 Explanation</h2>
+
+<p>
+JSON represents structured data using key-value pairs.
+CSV represents tabular data using comma-separated values.
+Hashing converts input data into a fixed-length value.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🛠 Use of Program</h2>
+
+<ul>
+<li>Store structured information.</li>
+<li>Exchange data between applications.</li>
+<li>Represent tabular information.</li>
+<li>Understand data integrity concepts.</li>
+</ul>
+
+</div>
+
+<div class="box">
+
+<h2>💻 JSON Example</h2>
+
+<pre><code>{
+    "name": "Mahalakshmi",
+    "course": "CSE",
+    "semester": 5
+}</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>💻 CSV Example</h2>
+
+<pre><code>Name,Course,Semester
+Mahalakshmi,CSE,5
+Student2,CSE,5
+Student3,CSE,5</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>💻 Hash Program</h2>
+
+<pre><code>const crypto = require("crypto");
+
+const data = "Mahalakshmi";
+
+const hash = crypto
+    .createHash("sha256")
+    .update(data)
+    .digest("hex");
+
+console.log("Original Data:", data);
+console.log("SHA-256 Hash:", hash);</code></pre>
+
+<p>
+Save the code as <strong>hash.js</strong>.
+</p>
+
+<p>
+Run it using:
+</p>
+
+<pre><code>node hash.js</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>🖥 Expected Output</h2>
+
+<p>
+The JSON and CSV data can be represented as structured
+text files, while the Node.js program prints the SHA-256
+hash of the input data.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🎓 Viva Questions</h2>
+
+<ol>
+<li>What is JSON?</li>
+<li>What is CSV?</li>
+<li>What is hashing?</li>
+<li>What is SHA-256?</li>
+<li>Why is hashing useful?</li>
+</ol>
+
+</div>
+
+<h2>MAHALAKSHMI'S GITHUB</h2>
+
+<a class="github"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</div>
+
+</body>
+</html>

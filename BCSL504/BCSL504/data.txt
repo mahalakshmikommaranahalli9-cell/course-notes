@@ -1,0 +1,4 @@
+Welcome to BCSL504 Web Technology Laboratory.
+
+This data was loaded using AJAX without reloading
+the complete webpage.

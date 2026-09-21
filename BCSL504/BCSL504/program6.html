@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>BCSL504 | Program 6</title>
+
+<style>
+
+body{
+    background:#080808;
+    color:white;
+    font-family:Arial;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+a{
+    color:#d4af37;
+}
+
+h1,h2{
+    color:#d4af37;
+}
+
+.box{
+    background:#111;
+    padding:25px;
+    margin:20px 0;
+    border-radius:10px;
+}
+
+.calculator{
+    max-width:400px;
+    margin:auto;
+    background:#181818;
+    padding:25px;
+    border-radius:10px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    box-sizing:border-box;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    cursor:pointer;
+    background:#d4af37;
+    border:0;
+    border-radius:5px;
+}
+
+#result{
+    margin-top:20px;
+    font-size:20px;
+    color:#d4af37;
+}
+
+.github{
+    display:inline-block;
+    background:#d4af37;
+    color:#000;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html">← Back to BCSL504</a>
+
+<h1>BCSL504 • PROGRAM 6</h1>
+
+<h2>JavaScript Calculator</h2>
+
+<div class="box">
+
+<h2>🎯 Aim</h2>
+
+<p>
+To develop a simple calculator using JavaScript.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>📖 Explanation</h2>
+
+<p>
+JavaScript is used to add logic and interactivity
+to web pages. In this program JavaScript performs
+basic arithmetic operations.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🛠 Use of Program</h2>
+
+<ul>
+<li>Perform arithmetic calculations.</li>
+<li>Practice JavaScript functions.</li>
+<li>Understand DOM interaction.</li>
+<li>Handle user input.</li>
+</ul>
+
+</div>
+
+<div class="box">
+
+<h2>💻 Complete Program</h2>
+
+<div class="calculator">
+
+<input id="num1" type="number" placeholder="Enter first number">
+
+<input id="num2" type="number" placeholder="Enter second number">
+
+<button onclick="calculate('+')">+</button>
+<button onclick="calculate('-')">−</button>
+<button onclick="calculate('*')">×</button>
+<button onclick="calculate('/')">÷</button>
+
+<div id="result"></div>
+
+</div>
+
+<pre><code>&lt;script&gt;
+
+function calculate(operator){
+
+    let a = Number(
+        document.getElementById("num1").value
+    );
+
+    let b = Number(
+        document.getElementById("num2").value
+    );
+
+    let result;
+
+    if(operator === "+"){
+        result = a + b;
+    }
+    else if(operator === "-"){
+        result = a - b;
+    }
+    else if(operator === "*"){
+        result = a * b;
+    }
+    else if(operator === "/"){
+
+        if(b === 0){
+            result = "Cannot divide by zero";
+        }
+        else{
+            result = a / b;
+        }
+
+    }
+
+    document.getElementById("result").innerHTML =
+        "Result: " + result;
+}
+
+&lt;/script&gt;</code></pre>
+
+</div>
+
+<div class="box">
+
+<h2>🖥 Expected Output</h2>
+
+<p>
+The calculator accepts two numbers and performs
+addition, subtraction, multiplication or division.
+</p>
+
+</div>
+
+<div class="box">
+
+<h2>🎓 Viva Questions</h2>
+
+<ol>
+<li>What is JavaScript?</li>
+<li>What is DOM?</li>
+<li>What is a function?</li>
+<li>Why is Number() used?</li>
+<li>How is division by zero handled?</li>
+</ol>
+
+</div>
+
+<h2>MAHALAKSHMI'S GITHUB</h2>
+
+<a class="github"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</div>
+
+<script>
+
+function calculate(operator){
+
+    let a = Number(
+        document.getElementById("num1").value
+    );
+
+    let b = Number(
+        document.getElementById("num2").value
+    );
+
+    let result;
+
+    if(operator === "+"){
+        result = a + b;
+    }
+
+    else if(operator === "-"){
+        result = a - b;
+    }
+
+    else if(operator === "*"){
+        result = a * b;
+    }
+
+    else if(operator === "/"){
+
+        if(b === 0){
+            result = "Cannot divide by zero";
+        }
+
+        else{
+            result = a / b;
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        "Result: " + result;
+}
+
+</script>
+
+</body>
+</html>
