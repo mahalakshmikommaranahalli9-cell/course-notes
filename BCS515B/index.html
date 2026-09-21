@@ -11,6 +11,7 @@
     <title>BCS515B | Artificial Intelligence</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -39,11 +40,15 @@
             justify-content: center;
             text-align: center;
             padding: 50px 20px;
+
             background:
-                radial-gradient(circle at top,
+                radial-gradient(
+                    circle at top,
                     rgba(255, 193, 7, 0.14),
-                    transparent 40%),
+                    transparent 40%
+                ),
                 #050505;
+
             border-bottom: 1px solid #2c2c2c;
         }
 
@@ -207,6 +212,10 @@
             font-size: 9px;
         }
 
+        /* =========================
+           BUTTON
+        ========================= */
+
         .btn {
             display: inline-block;
             text-decoration: none;
@@ -221,13 +230,6 @@
         .btn:hover {
             background: #f0d477;
             transform: translateY(-2px);
-        }
-
-        .btn.disabled {
-            background: #333;
-            color: #777;
-            cursor: not-allowed;
-            pointer-events: none;
         }
 
         /* =========================
@@ -419,6 +421,7 @@
             -webkit-user-drag: none;
             user-drag: none;
         }
+
     </style>
 </head>
 
@@ -483,7 +486,7 @@
             </p>
 
             <p>
-                Each module will contain theory, examples,
+                Each module contains theory, examples,
                 step-by-step solved problems, important questions,
                 exam-writing tips and useful learning resources.
             </p>
@@ -511,7 +514,10 @@
 
         <div class="modules">
 
-            <!-- MODULE 1 -->
+
+            <!-- =========================
+                 MODULE 1
+            ========================= -->
 
             <div class="module-card">
 
@@ -546,7 +552,9 @@
             </div>
 
 
-            <!-- MODULE 2 -->
+            <!-- =========================
+                 MODULE 2
+            ========================= -->
 
             <div class="module-card">
 
@@ -573,14 +581,16 @@
 
                 </ul>
 
-                <a href="module2.html" class="btn disabled">
-                    Coming Soon
+                <a href="module2.html" class="btn">
+                    Open Module 2 →
                 </a>
 
             </div>
 
 
-            <!-- MODULE 3 -->
+            <!-- =========================
+                 MODULE 3
+            ========================= -->
 
             <div class="module-card">
 
@@ -608,14 +618,16 @@
 
                 </ul>
 
-                <a href="module3.html" class="btn disabled">
-                    Coming Soon
+                <a href="module3.html" class="btn">
+                    Open Module 3 →
                 </a>
 
             </div>
 
 
-            <!-- MODULE 4 -->
+            <!-- =========================
+                 MODULE 4
+            ========================= -->
 
             <div class="module-card">
 
@@ -642,14 +654,16 @@
 
                 </ul>
 
-                <a href="module4.html" class="btn disabled">
-                    Coming Soon
+                <a href="module4.html" class="btn">
+                    Open Module 4 →
                 </a>
 
             </div>
 
 
-            <!-- MODULE 5 -->
+            <!-- =========================
+                 MODULE 5
+            ========================= -->
 
             <div class="module-card">
 
@@ -676,11 +690,12 @@
 
                 </ul>
 
-                <a href="module5.html" class="btn disabled">
-                    Coming Soon
+                <a href="module5.html" class="btn">
+                    Open Module 5 →
                 </a>
 
             </div>
+
 
         </div>
 
@@ -928,33 +943,52 @@
 <script>
 
     /* Disable right click */
-    document.addEventListener("contextmenu", function(event) {
-        event.preventDefault();
-    });
 
-    /* Disable text selection */
-    document.addEventListener("selectstart", function(event) {
-        event.preventDefault();
-    });
-
-    /* Disable dragging */
-    document.addEventListener("dragstart", function(event) {
-        event.preventDefault();
-    });
-
-    /* Disable common copy/save shortcuts */
-    document.addEventListener("keydown", function(event) {
-
-        if (
-            (event.ctrlKey || event.metaKey) &&
-            ["c", "x", "a", "u", "s", "p"].includes(
-                event.key.toLowerCase()
-            )
-        ) {
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
             event.preventDefault();
         }
+    );
 
-    });
+
+    /* Disable text selection */
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    /* Disable dragging */
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    /* Disable common copy/save shortcuts */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                ["c", "x", "a", "u", "s", "p"].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+                event.preventDefault();
+            }
+
+        }
+    );
 
 </script>
 
