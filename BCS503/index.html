@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BCS503 | Theory of Computation</title>
+
+<style>
+:root{
+    --bg:#080808;
+    --card:#141414;
+    --card2:#1b1b1b;
+    --gold:#ffd54a;
+    --gold2:#ffb300;
+    --text:#f5f5f5;
+    --muted:#bdbdbd;
+    --border:rgba(255,213,74,.22);
+    --green:#7cff8a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top right,
+        rgba(255,213,74,.08),
+        transparent 30%),
+        radial-gradient(circle at bottom left,
+        rgba(255,179,0,.05),
+        transparent 30%),
+        var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:65px 20px 50px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#111,#080808);
+}
+
+header h1{
+    font-size:clamp(34px,6vw,58px);
+    color:var(--gold);
+    text-shadow:0 0 20px rgba(255,213,74,.2);
+}
+
+header p{
+    color:var(--muted);
+    margin-top:12px;
+    font-size:18px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:20px;
+    padding:8px 18px;
+    border:1px solid var(--gold);
+    border-radius:30px;
+    color:var(--gold);
+    font-size:14px;
+}
+
+/* NAV */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,8,8,.95);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:12px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav a{
+    color:var(--muted);
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+/* MAIN */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:30px 18px 70px;
+}
+
+/* WELCOME */
+
+.welcome{
+    background:linear-gradient(145deg,#171717,#101010);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:35px;
+    margin-bottom:35px;
+}
+
+.welcome h2{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.welcome p{
+    color:#ddd;
+}
+
+/* MODULE GRID */
+
+.modules{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.module-card{
+    background:linear-gradient(145deg,#171717,#101010);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:28px;
+    transition:.25s;
+    position:relative;
+    overflow:hidden;
+}
+
+.module-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(
+        90deg,
+        var(--gold),
+        var(--gold2)
+    );
+}
+
+.module-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--gold);
+    box-shadow:0 12px 35px rgba(255,213,74,.1);
+}
+
+.module-number{
+    color:var(--gold2);
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.module-card h3{
+    color:var(--gold);
+    font-size:23px;
+    margin:8px 0 12px;
+}
+
+.module-card p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 17px;
+    border-radius:9px;
+    background:linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold2)
+    );
+    color:#080808;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(255,213,74,.2);
+}
+
+.btn.disabled{
+    background:#222;
+    color:#777;
+    border:1px solid #333;
+    cursor:not-allowed;
+}
+
+/* INFO */
+
+.info{
+    margin-top:35px;
+    padding:28px;
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:#111;
+}
+
+.info h2{
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.info ul{
+    margin-left:22px;
+    color:#ccc;
+}
+
+.info li{
+    margin:7px 0;
+}
+
+/* GITHUB */
+
+.github{
+    margin-top:35px;
+    text-align:center;
+    padding:35px;
+    border-radius:18px;
+    background:#111;
+    border:1px solid var(--border);
+}
+
+.github h2{
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.github p{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    text-align:center;
+    padding:40px 20px;
+    color:#888;
+}
+
+footer strong{
+    color:var(--gold);
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .modules{
+        grid-template-columns:1fr;
+    }
+
+    header{
+        padding:45px 18px;
+    }
+
+    .welcome,
+    .module-card,
+    .info,
+    .github{
+        padding:23px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>BCS503</h1>
+
+<p>Theory of Computation</p>
+
+<div class="badge">
+5th Semester • Computer Science & Engineering
+</div>
+
+</header>
+
+<nav>
+
+<div class="nav-inner">
+
+<a href="../index.html">
+← Course Notes
+</a>
+
+<a href="#modules">
+Modules
+</a>
+
+</div>
+
+</nav>
+
+<div class="container">
+
+<!-- WELCOME -->
+
+<section class="welcome">
+
+<h2>📘 Welcome to BCS503</h2>
+
+<p>
+Welcome to the <strong>BCS503 — Theory of Computation</strong>
+Course Notes section.
+</p>
+
+<p>
+This section contains module-wise notes, explanations,
+solved problems, important examination questions and
+quick revision material for 5th semester CSE students.
+</p>
+
+<p>
+Use the modules below to study Theory of Computation
+step by step.
+</p>
+
+</section>
+
+<!-- MODULES -->
+
+<section id="modules">
+
+<div class="modules">
+
+<!-- MODULE 1 -->
+
+<div class="module-card">
+
+<div class="module-number">
+MODULE 01
+</div>
+
+<h3>Introduction to Finite Automata</h3>
+
+<p>
+Finite Automata, DFA, NFA, ε-NFA,
+transition diagrams, transition tables,
+ε-closure, NFA to DFA conversion and
+applications.
+</p>
+
+<a href="module1.html" class="btn">
+Open Module 1 →
+</a>
+
+</div>
+
+<!-- MODULE 2 -->
+
+<div class="module-card">
+
+<div class="module-number">
+MODULE 02
+</div>
+
+<h3>Regular Expressions & Regular Languages</h3>
+
+<p>
+Regular expressions, finite automata and
+regular expressions, pumping lemma,
+closure properties, equivalence and
+DFA minimization.
+</p>
+
+<a href="module2.html" class="btn">
+Open Module 2 →
+</a>
+
+</div>
+
+<!-- MODULE 3 -->
+
+<div class="module-card">
+
+<div class="module-number">
+MODULE 03
+</div>
+
+<h3>Context-Free Grammars</h3>
+
+<p>
+Context-free grammars, derivations,
+parse trees, ambiguity and related
+concepts.
+</p>
+
+<a href="module3.html" class="btn">
+Open Module 3 →
+</a>
+
+</div>
+
+<!-- MODULE 4 -->
+
+<div class="module-card">
+
+<div class="module-number">
+MODULE 04
+</div>
+
+<h3>Pushdown Automata</h3>
+
+<p>
+Pushdown automata, CFG and PDA,
+acceptance methods and construction
+problems.
+</p>
+
+<a href="module4.html" class="btn">
+Open Module 4 →
+</a>
+
+</div>
+
+<!-- MODULE 5 -->
+
+<div class="module-card">
+
+<div class="module-number">
+MODULE 05
+</div>
+
+<h3>Turing Machines</h3>
+
+<p>
+Turing machines, configurations,
+languages accepted by Turing machines
+and computational concepts.
+</p>
+
+<a href="module5.html" class="btn">
+Open Module 5 →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- STUDY FLOW -->
+
+<section class="info">
+
+<h2>🧠 Recommended Study Flow</h2>
+
+<ul>
+
+<li>Start with the basic definitions.</li>
+
+<li>Understand the transition diagrams.</li>
+
+<li>Practice DFA construction problems.</li>
+
+<li>Practice NFA → DFA conversion.</li>
+
+<li>Work through numerical/problem-based questions.</li>
+
+<li>Revise important 2, 5 and 10-mark questions.</li>
+
+<li>Use the quick-revision sections before examinations.</li>
+
+</ul>
+
+</section>
+
+<!-- EXAM -->
+
+<section class="info">
+
+<h2>🎯 Exam Preparation</h2>
+
+<ul>
+
+<li>Learn definitions accurately.</li>
+
+<li>Practice drawing automata neatly.</li>
+
+<li>Show transition tables wherever useful.</li>
+
+<li>For conversion problems, show every intermediate step.</li>
+
+<li>Clearly mark initial and final states.</li>
+
+<li>Write the final conclusion for proof/construction problems.</li>
+
+</ul>
+
+</section>
+
+<!-- GITHUB -->
+
+<section class="github">
+
+<h2>MAHALAKSHMI'S GITHUB</h2>
+
+<p>
+Explore more projects, coding work and course notes.
+</p>
+
+<a
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank"
+rel="noopener noreferrer"
+class="btn"
+>
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</section>
+
+</div>
+
+<footer>
+
+<p>
+<strong>MAHALAKSHMI'S COURSE NOTES</strong>
+</p>
+
+<p>
+BCS503 • Theory of Computation
+</p>
+
+<p>
+© 2026 Mahalakshmi
+</p>
+
+</footer>
+
+<script>
+
+/* Basic copy protection */
+
+document.addEventListener(
+"contextmenu",
+function(e){
+    e.preventDefault();
+}
+);
+
+document.addEventListener(
+"dragstart",
+function(e){
+    e.preventDefault();
+}
+);
+
+</script>
+
+</body>
+</html>

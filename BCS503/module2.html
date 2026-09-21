@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mahalakshmi's Course Notes - BCS503 Theory of Computation Module 2">
+<title>BCS503 | Module 2 - Regular Languages</title>
+
+<style>
+:root{
+    --bg:#070707;
+    --panel:#101010;
+    --panel2:#15120a;
+    --gold:#f5c451;
+    --gold2:#ffd978;
+    --text:#eeeeee;
+    --muted:#b7b7b7;
+    --line:#302a1d;
+    --green:#9cff9c;
+    --red:#ff8585;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+    margin:0;
+    background:
+        radial-gradient(circle at 50% -10%,#211a0b 0,#090909 35%,#050505 100%);
+    color:var(--text);
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    line-height:1.75;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(7,7,7,.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:18px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    color:var(--gold);
+    font-size:clamp(25px,5vw,42px);
+}
+
+header p{
+    margin:4px 0 10px;
+    color:var(--muted);
+}
+
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+nav a{
+    color:var(--gold2);
+    text-decoration:none;
+    border:1px solid #51431f;
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:13px;
+}
+
+nav a:hover{
+    background:#201a0c;
+}
+
+.container{
+    width:min(1120px,94%);
+    margin:auto;
+    padding:28px 0 70px;
+}
+
+.hero{
+    padding:32px 24px;
+    text-align:center;
+    border:1px solid #5b491f;
+    border-radius:20px;
+    background:linear-gradient(145deg,#15120b,#0d0d0d);
+    box-shadow:0 20px 60px #0008;
+}
+
+.badge{
+    display:inline-block;
+    border:1px solid #695520;
+    border-radius:999px;
+    padding:4px 12px;
+    color:var(--gold);
+    font-size:12px;
+}
+
+.hero h2{
+    border:0;
+    padding:0;
+    margin:14px 0;
+    font-size:clamp(27px,5vw,44px);
+}
+
+section{
+    margin-top:45px;
+}
+
+h2{
+    color:var(--gold);
+    border-left:5px solid var(--gold);
+    padding-left:13px;
+    font-size:clamp(23px,4vw,31px);
+}
+
+h3{
+    color:var(--gold2);
+    margin-top:25px;
+}
+
+h4{
+    color:#f2d78c;
+}
+
+.card{
+    background:linear-gradient(145deg,#111,#0b0b0b);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+    margin:18px 0;
+}
+
+.theory{
+    border-left:4px solid #76602a;
+}
+
+.example{
+    background:var(--panel2);
+    border:1px solid #4d3d1a;
+    border-radius:12px;
+    padding:18px;
+    margin:18px 0;
+}
+
+.solution{
+    background:#0c160c;
+    border-left:4px solid #68bd68;
+    border-radius:8px;
+    padding:16px;
+    margin-top:12px;
+}
+
+.warning{
+    background:#1a1008;
+    border-left:4px solid var(--gold);
+    padding:15px;
+    border-radius:8px;
+}
+
+.formula{
+    background:#050505;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:15px;
+    overflow:auto;
+    font-family:Consolas,monospace;
+    color:#f7e3a6;
+}
+
+pre{
+    background:#050505;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:15px;
+    overflow:auto;
+    color:#eee;
+}
+
+code{
+    background:#1a180f;
+    color:var(--gold2);
+    padding:2px 6px;
+    border-radius:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0;
+}
+
+th,td{
+    border:1px solid #3b3b3b;
+    padding:11px;
+    text-align:left;
+    vertical-align:top;
+}
+
+th{
+    color:var(--gold);
+    background:#17130a;
+}
+
+tr:nth-child(even){
+    background:#0d0d0d;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.question{
+    border:1px solid #333;
+    border-radius:12px;
+    padding:17px;
+    margin:13px 0;
+    background:#0e0e0e;
+}
+
+.answer{
+    color:var(--green);
+}
+
+.bad{
+    color:var(--red);
+}
+
+.btn{
+    display:inline-block;
+    background:var(--gold);
+    color:#080808;
+    padding:11px 17px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:700;
+    margin:5px 3px;
+}
+
+.btn:hover{
+    background:var(--gold2);
+}
+
+.yt{
+    border-left:4px solid #e53935;
+    background:#170909;
+    padding:16px;
+    border-radius:9px;
+}
+
+.footer{
+    text-align:center;
+    color:var(--muted);
+    border-top:1px solid #292929;
+    padding:30px 10px;
+    margin-top:50px;
+}
+
+.top{
+    position:fixed;
+    right:17px;
+    bottom:17px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 5px 20px #0008;
+}
+
+li{margin:6px 0}
+
+@media(max-width:650px){
+    .container{width:92%}
+    .card,.example{padding:15px}
+    table{font-size:13px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>BCS503 — Theory of Computation</h1>
+    <p>Module 2 — Regular Languages, Pumping Lemma & DFA Minimization</p>
+    <nav>
+        <a href="index.html">← BCS503 Home</a>
+        <a href="#syllabus">Syllabus</a>
+        <a href="#re">Regular Expression</a>
+        <a href="#fa-re">FA ↔ RE</a>
+        <a href="#pumping">Pumping Lemma</a>
+        <a href="#closure">Closure</a>
+        <a href="#min">Minimization</a>
+        <a href="#questions">Questions</a>
+    </nav>
+</header>
+
+<main class="container">
+
+<div class="hero">
+    <span class="badge">MAHALAKSHMI'S COURSE NOTES</span>
+    <h2>MODULE 2</h2>
+    <p>
+        Regular Expressions • Regular Languages • FA ↔ RE •
+        Pumping Lemma • Closure Properties • Equivalence •
+        DFA Minimization • Applications
+    </p>
+</div>
+
+<section id="syllabus">
+<h2>1. Module Overview</h2>
+
+<div class="card theory">
+<h3>What this module is about</h3>
+<p>
+Module 2 studies <b>regular languages</b> from another point of view.
+In Module 1, finite automata were used to recognize patterns. Here,
+the same class of languages is described using <b>regular expressions</b>.
+We also study how to convert between regular expressions and finite
+automata, how to prove that a language is not regular, and how to
+reduce an automaton to a simpler equivalent machine.
+</p>
+
+<p>
+The major ideas are:
+</p>
+
+<ul>
+<li>Regular expressions and their operators.</li>
+<li>Relationship between regular expressions and finite automata.</li>
+<li>State elimination and conversion of automata to regular expressions.</li>
+<li>Pumping Lemma for proving non-regularity.</li>
+<li>Closure properties of regular languages.</li>
+<li>Equivalence of automata.</li>
+<li>DFA minimization.</li>
+<li>Applications of regular expressions.</li>
+</ul>
+
+<div class="warning">
+<b>Study order:</b>
+Regular Expression → RE problems → RE to automata → automata to RE →
+Pumping Lemma → Closure Properties → Equivalence → Minimization.
+</div>
+</div>
+</section>
+
+<section id="re">
+<h2>2. Regular Expressions — Complete Theory</h2>
+
+<div class="card theory">
+<h3>2.1 Definition</h3>
+
+<p>
+A <b>regular expression (RE)</b> is a formal notation used to describe
+a regular language over an alphabet. It is constructed recursively
+from basic symbols using operations such as union, concatenation and
+Kleene star.
+</p>
+
+<p>
+If the alphabet is Σ = {a,b}, expressions can be constructed from
+<code>a</code>, <code>b</code>, <code>ε</code> and <code>∅</code> using
+the allowed operators.
+</p>
+
+<h3>Basic expressions</h3>
+<table>
+<tr><th>Expression</th><th>Meaning</th></tr>
+<tr><td>∅</td><td>Language containing no strings.</td></tr>
+<tr><td>ε</td><td>Language containing only the empty string.</td></tr>
+<tr><td>a</td><td>Language containing the single string a.</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>2.2 Union</h3>
+<p>
+For regular expressions R and S, <code>R + S</code> represents the union
+of their languages.
+</p>
+
+<div class="formula">
+L(R + S) = L(R) ∪ L(S)
+</div>
+
+<div class="example">
+<b>Example:</b> <code>a+b</code> accepts either <code>a</code> or <code>b</code>.
+</div>
+</div>
+
+<div class="card">
+<h3>2.3 Concatenation</h3>
+<p>
+Concatenation joins a string from R with a string from S.
+</p>
+
+<div class="formula">
+L(RS) = L(R)L(S)
+</div>
+
+<div class="example">
+<b>Example:</b> <code>ab</code> accepts exactly the string <code>ab</code>.
+</div>
+</div>
+
+<div class="card">
+<h3>2.4 Kleene Star</h3>
+<p>
+The Kleene star means zero or more repetitions.
+</p>
+
+<div class="formula">
+L(R*) = {ε, strings formed using one or more repetitions of R}
+</div>
+
+<div class="example">
+<p><code>a*</code> represents:</p>
+<p>ε, a, aa, aaa, aaaa, ...</p>
+</div>
+</div>
+
+<div class="card">
+<h3>2.5 Operator Precedence</h3>
+
+<p>When parentheses are absent, use:</p>
+
+<ol>
+<li><b>Star (*)</b> has highest precedence.</li>
+<li><b>Concatenation</b> has next precedence.</li>
+<li><b>Union (+)</b> has lowest precedence.</li>
+</ol>
+
+<div class="example">
+<p><code>a+bc*</code> means:</p>
+<p><code>a + (b(c*))</code></p>
+</div>
+</div>
+
+<div class="card">
+<h3>2.6 Important RE Construction Patterns</h3>
+
+<table>
+<tr><th>Language requirement</th><th>Regular Expression</th></tr>
+<tr><td>All strings over {a,b}</td><td><code>(a+b)*</code></tr>
+<tr><td>Strings ending in a</td><td><code>(a+b)*a</code></tr>
+<tr><td>Strings beginning with a</td><td><code>a(a+b)*</code></tr>
+<tr><td>Strings containing ab</td><td><code>(a+b)*ab(a+b)*</code></tr>
+<tr><td>Exactly one 1 over {0,1}</td><td><code>0*10*</code></tr>
+<tr><td>Exactly two 1s</td><td><code>0*10*10*</code></tr>
+<tr><td>Even number of 1s</td><td><code>0*(10*10*)*</code></tr>
+<tr><td>Odd number of 1s</td><td><code>0*10*(10*10*)*</code></tr>
+</table>
+</div>
+
+<div class="question">
+<h3>Solved Example 1 — RE for strings ending in 1</h3>
+<p><b>Language:</b> All strings over {0,1} that end in 1.</p>
+<div class="solution">
+<p>The part before the final 1 can contain anything.</p>
+<p>Anything over {0,1}: <code>(0+1)*</code></p>
+<p>Final symbol: <code>1</code></p>
+<p><b>Answer:</b> <code>(0+1)*1</code></p>
+</div>
+</div>
+
+<div class="question">
+<h3>Solved Example 2 — RE for strings containing at least one 1</h3>
+<div class="solution">
+<p>Anything before 1 + the required 1 + anything after it:</p>
+<p><code>(0+1)*1(0+1)*</code></p>
+</div>
+</div>
+
+<div class="question">
+<h3>Solved Example 3 — RE for exactly two a's</h3>
+<div class="solution">
+<p>Anything except a before the first a is <code>b*</code>.</p>
+<p>Then first a, then any number of b's, then second a, then b's.</p>
+<p><b>Answer:</b> <code>b*ab*ab*</code></p>
+</div>
+</div>
+</section>
+
+<section id="fa-re">
+<h2>3. Relationship Between Finite Automata and Regular Expressions</h2>
+
+<div class="card theory">
+<h3>3.1 Fundamental Result</h3>
+<p>
+Finite automata and regular expressions describe the same class of
+languages: <b>regular languages</b>.
+</p>
+
+<div class="formula">
+Regular Expression ⇄ Finite Automaton
+</div>
+
+<p>
+Therefore, a regular expression can be converted into an equivalent
+finite automaton, and a finite automaton can be converted into an
+equivalent regular expression.
+</p>
+</div>
+
+<div class="card">
+<h3>3.2 RE → ε-NFA — Construction Idea</h3>
+
+<p>
+A standard construction creates an ε-NFA for each regular expression
+and combines these small automata according to the RE operation.
+</p>
+
+<table>
+<tr><th>RE operation</th><th>Construction idea</th></tr>
+<tr><td>Symbol a</td><td>One transition labelled a.</td></tr>
+<tr><td>R + S</td><td>ε-branch from a new start to R and S.</td></tr>
+<tr><td>RS</td><td>Connect final of R to start of S using ε.</td></tr>
+<tr><td>R*</td><td>Add ε paths allowing zero or repeated copies.</td></tr>
+</table>
+</div>
+
+<div class="question">
+<h3>Solved Example 4 — Construct automaton for a+b</h3>
+<div class="solution">
+<p>Create a new start state q0.</p>
+<p>From q0, use ε-transitions to two branches.</p>
+<p>First branch reads <code>a</code> and reaches a final state.</p>
+<p>Second branch reads <code>b</code> and reaches a final state.</p>
+<p>This accepts exactly {a,b}.</p>
+</div>
+</div>
+
+<div class="card">
+<h3>3.3 Finite Automaton → Regular Expression</h3>
+
+<p>
+One common method is <b>state elimination</b>. The idea is to remove
+states while replacing paths through the removed state by an
+equivalent regular-expression label.
+</p>
+
+<h3>State Elimination Formula</h3>
+
+<div class="formula">
+Rij(new) = Rij(old) + Rik(Rkk)*Rkj
+</div>
+
+<p>
+Here k is the state being eliminated, while i and j are the
+remaining states.
+</p>
+
+<h3>General Procedure</h3>
+<ol>
+<li>Convert the automaton into a suitable generalized transition graph.</li>
+<li>Choose an intermediate state to eliminate.</li>
+<li>Update paths passing through that state.</li>
+<li>Repeat until only the required start-to-final path remains.</li>
+<li>The resulting label is the equivalent regular expression.</li>
+</ol>
+</div>
+
+<div class="question">
+<h3>Solved Example 5 — State Elimination Idea</h3>
+<p>
+Suppose a path from q0 to q1 has label <code>a</code>, q1 has a loop
+<code>b</code>, and q1 reaches q2 using <code>c</code>.
+</p>
+<div class="solution">
+<p>The path from q0 to q2 is:</p>
+<p><code>ab*c</code></p>
+<p>because q1 can be visited zero or more times through the b-loop.</p>
+</div>
+</div>
+</section>
+
+<section id="pumping">
+<h2>4. Pumping Lemma for Regular Languages</h2>
+
+<div class="card theory">
+<h3>4.1 Why Pumping Lemma?</h3>
+
+<p>
+Finite automata have only a finite number of states. When a sufficiently
+long string is processed, some state must be visited more than once.
+The repeated portion forms a loop. That loop can be repeated more
+times or removed while remaining within the structure of a regular
+automaton.
+</p>
+
+<p>
+The Pumping Lemma formalizes this observation.
+It is mainly used to show that a language is <b>not regular</b>.
+</p>
+</div>
+
+<div class="card">
+<h3>4.2 Statement</h3>
+
+<p>
+If L is a regular language, then there exists a positive integer p
+such that every string w ∈ L with |w| ≥ p can be written as:
+</p>
+
+<div class="formula">
+w = xyz
+</div>
+
+<p>such that:</p>
+
+<div class="formula">
+1. |xy| ≤ p<br>
+2. |y| > 0<br>
+3. xyⁱz ∈ L for every i ≥ 0
+</div>
+
+<h3>Meaning of the three conditions</h3>
+<ul>
+<li><b>|xy| ≤ p:</b> the pumped part occurs within the first p symbols.</li>
+<li><b>|y| > 0:</b> the pumped part cannot be empty.</li>
+<li><b>xyⁱz ∈ L:</b> pumping y any number of times must keep the string in L if L is regular.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>4.3 Standard Proof Strategy</h3>
+
+<ol>
+<li>Assume the language is regular.</li>
+<li>Let p be the pumping length.</li>
+<li>Choose a string w ∈ L with |w| ≥ p.</li>
+<li>Consider every valid split w=xyz satisfying the lemma.</li>
+<li>Use |xy|≤p to restrict the possible location of y.</li>
+<li>Choose i=0 or i=2.</li>
+<li>Show that xyⁱz ∉ L.</li>
+<li>This contradicts the pumping lemma.</li>
+<li>Therefore the original assumption was false.</li>
+</ol>
+
+<div class="warning">
+<b>Important:</b> You cannot simply choose a convenient split. The proof
+must handle every split satisfying the pumping-lemma conditions.
+</div>
+</div>
+
+<div class="question">
+<h3>Solved Problem 1 — Prove L = {aⁿbⁿ | n ≥ 0} is not regular</h3>
+
+<div class="solution">
+<p><b>Step 1: Assume L is regular.</b></p>
+<p>Then a pumping length p exists.</p>
+
+<p><b>Step 2: Choose the string.</b></p>
+<p><code>w = aᵖbᵖ</code></p>
+
+<p>Clearly w ∈ L and |w|=2p ≥ p.</p>
+
+<p><b>Step 3: Apply |xy|≤p.</b></p>
+<p>The first p symbols are all a's. Therefore y consists only of a's.</p>
+
+<p>Let <code>y=aᵏ</code>, where k&gt;0.</p>
+
+<p><b>Step 4: Pump down.</b></p>
+<p>Choose i=0.</p>
+
+<p><code>xy⁰z = xz = aᵖ⁻ᵏbᵖ</code></p>
+
+<p>Now the number of a's is less than the number of b's.</p>
+
+<p>Therefore:</p>
+<p><code>xz ∉ L</code></p>
+
+<p><b>Step 5: Contradiction.</b></p>
+<p>The pumping lemma says xyⁱz must remain in L for every i≥0.</p>
+
+<p class="answer">
+Therefore L is not regular.
+</p>
+</div>
+</div>
+
+<div class="question">
+<h3>Solved Problem 2 — Prove L = {0ⁿ1ⁿ | n ≥ 0} is not regular</h3>
+<div class="solution">
+<p>Assume L is regular with pumping length p.</p>
+<p>Choose <code>w=0ᵖ1ᵖ</code>.</p>
+<p>Since |xy|≤p, y contains only zeros.</p>
+<p>Pump y down using i=0.</p>
+<p>The number of zeros becomes smaller than the number of ones.</p>
+<p>Hence the resulting string is not in L.</p>
+<p class="answer">Therefore L is not regular.</p>
+</div>
+</div>
+
+<div class="question">
+<h3>Solved Problem 3 — Why is {aⁿbⁿcⁿ | n≥0} not regular?</h3>
+<div class="solution">
+<p>
+Assume the language is regular and choose
+<code>w=aᵖbᵖcᵖ</code>.
+Because |xy|≤p, y lies entirely in the first block of a's.
+Pumping y changes the number of a's without changing the numbers
+of b's and c's. The equality requirement is broken.
+</p>
+<p class="answer">Contradiction. Hence the language is not regular.</p>
+</div>
+</div>
+</section>
+
+<section id="closure">
+<h2>5. Closure Properties of Regular Languages</h2>
+
+<div class="card theory">
+<p>
+A family of languages is said to be <b>closed</b> under an operation
+if applying that operation to languages in the family produces another
+language that is still in the family.
+</p>
+
+<table>
+<tr><th>Operation</th><th>Regular languages closed?</th><th>Idea</th></tr>
+<tr><td>Union</td><td>Yes</td><td>Use product construction or combine automata.</td></tr>
+<tr><td>Intersection</td><td>Yes</td><td>Product automaton.</td></tr>
+<tr><td>Complement</td><td>Yes</td><td>Complete DFA and swap final/non-final states.</td></tr>
+<tr><td>Difference</td><td>Yes</td><td>L1−L2 = L1 ∩ complement(L2).</td></tr>
+<tr><td>Concatenation</td><td>Yes</td><td>Connect automata using ε-transitions in NFA construction.</td></tr>
+<tr><td>Kleene star</td><td>Yes</td><td>Add ε paths for zero or more repetitions.</td></tr>
+<tr><td>Reversal</td><td>Yes</td><td>Reverse transitions using an NFA construction.</td></tr>
+</table>
+</div>
+
+<div class="question">
+<h3>Solved Problem 4 — Prove regular languages are closed under complement</h3>
+<div class="solution">
+<p>
+Let L be regular. Then there exists a DFA M accepting L.
+First ensure that M is complete, meaning every state has a transition
+for every alphabet symbol.
+</p>
+<p>
+Create M' by changing every final state of M into a non-final state
+and every non-final state into a final state.
+</p>
+<p>
+M' accepts exactly the strings that M rejects.
+</p>
+<p class="answer">
+Therefore the complement of a regular language is regular.
+</p>
+</div>
+</div>
+</section>
+
+<section id="equivalence">
+<h2>6. Equivalence of Automata</h2>
+
+<div class="card theory">
+<h3>Definition</h3>
+<p>
+Two automata M1 and M2 are equivalent if they accept exactly the
+same set of strings.
+</p>
+
+<div class="formula">
+M1 ≡ M2  ⇔  L(M1)=L(M2)
+</div>
+
+<h3>Ways to establish equivalence</h3>
+<ul>
+<li>Compare their recognized languages.</li>
+<li>Construct the symmetric-difference product and check emptiness.</li>
+<li>Minimize both DFAs and compare the resulting structures, with suitable state correspondence.</li>
+</ul>
+</div>
+</section>
+
+<section id="min">
+<h2>7. DFA Minimization — Full Theory</h2>
+
+<div class="card theory">
+<h3>Why minimize a DFA?</h3>
+<p>
+A DFA may contain states that are unreachable or states that behave
+identically for all possible future inputs. Minimization removes
+unnecessary states while preserving the language recognized by the DFA.
+</p>
+
+<h3>Important terms</h3>
+<ul>
+<li><b>Reachable state:</b> a state that can be reached from the initial state.</li>
+<li><b>Equivalent states:</b> no input string can distinguish their behavior with respect to acceptance.</li>
+<li><b>Distinguishable states:</b> there exists an input string that causes one state to accept and the other to reject.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>7.1 Table-Filling Method</h3>
+
+<ol>
+<li>Remove unreachable states.</li>
+<li>List every unordered pair of remaining states.</li>
+<li>Mark pairs in which one state is final and the other is non-final.</li>
+<li>For each unmarked pair (p,q), examine every input symbol.</li>
+<li>If δ(p,a) and δ(q,a) form an already marked pair, mark (p,q).</li>
+<li>Repeat until no new pair is marked.</li>
+<li>Unmarked pairs represent equivalent states.</li>
+<li>Merge equivalent states.</li>
+</ol>
+</div>
+
+<div class="question">
+<h3>Worked Minimization Example</h3>
+
+<p>Consider states:</p>
+
+<div class="formula">
+Q = {A,B,C,D,E}
+</div>
+
+<p>Suppose:</p>
+<ul>
+<li>A is the initial state.</li>
+<li>D and E are final states.</li>
+<li>All states are reachable.</li>
+</ul>
+
+<p>
+Start by making pairs:
+</p>
+
+<div class="formula">
+(A,B), (A,C), (A,D), (A,E),<br>
+(B,C), (B,D), (B,E),<br>
+(C,D), (C,E),<br>
+(D,E)
+</div>
+
+<p>
+Immediately mark every pair containing exactly one final and one
+non-final state:
+</p>
+
+<div class="formula">
+(A,D), (A,E), (B,D), (B,E), (C,D), (C,E)
+</div>
+
+<p>
+Then examine every remaining pair using the transition table of the
+specific DFA. If a transition leads to a previously marked pair,
+mark the current pair. Continue until no new pair can be marked.
+</p>
+
+<div class="warning">
+For an actual VTU numerical problem, always use the given transition
+table. Do not guess whether two states are equivalent merely because
+they look similar.
+</div>
+</div>
+
+<div class="card">
+<h3>7.2 Partition Refinement Method</h3>
+
+<p>
+Another minimization method starts with two groups:
+</p>
+
+<div class="formula">
+P0 = {Final states, Non-final states}
+</div>
+
+<p>
+Then repeatedly split a group whenever its states transition into
+different groups for some input symbol.
+Continue until no group can be split.
+Each final group becomes one state of the minimized DFA.
+</p>
+</div>
+</section>
+
+<section>
+<h2>8. Applications of Regular Expressions</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Text Searching</h3>
+<p>REs can locate patterns in large text files.</p>
+</div>
+
+<div class="card">
+<h3>Lexical Analysis</h3>
+<p>Compilers use regular-language concepts to identify tokens such as identifiers, numbers and keywords.</p>
+</div>
+
+<div class="card">
+<h3>Input Validation</h3>
+<p>Regular expressions are commonly used for checking whether input follows a required pattern.</p>
+</div>
+
+<div class="card">
+<h3>Log Analysis</h3>
+<p>Patterns can be searched in server and application logs.</p>
+</div>
+
+</div>
+
+<div class="example">
+<b>Practical example:</b>
+<pre>^[A-Za-z][A-Za-z0-9]*$</pre>
+<p>
+This practical regex describes a simple identifier beginning with a
+letter and followed by zero or more letters/digits.
+</p>
+</div>
+</section>
+
+<section>
+<h2>9. Important VTU-Style Problems</h2>
+
+<div class="question">
+<h3>2-Mark Questions</h3>
+<ul>
+<li>Define regular expression.</li>
+<li>What is Kleene star?</li>
+<li>Define regular language.</li>
+<li>State the pumping lemma for regular languages.</li>
+<li>Define equivalent automata.</li>
+<li>What is DFA minimization?</li>
+<li>What are distinguishable states?</li>
+<li>List closure properties of regular languages.</li>
+</ul>
+</div>
+
+<div class="question">
+<h3>5-Mark Questions</h3>
+<ul>
+<li>Explain the basic operations on regular expressions.</li>
+<li>Explain RE to ε-NFA construction.</li>
+<li>Explain state elimination.</li>
+<li>Explain pumping lemma with conditions.</li>
+<li>Explain closure properties of regular languages.</li>
+<li>Explain table-filling DFA minimization.</li>
+</ul>
+</div>
+
+<div class="question">
+<h3>10-Mark Questions</h3>
+<ul>
+<li>Construct a regular expression for a given language and explain it.</li>
+<li>Construct an ε-NFA for a given regular expression.</li>
+<li>Convert a finite automaton to an equivalent regular expression using state elimination.</li>
+<li>State and apply the pumping lemma to prove a language is not regular.</li>
+<li>Minimize a given DFA using the table-filling method.</li>
+<li>Explain equivalence and minimization of automata with suitable examples.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>10. Common Mistakes</h2>
+
+<div class="warning">
+<ul>
+<li>Do not confuse <code>ε</code> with <code>∅</code>.</li>
+<li>In pumping-lemma proofs, do not select only one convenient split without justification.</li>
+<li>Remember that pumping lemma is normally used to prove <b>non-regularity</b>; satisfying it does not by itself prove regularity.</li>
+<li>For DFA minimization, remove unreachable states first.</li>
+<li>For complement construction, the DFA must be complete.</li>
+<li>Do not confuse RE notation used in formal language theory with every feature of programming-language regex engines.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>11. Exam Answer-Writing Template</h2>
+
+<div class="card">
+<h3>For a 10-mark theory/problem answer</h3>
+<ol>
+<li>Write the definition.</li>
+<li>Write the formal notation.</li>
+<li>Explain the concept in 3–5 sentences.</li>
+<li>State the algorithm/conditions.</li>
+<li>Draw the required automaton/table if applicable.</li>
+<li>Show every important step.</li>
+<li>Give the final result clearly.</li>
+<li>End with a conclusion.</li>
+</ol>
+</div>
+</section>
+
+<section>
+<h2>12. Quick Revision</h2>
+
+<div class="card">
+<table>
+<tr><th>Topic</th><th>One-line memory point</th></tr>
+<tr><td>RE</td><td>Notation for regular languages.</td></tr>
+<tr><td>Union</td><td>Either R or S.</td></tr>
+<tr><td>Concatenation</td><td>R followed by S.</td></tr>
+<tr><td>Star</td><td>Zero or more repetitions.</td></tr>
+<tr><td>RE → FA</td><td>Construct equivalent ε-NFA.</td></tr>
+<tr><td>FA → RE</td><td>State elimination.</td></tr>
+<tr><td>Pumping Lemma</td><td>Useful for proving non-regularity.</td></tr>
+<tr><td>Closure</td><td>Operation keeps language regular.</td></tr>
+<tr><td>Equivalence</td><td>Same accepted language.</td></tr>
+<tr><td>Minimization</td><td>Remove unreachable and merge equivalent states.</td></tr>
+</table>
+</div>
+</section>
+
+<section>
+<h2>13. YouTube Learning</h2>
+
+<div class="yt">
+<p>
+<b>Direct learning:</b>
+<a href="https://www.youtube.com/results?search_query=BCS503+Theory+of+Computation+Module+2+Regular+Expression+Pumping+Lemma+DFA+Minimization"
+target="_blank">
+▶ BCS503 Module 2 — Regular Expression + Pumping Lemma + DFA Minimization
+</a>
+</p>
+
+<p>
+For a specific topic, use:
+<a href="https://www.youtube.com/results?search_query=Theory+of+Computation+Regular+Expression+Pumping+Lemma+DFA+Minimization"
+target="_blank">
+▶ Theory of Computation Module 2 YouTube Search
+</a>
+</p>
+</div>
+</section>
+
+<section>
+<h2>14. MAHALAKSHMI'S GITHUB</h2>
+
+<a class="btn"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</section>
+
+<div class="footer">
+MAHALAKSHMI'S COURSE NOTES<br>
+BCS503 — Theory of Computation — Module 2
+</div>
+
+</main>
+
+<a class="top" href="#">↑</a>
+
+<script>
+document.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("dragstart",e=>e.preventDefault());
+document.addEventListener("selectstart",e=>e.preventDefault());
+
+document.addEventListener("keydown",function(e){
+    const k=e.key.toLowerCase();
+    if((e.ctrlKey||e.metaKey)&&["c","x","a","u","s","p"].includes(k)){
+        e.preventDefault();
+    }
+});
+</script>
+
+</body>
+</html>

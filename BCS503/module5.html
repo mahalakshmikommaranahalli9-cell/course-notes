@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080706">
+
+<title>BCS503 Module 5 | Turing Machine & Undecidability</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080706;
+    color:#eee8dc;
+    line-height:1.8;
+    user-select:none;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+
+    background:
+    radial-gradient(
+        circle at 15% 10%,
+        rgba(212,175,55,.10),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(212,175,55,.06),
+        transparent 30%
+    );
+}
+
+body::after{
+    content:"🦁";
+    position:fixed;
+    right:3%;
+    bottom:2%;
+    font-size:120px;
+    opacity:.025;
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    padding:55px 7%;
+    background:linear-gradient(
+        135deg,
+        #090909,
+        #151109
+    );
+    border-bottom:1px solid #4d3b19;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid #85671f;
+    border-radius:30px;
+    color:#dfbd58;
+    font-size:.78rem;
+    letter-spacing:1px;
+    margin-bottom:15px;
+}
+
+header h1{
+    color:#e4c45d;
+    font-size:clamp(2rem,5vw,3.4rem);
+    line-height:1.15;
+}
+
+.subtitle{
+    margin-top:15px;
+    color:#bdb5a8;
+    max-width:1000px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,7,6,.97);
+    border-bottom:1px solid #382d18;
+    padding:11px 5%;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    color:#d7b95e;
+    text-decoration:none;
+    margin-right:18px;
+    font-size:.9rem;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+section{
+    padding:45px 0;
+    border-bottom:1px solid #29251e;
+}
+
+h2{
+    color:#e1bd53;
+    font-size:2rem;
+    margin-bottom:20px;
+}
+
+h3{
+    color:#f0d37b;
+    margin-top:28px;
+    margin-bottom:12px;
+    font-size:1.3rem;
+}
+
+h4{
+    color:#d9b84f;
+    margin-top:20px;
+    margin-bottom:8px;
+}
+
+p{
+    margin:10px 0;
+    color:#ddd6ca;
+}
+
+ul,
+ol{
+    margin:12px 0 18px 30px;
+}
+
+li{
+    margin:6px 0;
+    color:#ddd6ca;
+}
+
+strong{
+    color:white;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card{
+    background:#11100d;
+    border:1px solid #453719;
+    border-radius:14px;
+    padding:23px;
+    margin:20px 0;
+}
+
+.problem{
+    background:#12100b;
+    border-left:4px solid #d4af37;
+    padding:23px;
+    margin:28px 0;
+    border-radius:0 12px 12px 0;
+}
+
+.step{
+    background:#0d0d0c;
+    border:1px solid #332b1b;
+    border-radius:10px;
+    padding:17px;
+    margin:14px 0;
+}
+
+.step-title{
+    color:#e3c25c;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.answer{
+    background:#171308;
+    border:1px solid #82651f;
+    border-radius:10px;
+    padding:20px;
+    margin-top:18px;
+}
+
+.note{
+    background:#12110d;
+    border-left:4px solid #9b7928;
+    padding:16px 19px;
+    margin:18px 0;
+}
+
+.warning{
+    background:#171009;
+    border-left:4px solid #b78b2c;
+    padding:16px 19px;
+    margin:18px 0;
+}
+
+/* =========================================================
+   CODE
+========================================================= */
+
+code{
+    color:#f2d982;
+    background:#17140c;
+    padding:2px 6px;
+    border-radius:4px;
+}
+
+pre{
+    background:#050505;
+    color:#efd989;
+    border:1px solid #3d311b;
+    border-radius:10px;
+    padding:18px;
+    overflow-x:auto;
+    white-space:pre-wrap;
+    font-family:"Courier New",monospace;
+    margin:13px 0;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0;
+}
+
+th,
+td{
+    border:1px solid #4a3a1c;
+    padding:11px;
+    text-align:left;
+    vertical-align:top;
+}
+
+th{
+    background:#171207;
+    color:#e3c15b;
+}
+
+td{
+    background:#0e0e0d;
+    color:#ddd5c8;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.btn{
+    display:inline-block;
+    background:#d9b64d;
+    color:#080706;
+    padding:11px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:6px 6px 6px 0;
+}
+
+.btn:hover{
+    background:#f0d36d;
+}
+
+.center{
+    text-align:center;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+    padding:45px 6%;
+    color:#999285;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    header{
+        padding:38px 5%;
+    }
+
+    section{
+        padding:32px 0;
+    }
+
+    h2{
+        font-size:1.55rem;
+    }
+
+    h3{
+        font-size:1.15rem;
+    }
+
+    .card,
+    .problem{
+        padding:16px;
+    }
+
+    table{
+        font-size:.82rem;
+    }
+}
+
+/* =========================================================
+   PRINT BLOCK
+========================================================= */
+
+@media print{
+
+    body{
+        display:none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+<span class="badge">
+BCS503 • SEMESTER V • MODULE 5
+</span>
+
+<h1>
+Turing Machines & Undecidability
+</h1>
+
+<p class="subtitle">
+
+Complete Module 5 notes covering
+Turing Machine fundamentals, formal definition,
+transition functions, construction techniques,
+instantaneous descriptions, solved machine-design
+problems, decidability, recursively enumerable languages,
+halting problem and undecidability.
+
+<strong>
+Step-by-step problems are included.
+</strong>
+
+</p>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+<a href="#intro">Introduction</a>
+<a href="#tm">Turing Machine</a>
+<a href="#transition">Transitions</a>
+<a href="#problem1">0ⁿ1ⁿ</a>
+<a href="#problem2">Palindrome</a>
+<a href="#problem3">Equal Counts</a>
+<a href="#id">ID</a>
+<a href="#language">Languages</a>
+<a href="#decidable">Decidability</a>
+<a href="#halting">Halting</a>
+<a href="#questions">Questions</a>
+<a href="#videos">YouTube</a>
+
+</nav>
+
+
+<main>
+
+
+<!-- =========================================================
+     1. INTRODUCTION
+========================================================= -->
+
+<section id="intro">
+
+<h2>1. Introduction to Turing Machines</h2>
+
+<div class="card">
+
+<h3>1.1 What is a Turing Machine?</h3>
+
+<p>
+A <strong>Turing Machine (TM)</strong> is a mathematical model
+of computation introduced by Alan Turing.
+</p>
+
+<p>
+It is more powerful than finite automata and pushdown automata
+because it has an unlimited tape that can be used as memory.
+</p>
+
+<p>
+A simple representation is:
+</p>
+
+<pre>
+        Read / Write Head
+              ↓
+... | 0 | 1 | 1 | 0 | 1 | B | B | B | ...
+              ↑
+            Tape
+</pre>
+
+<p>
+The head can:
+</p>
+
+<ul>
+
+<li>Read a symbol.</li>
+
+<li>Write a symbol.</li>
+
+<li>Move Left.</li>
+
+<li>Move Right.</li>
+
+</ul>
+
+</div>
+
+
+<h3>1.2 Why do we need Turing Machines?</h3>
+
+<ul>
+
+<li>To model general computation.</li>
+
+<li>To study what computers can and cannot solve.</li>
+
+<li>To define decidable and undecidable problems.</li>
+
+<li>To study algorithms formally.</li>
+
+<li>To understand the limits of computation.</li>
+
+</ul>
+
+
+<h3>1.3 Difference between FA, PDA and TM</h3>
+
+<table>
+
+<tr>
+
+<th>Feature</th>
+<th>FA</th>
+<th>PDA</th>
+<th>TM</th>
+
+</tr>
+
+<tr>
+
+<td>Memory</td>
+<td>Finite states</td>
+<td>Stack</td>
+<td>Infinite tape</td>
+
+</tr>
+
+<tr>
+
+<td>Read input</td>
+<td>One direction</td>
+<td>One direction</td>
+<td>Can move L/R</td>
+
+</tr>
+
+<tr>
+
+<td>Write memory</td>
+<td>No</td>
+<td>Stack operations</td>
+<td>Yes</td>
+
+</tr>
+
+<tr>
+
+<td>Power</td>
+<td>Regular languages</td>
+<td>Context-Free Languages</td>
+<td>General computation</td>
+
+</tr>
+
+</table>
+
+</section>
+
+
+
+<!-- =========================================================
+     2. FORMAL DEFINITION
+========================================================= -->
+
+<section id="tm">
+
+<h2>2. Formal Definition of Turing Machine</h2>
+
+<p>
+A Turing Machine is represented using a 7-tuple:
+</p>
+
+<pre>
+M = (Q, Σ, Γ, δ, q₀, B, F)
+</pre>
+
+<h3>2.1 Components</h3>
+
+<table>
+
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>Q</td>
+<td>Finite set of states</td>
+</tr>
+
+<tr>
+<td>Σ</td>
+<td>Input alphabet</td>
+</tr>
+
+<tr>
+<td>Γ</td>
+<td>Tape alphabet</td>
+</tr>
+
+<tr>
+<td>δ</td>
+<td>Transition function</td>
+</tr>
+
+<tr>
+<td>q₀</td>
+<td>Initial state</td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>Blank symbol</td>
+</tr>
+
+<tr>
+<td>F</td>
+<td>Set of final states</td>
+</tr>
+
+</table>
+
+
+<h3>2.2 Transition Function</h3>
+
+<p>
+A common form of transition function is:
+</p>
+
+<pre>
+δ(q, X) = (p, Y, D)
+</pre>
+
+<p>
+Meaning:
+</p>
+
+<ul>
+
+<li>Current state = q</li>
+
+<li>Read X</li>
+
+<li>Write Y</li>
+
+<li>Move in direction D</li>
+
+<li>Enter state p</li>
+
+</ul>
+
+<p>
+where:
+</p>
+
+<pre>
+D = L or R
+</pre>
+
+</section>
+
+
+
+<!-- =========================================================
+     3. TRANSITION TABLE
+========================================================= -->
+
+<section id="transition">
+
+<h2>3. Turing Machine Transition Table</h2>
+
+<p>
+A transition table tells the machine what to do for
+each current state and tape symbol.
+</p>
+
+<h3>Example</h3>
+
+<table>
+
+<tr>
+
+<th>Current State</th>
+<th>Read</th>
+<th>Write</th>
+<th>Move</th>
+<th>Next State</th>
+
+</tr>
+
+<tr>
+
+<td>q0</td>
+<td>0</td>
+<td>X</td>
+<td>R</td>
+<td>q1</td>
+
+</tr>
+
+<tr>
+
+<td>q1</td>
+<td>0</td>
+<td>0</td>
+<td>R</td>
+<td>q1</td>
+
+</tr>
+
+<tr>
+
+<td>q1</td>
+<td>1</td>
+<td>Y</td>
+<td>L</td>
+<td>q2</td>
+
+</tr>
+
+</table>
+
+<p>
+The first row means:
+</p>
+
+<pre>
+If machine is in q0
+and reads 0,
+
+write X,
+move Right,
+go to q1.
+</pre>
+
+</section>
+
+
+
+<!-- =========================================================
+     4. TM DESIGN METHOD
+========================================================= -->
+
+<section>
+
+<h2>4. General Method to Construct a Turing Machine</h2>
+
+<div class="card">
+
+<h3>Step 1 — Understand the language</h3>
+
+<p>
+First identify exactly what condition the input must satisfy.
+</p>
+
+<h3>Step 2 — Decide what must be remembered</h3>
+
+<p>
+Use tape symbols such as:
+</p>
+
+<pre>
+X
+Y
+A
+B
+</pre>
+
+<p>
+to mark symbols that have already been processed.
+</p>
+
+<h3>Step 3 — Create states</h3>
+
+<p>
+Each state should perform one clear task.
+</p>
+
+<h3>Step 4 — Write transitions</h3>
+
+<p>
+For every relevant symbol specify:
+</p>
+
+<pre>
+Read
+Write
+Move
+Next state
+</pre>
+
+<h3>Step 5 — Test using a small input</h3>
+
+<p>
+Always trace the machine manually.
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     5. 0^n 1^n
+========================================================= -->
+
+<section id="problem1">
+
+<h2>5. Solved Problem 1 — TM for 0ⁿ1ⁿ</h2>
+
+<div class="problem">
+
+<h3>Problem</h3>
+
+<p>
+Construct a Turing Machine for:
+</p>
+
+<pre>
+L = { 0ⁿ1ⁿ | n ≥ 1 }
+</pre>
+
+<p>
+Examples accepted:
+</p>
+
+<pre>
+01
+0011
+000111
+00001111
+</pre>
+
+<p>
+Examples rejected:
+</p>
+
+<pre>
+001
+011
+00111
+0101
+</pre>
+
+</div>
+
+
+<h3>5.1 Basic idea</h3>
+
+<p>
+We match every 0 with one 1.
+</p>
+
+<p>
+Use:
+</p>
+
+<pre>
+X = marked 0
+Y = marked 1
+</pre>
+
+<p>
+Algorithm:
+</p>
+
+<ol>
+
+<li>Find the first unmarked 0.</li>
+
+<li>Change it to X.</li>
+
+<li>Move right until an unmarked 1 is found.</li>
+
+<li>Change that 1 to Y.</li>
+
+<li>Return to the left side.</li>
+
+<li>Repeat.</li>
+
+<li>When no unmarked 0 remains, check that only Y remains.</li>
+
+<li>Accept if valid.</li>
+
+</ol>
+
+
+
+<h3>5.2 States</h3>
+
+<table>
+
+<tr>
+<th>State</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>q0</td>
+<td>Find an unmarked 0</td>
+</tr>
+
+<tr>
+<td>q1</td>
+<td>Find matching 1</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>Return to left</td>
+</tr>
+
+<tr>
+<td>q3</td>
+<td>Final checking</td>
+</tr>
+
+<tr>
+<td>q_accept</td>
+<td>Accept</td>
+</tr>
+
+<tr>
+<td>q_reject</td>
+<td>Reject</td>
+</tr>
+
+</table>
+
+
+
+<h3>5.3 Transition table</h3>
+
+<table>
+
+<tr>
+
+<th>State</th>
+<th>Read</th>
+<th>Write</th>
+<th>Move</th>
+<th>Next</th>
+
+</tr>
+
+<tr>
+<td>q0</td>
+<td>0</td>
+<td>X</td>
+<td>R</td>
+<td>q1</td>
+</tr>
+
+<tr>
+<td>q0</td>
+<td>X</td>
+<td>X</td>
+<td>R</td>
+<td>q0</td>
+</tr>
+
+<tr>
+<td>q0</td>
+<td>Y</td>
+<td>Y</td>
+<td>R</td>
+<td>q3</td>
+</tr>
+
+<tr>
+<td>q1</td>
+<td>0</td>
+<td>0</td>
+<td>R</td>
+<td>q1</td>
+</tr>
+
+<tr>
+<td>q1</td>
+<td>Y</td>
+<td>Y</td>
+<td>R</td>
+<td>q1</td>
+</tr>
+
+<tr>
+<td>q1</td>
+<td>1</td>
+<td>Y</td>
+<td>L</td>
+<td>q2</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>0</td>
+<td>0</td>
+<td>L</td>
+<td>q2</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>X</td>
+<td>X</td>
+<td>L</td>
+<td>q2</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>Y</td>
+<td>Y</td>
+<td>L</td>
+<td>q2</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>B</td>
+<td>B</td>
+<td>R</td>
+<td>q0</td>
+</tr>
+
+<tr>
+<td>q3</td>
+<td>Y</td>
+<td>Y</td>
+<td>R</td>
+<td>q3</td>
+</tr>
+
+<tr>
+<td>q3</td>
+<td>B</td>
+<td>B</td>
+<td>R</td>
+<td>q_accept</td>
+</tr>
+
+<tr>
+<td>q3</td>
+<td>0</td>
+<td>0</td>
+<td>R</td>
+<td>q_reject</td>
+</tr>
+
+</table>
+
+
+<h3>5.4 Trace for input 0011</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1
+</div>
+
+<pre>
+0011
+^
+q0
+</pre>
+
+<p>
+First 0 is marked:
+</p>
+
+<pre>
+X011
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2
+</div>
+
+<p>
+Move right and find the first 1.
+</p>
+
+<pre>
+X0Y1
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3
+</div>
+
+<p>
+Return to beginning.
+</p>
+
+<pre>
+X0Y1
+^
+q0
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4
+</div>
+
+<p>
+Mark the second 0:
+</p>
+
+<pre>
+XXY1
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5
+</div>
+
+<p>
+Find the remaining 1:
+</p>
+
+<pre>
+XXYY
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 6
+</div>
+
+<p>
+No unmarked 0 remains.
+Only Y symbols remain.
+</p>
+
+<pre>
+XXYY → ACCEPT
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final result:
+</strong>
+
+<pre>
+0011 ∈ L
+</pre>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     6. PALINDROME
+========================================================= -->
+
+<section id="problem2">
+
+<h2>6. Solved Problem 2 — TM for Palindrome</h2>
+
+<div class="problem">
+
+<h3>Problem</h3>
+
+<p>
+Construct a TM that accepts binary palindromes.
+</p>
+
+<pre>
+L = { w | w = reverse(w) }
+</pre>
+
+<p>
+Examples:
+</p>
+
+<pre>
+ε
+0
+1
+00
+11
+010
+101
+0110
+1001
+</pre>
+
+<p>
+Examples rejected:
+</p>
+
+<pre>
+01
+10
+001
+011
+0100
+</pre>
+
+</div>
+
+
+<h3>6.1 Main idea</h3>
+
+<p>
+Compare the first and last unmarked symbols.
+</p>
+
+<p>
+If they are equal:
+</p>
+
+<pre>
+mark both
+</pre>
+
+<p>
+Then repeat for the smaller remaining string.
+</p>
+
+<p>
+Use:
+</p>
+
+<pre>
+X = processed 0
+Y = processed 1
+</pre>
+
+
+<h3>6.2 Algorithm</h3>
+
+<ol>
+
+<li>Find the first unmarked symbol.</li>
+
+<li>Remember whether it is 0 or 1.</li>
+
+<li>Mark it.</li>
+
+<li>Move to the right end.</li>
+
+<li>Find the last unmarked symbol.</li>
+
+<li>Compare it with the remembered symbol.</li>
+
+<li>If they are different, reject.</li>
+
+<li>If they are equal, mark it.</li>
+
+<li>Return to the left.</li>
+
+<li>Repeat.</li>
+
+<li>If no unmarked symbol remains, accept.</li>
+
+</ol>
+
+
+<h3>6.3 States</h3>
+
+<table>
+
+<tr>
+<th>State</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>q0</td>
+<td>Find first unmarked symbol</td>
+</tr>
+
+<tr>
+<td>q1</td>
+<td>First symbol was 0</td>
+</tr>
+
+<tr>
+<td>q2</td>
+<td>First symbol was 1</td>
+</tr>
+
+<tr>
+<td>q3</td>
+<td>Return left after matching 0</td>
+</tr>
+
+<tr>
+<td>q4</td>
+<td>Return left after matching 1</td>
+</tr>
+
+<tr>
+<td>q_accept</td>
+<td>Accept</td>
+</tr>
+
+<tr>
+<td>q_reject</td>
+<td>Reject</td>
+</tr>
+
+</table>
+
+
+<h3>6.4 Conceptual transition table</h3>
+
+<table>
+
+<tr>
+
+<th>State</th>
+<th>Read</th>
+<th>Action</th>
+
+</tr>
+
+<tr>
+
+<td>q0</td>
+<td>0</td>
+<td>Mark 0 as X and search for matching last symbol</td>
+
+</tr>
+
+<tr>
+
+<td>q0</td>
+<td>1</td>
+<td>Mark 1 as Y and search for matching last symbol</td>
+
+</tr>
+
+<tr>
+
+<td>q0</td>
+<td>X/Y</td>
+<td>Continue scanning</td>
+
+</tr>
+
+<tr>
+
+<td>q0</td>
+<td>B</td>
+<td>Accept</td>
+
+</tr>
+
+<tr>
+
+<td>q1</td>
+<td>0</td>
+<td>Search right for last unmarked symbol</td>
+
+</tr>
+
+<tr>
+
+<td>q1</td>
+<td>1</td>
+<td>Reject if it is the final unmarked symbol</td>
+
+</tr>
+
+<tr>
+
+<td>q2</td>
+<td>1</td>
+<td>Search right for matching final symbol</td>
+
+</tr>
+
+<tr>
+
+<td>q2</td>
+<td>0</td>
+<td>Reject when it is the final unmarked symbol</td>
+
+</tr>
+
+</table>
+
+
+<h3>6.5 Example — 0110</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Compare first and last
+</div>
+
+<pre>
+0 1 1 0
+^     ^
+</pre>
+
+<p>
+Both are 0.
+</p>
+
+<p>
+Mark them:
+</p>
+
+<pre>
+X 1 1 X
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Compare remaining symbols
+</div>
+
+<pre>
+X 1 1 X
+  ^ ^
+</pre>
+
+<p>
+Both are 1.
+</p>
+
+<p>
+Mark:
+</p>
+
+<pre>
+X Y Y X
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3
+</div>
+
+<p>
+No unmarked symbols remain.
+</p>
+
+<pre>
+XYYX → ACCEPT
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Therefore:
+</strong>
+
+<pre>
+0110 is a palindrome.
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Palindrome Rejection Example — 0100
+</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1</div>
+
+<pre>
+0 1 0 0
+^     ^
+</pre>
+
+<p>
+First = 0 and last = 0.
+</p>
+
+<p>
+Mark them:
+</p>
+
+<pre>
+X 1 0 X
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 2</div>
+
+<pre>
+X 1 0 X
+  ^ ^
+</pre>
+
+<p>
+Now compare 1 and 0.
+They are different.
+</p>
+
+</div>
+
+<div class="answer">
+
+<strong>
+Therefore:
+</strong>
+
+<pre>
+0100 → REJECT
+</pre>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     7. EQUAL NUMBER OF 0s AND 1s
+========================================================= -->
+
+<section id="problem3">
+
+<h2>7. Solved Problem 3 — Equal Number of 0s and 1s</h2>
+
+<div class="problem">
+
+<h3>Problem</h3>
+
+<p>
+Construct a TM for strings containing an equal number
+of 0s and 1s.
+</p>
+
+<pre>
+L = { w ∈ {0,1}* | #0(w) = #1(w) }
+</pre>
+
+<p>
+Examples accepted:
+</p>
+
+<pre>
+01
+10
+0011
+0101
+1010
+1100
+</pre>
+
+<p>
+Examples rejected:
+</p>
+
+<pre>
+0
+1
+001
+011
+0001111
+</pre>
+
+</div>
+
+
+<h3>7.1 Main idea</h3>
+
+<p>
+Pair every 0 with one 1.
+</p>
+
+<p>
+Use:
+</p>
+
+<pre>
+X = marked 0
+Y = marked 1
+</pre>
+
+<p>
+Algorithm:
+</p>
+
+<ol>
+
+<li>Find an unmarked 0.</li>
+
+<li>Mark it X.</li>
+
+<li>Search for an unmarked 1.</li>
+
+<li>Mark it Y.</li>
+
+<li>Return to the beginning.</li>
+
+<li>Repeat.</li>
+
+<li>If no 0 remains, check that no 1 remains.</li>
+
+<li>If all symbols are marked, accept.</li>
+
+</ol>
+
+
+<h3>7.2 Example — 0011</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1</div>
+
+<pre>
+0 0 1 1
+^
+</pre>
+
+<p>
+Mark first 0:
+</p>
+
+<pre>
+X 0 1 1
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2</div>
+
+<p>
+Find one 1 and mark it:
+</p>
+
+<pre>
+X 0 Y 1
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3</div>
+
+<p>
+Repeat:
+</p>
+
+<pre>
+X X Y Y
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+All symbols have been paired.
+</strong>
+
+<pre>
+0011 → ACCEPT
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Rejection Example — 001
+</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1</div>
+
+<pre>
+0 0 1
+</pre>
+
+<p>
+Pair one 0 with the 1:
+</p>
+
+<pre>
+X 0 Y
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2</div>
+
+<p>
+There is still an unmarked 0.
+But there is no unmarked 1 left.
+</p>
+
+</div>
+
+
+<div class="answer">
+
+<pre>
+001 → REJECT
+</pre>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     8. INSTANTANEOUS DESCRIPTION
+========================================================= -->
+
+<section id="id">
+
+<h2>8. Instantaneous Description (ID)</h2>
+
+<p>
+An Instantaneous Description represents the current
+configuration of a Turing Machine.
+</p>
+
+<p>
+A common notation is:
+</p>
+
+<pre>
+α q β
+</pre>
+
+<p>
+where q represents the current state and the machine head
+is positioned at the first symbol of β.
+</p>
+
+
+<h3>8.1 Example</h3>
+
+<pre>
+0011
+</pre>
+
+<p>
+Suppose the machine is at the first symbol in q0:
+</p>
+
+<pre>
+q0 0011
+</pre>
+
+<p>
+After marking the first 0:
+</p>
+
+<pre>
+X q1 011
+</pre>
+
+<p>
+The exact ID notation can vary slightly by textbook,
+but the important point is to show:
+</p>
+
+<ul>
+
+<li>Tape contents</li>
+
+<li>Current state</li>
+
+<li>Head position</li>
+
+</ul>
+
+</section>
+
+
+
+<!-- =========================================================
+     9. TM LANGUAGE
+========================================================= -->
+
+<section id="language">
+
+<h2>9. Languages Accepted by Turing Machines</h2>
+
+<h3>9.1 Accepted language</h3>
+
+<p>
+The language accepted by a TM M is:
+</p>
+
+<pre>
+L(M) = { w | M accepts w }
+</pre>
+
+<p>
+If the machine enters an accept state,
+the input belongs to the language.
+</p>
+
+
+<h3>9.2 Rejection</h3>
+
+<p>
+If the machine enters a reject state,
+the input is not accepted.
+</p>
+
+
+<h3>9.3 What if the machine never stops?</h3>
+
+<p>
+A Turing Machine may continue forever on some inputs.
+</p>
+
+<pre>
+Input
+ ↓
+TM
+ ↓
+Runs forever
+ ↓
+No accept/reject
+</pre>
+
+<p>
+This is an important difference between a general
+Turing Machine and a decider.
+</p>
+
+</section>
+
+
+
+<!-- =========================================================
+     10. DECIDABILITY
+========================================================= -->
+
+<section id="decidable">
+
+<h2>10. Decidability</h2>
+
+<h3>10.1 What is a Decidable Language?</h3>
+
+<p>
+A language is decidable if there exists a Turing Machine
+that halts on every input and correctly answers whether
+the input belongs to the language.
+</p>
+
+<p>
+Such a machine is called a <strong>Decider</strong>.
+</p>
+
+<pre>
+Input
+  ↓
+Decider
+  ↓
+ ┌─────────────┐
+ │             │
+YES           NO
+ │             │
+HALT          HALT
+</pre>
+
+
+<h3>10.2 Decidable problem</h3>
+
+<p>
+For every input:
+</p>
+
+<pre>
+TM eventually halts.
+</pre>
+
+<p>
+It gives either:
+</p>
+
+<pre>
+ACCEPT
+</p> <pre> REJECT </pre> </section> <!-- ========================================================= 11. RECURSIVELY ENUMERABLE ========================================================= --> <section> <h2>11. Recursively Enumerable Languages</h2> <p> A language is recursively enumerable (RE), also called Turing-recognizable, if some Turing Machine recognizes it. </p> <p> For strings belonging to the language: </p> <pre> TM eventually accepts. </pre> <p> For strings not belonging to the language, the machine may: </p> <pre> reject OR run forever </pre> <h3>11.1 Difference between Decider and Recognizer</h3> <table> <tr> <th>Feature</th> <th>Decider</th> <th>Recognizer</th> </tr> <tr> <td>Member input</td> <td>Accepts and halts</td> <td>Accepts and halts</td> </tr> <tr> <td>Non-member input</td> <td>Rejects and halts</td> <td>May reject or loop forever</td> </tr> <tr> <td>Always halts?</td> <td>Yes</td> <td>No</td> </tr> </table> </section> <!-- ========================================================= 12. DECIDABLE VS RE ========================================================= --> <section> <h2>12. Decidable vs Recursively Enumerable</h2> <table> <tr> <th>Property</th> <th>Decidable</th> <th>RE</th> </tr> <tr> <td>Accept members</td> <td>Yes</td> <td>Yes</td> </tr> <tr> <td>Reject non-members</td> <td>Yes</td> <td>Not necessarily</td> </tr> <tr> <td>Always halts</td> <td>Yes</td> <td>No</td> </tr> <tr> <td>Also called</td> <td>Recursive language</td> <td>Turing-recognizable language</td> </tr> </table> <div class="note">
+
+<strong>Easy memory trick:</strong>
+
+<pre> DECIDER = Always stops RECOGNIZER = May run forever </pre> </div> </section> <!-- ========================================================= 13. HALTING PROBLEM ========================================================= --> <section id="halting"> <h2>13. Halting Problem</h2> <h3>13.1 Definition</h3> <p> The Halting Problem asks: </p> <pre> Given a program P and input w, will P eventually halt on w? </pre> <p> Alan Turing proved that there is no general algorithm that can correctly answer this question for every possible program and input. </p> <h3>13.2 Why is this important?</h3> <p> It demonstrates a fundamental limit of computation. </p> <p> Some problems cannot be solved by any algorithm that works correctly for every possible input. </p> <div class="problem"> <h3> Problem 4 — Explain the Halting Problem </h3> <div class="step"> <div class="step-title"> Step 1 — Assume a perfect halting machine exists </div> <p> Suppose we have a machine: </p> <pre> H(P, W) </pre> <p> It tells us: </p> <pre> YES → P halts on W NO → P does not halt on W </pre> </div> <div class="step"> <div class="step-title"> Step 2 — Construct a special program D </div> <p> D does the opposite of H's prediction when given a program as input. </p> <pre> D(P): if H(P,P) says YES: loop forever if H(P,P) says NO: halt </pre> </div> <div class="step"> <div class="step-title"> Step 3 — Give D itself as input </div> <pre> D(D) </pre> <p> Now two possibilities exist. </p> </div> <div class="step"> <div class="step-title"> Case 1 — H says D halts</div> <p> Then D is designed to loop forever. Contradiction. </p> </div> <div class="step"> <div class="step-title"> Case 2 — H says D loops forever</div> <p> Then D is designed to halt. Again contradiction. </p> </div> <div class="answer"> <strong> Conclusion: </strong> <p> Therefore the assumed perfect machine H cannot exist. The Halting Problem is undecidable. </p> </div> </div> <!-- ========================================================= 14. UNDECIDABILITY ========================================================= --> <section> <h2>14. Undecidability</h2> <h3>14.1 Meaning</h3> <p> A problem is undecidable if there is no algorithm that correctly solves the problem for every possible input. </p> <h3>14.2 Important undecidable problems</h3> <ul> <li>Halting Problem</li> <li>Acceptance Problem for Turing Machines</li> <li>Many questions about arbitrary programs</li> </ul> <h3>14.3 Decidable vs Undecidable</h3> <table> <tr> <th>Decidable</th> <th>Undecidable</th> </tr> <tr> <td> There exists an algorithm. </td> <td> No algorithm can solve every instance. </td> </tr> <tr> <td> Machine always halts. </td> <td> A general solver cannot always exist. </td> </tr> <tr> <td> Example: many finite-state problems. </td> <td> Example: Halting Problem. </td> </tr> </table> </section> <!-- ========================================================= 15. ACCEPTANCE PROBLEM ========================================================= --> <section> <h2>15. Acceptance Problem</h2> <p> The acceptance problem asks: </p> <pre> Given TM M and input w, does M accept w? </pre> <p> This problem is undecidable for arbitrary Turing Machines. </p> <p> The reason is closely connected with the ability of a machine to simulate arbitrary computation. </p> <div class="warning">
+
+<strong>Important distinction:</strong>
+
+The question:
+
+<pre> "Does this particular machine accept this particular input?" </pre>
+
+is different from asking for a general algorithm that works
+for <strong>every</strong> machine and input.
+
+The undecidability result concerns the general problem.
+
+</div> </section> <!-- ========================================================= 16. TM DESIGN SUMMARY ========================================================= --> <section> <h2>16. Important TM Construction Patterns</h2> <div class="card"> <h3>Pattern 1 — Matching symbols</h3> <pre> Find first 0 ↓ Mark it X ↓ Find matching 1 ↓ Mark it Y ↓ Return ↓ Repeat </pre> <h3>Pattern 2 — Palindrome</h3> <pre> Take first symbol ↓ Remember it ↓ Find last symbol ↓ Compare ↓ Mark both ↓ Repeat </pre> <h3>Pattern 3 — Counting</h3> <pre> Mark one symbol ↓ Find corresponding symbol ↓ Mark it ↓ Repeat ↓ Check leftovers </pre> </div> </section> <!-- ========================================================= 17. IMPORTANT EXAMPLES ========================================================= --> <section> <h2>17. More Practice Problems</h2> <div class="card"> <h3>Problem A</h3> <p> Construct a TM for: </p> <pre> L = { 0ⁿ1ⁿ | n ≥ 1 } </pre> <p> Solved above. </p> <h3>Problem B</h3> <p> Construct a TM for binary palindromes. </p> <p> Solved above. </p> <h3>Problem C</h3> <p> Construct a TM for equal number of 0s and 1s. </p> <p> Solved above. </p> <h3>Problem D — Practice Yourself</h3> <pre> L = { 0ⁿ1ⁿ2ⁿ | n ≥ 1 } </pre> <p> Hint: </p> <pre> Mark one 0 ↓ Find one 1 ↓ Find one 2 ↓ Return left ↓ Repeat </pre> <h3>Problem E — Practice Yourself</h3> <pre> L = { ww | w ∈ {0,1}* } </pre> <p> This requires a more advanced comparison strategy. Try designing the machine using marked symbols and multiple passes. </p> </div> </section> <!-- ========================================================= 18. VTU ANSWER FORMAT ========================================================= --> <section> <h2>18. How to Write TM Answers in VTU Exam</h2> <div class="card"> <h3>For a TM Construction Problem</h3> <ol> <li>Write the language.</li> <li>Explain the basic idea.</li> <li>Define the states.</li> <li>Define input and tape alphabets.</li> <li>Give transition function/table.</li> <li>Draw or describe the state transitions.</li> <li>Give an example trace.</li> <li>Write final result.</li> </ol> <h3>Example conclusion:</h3> <pre> Therefore the constructed Turing Machine accepts exactly the strings belonging to L. </pre> <h3>For Halting Problem</h3> <ol> <li>Define the problem.</li> <li>Assume a decider exists.</li> <li>Construct a contradictory machine.</li> <li>Run the machine on itself.</li> <li>Show contradiction.</li> <li>Conclude undecidability.</li> </ol> </div> </section> <!-- ========================================================= 19. 2 MARK ========================================================= --> <section id="questions"> <h2>19. Important 2-Mark Questions</h2> <div class="card"> <ol> <li>Define Turing Machine.</li> <li>Write the 7-tuple representation of a TM.</li> <li>Define tape alphabet.</li> <li>What is a blank symbol?</li> <li>What is a transition function?</li> <li>What is an instantaneous description?</li> <li>Define recursively enumerable language.</li> <li>Define decidable language.</li> <li>What is an undecidable problem?</li> <li>State the Halting Problem.</li> <li>What is a decider?</li> <li>What is a recognizer?</li> </ol> </div> <!-- ========================================================= 20. 5 MARK ========================================================= --> <h2>20. Important 5-Mark Questions</h2> <div class="card"> <ol> <li> Explain the formal definition of a Turing Machine. </li> <li> Explain the transition function of a TM. </li> <li> Explain Instantaneous Description. </li> <li> Construct a TM for 0ⁿ1ⁿ. </li> <li> Construct a TM for palindrome. </li> <li> Explain decidable languages. </li> <li> Explain recursively enumerable languages. </li> <li> Differentiate between decider and recognizer. </li> <li> Explain the Halting Problem. </li> </ol> </div> <!-- ========================================================= 21. 10 MARK ========================================================= --> <h2>21. Important 10-Mark Questions</h2> <div class="card"> <ol> <li> Explain the formal model of Turing Machine with transition function and configuration. </li> <li> Construct and explain a TM for L = {0ⁿ1ⁿ | n ≥ 1}. </li> <li> Construct a TM for palindrome and trace its operation. </li> <li> Construct a TM that accepts strings containing equal numbers of 0s and 1s. </li> <li> Explain decidability and recursively enumerable languages. </li> <li> Explain the Halting Problem and prove that it is undecidable. </li> <li> Explain the difference between decidable and undecidable problems. </li> </ol> </div> </section> <!-- ========================================================= 22. QUICK REVISION ========================================================= --> <section> <h2>22. Quick Revision</h2> <pre> TURING MACHINE: M = (Q, Σ, Γ, δ, q₀, B, F) Transition: δ(q, X) = (p, Y, D) D = L or R TM can: ✓ Read ✓ Write ✓ Move Left ✓ Move Right IMPORTANT MARKERS: X = processed 0 Y = processed 1 DECIDER: Always halts. RECOGNIZER: Accepts members, but may loop forever on non-members. DECIDABLE: There exists a TM that halts on every input. UNDECIDABLE: No algorithm can solve every instance correctly. HALTING PROBLEM: Determining whether an arbitrary program/TM eventually halts is undecidable. IMPORTANT TM PROBLEMS: ✓ 0ⁿ1ⁿ ✓ Palindrome ✓ Equal number of 0s and 1s ✓ 0ⁿ1ⁿ2ⁿ </pre> </section> <!-- ========================================================= 23. MEMORY TRICKS ========================================================= --> <section> <h2>23. Easy Memory Tricks</h2> <div class="card"> <h3>7-Tuple</h3> <pre> Q Σ Γ δ q₀ B F </pre> <p> Remember: </p> <pre> States Input Tape Transition Start Blank Final </pre> <h3>Decider</h3> <pre> DECIDER = DOES NOT GET STUCK </pre> <h3>Recognizer</h3> <pre> RECOGNIZER = ACCEPTS MEMBERS BUT MAY LOOP ON NON-MEMBERS </pre> <h3>TM Matching Strategy</h3> <pre> MARK → SEARCH → MATCH → RETURN → REPEAT </pre> </div> </section> <!-- ========================================================= 24. YOUTUBE ========================================================= --> <section id="videos"> <h2>24. YouTube Learning</h2> <div class="card"> <p> Use these searches for visual explanations and step-by-step solved problems. </p>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=turing+machine+TOC+complete+concept" target="_blank">
+Turing Machine Basics
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=turing+machine+0n1n+solved+problem" target="_blank">
+TM for 0ⁿ1ⁿ
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=turing+machine+palindrome+solved+problem" target="_blank">
+Palindrome TM
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=turing+machine+equal+number+of+0+and+1" target="_blank">
+Equal 0s & 1s
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=instantaneous+description+turing+machine" target="_blank">
+Instantaneous Description
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=decidability+and+undecidability+TOC" target="_blank">
+Decidability
+</a>
+
+<a class="btn" href="https://www.youtube.com/results?search_query=halting+problem+TOC+proof" target="_blank">
+Halting Problem
+</a>
+
+</div> </section> <!-- ========================================================= 25. FINAL CHECKLIST ========================================================= --> <section> <h2>25. Module 5 Exam Checklist</h2> <div class="card"> <ul> <li>☐ I know the definition of Turing Machine.</li> <li>☐ I remember the 7-tuple.</li> <li>☐ I know input alphabet and tape alphabet.</li> <li>☐ I understand the transition function.</li> <li>☐ I can construct a basic TM.</li> <li>☐ I understand marking symbols.</li> <li>☐ I can solve 0ⁿ1ⁿ.</li> <li>☐ I can solve palindrome.</li> <li>☐ I can solve equal number of 0s and 1s.</li> <li>☐ I understand Instantaneous Description.</li> <li>☐ I know decidable languages.</li> <li>☐ I know recursively enumerable languages.</li> <li>☐ I know the difference between decider and recognizer.</li> <li>☐ I understand the Halting Problem.</li> <li>☐ I understand undecidability.</li> <li>☐ I can write VTU-style answers.</li> </ul> </div> </section> <!-- ========================================================= GITHUB ========================================================= --> <section class="center"> <h2> MAHALAKSHMI'S GITHUB </h2> <p> More projects, notes and learning work. </p>
+
+<a class="btn" href="https://github.com/mahalakshmikommaranahalli9-cell" target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</section> </main> <!-- ========================================================= FOOTER ========================================================= --> <footer> <p> BCS503 • Theory of Computation • Module 5 </p> <p> Mahalakshmi's Course Notes </p> </footer> <!-- ========================================================= ANTI-COPY ========================================================= --> <script> document.addEventListener( "contextmenu", function(event){ event.preventDefault(); } ); document.addEventListener( "dragstart", function(event){ event.preventDefault(); } ); document.addEventListener( "selectstart", function(event){ event.preventDefault(); } ); document.addEventListener( "copy", function(event){ event.preventDefault(); } ); document.addEventListener( "cut", function(event){ event.preventDefault(); } ); document.addEventListener( "keydown", function(event){ const key = event.key.toLowerCase(); if( (event.ctrlKey || event.metaKey) && ["c","x","a","u","s","p"].includes(key) ){ event.preventDefault(); } } ); </script> </body> </html> ```

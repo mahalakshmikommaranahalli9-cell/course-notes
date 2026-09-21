@@ -1,0 +1,3410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080706">
+
+<title>BCS503 Module 4 | CFG Simplification, CNF, GNF & CFL</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080706;
+    color:#eee8dc;
+    line-height:1.8;
+    user-select:none;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+
+    background:
+    radial-gradient(
+        circle at 15% 10%,
+        rgba(212,175,55,.10),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(212,175,55,.06),
+        transparent 30%
+    );
+}
+
+body::after{
+    content:"🦁";
+    position:fixed;
+    right:3%;
+    bottom:2%;
+    font-size:120px;
+    opacity:.025;
+    pointer-events:none;
+    z-index:-1;
+}
+
+header{
+    padding:55px 7%;
+    background:linear-gradient(
+        135deg,
+        #090909,
+        #151109
+    );
+    border-bottom:1px solid #4d3b19;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid #85671f;
+    border-radius:30px;
+    color:#dfbd58;
+    font-size:.78rem;
+    letter-spacing:1px;
+    margin-bottom:15px;
+}
+
+header h1{
+    color:#e4c45d;
+    font-size:clamp(2rem,5vw,3.4rem);
+    line-height:1.15;
+}
+
+.subtitle{
+    margin-top:15px;
+    color:#bdb5a8;
+    max-width:1000px;
+}
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,7,6,.97);
+    border-bottom:1px solid #382d18;
+    padding:11px 5%;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+nav a{
+    color:#d7b95e;
+    text-decoration:none;
+    margin-right:18px;
+    font-size:.9rem;
+}
+
+nav a:hover{
+    color:white;
+}
+
+main{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+section{
+    padding:45px 0;
+    border-bottom:1px solid #29251e;
+}
+
+h2{
+    color:#e1bd53;
+    font-size:2rem;
+    margin-bottom:20px;
+}
+
+h3{
+    color:#f0d37b;
+    margin-top:28px;
+    margin-bottom:12px;
+    font-size:1.3rem;
+}
+
+h4{
+    color:#d9b84f;
+    margin-top:20px;
+    margin-bottom:8px;
+}
+
+p{
+    margin:10px 0;
+    color:#ddd6ca;
+}
+
+ul,ol{
+    margin:12px 0 18px 30px;
+}
+
+li{
+    margin:6px 0;
+    color:#ddd6ca;
+}
+
+strong{
+    color:white;
+}
+
+.card{
+    background:#11100d;
+    border:1px solid #453719;
+    border-radius:14px;
+    padding:23px;
+    margin:20px 0;
+}
+
+.problem{
+    background:#12100b;
+    border-left:4px solid #d4af37;
+    padding:23px;
+    margin:28px 0;
+    border-radius:0 12px 12px 0;
+}
+
+.step{
+    background:#0d0d0c;
+    border:1px solid #332b1b;
+    border-radius:10px;
+    padding:17px;
+    margin:14px 0;
+}
+
+.step-title{
+    color:#e3c25c;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.answer{
+    background:#171308;
+    border:1px solid #82651f;
+    border-radius:10px;
+    padding:20px;
+    margin-top:18px;
+}
+
+.note{
+    background:#12110d;
+    border-left:4px solid #9b7928;
+    padding:16px 19px;
+    margin:18px 0;
+}
+
+.warning{
+    background:#171009;
+    border-left:4px solid #b78b2c;
+    padding:16px 19px;
+    margin:18px 0;
+}
+
+code{
+    color:#f2d982;
+    background:#17140c;
+    padding:2px 6px;
+    border-radius:4px;
+}
+
+pre{
+    background:#050505;
+    color:#efd989;
+    border:1px solid #3d311b;
+    border-radius:10px;
+    padding:18px;
+    overflow-x:auto;
+    white-space:pre-wrap;
+    font-family:"Courier New",monospace;
+    margin:13px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:18px 0;
+}
+
+th,td{
+    border:1px solid #4a3a1c;
+    padding:11px;
+    text-align:left;
+    vertical-align:top;
+}
+
+th{
+    background:#171207;
+    color:#e3c15b;
+}
+
+td{
+    background:#0e0e0d;
+    color:#ddd5c8;
+}
+
+.btn{
+    display:inline-block;
+    background:#d9b64d;
+    color:#080706;
+    padding:11px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    margin:6px 6px 6px 0;
+}
+
+.btn:hover{
+    background:#f0d36d;
+}
+
+.center{
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:45px 6%;
+    color:#999285;
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:38px 5%;
+    }
+
+    section{
+        padding:32px 0;
+    }
+
+    h2{
+        font-size:1.55rem;
+    }
+
+    h3{
+        font-size:1.15rem;
+    }
+
+    .card,
+    .problem{
+        padding:16px;
+    }
+
+    table{
+        font-size:.82rem;
+    }
+}
+
+@media print{
+
+    body{
+        display:none;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<span class="badge">
+BCS503 • SEMESTER V • MODULE 4
+</span>
+
+<h1>
+Context-Free Languages, CFG Simplification & Normal Forms
+</h1>
+
+<p class="subtitle">
+
+Complete Module 4 notes covering
+CFG simplification, ε-productions,
+unit productions, useless symbols,
+Chomsky Normal Form, Greibach Normal Form,
+CFL Pumping Lemma and closure properties.
+
+<strong>
+Every major numerical/conversion problem is solved step by step.
+</strong>
+
+</p>
+
+</header>
+
+
+<nav>
+
+<a href="#intro">Introduction</a>
+<a href="#epsilon">ε-Production</a>
+<a href="#unit">Unit Production</a>
+<a href="#useless">Useless Symbols</a>
+<a href="#cnf">CNF</a>
+<a href="#gnf">GNF</a>
+<a href="#pumping">Pumping Lemma</a>
+<a href="#closure">Closure</a>
+<a href="#questions">Questions</a>
+<a href="#videos">YouTube</a>
+
+</nav>
+
+
+<main>
+
+
+<!-- ================================================= -->
+<!-- INTRODUCTION -->
+<!-- ================================================= -->
+
+<section id="intro">
+
+<h2>1. Context-Free Languages</h2>
+
+<div class="card">
+
+<h3>1.1 What is a Context-Free Language?</h3>
+
+<p>
+A language is called a <strong>Context-Free Language (CFL)</strong>
+if it can be generated by a Context-Free Grammar (CFG).
+</p>
+
+<pre>
+CFG  →  generates  →  CFL
+S → aSb | ε
+</pre>
+
+<p>
+generates:
+</p>
+
+<pre>
+ε
+ab
+aabb
+aaabbb
+aaaabbbb
+...
+</pre>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+L = { aⁿbⁿ | n ≥ 0 }
+</pre>
+
+</div>
+
+
+<h3>1.2 Why do we simplify CFG?</h3>
+
+<p>
+A grammar may contain unnecessary or complicated productions.
+Before converting a grammar into a normal form,
+we often simplify it.
+</p>
+
+<p>
+The major simplification steps are:
+</p>
+
+<ol>
+
+<li>Remove ε-productions.</li>
+
+<li>Remove unit productions.</li>
+
+<li>Remove useless symbols.</li>
+
+</ol>
+
+<div class="note">
+
+<strong>Important:</strong>
+
+These three conversions are frequently asked as
+step-by-step problems.
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- EPSILON -->
+<!-- ================================================= -->
+
+<section id="epsilon">
+
+<h2>2. Elimination of ε-Productions</h2>
+
+<h3>2.1 What is an ε-production?</h3>
+
+<p>
+A production of the form:
+</p>
+
+<pre>
+A → ε
+</pre>
+
+<p>
+is called an ε-production.
+</p>
+
+<p>
+Here ε represents the empty string.
+</p>
+
+
+<h3>2.2 Basic procedure</h3>
+
+<ol>
+
+<li>Find all nullable variables.</li>
+
+<li>For every production containing nullable variables,
+create alternatives by removing nullable variables.</li>
+
+<li>Remove the ε-productions.</li>
+
+<li>Keep S → ε only when the original language requires ε.</li>
+
+</ol>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 1 — Remove ε-Productions
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → AB
+A → aA | ε
+B → bB | ε
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Find nullable variables
+</div>
+
+<p>
+A is nullable because:
+</p>
+
+<pre>
+A → ε
+</pre>
+
+<p>
+B is nullable because:
+</p>
+
+<pre>
+B → ε
+</pre>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+Nullable = {A, B}
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Examine S → AB
+</div>
+
+<p>
+Both A and B are nullable.
+Therefore we generate all useful combinations:
+</p>
+
+<pre>
+AB
+A
+B
+ε
+</pre>
+
+<p>
+So:
+</p>
+
+<pre>
+S → AB | A | B | ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Remove ε from A and B
+</div>
+
+<p>
+Original:
+</p>
+
+<pre>
+A → aA | ε
+B → bB | ε
+</pre>
+
+<p>
+becomes:
+</p>
+
+<pre>
+A → aA | a
+
+B → bB | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Decide about S → ε
+</div>
+
+<p>
+Since the original grammar can generate ε,
+we retain:
+</p>
+
+<pre>
+S → ε
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final grammar:
+</strong>
+
+<pre>
+S → AB | A | B | ε
+
+A → aA | a
+
+B → bB | b
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 2 — More Detailed ε-Elimination
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → ABC
+A → aA | ε
+B → bB | ε
+C → c
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Identify nullable variables
+</div>
+
+<pre>
+A → ε
+
+B → ε
+
+C is NOT nullable.
+</pre>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+Nullable = {A, B}
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Expand S → ABC
+</div>
+
+<p>
+Because A and B can disappear,
+we generate:
+</p>
+
+<pre>
+ABC
+BC
+AC
+C
+</pre>
+
+<p>
+We do not remove C because C is not nullable.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Remove ε from A and B
+</div>
+
+<pre>
+A → aA | a
+
+B → bB | b
+
+C → c
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final grammar:
+</strong>
+
+<pre>
+S → ABC | BC | AC | C
+
+A → aA | a
+
+B → bB | b
+
+C → c
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="warning">
+
+<strong>Exam Tip:</strong>
+
+If two nullable variables occur together,
+remember that you must consider:
+
+<pre>
+Keep both
+Remove first
+Remove second
+Remove both
+</pre>
+
+Do not simply delete all nullable variables.
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- UNIT -->
+<!-- ================================================= -->
+
+<section id="unit">
+
+<h2>3. Elimination of Unit Productions</h2>
+
+<h3>3.1 Definition</h3>
+
+<p>
+A production of the form:
+</p>
+
+<pre>
+A → B
+</pre>
+
+<p>
+where both A and B are variables,
+is called a <strong>unit production</strong>.
+</p>
+
+
+<div class="problem">
+
+<h3>
+Problem 3 — Remove Unit Productions
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → A | b
+A → B | a
+B → C | b
+C → c
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Identify unit productions
+</div>
+
+<pre>
+S → A
+A → B
+B → C
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Find productions of A
+</div>
+
+<p>
+A reaches B.
+B reaches C.
+C produces c.
+</p>
+
+<p>
+Therefore A can ultimately produce:
+</p>
+
+<pre>
+a
+b
+c
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Find productions of B
+</div>
+
+<p>
+B reaches C.
+</p>
+
+<p>
+C produces c.
+</p>
+
+<p>
+B also directly produces b.
+</p>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+B → b | c
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Find productions of S
+</div>
+
+<p>
+S can reach A, then B, then C.
+</p>
+
+<p>
+Therefore S can generate:
+</p>
+
+<pre>
+a
+b
+c
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Remove all unit productions
+</div>
+
+<pre>
+S → a | b | c
+
+A → a | b | c
+
+B → b | c
+
+C → c
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<pre>
+S → a | b | c
+A → a | b | c
+B → b | c
+C → c
+</pre>
+
+<p>
+There are no productions of the form A → B.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 4 — Unit Chain
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → A
+A → B
+B → C
+C → aC | b
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1
+</div>
+
+<p>
+C has no unit production.
+</p>
+
+<pre>
+C → aC | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2
+</div>
+
+<p>
+B → C means B gets all non-unit productions of C:
+</p>
+
+<pre>
+B → aC | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3
+</div>
+
+<p>
+A → B means A gets:
+</p>
+
+<pre>
+A → aC | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4
+</div>
+
+<p>
+S → A means:
+</p>
+
+<pre>
+S → aC | b
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final grammar:
+</strong>
+
+<pre>
+S → aC | b
+
+A → aC | b
+
+B → aC | b
+
+C → aC | b
+</pre>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- USELESS -->
+<!-- ================================================= -->
+
+<section id="useless">
+
+<h2>4. Elimination of Useless Symbols</h2>
+
+<h3>4.1 What is a useless symbol?</h3>
+
+<p>
+A symbol is useless if it cannot contribute to
+the generation of a terminal string from the start symbol.
+</p>
+
+<p>
+There are two major reasons:
+</p>
+
+<ol>
+
+<li>
+The symbol is <strong>non-generating</strong>.
+</li>
+
+<li>
+The symbol is <strong>unreachable</strong>.
+</li>
+
+</ol>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 5 — Remove Useless Symbols
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → AB | C
+A → a
+B → b
+C → D
+D → E
+E → e
+F → f
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Find generating variables
+</div>
+
+<p>
+A generates a:
+</p>
+
+<pre>
+A → a
+</pre>
+
+<p>
+B generates b:
+</p>
+
+<pre>
+B → b
+</pre>
+
+<p>
+E generates e:
+</p>
+
+<pre>
+E → e
+</pre>
+
+<p>
+Therefore D generates e:
+</p>
+
+<pre>
+D → E → e
+</pre>
+
+<p>
+C generates e:
+</p>
+
+<pre>
+C → D → E → e
+</pre>
+
+<p>
+F generates f.
+</p>
+
+<p>
+Therefore all variables appear generating.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Check reachability from S
+</div>
+
+<p>
+Start:
+</p>
+
+<pre>
+S
+</pre>
+
+<p>
+From S:
+</p>
+
+<pre>
+S → A B
+S → C
+</pre>
+
+<p>
+Therefore A, B and C are reachable.
+</p>
+
+<p>
+From C:
+</p>
+
+<pre>
+C → D
+</pre>
+
+<p>
+Therefore D is reachable.
+</p>
+
+<p>
+From D:
+</p>
+
+<pre>
+D → E
+</pre>
+
+<p>
+Therefore E is reachable.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Check F
+</div>
+
+<p>
+There is:
+</p>
+
+<pre>
+F → f
+</pre>
+
+<p>
+But there is no production from S,
+A, B, C, D or E that reaches F.
+</p>
+
+<p>
+Therefore F is unreachable.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Remove F
+</div>
+
+<p>
+Delete:
+</p>
+
+<pre>
+F → f
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final grammar:
+</strong>
+
+<pre>
+S → AB | C
+
+A → a
+
+B → b
+
+C → D
+
+D → E
+
+E → e
+</pre>
+
+<p>
+F has been removed because it is unreachable.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 6 — Non-generating Symbol
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → AB
+A → a
+B → C
+C → D
+D → C
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Find directly generating variables
+</div>
+
+<pre>
+A → a
+</pre>
+
+<p>
+So A is generating.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Check B
+</div>
+
+<pre>
+B → C
+C → D
+D → C
+</pre>
+
+<p>
+There is no production from C or D
+that eventually produces a terminal.
+</p>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+B, C, D = non-generating
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Effect on S
+</div>
+
+<p>
+S requires:
+</p>
+
+<pre>
+S → AB
+</pre>
+
+<p>
+But B cannot generate a terminal string.
+Therefore S cannot generate any terminal string.
+</p>
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+The grammar generates no terminal string.
+The non-generating chain B, C, D is useless.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- CNF -->
+<!-- ================================================= -->
+
+<section id="cnf">
+
+<h2>5. Chomsky Normal Form (CNF)</h2>
+
+<h3>5.1 Definition</h3>
+
+<p>
+A CFG is in Chomsky Normal Form if its productions
+are generally of the form:
+</p>
+
+<pre>
+A → BC
+
+A → a
+</pre>
+
+<p>
+where A, B and C are variables and a is a terminal.
+</p>
+
+<p>
+The start symbol may also have:
+</p>
+
+<pre>
+S → ε
+</pre>
+
+<p>
+when ε belongs to the language.
+</p>
+
+
+<h3>5.2 Why CNF?</h3>
+
+<ul>
+
+<li>
+Useful for theoretical analysis.
+</li>
+
+<li>
+Used in parsing algorithms such as CYK.
+</li>
+
+<li>
+Provides a standard structure for CFGs.
+</li>
+
+<li>
+Simplifies proofs involving context-free languages.
+</li>
+
+</ul>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 7 — Convert CFG to CNF
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → aAB
+A → a
+B → b
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Identify the problem
+</div>
+
+<p>
+The production:
+</p>
+
+<pre>
+S → aAB
+</pre>
+
+<p>
+contains three symbols on the right-hand side.
+CNF allows only two variables:
+</p>
+
+<pre>
+A → BC
+</pre>
+
+<p>
+or one terminal:
+</p>
+
+<pre>
+A → a
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Replace terminal a
+</div>
+
+<p>
+Introduce a new variable:
+</p>
+
+<pre>
+X → a
+</pre>
+
+<p>
+Replace a by X:
+</p>
+
+<pre>
+S → XAB
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Break three variables
+</div>
+
+<p>
+Introduce another variable:
+</p>
+
+<pre>
+Y → AB
+</pre>
+
+<p>
+Then:
+</p>
+
+<pre>
+S → XY
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Check every production
+</div>
+
+<pre>
+S → XY
+X → a
+Y → AB
+A → a
+B → b
+</pre>
+
+<p>
+Every production now has one of the allowed forms.
+</p>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final CNF:
+</strong>
+
+<pre>
+S → XY
+
+Y → AB
+
+X → a
+
+A → a
+
+B → b
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 8 — Complete CNF Conversion
+</h3>
+
+<p>
+Convert:
+</p>
+
+<pre>
+S → aAB | bB
+A → aA | ε
+B → bB | b
+</pre>
+
+into CNF.
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Remove ε-production
+</div>
+
+<p>
+A is nullable:
+</p>
+
+<pre>
+A → ε
+</pre>
+
+<p>
+So from:
+</p>
+
+<pre>
+S → aAB
+</pre>
+
+<p>
+we obtain:
+</p>
+
+<pre>
+S → aAB | aB
+</pre>
+
+<p>
+For:
+</p>
+
+<pre>
+A → aA
+</pre>
+
+<p>
+we add:
+</p>
+
+<pre>
+A → a
+</pre>
+
+<p>
+Thus:
+</p>
+
+<pre>
+S → aAB | aB | bB
+
+A → aA | a
+
+B → bB | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Replace terminals in mixed productions
+</div>
+
+<p>
+Introduce:
+</p>
+
+<pre>
+X → a
+
+Y → b
+</pre>
+
+<p>
+Then:
+</p>
+
+<pre>
+S → XAB | XB | YB
+
+A → XA | a
+
+B → YB | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Break XAB
+</div>
+
+<p>
+Introduce:
+</p>
+
+<pre>
+C → AB
+</pre>
+
+<p>
+Then:
+</p>
+
+<pre>
+S → XC
+</pre>
+
+<p>
+The other productions remain:
+</p>
+
+<pre>
+S → XB | YB
+
+C → AB
+
+A → XA | a
+
+B → YB | b
+
+X → a
+
+Y → b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Check CNF
+</div>
+
+<p>
+All productions are now either:
+</p>
+
+<pre>
+Variable → Variable Variable
+
+or
+
+Variable → Terminal
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final CNF:
+</strong>
+
+<pre>
+S → XC | XB | YB
+
+C → AB
+
+A → XA | a
+
+B → YB | b
+
+X → a
+
+Y → b
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 9 — CNF for S → aSb | ab
+</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Original grammar
+</div>
+
+<pre>
+S → aSb | ab
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Replace terminals
+</div>
+
+<p>
+Introduce:
+</p>
+
+<pre>
+A → a
+
+B → b
+</pre>
+
+<p>
+Then:
+</p>
+
+<pre>
+S → ASB | AB
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Break ASB
+</div>
+
+<p>
+Introduce:
+</p>
+
+<pre>
+C → SB
+</pre>
+
+<p>
+Then:
+</p>
+
+<pre>
+S → AC | AB
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="answer">
+
+<strong>
+Final CNF:
+</strong>
+
+<pre>
+S → AC | AB
+
+C → SB
+
+A → a
+
+B → b
+</pre>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="note">
+
+<strong>CNF Exam Shortcut:</strong>
+
+When you see something like:
+
+<pre>
+A → abc
+</pre>
+
+think:
+
+<pre>
+X → a
+Y → b
+Z → c
+
+A → XY
+XY → Z
+</pre>
+
+More systematically, introduce variables and
+break the RHS into pairs.
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- GNF -->
+<!-- ================================================= -->
+
+<section id="gnf">
+
+<h2>6. Greibach Normal Form (GNF)</h2>
+
+<h3>6.1 Definition</h3>
+
+<p>
+A CFG is in Greibach Normal Form when productions
+generally have the form:
+</p>
+
+<pre>
+A → aα
+</pre>
+
+<p>
+where:
+</p>
+
+<ul>
+
+<li>
+a is a terminal.
+</li>
+
+<li>
+α is a possibly empty string of variables.
+</li>
+
+</ul>
+
+
+<p>
+Therefore the first symbol on the right side
+must always be a terminal.
+</p>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 10 — Convert a Simple Grammar to GNF
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → AB
+
+A → a
+
+B → b
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Check A
+</div>
+
+<pre>
+A → a
+</pre>
+
+<p>
+This already starts with a terminal.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Substitute A into S
+</div>
+
+<pre>
+S → AB
+</pre>
+
+<p>
+Since:
+</p>
+
+<pre>
+A → a
+</pre>
+
+<p>
+we get:
+</p>
+
+<pre>
+S → aB
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Check B
+</div>
+
+<pre>
+B → b
+</pre>
+
+<p>
+This is already GNF.
+</p>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final GNF:
+</strong>
+
+<pre>
+S → aB
+
+A → a
+
+B → b
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="warning">
+
+<strong>
+Important:</strong>
+
+GNF conversion can become considerably more complicated
+for grammars containing recursion, nullable productions
+and indirect substitutions.
+
+For an exam, first simplify the grammar and remove
+ε-productions and unit productions before attempting
+a full GNF conversion.
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- PUMPING -->
+<!-- ================================================= -->
+
+<section id="pumping">
+
+<h2>7. Pumping Lemma for Context-Free Languages</h2>
+
+<h3>7.1 Purpose</h3>
+
+<p>
+The CFL Pumping Lemma is mainly used to prove that
+certain languages are <strong>not context-free</strong>.
+</p>
+
+
+<h3>7.2 Statement</h3>
+
+<p>
+If L is a context-free language, then there exists
+a pumping length p such that every string z in L
+with:
+</p>
+
+<pre>
+|z| ≥ p
+</pre>
+
+can be written as:
+</p>
+
+<pre>
+z = uvwxy
+</pre>
+
+such that:
+</p>
+
+<pre>
+1. |vwx| ≤ p
+
+2. |vx| ≥ 1
+
+3. uvⁱwxⁱy ∈ L for every i ≥ 0
+</pre>
+
+
+
+<h3>7.3 Meaning</h3>
+
+<p>
+The middle portion:
+</p>
+
+<pre>
+vwx
+</pre>
+
+is limited in length.
+The pieces:
+</p>
+
+<pre>
+v and x
+</pre>
+
+are the parts that can be pumped.
+</p>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 11 — Prove
+L = { aⁿbⁿcⁿ | n ≥ 0 }
+is not context-free
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Assume the opposite
+</div>
+
+<p>
+Assume:
+</p>
+
+<pre>
+L = {aⁿbⁿcⁿ | n ≥ 0}
+</pre>
+
+<p>
+is context-free.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Choose pumping length
+</div>
+
+<p>
+Let p be the pumping length.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Choose a string
+</div>
+
+<p>
+Choose:
+</p>
+
+<pre>
+z = aᵖbᵖcᵖ
+</pre>
+
+<p>
+Clearly:
+</p>
+
+<pre>
+|z| = 3p ≥ p
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Apply pumping lemma
+</div>
+
+<p>
+Write:
+</p>
+
+<pre>
+z = uvwxy
+</pre>
+
+with:
+</p>
+
+<pre>
+|vwx| ≤ p
+|vx| ≥ 1
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Analyze possible locations
+</div>
+
+<p>
+Because vwx has length at most p,
+it cannot cover all three blocks:
+</p>
+
+<pre>
+aaaa...bbbb...cccc
+inside a's
+
+inside b's
+
+inside c's
+
+across a/b boundary
+
+across b/c boundary
+</pre>
+
+<p>
+But it cannot include both a's and c's,
+because the b-block between them has length p.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 6 — Pump
+</div>
+
+<p>
+Choose i = 0 or i = 2.
+Since v and x occur in at most two adjacent
+symbol blocks, pumping changes the number of
+symbols in one or two blocks but not all three equally.
+</p>
+
+<p>
+Therefore after pumping:
+</p>
+
+<pre>
+# of a's, # of b's, # of c's
+</pre>
+
+<p>
+cannot remain equal.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 7 — Contradiction
+</div>
+
+<p>
+The pumped string is not of the form:
+</p>
+
+<pre>
+aⁿbⁿcⁿ
+</pre>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+uvⁱwxⁱy ∉ L
+</pre>
+
+for a suitable i.
+</p>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<pre>
+L = {aⁿbⁿcⁿ | n ≥ 0}
+
+is NOT a context-free language.
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 12 — Prove
+L = { aⁿbⁿcᵐ | n,m ≥ 0 }
+is context-free
+</h3>
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Observe the language
+</div>
+
+<p>
+The language requires equal numbers of a and b,
+while c can occur independently.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Construct a CFG
+</div>
+
+<pre>
+S → AB
+
+A → aAb | ε
+
+B → cB | ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Check A
+</div>
+
+<pre>
+A → aAb | ε
+</pre>
+
+<p>
+generates:
+</p>
+
+<pre>
+ε
+ab
+aabb
+aaabbb
+...
+</pre>
+
+<p>
+Therefore:
+</p>
+
+<pre>
+L(A) = {aⁿbⁿ | n ≥ 0}
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Check B
+</div>
+
+<pre>
+B → cB | ε
+</pre>
+
+<p>
+generates:
+</p>
+
+<pre>
+ε
+c
+cc
+ccc
+...
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+Since we constructed a CFG for the language,
+the language is context-free.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 13 — Pumping Lemma Proof Strategy
+</h3>
+
+<p>
+To prove a language is not context-free,
+follow this exact exam sequence:
+</p>
+
+<div class="step">
+
+<div class="step-title">
+Step 1</div>
+
+<pre>
+Assume L is context-free.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 2</div>
+
+<pre>
+Let p be the pumping length.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 3</div>
+
+<pre>
+Choose a suitable string z ∈ L
+with |z| ≥ p.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 4</div>
+
+<pre>
+Write z = uvwxy.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 5</div>
+
+<pre>
+Use |vwx| ≤ p
+and |vx| ≥ 1.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 6</div>
+
+<pre>
+Consider i = 0 or i = 2.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 7</div>
+
+<pre>
+Show uvⁱwxⁱy ∉ L.
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 8</div>
+
+<pre>
+Contradiction.
+</pre>
+
+</div>
+
+<div class="answer">
+
+<strong>
+Therefore L is not context-free.
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- CLOSURE -->
+<!-- ================================================= -->
+
+<section id="closure">
+
+<h2>8. Closure Properties of CFL</h2>
+
+<h3>8.1 CFLs are closed under</h3>
+
+<ul>
+
+<li>Union</li>
+
+<li>Concatenation</li>
+
+<li>Kleene star</li>
+
+<li>Reversal</li>
+
+</ul>
+
+
+<h3>8.2 CFLs are NOT closed under</h3>
+
+<ul>
+
+<li>Intersection</li>
+
+<li>Complement</li>
+
+<li>Difference</li>
+
+</ul>
+
+
+<div class="problem">
+
+<h3>
+Problem 14 — Union of CFLs
+</h3>
+
+<p>
+Suppose:
+</p>
+
+<pre>
+L1 = {aⁿbⁿ | n ≥ 0}
+
+L2 = {cⁿdⁿ | n ≥ 0}
+</pre>
+
+<p>
+Both are CFLs.
+</p>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Create grammars
+</div>
+
+<pre>
+S1 → aS1b | ε
+
+S2 → cS2d | ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Combine them
+</div>
+
+<pre>
+S → S1 | S2
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+The union is context-free.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 15 — Concatenation of CFLs
+</h3>
+
+<p>
+Let:
+</p>
+
+<pre>
+L1 = {aⁿ | n ≥ 0}
+
+L2 = {bᵐ | m ≥ 0}
+</pre>
+
+
+<p>
+Both are regular and therefore CFL.
+</p>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1</div>
+
+<pre>
+S1 → aS1 | ε
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 2</div>
+
+<pre>
+S2 → bS2 | ε
+</pre>
+
+</div>
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Concatenate</div>
+
+<pre>
+S → S1S2
+</pre>
+
+</div>
+
+<div class="answer">
+
+<strong>
+Therefore:
+</strong>
+
+<pre>
+L1L2
+</pre>
+
+is context-free.
+
+</div>
+
+</div>
+
+
+
+<div class="note">
+
+<strong>Remember for exam:</strong>
+
+<table>
+
+<tr>
+<th>Operation</th>
+<th>CFL?</th>
+</tr>
+
+<tr>
+<td>Union</td>
+<td>Closed</td>
+</tr>
+
+<tr>
+<td>Concatenation</td>
+<td>Closed</td>
+</tr>
+
+<tr>
+<td>Kleene Star</td>
+<td>Closed</td>
+</tr>
+
+<tr>
+<td>Reversal</td>
+<td>Closed</td>
+</tr>
+
+<tr>
+<td>Intersection</td>
+<td>Not closed</td>
+</tr>
+
+<tr>
+<td>Complement</td>
+<td>Not closed</td>
+</tr>
+
+<tr>
+<td>Difference</td>
+<td>Not closed</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- IMPORTANT DIFFERENCES -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>9. CNF vs GNF</h2>
+
+<table>
+
+<tr>
+
+<th>
+Feature
+</th>
+
+<th>
+CNF
+</th>
+
+<th>
+GNF
+</th>
+
+</tr>
+
+<tr>
+
+<td>
+Full form
+</td>
+
+<td>
+Chomsky Normal Form
+</td>
+
+<td>
+Greibach Normal Form
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Typical production
+</td>
+
+<td>
+A → BC or A → a
+</td>
+
+<td>
+A → aα
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+First RHS symbol
+</td>
+
+<td>
+May be variable
+</td>
+
+<td>
+Must be terminal
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Use
+</td>
+
+<td>
+Parsing and theoretical analysis
+</td>
+
+<td>
+Derivation / PDA-related theoretical results
+</td>
+
+</tr>
+
+</table>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- VTU ANSWER -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>10. How to Write Conversion Problems in VTU Exam</h2>
+
+<div class="card">
+
+<h3>For ε-Production Removal</h3>
+
+<ol>
+
+<li>Find nullable variables.</li>
+
+<li>Generate alternatives.</li>
+
+<li>Remove ε-productions.</li>
+
+<li>Keep S → ε if necessary.</li>
+
+<li>Write final grammar.</li>
+
+</ol>
+
+
+<h3>For Unit Production Removal</h3>
+
+<ol>
+
+<li>Identify A → B productions.</li>
+
+<li>Find all reachable variables through unit chains.</li>
+
+<li>Copy non-unit productions.</li>
+
+<li>Delete unit productions.</li>
+
+</ol>
+
+
+<h3>For Useless Symbol Removal</h3>
+
+<ol>
+
+<li>Find generating variables.</li>
+
+<li>Remove non-generating symbols.</li>
+
+<li>Check reachable symbols.</li>
+
+<li>Remove unreachable symbols.</li>
+
+</ol>
+
+
+<h3>For CNF</h3>
+
+<ol>
+
+<li>Remove ε-productions.</li>
+
+<li>Remove unit productions.</li>
+
+<li>Remove useless symbols.</li>
+
+<li>Replace terminals in long RHS expressions.</li>
+
+<li>Break RHS expressions longer than two symbols.</li>
+
+<li>Write final CNF.</li>
+
+</ol>
+
+
+<h3>For Pumping Lemma</h3>
+
+<ol>
+
+<li>Assume the language is CFL.</li>
+
+<li>Let p be the pumping length.</li>
+
+<li>Choose a suitable string.</li>
+
+<li>Apply z = uvwxy.</li>
+
+<li>Use |vwx| ≤ p.</li>
+
+<li>Use |vx| ≥ 1.</li>
+
+<li>Choose a pumping value such as i = 0 or 2.</li>
+
+<li>Show the resulting string is not in L.</li>
+
+<li>State contradiction.</li>
+
+</ol>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- QUESTIONS -->
+<!-- ================================================= -->
+
+<section id="questions">
+
+<h2>11. Important VTU-Style Questions</h2>
+
+<div class="card">
+
+<h3>2-Mark Questions</h3>
+
+<ol>
+
+<li>Define Context-Free Language.</li>
+
+<li>What is an ε-production?</li>
+
+<li>What is a unit production?</li>
+
+<li>Define useless symbol.</li>
+
+<li>What is Chomsky Normal Form?</li>
+
+<li>What is Greibach Normal Form?</li>
+
+<li>State the CFL Pumping Lemma.</li>
+
+<li>What is a nullable variable?</li>
+
+<li>List two closure properties of CFLs.</li>
+
+<li>Are CFLs closed under intersection?</li>
+
+</ol>
+
+
+<h3>5-Mark Questions</h3>
+
+<ol>
+
+<li>Explain ε-production elimination.</li>
+
+<li>Explain unit-production elimination.</li>
+
+<li>Explain useless-symbol elimination.</li>
+
+<li>Convert a CFG to CNF.</li>
+
+<li>Explain GNF.</li>
+
+<li>State and explain the CFL Pumping Lemma.</li>
+
+<li>Explain closure properties of CFLs.</li>
+
+</ol>
+
+
+<h3>10-Mark Questions</h3>
+
+<ol>
+
+<li>
+Simplify the given CFG by removing ε-productions,
+unit productions and useless symbols.
+</li>
+
+<li>
+Convert the given CFG into Chomsky Normal Form.
+</li>
+
+<li>
+Convert a given CFG into Greibach Normal Form.
+</li>
+
+<li>
+State and prove that a given language is not context-free
+using the Pumping Lemma.
+</li>
+
+<li>
+Explain the closure properties of Context-Free Languages.
+</li>
+
+</ol>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- QUICK REVISION -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>12. Quick Revision</h2>
+
+<pre>
+
+CFG Simplification:
+
+1. Remove ε-productions
+2. Remove unit productions
+3. Remove useless symbols
+
+
+CNF:
+
+A → BC
+
+A → a
+
+S → ε   (when required)
+
+
+GNF:
+
+A → aα
+
+
+CFL Pumping Lemma:
+
+z = uvwxy
+
+|vwx| ≤ p
+
+|vx| ≥ 1
+
+uvⁱwxⁱy ∈ L
+
+
+CFL Closed Under:
+
+✓ Union
+✓ Concatenation
+✓ Kleene Star
+✓ Reversal
+
+
+CFL Not Closed Under:
+
+✗ Intersection
+✗ Complement
+✗ Difference
+
+
+Important non-CFL:
+
+{aⁿbⁿcⁿ | n ≥ 0}
+
+</pre>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- VIDEOS -->
+<!-- ================================================= -->
+
+<section id="videos">
+
+<h2>13. YouTube Learning</h2>
+
+<div class="card">
+
+<p>
+Use these searches for visual explanations and
+step-by-step solved problems.
+</p>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=context+free+grammar+epsilon+production+elimination"
+target="_blank">
+ε-Production
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=context+free+grammar+unit+production+elimination"
+target="_blank">
+Unit Production
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=context+free+grammar+useless+symbol+elimination"
+target="_blank">
+Useless Symbols
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=chomsky+normal+form+CNF+conversion+solved+problems"
+target="_blank">
+CNF
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=greibach+normal+form+GNF+conversion"
+target="_blank">
+GNF
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=context+free+language+pumping+lemma+solved+problems"
+target="_blank">
+CFL Pumping Lemma
+</a>
+
+
+<a
+class="btn"
+href="https://www.youtube.com/results?search_query=context+free+language+closure+properties"
+target="_blank">
+Closure Properties
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- CHECKLIST -->
+<!-- ================================================= -->
+
+<section>
+
+<h2>14. Module 4 Exam Checklist</h2>
+
+<div class="card">
+
+<ul>
+
+<li>☐ I know what a Context-Free Language is.</li>
+
+<li>☐ I can identify nullable variables.</li>
+
+<li>☐ I can remove ε-productions.</li>
+
+<li>☐ I can remove unit productions.</li>
+
+<li>☐ I can identify generating symbols.</li>
+
+<li>☐ I can identify unreachable symbols.</li>
+
+<li>☐ I can remove useless symbols.</li>
+
+<li>☐ I know CNF rules.</li>
+
+<li>☐ I can convert a grammar into CNF.</li>
+
+<li>☐ I know GNF rules.</li>
+
+<li>☐ I can solve simple GNF conversions.</li>
+
+<li>☐ I know the CFL Pumping Lemma.</li>
+
+<li>☐ I can prove a language is not CFL.</li>
+
+<li>☐ I know CFL closure properties.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+
+<!-- ================================================= -->
+<!-- GITHUB -->
+<!-- ================================================= -->
+
+<section class="center">
+
+<h2>
+MAHALAKSHMI'S GITHUB
+</h2>
+
+<p>
+More projects, notes and learning work.
+</p>
+
+<a
+class="btn"
+href="https://github.com/mahalakshmikommaranahalli9-cell"
+target="_blank">
+🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<p>
+BCS503 • Theory of Computation • Module 4
+</p>
+
+<p>
+Mahalakshmi's Course Notes
+</p>
+
+</footer>
+
+
+<script>
+
+document.addEventListener(
+"contextmenu",
+function(event){
+    event.preventDefault();
+}
+);
+
+document.addEventListener(
+"dragstart",
+function(event){
+    event.preventDefault();
+}
+);
+
+document.addEventListener(
+"selectstart",
+function(event){
+    event.preventDefault();
+}
+);
+
+document.addEventListener(
+"copy",
+function(event){
+    event.preventDefault();
+}
+);
+
+document.addEventListener(
+"cut",
+function(event){
+    event.preventDefault();
+}
+);
+
+document.addEventListener(
+"keydown",
+function(event){
+
+    const key =
+    event.key.toLowerCase();
+
+    if(
+        (event.ctrlKey || event.metaKey) &&
+        ["c","x","a","u","s","p"].includes(key)
+    ){
+        event.preventDefault();
+    }
+
+}
+
+);
+
+</script>
+
+
+</body>
+
+</html>

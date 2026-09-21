@@ -1,0 +1,4144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080706">
+
+    <title>BCS503 Module 3 | Context-Free Grammars & PDA</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080706;
+            color: #eee8dc;
+            line-height: 1.8;
+            user-select: none;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(212,175,55,0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(212,175,55,0.06),
+                    transparent 30%
+                );
+        }
+
+        body::after {
+            content: "🦁";
+            position: fixed;
+            right: 3%;
+            bottom: 2%;
+            font-size: 120px;
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            padding: 55px 7%;
+            background:
+                linear-gradient(
+                    135deg,
+                    #090909,
+                    #151109
+                );
+
+            border-bottom: 1px solid #4d3b19;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 6px 14px;
+
+            border: 1px solid #85671f;
+
+            border-radius: 30px;
+
+            color: #dfbd58;
+
+            font-size: 0.78rem;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            color: #e4c45d;
+
+            font-size: clamp(
+                2rem,
+                5vw,
+                3.5rem
+            );
+
+            line-height: 1.15;
+        }
+
+        .subtitle {
+            margin-top: 15px;
+
+            color: #bdb5a8;
+
+            max-width: 950px;
+        }
+
+        nav {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            background: rgba(
+                8,
+                7,
+                6,
+                0.97
+            );
+
+            border-bottom: 1px solid #382d18;
+
+            padding: 11px 5%;
+
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: #d7b95e;
+
+            text-decoration: none;
+
+            margin-right: 18px;
+
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            width: min(
+                1120px,
+                92%
+            );
+
+            margin: auto;
+        }
+
+        section {
+            padding: 45px 0;
+
+            border-bottom: 1px solid #29251e;
+        }
+
+        h2 {
+            color: #e1bd53;
+
+            font-size: 2rem;
+
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #f0d37b;
+
+            margin-top: 28px;
+
+            margin-bottom: 12px;
+
+            font-size: 1.3rem;
+        }
+
+        h4 {
+            color: #d9b84f;
+
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin: 10px 0;
+
+            color: #ddd6ca;
+        }
+
+        ul,
+        ol {
+            margin: 12px 0 18px 30px;
+        }
+
+        li {
+            margin: 6px 0;
+
+            color: #ddd6ca;
+        }
+
+        strong {
+            color: white;
+        }
+
+        .gold {
+            color: #dfbd55;
+        }
+
+        .card {
+            background: #11100d;
+
+            border: 1px solid #453719;
+
+            border-radius: 14px;
+
+            padding: 23px;
+
+            margin: 20px 0;
+
+            box-shadow:
+                0 8px 25px rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+        }
+
+        .problem {
+            background: #12100b;
+
+            border-left: 4px solid #d4af37;
+
+            padding: 23px;
+
+            margin: 28px 0;
+
+            border-radius:
+                0 12px 12px 0;
+        }
+
+        .step {
+            background: #0d0d0c;
+
+            border: 1px solid #332b1b;
+
+            border-radius: 10px;
+
+            padding: 17px;
+
+            margin: 14px 0;
+        }
+
+        .step-title {
+            color: #e3c25c;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .answer {
+            background: #171308;
+
+            border: 1px solid #82651f;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin-top: 18px;
+        }
+
+        .note {
+            background: #12110d;
+
+            border-left: 4px solid #9b7928;
+
+            padding: 16px 19px;
+
+            margin: 18px 0;
+        }
+
+        .warning {
+            background: #171009;
+
+            border-left: 4px solid #b78b2c;
+
+            padding: 16px 19px;
+
+            margin: 18px 0;
+        }
+
+        code {
+            color: #f2d982;
+
+            background: #17140c;
+
+            padding: 2px 6px;
+
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #050505;
+
+            color: #efd989;
+
+            border: 1px solid #3d311b;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            overflow-x: auto;
+
+            white-space: pre-wrap;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            margin: 13px 0;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 18px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #4a3a1c;
+
+            padding: 11px;
+
+            text-align: left;
+
+            vertical-align: top;
+        }
+
+        th {
+            background: #171207;
+
+            color: #e3c15b;
+        }
+
+        td {
+            background: #0e0e0d;
+
+            color: #ddd5c8;
+        }
+
+        .btn {
+            display: inline-block;
+
+            background: #d9b64d;
+
+            color: #080706;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            margin: 6px 6px 6px 0;
+        }
+
+        .btn:hover {
+            background: #f0d36d;
+        }
+
+        .small {
+            color: #aaa394;
+
+            font-size: 0.9rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 45px 6%;
+
+            color: #999285;
+        }
+
+        @media(max-width:700px) {
+
+            header {
+                padding: 38px 5%;
+            }
+
+            section {
+                padding: 32px 0;
+            }
+
+            h2 {
+                font-size: 1.55rem;
+            }
+
+            h3 {
+                font-size: 1.15rem;
+            }
+
+            .card,
+            .problem {
+                padding: 16px;
+            }
+
+            table {
+                font-size: 0.82rem;
+            }
+        }
+
+        @media print {
+
+            body {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <span class="badge">
+        BCS503 • SEMESTER V • MODULE 3
+    </span>
+
+    <h1>
+        Context-Free Grammars & Pushdown Automata
+    </h1>
+
+    <p class="subtitle">
+
+        Complete Module 3 notes with detailed theory,
+        construction methods, derivations, parse trees,
+        ambiguity, PDA design, PDA tracing,
+        CFG-PDA equivalence and DPDA.
+
+        <strong>
+            No shortcut steps.
+        </strong>
+
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="#syllabus">Syllabus</a>
+
+    <a href="#cfg">CFG</a>
+
+    <a href="#construction">CFG Problems</a>
+
+    <a href="#derivation">Derivations</a>
+
+    <a href="#parse">Parse Trees</a>
+
+    <a href="#ambiguity">Ambiguity</a>
+
+    <a href="#pda">PDA</a>
+
+    <a href="#pdaproblems">PDA Problems</a>
+
+    <a href="#equivalence">CFG ↔ PDA</a>
+
+    <a href="#dpda">DPDA</a>
+
+    <a href="#questions">Questions</a>
+
+    <a href="#videos">YouTube</a>
+
+</nav>
+
+
+<main>
+
+
+<!-- ===================================================== -->
+<!-- SYLLABUS -->
+<!-- ===================================================== -->
+
+
+<section id="syllabus">
+
+<h2>
+    1. Module 3 Syllabus
+</h2>
+
+
+<div class="card">
+
+<p>
+Module 3 of BCS503 Theory of Computation deals with
+Context-Free Grammars and Pushdown Automata.
+</p>
+
+<ul>
+
+<li>
+Context-Free Grammars
+</li>
+
+<li>
+Parse Trees
+</li>
+
+<li>
+Ambiguity in Grammars and Languages
+</li>
+
+<li>
+Definition of Pushdown Automata
+</li>
+
+<li>
+Languages of a PDA
+</li>
+
+<li>
+Equivalence of PDA and CFG
+</li>
+
+<li>
+Deterministic Pushdown Automata
+</li>
+
+</ul>
+
+<div class="note">
+
+<strong>
+Exam focus:
+</strong>
+
+Construction problems are very important.
+
+You should know how to construct a CFG,
+derive strings, draw parse trees,
+prove ambiguity, construct a PDA,
+and trace a PDA.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- CFG -->
+<!-- ===================================================== -->
+
+
+<section id="cfg">
+
+<h2>
+    2. Context-Free Grammar
+</h2>
+
+
+<h3>
+    2.1 Definition
+</h3>
+
+<p>
+
+A Context-Free Grammar is a formal system used
+to generate strings belonging to a context-free language.
+
+</p>
+
+
+<p>
+A CFG is represented by:
+</p>
+
+
+<pre>
+G = (V, Σ, P, S)
+</pre>
+
+
+<ul>
+
+<li>
+<strong>V</strong> = Set of variables / non-terminals
+</li>
+
+<li>
+<strong>Σ</strong> = Set of terminals
+</li>
+
+<li>
+<strong>P</strong> = Set of production rules
+</li>
+
+<li>
+<strong>S</strong> = Start symbol
+</li>
+
+</ul>
+
+
+<h3>
+    2.2 Production Rule
+</h3>
+
+
+<p>
+A CFG production generally has the form:
+</p>
+
+
+<pre>
+A → α
+</pre>
+
+
+<p>
+where A is one variable and α is a string
+containing terminals and variables.
+</p>
+
+
+<h3>
+    2.3 Example
+</h3>
+
+
+<pre>
+S → aSb | ε
+</pre>
+
+
+<p>
+This grammar generates:
+</p>
+
+
+<pre>
+ε
+ab
+aabb
+aaabbb
+aaaabbbb
+...
+</pre>
+
+
+<p>
+Therefore:
+</p>
+
+
+<pre>
+L(G) = { aⁿbⁿ | n ≥ 0 }
+</pre>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- CFG CONSTRUCTION -->
+<!-- ===================================================== -->
+
+
+<section id="construction">
+
+<h2>
+    3. Complete CFG Construction Problems
+</h2>
+
+
+<!-- PROBLEM 1 -->
+
+<div class="problem">
+
+<h3>
+Problem 1 — Construct CFG for
+L = { aⁿbⁿ | n ≥ 0 }
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Understand the language
+</div>
+
+<p>
+
+The language contains equal numbers of
+a's and b's.
+
+All a's occur before all b's.
+
+Examples:
+
+</p>
+
+<pre>
+ε
+ab
+aabb
+aaabbb
+aaaabbbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Find the recursive pattern
+</div>
+
+<p>
+
+For every additional a we need one additional b.
+
+Therefore we put one a on the left
+and one b on the right.
+
+</p>
+
+<pre>
+S → aSb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Add the stopping condition
+</div>
+
+<p>
+
+When no more pairs are required,
+the grammar must stop.
+
+Since n can be zero:
+
+</p>
+
+<pre>
+S → ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Write the complete grammar
+</div>
+
+<pre>
+S → aSb | ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Verify string "aaabbb"
+</div>
+
+<pre>
+S
+⇒ aSb
+⇒ aaSbb
+⇒ aaaSbbb
+⇒ aaaεbbb
+⇒ aaabbb
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<pre>
+G = ({S}, {a,b}, {S → aSb | ε}, S)
+</pre>
+
+<p>
+Therefore the grammar generates exactly
+the language {aⁿbⁿ | n ≥ 0}.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- PROBLEM 2 -->
+
+<div class="problem">
+
+<h3>
+Problem 2 — Construct CFG for
+L = { aⁿbᵐ | n ≥ 1, m ≥ 1 }
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Understand the language
+</div>
+
+<p>
+
+There must be at least one a
+and at least one b.
+
+The number of a's and b's
+does not have to be equal.
+
+Examples:
+
+</p>
+
+<pre>
+ab
+aab
+abb
+aaabb
+aaaabbbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Generate one or more a's
+</div>
+
+<pre>
+A → aA | a
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Generate one or more b's
+</div>
+
+<pre>
+B → bB | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Join them
+</div>
+
+<pre>
+S → AB
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Complete grammar
+</div>
+
+<pre>
+S → AB
+
+A → aA | a
+
+B → bB | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 6 — Derive "aaabbb"
+</div>
+
+<pre>
+S
+⇒ AB
+⇒ aAB
+⇒ aaAB
+⇒ aaaB
+⇒ aaabB
+⇒ aaabbB
+⇒ aaabbb
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<pre>
+S → AB
+A → aA | a
+B → bB | b
+</pre>
+
+</div>
+
+</div>
+
+
+
+<!-- PROBLEM 3 -->
+
+<div class="problem">
+
+<h3>
+Problem 3 — Construct CFG for all palindromes over {a,b}
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Understand palindrome structure
+</div>
+
+<p>
+
+A palindrome reads the same from
+left to right and right to left.
+
+Examples:
+
+</p>
+
+<pre>
+ε
+a
+b
+aa
+bb
+aba
+bab
+abba
+baab
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Add matching symbols
+</div>
+
+<pre>
+S → aSa
+S → bSb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Add base cases
+</div>
+
+<p>
+We need even-length and odd-length palindromes.
+</p>
+
+<pre>
+S → ε | a | b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Final grammar
+</div>
+
+<pre>
+S → ε | a | b | aSa | bSb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Derive "abba"
+</div>
+
+<pre>
+S
+⇒ aSa
+⇒ abSba
+⇒ abεba
+⇒ abba
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<pre>
+S → ε | a | b | aSa | bSb
+</pre>
+
+</div>
+
+</div>
+
+
+
+<!-- PROBLEM 4 -->
+
+<div class="problem">
+
+<h3>
+Problem 4 — Construct CFG for Balanced Parentheses
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Empty string
+</div>
+
+<p>
+The empty string is balanced.
+</p>
+
+<pre>
+S → ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Put parentheses around a balanced string
+</div>
+
+<pre>
+S → (S)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Concatenate balanced strings
+</div>
+
+<pre>
+S → SS
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Final grammar
+</div>
+
+<pre>
+S → SS | (S) | ε
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Derive "(())"
+</div>
+
+<pre>
+S
+⇒ (S)
+⇒ ((S))
+⇒ (())
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<pre>
+S → SS | (S) | ε
+</pre>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- DERIVATION -->
+<!-- ===================================================== -->
+
+
+<section id="derivation">
+
+<h2>
+    4. Derivations
+</h2>
+
+
+<h3>
+4.1 Leftmost Derivation
+</h3>
+
+<p>
+
+In a leftmost derivation,
+the leftmost variable is replaced first.
+
+</p>
+
+
+<div class="problem">
+
+<h3>
+Problem 5 — Leftmost Derivation of aaabbb
+</h3>
+
+<p>
+Given:
+</p>
+
+<pre>
+S → aSb | ab
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1
+</div>
+
+<pre>
+S
+⇒ aSb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2
+</div>
+
+<pre>
+aSb
+⇒ aaSbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3
+</div>
+
+<pre>
+aaSbb
+⇒ aaaSbbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Replace final S
+</div>
+
+<pre>
+aaaSbbb
+⇒ aaa(ab)bbb
+⇒ aaabbb
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Complete leftmost derivation:
+</strong>
+
+<pre>
+S
+⇒ aSb
+⇒ aaSbb
+⇒ aaaSbbb
+⇒ aaabbb
+</pre>
+
+</div>
+
+</div>
+
+
+
+<h3>
+4.2 Rightmost Derivation
+</h3>
+
+
+<p>
+
+In a rightmost derivation,
+the rightmost variable is replaced first.
+
+</p>
+
+
+<div class="problem">
+
+<h3>
+Problem 6 — Rightmost Derivation
+</h3>
+
+
+<p>
+Given:
+</p>
+
+<pre>
+S → aSb | ab
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1
+</div>
+
+<pre>
+S
+⇒ aSb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2
+</div>
+
+<pre>
+aSb
+⇒ aaSbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3
+</div>
+
+<pre>
+aaSbb
+⇒ aaaSbbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4
+</div>
+
+<pre>
+aaaSbbb
+⇒ aaa(ab)bbb
+⇒ aaabbb
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final derivation:
+</strong>
+
+<pre>
+S
+⇒ aSb
+⇒ aaSbb
+⇒ aaaSbbb
+⇒ aaabbb
+</pre>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- PARSE TREE -->
+<!-- ===================================================== -->
+
+
+<section id="parse">
+
+<h2>
+    5. Parse Trees
+</h2>
+
+
+<p>
+
+A parse tree is a tree representation
+of how a string is derived from a grammar.
+
+</p>
+
+
+<ul>
+
+<li>
+Root = Start symbol
+</li>
+
+<li>
+Internal nodes = Variables
+</li>
+
+<li>
+Leaves = Terminals or ε
+</li>
+
+<li>
+Read leaves from left to right to obtain the string
+</li>
+
+</ul>
+
+
+<div class="problem">
+
+<h3>
+Problem 7 — Parse Tree for "aabb"
+</h3>
+
+
+<p>
+Grammar:
+</p>
+
+<pre>
+S → aSb | ε
+</pre>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Root
+</div>
+
+<pre>
+        S
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — First expansion
+</div>
+
+<pre>
+          S
+        / | \
+       a  S  b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Expand inner S
+</div>
+
+<pre>
+            S
+          / | \
+         a  S  b
+           / | \
+          a  S  b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Replace final S by ε
+</div>
+
+<pre>
+            S
+          / | \
+         a  S  b
+           / | \
+          a  ε  b
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Read the leaves
+</div>
+
+<pre>
+a a ε b b
+</pre>
+
+<p>
+ε contributes no symbol.
+Therefore:
+</p>
+
+<pre>
+aabb
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<p>
+The parse tree generates the string <code>aabb</code>.
+</p>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- AMBIGUITY -->
+<!-- ===================================================== -->
+
+
+<section id="ambiguity">
+
+<h2>
+    6. Ambiguity in Grammars
+</h2>
+
+
+<h3>
+6.1 Definition
+</h3>
+
+<p>
+
+A grammar is ambiguous if at least one string
+in its language has two or more distinct
+parse trees.
+
+</p>
+
+
+<p>
+Equivalently, the string has:
+</p>
+
+<ul>
+
+<li>
+Two different leftmost derivations
+</li>
+
+<li>
+or two different rightmost derivations
+</li>
+
+<li>
+or two different parse trees
+</li>
+
+</ul>
+
+
+<div class="problem">
+
+<h3>
+Problem 8 — Prove that the Grammar is Ambiguous
+</h3>
+
+
+<p>
+Consider:
+</p>
+
+<pre>
+E → E + E
+E → E * E
+E → id
+</pre>
+
+
+<p>
+Show that:
+</p>
+
+<pre>
+id + id * id
+</pre>
+
+<p>
+is ambiguous.
+</p>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — First derivation
+</div>
+
+<p>
+Choose + as the top-level operation.
+</p>
+
+<pre>
+E
+⇒ E + E
+⇒ id + E
+⇒ id + E * E
+⇒ id + id * E
+⇒ id + id * id
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Second derivation
+</div>
+
+<p>
+Choose * as the top-level operation.
+</p>
+
+<pre>
+E
+⇒ E * E
+⇒ E + E * E
+⇒ id + E * E
+⇒ id + id * E
+⇒ id + id * id
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Compare the structures
+</div>
+
+<p>
+First interpretation:
+</p>
+
+<pre>
+id + (id * id)
+</pre>
+
+<p>
+Second interpretation:
+</p>
+
+<pre>
+(id + id) * id
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+
+The same string can have two distinct
+parse structures.
+
+Therefore the grammar is:
+
+</p>
+
+<pre>
+AMBIGUOUS
+</pre>
+
+</div>
+
+</div>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 9 — Grammar with Expression Precedence
+</h3>
+
+<p>
+A common way to remove the arithmetic ambiguity
+is to separate expression and multiplication levels.
+</p>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Expression
+</div>
+
+<pre>
+E → E + T | T
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Term
+</div>
+
+<pre>
+T → T * F | F
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Factor
+</div>
+
+<pre>
+F → id | (E)
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Grammar:
+</strong>
+
+<pre>
+E → E + T | T
+
+T → T * F | F
+
+F → id | (E)
+</pre>
+
+<p>
+
+This grammar structurally gives multiplication
+a deeper level than addition.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- PDA -->
+<!-- ===================================================== -->
+
+
+<section id="pda">
+
+<h2>
+    7. Pushdown Automata
+</h2>
+
+
+<h3>
+7.1 Why do we need PDA?
+</h3>
+
+<p>
+
+A finite automaton has only a finite number
+of states and cannot remember an unlimited count.
+
+For example:
+
+</p>
+
+<pre>
+L = { aⁿbⁿ | n ≥ 1 }
+</pre>
+
+<p>
+
+A PDA solves this using a stack.
+
+</p>
+
+
+<h3>
+7.2 PDA Definition
+</h3>
+
+<pre>
+M = (Q, Σ, Γ, δ, q₀, Z₀, F)
+</pre>
+
+
+<table>
+
+<tr>
+
+<th>
+Component
+</th>
+
+<th>
+Meaning
+</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Q
+</td>
+
+<td>
+Finite set of states
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Σ
+</td>
+
+<td>
+Input alphabet
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Γ
+</td>
+
+<td>
+Stack alphabet
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+δ
+</td>
+
+<td>
+Transition function
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+q₀
+</td>
+
+<td>
+Initial state
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Z₀
+</td>
+
+<td>
+Initial stack symbol
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+F
+</td>
+
+<td>
+Set of final states
+</td>
+
+</tr>
+
+</table>
+
+
+
+<h3>
+7.3 Transition Notation
+</h3>
+
+
+<pre>
+δ(q, input, stack-top)
+=
+(new-state, new-stack-content)
+</pre>
+
+
+<p>
+Example:
+</p>
+
+
+<pre>
+δ(q0, a, Z0)
+=
+(q0, AZ0)
+</pre>
+
+
+<p>
+
+Meaning:
+
+When the PDA is in q0,
+reads a,
+and sees Z0 on the stack,
+it stays in q0 and pushes A.
+
+</p>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- PDA PROBLEMS -->
+<!-- ===================================================== -->
+
+
+<section id="pdaproblems">
+
+<h2>
+    8. Complete PDA Construction Problems
+</h2>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 10 — Construct PDA for
+L = { aⁿbⁿ | n ≥ 1 }
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Understand the language
+</div>
+
+<p>
+
+The string must contain:
+
+</p>
+
+<ul>
+
+<li>
+One or more a's
+</li>
+
+<li>
+Followed by one or more b's
+</li>
+
+<li>
+Number of a's = number of b's
+</li>
+
+</ul>
+
+
+<p>
+Examples:
+</p>
+
+<pre>
+ab
+aabb
+aaabbb
+aaaabbbb
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Decide what the stack stores
+</div>
+
+<p>
+
+For every a that we read,
+push one A onto the stack.
+
+</p>
+
+<pre>
+a → PUSH A
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Process b's
+</div>
+
+<p>
+
+For every b,
+remove one A from the stack.
+
+</p>
+
+<pre>
+b → POP A
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Define states
+</div>
+
+<pre>
+q0 = reading a's
+
+q1 = reading b's
+
+qf = final state
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Define stack alphabet
+</div>
+
+<pre>
+Γ = {A, Z0}
+</pre>
+
+<p>
+Z0 is the bottom stack marker.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 6 — Construct transitions
+</div>
+
+
+<table>
+
+<tr>
+
+<th>
+Current
+</th>
+
+<th>
+Input
+</th>
+
+<th>
+Stack Top
+</th>
+
+<th>
+Next
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+q0
+</td>
+
+<td>
+a
+</td>
+
+<td>
+Z0
+</td>
+
+<td>
+q0
+</td>
+
+<td>
+Push A
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+q0
+</td>
+
+<td>
+a
+</td>
+
+<td>
+A
+</td>
+
+<td>
+q0
+</td>
+
+<td>
+Push A
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+q0
+</td>
+
+<td>
+b
+</td>
+
+<td>
+A
+</td>
+
+<td>
+q1
+</td>
+
+<td>
+Pop A
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+q1
+</td>
+
+<td>
+b
+</td>
+
+<td>
+A
+</td>
+
+<td>
+q1
+</td>
+
+<td>
+Pop A
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+q1
+</td>
+
+<td>
+ε
+</td>
+
+<td>
+Z0
+</td>
+
+<td>
+qf
+</td>
+
+<td>
+Accept
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 7 — Test with aabb
+</div>
+
+<pre>
+Input = aabb
+
+Initial:
+(q0, aabb, Z0)
+</pre>
+
+<p>
+Read first a:
+</p>
+
+<pre>
+(q0, abb, AZ0)
+</pre>
+
+<p>
+Read second a:
+</p>
+
+<pre>
+(q0, bb, AAZ0)
+</pre>
+
+<p>
+Read first b:
+</p>
+
+<pre>
+(q1, b, AZ0)
+</pre>
+
+<p>
+Read second b:
+</p>
+
+<pre>
+(q1, ε, Z0)
+</pre>
+
+<p>
+Take ε transition:
+</p>
+
+<pre>
+(qf, ε, Z0)
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Answer:
+</strong>
+
+<p>
+
+The PDA accepts exactly the strings
+whose number of a's equals the number of b's,
+with all a's occurring before b's.
+
+</p>
+
+<pre>
+L = { aⁿbⁿ | n ≥ 1 }
+</pre>
+
+</div>
+
+</div>
+
+
+
+<!-- TRACE -->
+
+<div class="problem">
+
+<h3>
+Problem 11 — Complete PDA Trace for "aaabbb"
+</h3>
+
+
+<p>
+Use the PDA from Problem 10.
+</p>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Initial configuration
+</div>
+
+<pre>
+(q0, aaabbb, Z0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Read first a
+</div>
+
+<pre>
+(q0, aabbb, AZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Read second a
+</div>
+
+<pre>
+(q0, abbb, AAZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Read third a
+</div>
+
+<pre>
+(q0, bbb, AAAZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Read first b
+</div>
+
+<pre>
+(q1, bb, AAZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 6 — Read second b
+</div>
+
+<pre>
+(q1, b, AZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 7 — Read third b
+</div>
+
+<pre>
+(q1, ε, Z0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 8 — Enter final state
+</div>
+
+<pre>
+(qf, ε, Z0)
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+
+Three A's were pushed for three a's
+and exactly three A's were popped for three b's.
+
+Therefore:
+
+</p>
+
+<pre>
+aaabbb → ACCEPTED
+</pre>
+
+</div>
+
+</div>
+
+
+
+<!-- PDA REJECT -->
+
+<div class="problem">
+
+<h3>
+Problem 12 — Show why "aabbb" is rejected
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Read first a
+</div>
+
+<pre>
+(q0, aabbb, Z0)
+→
+(q0, abbb, AZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Read second a
+</div>
+
+<pre>
+(q0, abbb, AZ0)
+→
+(q0, bbb, AAZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Read first b
+</div>
+
+<pre>
+(q0, bbb, AAZ0)
+→
+(q1, bb, AZ0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Read second b
+</div>
+
+<pre>
+(q1, bb, AZ0)
+→
+(q1, b, Z0)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Third b arrives
+</div>
+
+<p>
+
+The stack contains only Z0.
+
+There is no A available to pop.
+
+Therefore the transition for the third b is not possible.
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Result:
+</strong>
+
+<pre>
+aabbb → REJECTED
+</pre>
+
+<p>
+
+Because:
+
+</p>
+
+<pre>
+Number of a's = 2
+
+Number of b's = 3
+</pre>
+
+</div>
+
+</div>
+
+
+
+<!-- PDA BALANCED -->
+
+<div class="problem">
+
+<h3>
+Problem 13 — PDA for Balanced Parentheses
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Basic idea
+</div>
+
+<p>
+
+Whenever an opening parenthesis is found,
+push A.
+
+Whenever a closing parenthesis is found,
+pop A.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Push operation
+</div>
+
+<pre>
+( → PUSH A
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Pop operation
+</div>
+
+<pre>
+) → POP A
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Accept condition
+</div>
+
+<p>
+
+After the entire input is processed,
+the stack should return to Z0.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Trace "(())()"
+</div>
+
+<pre>
+Start:
+Z0
+
+Read (
+AZ0
+
+Read (
+AAZ0
+
+Read )
+AZ0
+
+Read )
+Z0
+
+Read (
+AZ0
+
+Read )
+Z0
+
+Accept
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Final Result:
+</strong>
+
+<pre>
+(())() → ACCEPTED
+</pre>
+
+</div>
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- PDA LANGUAGE -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    9. Languages of a PDA
+</h2>
+
+
+<h3>
+Acceptance by Final State
+</h3>
+
+<p>
+
+A string is accepted if the complete input
+is consumed and the PDA enters a final state.
+
+</p>
+
+
+<h3>
+Acceptance by Empty Stack
+</h3>
+
+<p>
+
+A string is accepted if the complete input
+is consumed and the stack becomes empty
+according to the PDA's convention.
+
+</p>
+
+
+<div class="note">
+
+<strong>
+Important:
+</strong>
+
+For nondeterministic PDAs,
+acceptance by final state and acceptance
+by empty stack characterize the same class
+of context-free languages.
+
+</div>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- CFG PDA EQUIVALENCE -->
+<!-- ===================================================== -->
+
+
+<section id="equivalence">
+
+<h2>
+    10. Equivalence of CFG and PDA
+</h2>
+
+
+<div class="answer">
+
+<strong>
+Important theorem:
+</strong>
+
+<p>
+
+A language is context-free if and only if
+some pushdown automaton accepts the language.
+
+</p>
+
+</div>
+
+
+<h3>
+10.1 CFG → PDA
+</h3>
+
+
+<p>
+
+The PDA uses its stack to simulate
+the derivation of the CFG.
+
+</p>
+
+
+<div class="problem">
+
+<h3>
+Problem 14 — Convert CFG
+S → aSb | ε
+to a PDA
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Start with S on stack
+</div>
+
+<pre>
+Stack:
+
+S
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Simulate grammar production
+</div>
+
+<p>
+
+The grammar contains:
+
+</p>
+
+<pre>
+S → aSb
+S → ε
+</pre>
+
+<p>
+
+Therefore the PDA can replace S
+by either aSb or ε.
+
+</p>
+
+<pre>
+δ(q, ε, S) → (q, aSb)
+
+δ(q, ε, S) → (q, ε)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Match terminal a
+</div>
+
+<pre>
+δ(q, a, a) → (q, ε)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Match terminal b
+</div>
+
+<pre>
+δ(q, b, b) → (q, ε)
+</pre>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Test with "aabb"
+</div>
+
+<pre>
+Stack:
+S
+
+Apply S → aSb
+
+Stack:
+aSb
+
+Read a
+
+Stack:
+Sb
+
+Apply S → aSb
+
+Stack:
+aSbb
+
+Read a
+
+Stack:
+Sbb
+
+Apply S → ε
+
+Stack:
+bb
+
+Read b
+
+Stack:
+b
+
+Read b
+
+Stack:
+empty / bottom marker
+
+Accept
+</pre>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+
+The PDA simulates a derivation of the CFG
+and accepts the strings generated by it.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<h3>
+10.2 PDA → CFG
+</h3>
+
+
+<p>
+
+The reverse construction converts a PDA
+into a CFG whose variables describe
+possible stack computations between states.
+
+</p>
+
+
+<div class="card">
+
+<h4>
+Exam Writing Point
+</h4>
+
+<p>
+
+For a theoretical question asking for the
+equivalence proof, write:
+
+</p>
+
+<ol>
+
+<li>
+Every CFG can be simulated by a PDA.
+</li>
+
+<li>
+Every PDA can be represented by an equivalent CFG.
+</li>
+
+<li>
+Therefore the languages generated by CFGs
+are exactly the languages accepted by NPDAs.
+</li>
+
+</ol>
+
+<pre>
+CFL = Languages accepted by NPDA
+</pre>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- DPDA -->
+<!-- ===================================================== -->
+
+
+<section id="dpda">
+
+<h2>
+    11. Deterministic Pushdown Automata
+</h2>
+
+
+<h3>
+11.1 Definition
+</h3>
+
+<p>
+
+A Deterministic Pushdown Automaton,
+or DPDA, is a PDA where the next action
+is uniquely determined by the current
+state, input situation and stack top.
+
+</p>
+
+
+<h3>
+11.2 PDA vs DPDA
+</h3>
+
+
+<table>
+
+<tr>
+
+<th>
+Feature
+</th>
+
+<th>
+PDA / NPDA
+</th>
+
+<th>
+DPDA
+</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Nondeterminism
+</td>
+
+<td>
+Allowed
+</td>
+
+<td>
+Not generally allowed
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Possible transitions
+</td>
+
+<td>
+Can have choices
+</td>
+
+<td>
+At most one applicable move
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Languages
+</td>
+
+<td>
+All context-free languages
+</td>
+
+<td>
+Deterministic context-free languages
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Power
+</td>
+
+<td>
+More general
+</td>
+
+<td>
+Restricted compared with NPDA
+</td>
+
+</tr>
+
+</table>
+
+
+
+<div class="problem">
+
+<h3>
+Problem 15 — Why aⁿbⁿ can be handled deterministically
+</h3>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 1 — Observe the input structure
+</div>
+
+<pre>
+aaaabbbb
+^^^^ ^^^^
+ a's  b's
+</pre>
+
+<p>
+
+All a's occur first,
+then b's.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 2 — Push during a-phase
+</div>
+
+<p>
+
+For every a,
+push A.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 3 — Change phase at first b
+</div>
+
+<p>
+
+When the first b is encountered,
+move to the popping state.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 4 — Pop during b-phase
+</div>
+
+<p>
+
+For every b,
+pop one A.
+
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-title">
+Step 5 — Accept
+</div>
+
+<p>
+
+If all input is consumed and
+the stack reaches the bottom marker,
+accept.
+
+</p>
+
+</div>
+
+
+<div class="answer">
+
+<strong>
+Conclusion:
+</strong>
+
+<p>
+
+The input symbols themselves determine
+the phase change, so no guess is required
+for this language.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="warning">
+
+<strong>
+Important exam correction:
+</strong>
+
+Do not write:
+
+</div>
+
+<pre>
+Every CFL can be accepted by a DPDA.
+</pre>
+
+<p>
+That statement is false.
+
+The correct statement is:
+</p>
+
+<pre>
+Every CFL can be accepted by an NPDA.
+
+DPDA recognizes deterministic
+context-free languages.
+</pre>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- COMPARISON -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    12. Finite Automaton vs PDA
+</h2>
+
+
+<table>
+
+<tr>
+
+<th>
+Feature
+</th>
+
+<th>
+Finite Automaton
+</th>
+
+<th>
+PDA
+</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Memory
+</td>
+
+<td>
+Finite states
+</td>
+
+<td>
+Stack + finite states
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Recognizes
+</td>
+
+<td>
+Regular languages
+</td>
+
+<td>
+Context-free languages (NPDA)
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Can recognize aⁿbⁿ?
+</td>
+
+<td>
+No
+</td>
+
+<td>
+Yes
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Unbounded memory
+</td>
+
+<td>
+No
+</td>
+
+<td>
+Stack provides theoretical unbounded storage
+</td>
+
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- APPLICATIONS -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    13. Applications
+</h2>
+
+
+<ul>
+
+<li>
+Compiler syntax analysis
+</li>
+
+<li>
+Expression parsing
+</li>
+
+<li>
+Balanced parentheses and brackets
+</li>
+
+<li>
+Nested structures
+</li>
+
+<li>
+Programming language syntax
+</li>
+
+<li>
+Parser design
+</li>
+
+<li>
+Grammar-based language recognition
+</li>
+
+</ul>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- VTU ANSWER FORMAT -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    14. How to Write 10-Mark Answers
+</h2>
+
+
+<div class="card">
+
+<h3>
+CFG Construction
+</h3>
+
+<ol>
+
+<li>
+Write the language.
+</li>
+
+<li>
+Explain the pattern.
+</li>
+
+<li>
+Choose variables.
+</li>
+
+<li>
+Write recursive rules.
+</li>
+
+<li>
+Write base condition.
+</li>
+
+<li>
+Give complete grammar.
+</li>
+
+<li>
+Derive at least one sample string.
+</li>
+
+<li>
+State final answer.
+</li>
+
+</ol>
+
+
+<h3>
+PDA Construction
+</h3>
+
+<ol>
+
+<li>
+Write the language.
+</li>
+
+<li>
+Explain stack purpose.
+</li>
+
+<li>
+Define states.
+</li>
+
+<li>
+Define input alphabet.
+</li>
+
+<li>
+Define stack alphabet.
+</li>
+
+<li>
+Write transition table.
+</li>
+
+<li>
+Explain push operation.
+</li>
+
+<li>
+Explain pop operation.
+</li>
+
+<li>
+Trace a sample string.
+</li>
+
+<li>
+State acceptance condition.
+</li>
+
+</ol>
+
+
+<h3>
+Ambiguity Problem
+</h3>
+
+<ol>
+
+<li>
+Write grammar.
+</li>
+
+<li>
+Choose a string.
+</li>
+
+<li>
+Give first derivation.
+</li>
+
+<li>
+Give second derivation.
+</li>
+
+<li>
+Compare parse structures.
+</li>
+
+<li>
+Conclude ambiguity.
+</li>
+
+</ol>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- QUESTIONS -->
+<!-- ===================================================== -->
+
+
+<section id="questions">
+
+<h2>
+    15. Important VTU-Style Questions
+</h2>
+
+
+<div class="card">
+
+<h3>
+2-Mark Questions
+</h3>
+
+<ol>
+
+<li>
+Define Context-Free Grammar.
+</li>
+
+<li>
+List the four components of a CFG.
+</li>
+
+<li>
+What is a parse tree?
+</li>
+
+<li>
+Define ambiguity.
+</li>
+
+<li>
+What is a PDA?
+</li>
+
+<li>
+List the components of PDA.
+</li>
+
+<li>
+Define DPDA.
+</li>
+
+<li>
+What is acceptance by final state?
+</li>
+
+<li>
+What is acceptance by empty stack?
+</li>
+
+<li>
+State the relationship between CFL and PDA.
+</li>
+
+</ol>
+
+
+
+<h3>
+5-Mark Questions
+</h3>
+
+<ol>
+
+<li>
+Explain CFG with an example.
+</li>
+
+<li>
+Explain leftmost derivation.
+</li>
+
+<li>
+Explain rightmost derivation.
+</li>
+
+<li>
+Explain parse tree.
+</li>
+
+<li>
+Explain ambiguity with an example.
+</li>
+
+<li>
+Construct CFG for aⁿbⁿ.
+</li>
+
+<li>
+Construct CFG for palindrome language.
+</li>
+
+<li>
+Construct PDA for aⁿbⁿ.
+</li>
+
+<li>
+Explain acceptance by final state and empty stack.
+</li>
+
+<li>
+Differentiate PDA and DPDA.
+</li>
+
+</ol>
+
+
+
+<h3>
+10-Mark Questions
+</h3>
+
+<ol>
+
+<li>
+Construct a CFG for a given language and derive a string using leftmost derivation.
+</li>
+
+<li>
+Construct a parse tree and determine whether the grammar is ambiguous.
+</li>
+
+<li>
+Construct PDA for {aⁿbⁿ | n ≥ 1} and trace it for a given input.
+</li>
+
+<li>
+Explain the equivalence of CFG and PDA.
+</li>
+
+<li>
+Explain deterministic PDA and compare it with PDA.
+</li>
+
+</ol>
+
+</div>
+
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- QUICK REVISION -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    16. Quick Revision
+</h2>
+
+
+<pre>
+
+CFG:
+
+G = (V, Σ, P, S)
+
+
+Important CFG:
+
+aⁿbⁿ
+
+S → aSb | ε
+
+
+Palindrome:
+
+S → ε | a | b | aSa | bSb
+
+
+Balanced Parentheses:
+
+S → SS | (S) | ε
+
+
+PDA:
+
+M = (Q, Σ, Γ, δ, q₀, Z₀, F)
+
+
+aⁿbⁿ PDA:
+
+a → PUSH A
+
+b → POP A
+
+
+Main theorem:
+
+CFL = Languages accepted by NPDA
+
+
+DPDA:
+
+Deterministic Pushdown Automaton
+
+Recognizes deterministic CFLs
+
+</pre>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- YOUTUBE -->
+<!-- ===================================================== -->
+
+
+<section id="videos">
+
+<h2>
+    17. YouTube Learning
+</h2>
+
+
+<div class="card">
+
+<p>
+Use these searches for visual explanations and solved problems.
+</p>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=context+free+grammar+CFG+theory+of+computation"
+    target="_blank"
+>
+    CFG
+</a>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=leftmost+rightmost+derivation+parse+tree"
+    target="_blank"
+>
+    Derivation + Parse Tree
+</a>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=ambiguity+in+context+free+grammar+solved+problems"
+    target="_blank"
+>
+    Ambiguity
+</a>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=pushdown+automata+PDA+construction+solved+problems"
+    target="_blank"
+>
+    PDA Problems
+</a>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=CFG+to+PDA+equivalence+theory+of+computation"
+    target="_blank"
+>
+    CFG ↔ PDA
+</a>
+
+
+<a
+    class="btn"
+    href="https://www.youtube.com/results?search_query=deterministic+pushdown+automata+DPDA"
+    target="_blank"
+>
+    DPDA
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- CHECKLIST -->
+<!-- ===================================================== -->
+
+
+<section>
+
+<h2>
+    18. Module 3 Exam Checklist
+</h2>
+
+
+<div class="card">
+
+<ul>
+
+<li>
+☐ I can define CFG.
+</li>
+
+<li>
+☐ I know all four components of CFG.
+</li>
+
+<li>
+☐ I can construct CFG for aⁿbⁿ.
+</li>
+
+<li>
+☐ I can construct CFG for palindromes.
+</li>
+
+<li>
+☐ I can construct CFG for balanced parentheses.
+</li>
+
+<li>
+☐ I can perform leftmost derivation.
+</li>
+
+<li>
+☐ I can perform rightmost derivation.
+</li>
+
+<li>
+☐ I can construct a parse tree.
+</li>
+
+<li>
+☐ I can prove grammar ambiguity.
+</li>
+
+<li>
+☐ I can define PDA.
+</li>
+
+<li>
+☐ I can construct PDA for aⁿbⁿ.
+</li>
+
+<li>
+☐ I can trace PDA configurations.
+</li>
+
+<li>
+☐ I understand acceptance methods.
+</li>
+
+<li>
+☐ I understand CFG → PDA.
+</li>
+
+<li>
+☐ I understand PDA → CFG concept.
+</li>
+
+<li>
+☐ I can explain DPDA.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- GITHUB -->
+<!-- ===================================================== -->
+
+
+<section class="center">
+
+<h2>
+    MAHALAKSHMI'S GITHUB
+</h2>
+
+
+<p>
+More projects, notes and learning work.
+</p>
+
+
+<a
+    class="btn"
+    href="https://github.com/mahalakshmikommaranahalli9-cell"
+    target="_blank"
+>
+    🐙 Visit Mahalakshmi's GitHub
+</a>
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+BCS503 • Theory of Computation • Module 3
+</p>
+
+<p>
+Mahalakshmi's Course Notes
+</p>
+
+</footer>
+
+
+
+<script>
+
+/* Basic client-side copy deterrence */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+
+document.addEventListener(
+    "dragstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+
+document.addEventListener(
+    "selectstart",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+
+document.addEventListener(
+    "copy",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+
+document.addEventListener(
+    "cut",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key =
+            event.key.toLowerCase();
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["c", "x", "a", "u", "s", "p"].includes(key)
+        ) {
+            event.preventDefault();
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
