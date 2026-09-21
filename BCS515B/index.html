@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
-
         body::before {
             content: "🦁";
             position: fixed;
@@ -48,10 +45,6 @@
             z-index: -1;
             pointer-events: none;
         }
-
-        /* =========================
-           HEADER
-        ========================= */
 
         header {
             text-align: center;
@@ -90,10 +83,6 @@
             font-size: 16px;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
-
         main {
             width: min(1100px, 92%);
             margin: auto;
@@ -109,10 +98,6 @@
             font-size: 30px;
             margin-bottom: 35px;
         }
-
-        /* =========================
-           WELCOME
-        ========================= */
 
         .welcome {
             background: #0b0b0b;
@@ -130,10 +115,6 @@
         .welcome p {
             color: #bbb;
         }
-
-        /* =========================
-           MODULE GRID
-        ========================= */
 
         .modules {
             display: grid;
@@ -174,10 +155,6 @@
             margin-bottom: 20px;
         }
 
-        /* =========================
-           BUTTON
-        ========================= */
-
         .btn {
             display: inline-block;
             text-decoration: none;
@@ -187,16 +164,13 @@
             border-radius: 8px;
             font-weight: bold;
             transition: 0.25s ease;
+            cursor: pointer;
         }
 
         .btn:hover {
             background: #f1cf61;
             transform: translateY(-2px);
         }
-
-        /* =========================
-           STUDY FLOW
-        ========================= */
 
         .flow {
             display: grid;
@@ -228,10 +202,6 @@
             font-size: 14px;
         }
 
-        /* =========================
-           EXAM PREPARATION
-        ========================= */
-
         .exam {
             background: #0b0b0b;
             border: 1px solid #29220f;
@@ -252,10 +222,6 @@
             color: #d4af37;
         }
 
-        /* =========================
-           RESOURCES
-        ========================= */
-
         .resources {
             text-align: center;
         }
@@ -266,10 +232,6 @@
             gap: 15px;
             flex-wrap: wrap;
         }
-
-        /* =========================
-           GITHUB
-        ========================= */
 
         .github {
             text-align: center;
@@ -287,10 +249,6 @@
             margin-bottom: 20px;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
-
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -302,10 +260,6 @@
         footer span {
             color: #d4af37;
         }
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 600px) {
 
@@ -332,404 +286,417 @@
 
         }
 
-        /* =========================
-           PRINT
-        ========================= */
-
         @media print {
+
             body {
                 display: none;
             }
+
         }
 
     </style>
+
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+<header>
 
-    <header>
+    <div class="badge">
+        5TH SEMESTER • CSE
+    </div>
 
-        <div class="badge">
-            5TH SEMESTER • CSE
-        </div>
+    <h1>BCS515B</h1>
 
-        <h1>BCS515B</h1>
+    <div class="subtitle">
+        Artificial Intelligence
+    </div>
 
-        <div class="subtitle">
-            Artificial Intelligence
-        </div>
+    <p class="description">
+        Complete course notes, solved problems, important questions,
+        revision points and exam preparation material.
+    </p>
 
-        <p class="description">
-            Complete course notes, solved problems, important questions,
-            revision points and exam preparation material.
+</header>
+
+
+<main>
+
+
+<section>
+
+    <div class="welcome">
+
+        <h2>Welcome to AI Notes 🤖</h2>
+
+        <p>
+            These notes are prepared for easy understanding,
+            revision and VTU examination preparation.
+            Each module contains theory, examples, solved problems
+            and important questions.
         </p>
 
-    </header>
+    </div>
+
+</section>
 
 
-    <main>
+<section>
 
-        <!-- =========================
-             WELCOME
-        ========================= -->
+    <h2 class="section-title">
+        Course Modules
+    </h2>
 
-        <section>
+    <div class="modules">
 
-            <div class="welcome">
 
-                <h2>Welcome to AI Notes 🤖</h2>
+        <!-- MODULE 1 -->
 
-                <p>
-                    These notes are prepared for easy understanding,
-                    revision and VTU examination preparation.
-                    Each module contains theory, examples, solved problems
-                    and important questions.
-                </p>
+        <div class="module-card">
 
+            <div class="module-number">
+                MODULE 01
             </div>
 
-        </section>
-
-
-        <!-- =========================
-             MODULES
-        ========================= -->
-
-        <section>
-
-            <h2 class="section-title">
-                Course Modules
-            </h2>
-
-            <div class="modules">
-
-                <!-- MODULE 1 -->
-
-                <div class="module-card">
-
-                    <div class="module-number">
-                        MODULE 01
-                    </div>
-
-                    <h3>
-                        Introduction & Intelligent Agents
-                    </h3>
-
-                    <p>
-                        AI fundamentals, intelligent agents,
-                        rationality, PEAS, environments and
-                        types of agents.
-                    </p>
-
-                    <a href="./module1.html" class="btn">
-                        Open Module 1 →
-                    </a>
-
-                </div>
-
-
-                <!-- MODULE 2 -->
-
-                <div class="module-card">
-
-                    <div class="module-number">
-                        MODULE 02
-                    </div>
-
-                    <h3>
-                        Problem Solving & Search
-                    </h3>
-
-                    <p>
-                        Problem-solving agents, problem formulation,
-                        uninformed search and important search algorithms.
-                    </p>
-
-                    <a href="./module2.html" class="btn">
-                        Open Module 2 →
-                    </a>
-
-                </div>
-
-
-                <!-- MODULE 3 -->
-
-                <div class="module-card">
-
-                    <div class="module-number">
-                        MODULE 03
-                    </div>
-
-                    <h3>
-                        Informed Search & Propositional Logic
-                    </h3>
-
-                    <p>
-                        Heuristic search, Greedy Search, A*,
-                        knowledge-based agents, Wumpus World
-                        and propositional logic.
-                    </p>
-
-                    <a href="./module3.html" class="btn">
-                        Open Module 3 →
-                    </a>
-
-                </div>
-
-
-                <!-- MODULE 4 -->
-
-                <div class="module-card">
-
-                    <div class="module-number">
-                        MODULE 04
-                    </div>
-
-                    <h3>
-                        First-Order Logic
-                    </h3>
-
-                    <p>
-                        FOL syntax and semantics, knowledge engineering,
-                        unification and forward chaining.
-                    </p>
-
-                    <a href="./module4.html" class="btn">
-                        Open Module 4 →
-                    </a>
-
-                </div>
-
-
-                <!-- MODULE 5 -->
-
-                <div class="module-card">
-
-                    <div class="module-number">
-                        MODULE 05
-                    </div>
-
-                    <h3>
-                        Inference & Classical Planning
-                    </h3>
-
-                    <p>
-                        Backward chaining, resolution, classical planning,
-                        state-space search and planning graphs.
-                    </p>
-
-                    <a href="./module5.html" class="btn">
-                        Open Module 5 →
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             STUDY FLOW
-        ========================= -->
-
-        <section>
-
-            <h2 class="section-title">
-                Study Flow
-            </h2>
-
-            <div class="flow">
-
-                <div class="flow-box">
-                    <span>01</span>
-                    <h3>Learn</h3>
-                    <p>
-                        Understand the concept and basic definitions.
-                    </p>
-                </div>
-
-                <div class="flow-box">
-                    <span>02</span>
-                    <h3>Practice</h3>
-                    <p>
-                        Work through solved examples and problems.
-                    </p>
-                </div>
-
-                <div class="flow-box">
-                    <span>03</span>
-                    <h3>Revise</h3>
-                    <p>
-                        Use important points and quick revision sections.
-                    </p>
-                </div>
-
-                <div class="flow-box">
-                    <span>04</span>
-                    <h3>Write</h3>
-                    <p>
-                        Practice answers according to VTU exam patterns.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             EXAM PREPARATION
-        ========================= -->
-
-        <section>
-
-            <h2 class="section-title">
-                Exam Preparation
-            </h2>
-
-            <div class="exam">
-
-                <ul>
-
-                    <li>
-                        <strong>2 Marks:</strong>
-                        Focus on definitions, differences and short concepts.
-                    </li>
-
-                    <li>
-                        <strong>5 Marks:</strong>
-                        Learn explanations with suitable examples.
-                    </li>
-
-                    <li>
-                        <strong>10 Marks:</strong>
-                        Practice complete answers with algorithms,
-                        diagrams, steps and solved problems.
-                    </li>
-
-                    <li>
-                        <strong>Numericals:</strong>
-                        Always write the problem, steps, calculation
-                        and final answer clearly.
-                    </li>
-
-                    <li>
-                        <strong>Revision:</strong>
-                        Revise each module completely before the examination.
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             RESOURCES
-        ========================= -->
-
-        <section class="resources">
-
-            <h2 class="section-title">
-                Learning Resources
-            </h2>
-
-            <div class="resource-buttons">
-
-                <a
-                    href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+VTU"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn"
-                >
-                    ▶ YouTube AI Lectures
-                </a>
-
-                <a
-                    href="https://github.com/mahalakshmikommaranahalli9-cell"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn"
-                >
-                    🐙 GitHub
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             GITHUB
-        ========================= -->
-
-        <section class="github">
-
-            <h2>
-                MAHALAKSHMI'S GITHUB
-            </h2>
+            <h3>
+                Introduction & Intelligent Agents
+            </h3>
 
             <p>
-                Explore my projects, notes and coding work.
+                AI fundamentals, intelligent agents,
+                rationality, PEAS, environments and
+                types of agents.
             </p>
 
             <a
-                href="https://github.com/mahalakshmikommaranahalli9-cell"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module1.html"
                 class="btn"
             >
-                🐙 Visit Mahalakshmi's GitHub
+                Open Module 1 →
             </a>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <!-- =========================
-         FOOTER
-    ========================= -->
+        <!-- MODULE 2 -->
 
-    <footer>
+        <div class="module-card">
 
-        <p>
-            © 2026 <span>Mahalakshmi</span> |
-            BCS515B Artificial Intelligence
-        </p>
+            <div class="module-number">
+                MODULE 02
+            </div>
 
-        <p>
-            5th Semester • Computer Science & Engineering
-        </p>
+            <h3>
+                Problem Solving & Search
+            </h3>
 
-    </footer>
+            <p>
+                Problem-solving agents, problem formulation,
+                uninformed search and important search algorithms.
+            </p>
+
+            <a
+                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module2.html"
+                class="btn"
+            >
+                Open Module 2 →
+            </a>
+
+        </div>
 
 
-    <!-- =========================
-         BASIC COPY PROTECTION
-    ========================= -->
+        <!-- MODULE 3 -->
 
-    <script>
+        <div class="module-card">
 
-        document.addEventListener("contextmenu", function (event) {
+            <div class="module-number">
+                MODULE 03
+            </div>
+
+            <h3>
+                Informed Search & Propositional Logic
+            </h3>
+
+            <p>
+                Heuristic search, Greedy Search, A*,
+                knowledge-based agents, Wumpus World
+                and propositional logic.
+            </p>
+
+            <a
+                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module3.html"
+                class="btn"
+            >
+                Open Module 3 →
+            </a>
+
+        </div>
+
+
+        <!-- MODULE 4 -->
+
+        <div class="module-card">
+
+            <div class="module-number">
+                MODULE 04
+            </div>
+
+            <h3>
+                First-Order Logic
+            </h3>
+
+            <p>
+                FOL syntax and semantics, knowledge engineering,
+                unification and forward chaining.
+            </p>
+
+            <a
+                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module4.html"
+                class="btn"
+            >
+                Open Module 4 →
+            </a>
+
+        </div>
+
+
+        <!-- MODULE 5 -->
+
+        <div class="module-card">
+
+            <div class="module-number">
+                MODULE 05
+            </div>
+
+            <h3>
+                Inference & Classical Planning
+            </h3>
+
+            <p>
+                Backward chaining, resolution, classical planning,
+                state-space search and planning graphs.
+            </p>
+
+            <a
+                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module5.html"
+                class="btn"
+            >
+                Open Module 5 →
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2 class="section-title">
+        Study Flow
+    </h2>
+
+    <div class="flow">
+
+        <div class="flow-box">
+
+            <span>01</span>
+
+            <h3>Learn</h3>
+
+            <p>
+                Understand the concept and basic definitions.
+            </p>
+
+        </div>
+
+
+        <div class="flow-box">
+
+            <span>02</span>
+
+            <h3>Practice</h3>
+
+            <p>
+                Work through solved examples and problems.
+            </p>
+
+        </div>
+
+
+        <div class="flow-box">
+
+            <span>03</span>
+
+            <h3>Revise</h3>
+
+            <p>
+                Use important points and quick revision sections.
+            </p>
+
+        </div>
+
+
+        <div class="flow-box">
+
+            <span>04</span>
+
+            <h3>Write</h3>
+
+            <p>
+                Practice answers according to VTU exam patterns.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <h2 class="section-title">
+        Exam Preparation
+    </h2>
+
+    <div class="exam">
+
+        <ul>
+
+            <li>
+                <strong>2 Marks:</strong>
+                Focus on definitions, differences and short concepts.
+            </li>
+
+            <li>
+                <strong>5 Marks:</strong>
+                Learn explanations with suitable examples.
+            </li>
+
+            <li>
+                <strong>10 Marks:</strong>
+                Practice complete answers with algorithms,
+                diagrams, steps and solved problems.
+            </li>
+
+            <li>
+                <strong>Numericals:</strong>
+                Always write the problem, steps, calculation
+                and final answer clearly.
+            </li>
+
+            <li>
+                <strong>Revision:</strong>
+                Revise each module completely before the examination.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<section class="resources">
+
+    <h2 class="section-title">
+        Learning Resources
+    </h2>
+
+    <div class="resource-buttons">
+
+        <a
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+VTU"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            ▶ YouTube AI Lectures
+        </a>
+
+
+        <a
+            href="https://github.com/mahalakshmikommaranahalli9-cell"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn"
+        >
+            🐙 GitHub
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="github">
+
+    <h2>
+        MAHALAKSHMI'S GITHUB
+    </h2>
+
+    <p>
+        Explore my projects, notes and coding work.
+    </p>
+
+    <a
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 <span>Mahalakshmi</span> |
+        BCS515B Artificial Intelligence
+    </p>
+
+    <p>
+        5th Semester • Computer Science & Engineering
+    </p>
+
+</footer>
+
+
+<script>
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
             event.preventDefault();
-        });
+        }
+    );
 
-        document.addEventListener("selectstart", function (event) {
+    document.addEventListener(
+        "selectstart",
+        function(event) {
             event.preventDefault();
-        });
+        }
+    );
 
-        document.addEventListener("dragstart", function (event) {
+    document.addEventListener(
+        "dragstart",
+        function(event) {
             event.preventDefault();
-        });
+        }
+    );
 
-        document.addEventListener("keydown", function (event) {
+    document.addEventListener(
+        "keydown",
+        function(event) {
 
             if (
                 (event.ctrlKey || event.metaKey) &&
@@ -740,11 +707,11 @@
                 event.preventDefault();
             }
 
-        });
+        }
+    );
 
-    </script>
+</script>
 
 </body>
 
 </html>
-<!-- BCS515B Pages deployment refresh -->
