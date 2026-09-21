@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+        content="#080706">
+
+    <meta name="description"
+        content="BCS515B Artificial Intelligence Module 4 - First Order Logic">
+
+    <title>BCS515B | Module 4 - First Order Logic</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080706;
+            color: #f5f0e6;
+            line-height: 1.7;
+        }
+
+        ::selection {
+            background: #d4af37;
+            color: #080706;
+        }
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #0d0b08,
+                #17130b
+            );
+
+            border-bottom: 1px solid #4d3b16;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: 2.3rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #cfc6b5;
+            font-size: 1rem;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(8, 7, 6, 0.96);
+
+            border-bottom: 1px solid #3e3013;
+
+            padding: 12px;
+
+            text-align: center;
+        }
+
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+
+            margin: 0 10px;
+
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #fff3b0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 18px 60px;
+        }
+
+        section {
+            background: #0e0c09;
+
+            border: 1px solid #3c3018;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        h2 {
+            color: #d4af37;
+
+            font-size: 1.7rem;
+
+            margin-bottom: 18px;
+
+            border-bottom: 1px solid #4b3a17;
+
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #e3c45b;
+
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #f0d878;
+
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #f1d66b;
+        }
+
+        code {
+            background: #18140c;
+
+            color: #ffe48a;
+
+            padding: 3px 7px;
+
+            border-radius: 5px;
+
+            font-family: Consolas, monospace;
+        }
+
+        .formula {
+            background: #151108;
+
+            border-left: 4px solid #d4af37;
+
+            padding: 14px 18px;
+
+            margin: 15px 0;
+
+            font-family: Consolas, monospace;
+
+            color: #ffe8a3;
+
+            overflow-x: auto;
+        }
+
+        .note {
+            background: #171207;
+
+            border-left: 4px solid #d4af37;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        .warning {
+            background: #1a1009;
+
+            border-left: 4px solid #c98232;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        .success {
+            background: #0d170f;
+
+            border-left: 4px solid #65a765;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 18px 0;
+
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid #4a3b1d;
+
+            padding: 11px;
+
+            text-align: left;
+
+            vertical-align: top;
+        }
+
+        th {
+            background: #211a0d;
+
+            color: #e4c85c;
+        }
+
+        td {
+            background: #100e0b;
+        }
+
+        .question {
+            background: #12100c;
+
+            border: 1px solid #3d321c;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            margin: 14px 0;
+        }
+
+        .answer {
+            margin-top: 10px;
+
+            color: #ddd5c6;
+        }
+
+        .step {
+            background: #13110d;
+
+            border: 1px solid #332b1a;
+
+            border-radius: 8px;
+
+            padding: 15px;
+
+            margin: 12px 0;
+        }
+
+        .step-title {
+            color: #d4af37;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        .btn-area {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            background: #d4af37;
+
+            color: #080706;
+
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #f1d66b;
+
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: transparent;
+
+            color: #d4af37;
+
+            border: 1px solid #d4af37;
+        }
+
+        .btn.secondary:hover {
+            background: #d4af37;
+
+            color: #080706;
+        }
+
+        .tag {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            margin: 4px;
+
+            border-radius: 20px;
+
+            background: #1c1609;
+
+            color: #e3c45b;
+
+            border: 1px solid #4c3c18;
+
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 30px 15px;
+
+            border-top: 1px solid #3d3017;
+
+            color: #9f9686;
+        }
+
+        footer strong {
+            color: #d4af37;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+
+                margin: 4px 6px;
+            }
+
+            table {
+                display: block;
+
+                overflow-x: auto;
+
+                white-space: nowrap;
+            }
+
+            .container {
+                padding: 20px 12px 45px;
+            }
+        }
+
+        /* Prevent easy copying */
+
+        body {
+            user-select: none;
+        }
+
+        img {
+            user-drag: none;
+        }
+
+        @media print {
+            body {
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>BCS515B — Module 4</h1>
+
+    <p>
+        Artificial Intelligence | First-Order Logic
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="#intro">Introduction</a>
+
+    <a href="#syntax">Syntax</a>
+
+    <a href="#semantics">Semantics</a>
+
+    <a href="#representation">Representation</a>
+
+    <a href="#knowledge">Knowledge Engineering</a>
+
+    <a href="#unification">Unification</a>
+
+    <a href="#forward">Forward Chaining</a>
+
+    <a href="#questions">Questions</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+INTRODUCTION
+===================================================== -->
+
+<section id="intro">
+
+    <h2>1. Introduction to First-Order Logic</h2>
+
+    <p>
+        <strong>First-Order Logic (FOL)</strong> is a formal language
+        used in Artificial Intelligence to represent objects,
+        properties, relationships and facts about the world.
+    </p>
+
+    <p>
+        Propositional logic represents complete statements as
+        simple symbols such as P and Q.
+        However, it cannot directly represent individual objects
+        and relationships between objects.
+    </p>
+
+    <div class="formula">
+
+        Propositional Logic:
+        P = "Maha is a student"
+
+        <br><br>
+
+        First-Order Logic:
+        Student(Maha)
+
+    </div>
+
+    <h3>Why do we need FOL?</h3>
+
+    <ul>
+
+        <li>To represent individual objects.</li>
+
+        <li>To represent properties of objects.</li>
+
+        <li>To represent relationships between objects.</li>
+
+        <li>To express general rules.</li>
+
+        <li>To reason about knowledge.</li>
+
+    </ul>
+
+
+    <div class="note">
+
+        <strong>Easy memory:</strong>
+
+        <br>
+
+        Propositional Logic →
+        Whole statements
+
+        <br>
+
+        First-Order Logic →
+        Objects + Properties + Relations + Quantifiers
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+SYNTAX
+===================================================== -->
+
+<section id="syntax">
+
+    <h2>2. Syntax of First-Order Logic</h2>
+
+    <p>
+        Syntax specifies how valid FOL expressions are constructed.
+    </p>
+
+
+    <h3>2.1 Constants</h3>
+
+    <p>
+        A constant represents a particular object.
+    </p>
+
+    <div class="formula">
+
+        Maha
+
+        <br>
+        Bengaluru
+
+        <br>
+        JIT
+
+        <br>
+        5
+
+    </div>
+
+
+    <h3>2.2 Variables</h3>
+
+    <p>
+        Variables represent unspecified objects.
+    </p>
+
+    <div class="formula">
+
+        x, y, z
+
+    </div>
+
+
+    <h3>2.3 Predicates</h3>
+
+    <p>
+        A predicate represents a property or relationship.
+    </p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+        <br>
+
+        Likes(Maha, AI)
+
+    </div>
+
+    <p>
+        Here <code>Student</code> is a unary predicate and
+        <code>Likes</code> is a binary predicate.
+    </p>
+
+
+    <h3>2.4 Functions</h3>
+
+    <p>
+        Functions return an object.
+    </p>
+
+    <div class="formula">
+
+        FatherOf(Maha)
+
+        <br>
+
+        ManagerOf(Employee1)
+
+    </div>
+
+
+    <h3>2.5 Terms</h3>
+
+    <p>
+        Terms refer to objects.
+    </p>
+
+    <ul>
+
+        <li>Constants</li>
+
+        <li>Variables</li>
+
+        <li>Functions applied to terms</li>
+
+    </ul>
+
+
+    <h3>2.6 Quantifiers</h3>
+
+    <p>
+        Quantifiers tell us how many objects satisfy a statement.
+    </p>
+
+
+    <h4>Universal Quantifier — ∀</h4>
+
+    <p>
+        Means <strong>"for all"</strong>.
+    </p>
+
+    <div class="formula">
+
+        ∀x Student(x) → Learner(x)
+
+    </div>
+
+    <p>
+        Meaning:
+        Every student is a learner.
+    </p>
+
+
+    <h4>Existential Quantifier — ∃</h4>
+
+    <p>
+        Means <strong>"there exists at least one"</strong>.
+    </p>
+
+    <div class="formula">
+
+        ∃x Student(x) ∧ Intelligent(x)
+
+    </div>
+
+    <p>
+        Meaning:
+        There exists at least one student who is intelligent.
+    </p>
+
+
+    <h3>2.7 Logical Connectives</h3>
+
+    <table>
+
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Meaning</th>
+        </tr>
+
+        <tr>
+            <td>¬</td>
+            <td>NOT</td>
+            <td>Negation</td>
+        </tr>
+
+        <tr>
+            <td>∧</td>
+            <td>AND</td>
+            <td>Both must be true</td>
+        </tr>
+
+        <tr>
+            <td>∨</td>
+            <td>OR</td>
+            <td>At least one is true</td>
+        </tr>
+
+        <tr>
+            <td>→</td>
+            <td>Implication</td>
+            <td>If...then...</td>
+        </tr>
+
+        <tr>
+            <td>↔</td>
+            <td>Biconditional</td>
+            <td>If and only if</td>
+        </tr>
+
+    </table>
+
+</section>
+
+
+<!-- =====================================================
+SEMANTICS
+===================================================== -->
+
+<section id="semantics">
+
+    <h2>3. Semantics of First-Order Logic</h2>
+
+    <p>
+        Semantics describes the meaning of FOL expressions.
+    </p>
+
+    <h3>Domain</h3>
+
+    <p>
+        The <strong>domain</strong> is the collection of objects
+        being discussed.
+    </p>
+
+    <div class="formula">
+
+        Domain = {Maha, Ravi, Priya}
+
+    </div>
+
+
+    <h3>Interpretation</h3>
+
+    <p>
+        Interpretation tells us what constants, predicates and
+        functions mean in a particular domain.
+    </p>
+
+    <h4>Example</h4>
+
+    <div class="formula">
+
+        Domain = Students
+
+        <br><br>
+
+        Student(Maha)
+
+    </div>
+
+    <p>
+        The interpretation tells us that Maha is an object in
+        the domain and Student is a property.
+    </p>
+
+
+    <h3>Free and Bound Variables</h3>
+
+    <p>
+        A variable is <strong>bound</strong> when it is controlled
+        by a quantifier.
+    </p>
+
+    <div class="formula">
+
+        ∀x Student(x)
+
+    </div>
+
+    <p>
+        Here x is bound.
+    </p>
+
+    <p>
+        A variable without a quantifier is called a
+        <strong>free variable</strong>.
+    </p>
+
+    <div class="formula">
+
+        Student(x)
+
+    </div>
+
+    <p>
+        Here x is free.
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+REPRESENTATION
+===================================================== -->
+
+<section id="representation">
+
+    <h2>4. Representing Knowledge using FOL</h2>
+
+    <p>
+        One of the most important applications of FOL in AI is
+        converting natural-language statements into logical form.
+    </p>
+
+
+    <h3>Example 1 — Every student is a learner</h3>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Identify objects
+        </div>
+
+        Student → object/property
+        <br>
+        Learner → property
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Identify quantifier
+        </div>
+
+        "Every" means universal quantifier.
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Write FOL
+        </div>
+
+        <div class="formula">
+
+            ∀x (Student(x) → Learner(x))
+
+        </div>
+
+    </div>
+
+
+    <h3>Example 2 — Some students are intelligent</h3>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        "Some" means existential quantifier.
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Identify properties:
+
+        <br>
+
+        Student(x)
+
+        <br>
+
+        Intelligent(x)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        <div class="formula">
+
+            ∃x (Student(x) ∧ Intelligent(x))
+
+        </div>
+
+    </div>
+
+
+    <h3>Example 3 — Every teacher teaches a subject</h3>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Identify objects
+        </div>
+
+        Teacher → person
+
+        <br>
+
+        Subject → object
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Identify relationship
+        </div>
+
+        Teaches(teacher, subject)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Add universal quantifier
+        </div>
+
+        <div class="formula">
+
+            ∀x (Teacher(x) →
+            ∃y (Subject(y) ∧ Teaches(x,y)))
+
+        </div>
+
+    </div>
+
+
+    <h3>Example 4 — Maha likes AI</h3>
+
+    <div class="formula">
+
+        Likes(Maha, AI)
+
+    </div>
+
+
+    <h3>Example 5 — Every programmer knows Python</h3>
+
+    <div class="formula">
+
+        ∀x (Programmer(x) →
+        Knows(x, Python))
+
+    </div>
+
+
+    <h3>Example 6 — There is a student who knows AI</h3>
+
+    <div class="formula">
+
+        ∃x (Student(x) ∧ Knows(x, AI))
+
+    </div>
+
+
+    <h3>Example 7 — No student is a teacher</h3>
+
+    <div class="formula">
+
+        ∀x (Student(x) →
+        ¬Teacher(x))
+
+    </div>
+
+
+    <h3>Example 8 — All dogs are animals</h3>
+
+    <div class="formula">
+
+        ∀x (Dog(x) → Animal(x))
+
+    </div>
+
+
+    <h3>Example 9 — Some animals are dogs</h3>
+
+    <div class="formula">
+
+        ∃x (Animal(x) ∧ Dog(x))
+
+    </div>
+
+
+    <div class="note">
+
+        <strong>Exam Trick:</strong>
+
+        <br>
+
+        Every / All → ∀
+
+        <br>
+
+        Some / At least one / There exists → ∃
+
+        <br>
+
+        No → Usually represented using implication + negation
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+FOL vs PROPOSITIONAL
+===================================================== -->
+
+<section>
+
+    <h2>5. Propositional Logic vs First-Order Logic</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Feature</th>
+
+            <th>Propositional Logic</th>
+
+            <th>First-Order Logic</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Objects</td>
+
+            <td>Not directly represented</td>
+
+            <td>Represented</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Variables</td>
+
+            <td>No</td>
+
+            <td>Yes</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Predicates</td>
+
+            <td>No</td>
+
+            <td>Yes</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Quantifiers</td>
+
+            <td>No</td>
+
+            <td>Yes</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Relationships</td>
+
+            <td>Limited</td>
+
+            <td>Directly represented</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Example</td>
+
+            <td>P</td>
+
+            <td>Student(Maha)</td>
+
+        </tr>
+
+    </table>
+
+</section>
+
+
+<!-- =====================================================
+KNOWLEDGE ENGINEERING
+===================================================== -->
+
+<section id="knowledge">
+
+    <h2>6. Knowledge Engineering</h2>
+
+    <p>
+        <strong>Knowledge Engineering</strong> is the process of
+        building a knowledge base that allows an AI system to
+        reason about a particular domain.
+    </p>
+
+
+    <h3>Steps of Knowledge Engineering</h3>
+
+    <ol>
+
+        <li>Identify the task.</li>
+
+        <li>Assemble relevant knowledge.</li>
+
+        <li>Decide the vocabulary.</li>
+
+        <li>Encode general knowledge.</li>
+
+        <li>Encode a specific instance.</li>
+
+        <li>Pose queries to the knowledge base.</li>
+
+        <li>Debug the knowledge base.</li>
+
+    </ol>
+
+
+    <h3>Example — University Knowledge Base</h3>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Identify the domain
+        </div>
+
+        University / College
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Define vocabulary
+        </div>
+
+        <div class="formula">
+
+            Student(x)
+
+            <br>
+
+            Teacher(x)
+
+            <br>
+
+            Studies(x,y)
+
+            <br>
+
+            Teaches(x,y)
+
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Add facts
+        </div>
+
+        <div class="formula">
+
+            Student(Maha)
+
+            <br>
+
+            Studies(Maha, AI)
+
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4: Add rules
+        </div>
+
+        <div class="formula">
+
+            ∀x (Student(x) →
+            Learner(x))
+
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 5: Query
+        </div>
+
+        Query:
+
+        <br>
+
+        Learner(Maha)?
+
+    </div>
+
+    <div class="success">
+
+        Since Student(Maha) is true and every student is a learner,
+        the answer is <strong>TRUE</strong>.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+UNIFICATION
+===================================================== -->
+
+<section id="unification">
+
+    <h2>7. Unification</h2>
+
+    <p>
+        <strong>Unification</strong> is the process of finding
+        substitutions that make two logical expressions identical.
+    </p>
+
+    <div class="formula">
+
+        Unification → Make two expressions the same
+
+    </div>
+
+
+    <h3>Substitution</h3>
+
+    <p>
+        A substitution replaces variables with constants,
+        variables or terms.
+    </p>
+
+    <div class="formula">
+
+        θ = {x / Maha}
+
+    </div>
+
+    <p>
+        This means replace x with Maha.
+    </p>
+
+
+    <h3>Example 1 — Simple Unification</h3>
+
+    <p>Unify:</p>
+
+    <div class="formula">
+
+        Student(x)
+
+        <br>
+
+        Student(Maha)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        Predicates are the same:
+
+        <br>
+
+        Student = Student
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Compare arguments:
+
+        <br>
+
+        x = Maha
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Therefore:
+
+        <div class="formula">
+
+            θ = {x / Maha}
+
+        </div>
+
+    </div>
+
+    <div class="success">
+
+        <strong>MGU = {x/Maha}</strong>
+
+        <br>
+
+        MGU means Most General Unifier.
+
+    </div>
+
+
+    <h3>Example 2 — Two Variables</h3>
+
+    <p>Unify:</p>
+
+    <div class="formula">
+
+        Likes(x, AI)
+
+        <br>
+
+        Likes(Maha, AI)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        Predicates are same:
+
+        <br>
+
+        Likes = Likes
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        First arguments:
+
+        <br>
+
+        x = Maha
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Second arguments:
+
+        <br>
+
+        AI = AI
+
+        <br>
+
+        Already equal.
+
+    </div>
+
+    <div class="formula">
+
+        θ = {x / Maha}
+
+    </div>
+
+
+    <h3>Example 3 — Variable with Variable</h3>
+
+    <p>Unify:</p>
+
+    <div class="formula">
+
+        Knows(x, y)
+
+        <br>
+
+        Knows(Maha, AI)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        First argument:
+
+        <br>
+
+        x = Maha
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Second argument:
+
+        <br>
+
+        y = AI
+
+    </div>
+
+    <div class="formula">
+
+        θ = {x / Maha, y / AI}
+
+    </div>
+
+
+    <h3>Example 4 — Function Unification</h3>
+
+    <p>Unify:</p>
+
+    <div class="formula">
+
+        Likes(x, FatherOf(y))
+
+        <br>
+
+        Likes(Maha, FatherOf(Ravi))
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        Predicates are identical:
+
+        <br>
+
+        Likes = Likes
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        First arguments:
+
+        <br>
+
+        x = Maha
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Second arguments:
+
+        <br>
+
+        FatherOf(y) = FatherOf(Ravi)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4
+        </div>
+
+        Therefore:
+
+        <br>
+
+        y = Ravi
+
+    </div>
+
+    <div class="formula">
+
+        θ = {x / Maha, y / Ravi}
+
+    </div>
+
+
+    <h3>Example 5 — Cannot Unify</h3>
+
+    <p>Try to unify:</p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+        <br>
+
+        Teacher(Maha)
+
+    </div>
+
+    <p>
+        Predicates are different.
+    </p>
+
+    <div class="warning">
+
+        Student ≠ Teacher
+
+        <br><br>
+
+        Therefore, these expressions cannot be unified.
+
+    </div>
+
+
+    <h3>Important Unification Rules</h3>
+
+    <ul>
+
+        <li>Predicate names must match.</li>
+
+        <li>Number of arguments must match.</li>
+
+        <li>Constants must match exactly.</li>
+
+        <li>Variables can be substituted.</li>
+
+        <li>Function names and structures must match.</li>
+
+    </ul>
+
+</section>
+
+
+<!-- =====================================================
+FORWARD CHAINING
+===================================================== -->
+
+<section id="forward">
+
+    <h2>8. Forward Chaining</h2>
+
+    <p>
+        Forward chaining is a data-driven inference technique.
+        It starts with known facts and repeatedly applies rules
+        to derive new facts.
+    </p>
+
+    <div class="formula">
+
+        Facts → Rules → New Facts → More Rules → Conclusion
+
+    </div>
+
+
+    <h3>Basic Rule Format</h3>
+
+    <div class="formula">
+
+        P ∧ Q → R
+
+    </div>
+
+    <p>
+        If P and Q are true, then R can be concluded.
+    </p>
+
+
+    <h3>Forward Chaining Algorithm</h3>
+
+    <ol>
+
+        <li>Start with initial facts.</li>
+
+        <li>Find a rule whose conditions are satisfied.</li>
+
+        <li>Apply the rule.</li>
+
+        <li>Add the new fact to the knowledge base.</li>
+
+        <li>Repeat the process.</li>
+
+        <li>Stop when the query is derived or no new facts can be generated.</li>
+
+    </ol>
+
+
+    <h3>🔥 Solved Problem 1 — Simple Forward Chaining</h3>
+
+    <p><strong>Given:</strong></p>
+
+    <div class="formula">
+
+        Fact 1: Student(Maha)
+
+        <br>
+
+        Rule 1:
+        Student(x) → Learner(x)
+
+        <br>
+
+        Rule 2:
+        Learner(x) → Intelligent(x)
+
+    </div>
+
+    <p>
+        <strong>Query:</strong>
+        Intelligent(Maha)?
+    </p>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Initial facts
+        </div>
+
+        Student(Maha)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Apply Rule 1
+        </div>
+
+        Student(x) → Learner(x)
+
+        <br><br>
+
+        Substitute:
+
+        <br>
+
+        x = Maha
+
+        <br><br>
+
+        Therefore:
+
+        <div class="formula">
+
+            Learner(Maha)
+
+        </div>
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Apply Rule 2
+        </div>
+
+        Learner(x) → Intelligent(x)
+
+        <br><br>
+
+        Substitute:
+
+        <br>
+
+        x = Maha
+
+        <br><br>
+
+        Therefore:
+
+        <div class="formula">
+
+            Intelligent(Maha)
+
+        </div>
+
+    </div>
+
+    <div class="success">
+
+        <strong>Answer: TRUE</strong>
+
+        <br>
+
+        Intelligent(Maha) has been derived.
+
+    </div>
+
+
+    <h3>🔥 Solved Problem 2 — Multiple Facts</h3>
+
+    <p><strong>Facts:</strong></p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+        <br>
+
+        Studies(Maha, AI)
+
+        <br>
+
+        Smart(Maha)
+
+    </div>
+
+    <p><strong>Rules:</strong></p>
+
+    <div class="formula">
+
+        Student(x) ∧ Studies(x, AI)
+        → LearnsAI(x)
+
+        <br><br>
+
+        LearnsAI(x) ∧ Smart(x)
+        → GoodStudent(x)
+
+    </div>
+
+    <p>
+        <strong>Query:</strong>
+        GoodStudent(Maha)?
+    </p>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Check Rule 1
+        </div>
+
+        Student(Maha) → TRUE
+
+        <br>
+
+        Studies(Maha, AI) → TRUE
+
+        <br><br>
+
+        Therefore:
+
+        <div class="formula">
+
+            LearnsAI(Maha)
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Check Rule 2
+        </div>
+
+        LearnsAI(Maha) → TRUE
+
+        <br>
+
+        Smart(Maha) → TRUE
+
+        <br><br>
+
+        Therefore:
+
+        <div class="formula">
+
+            GoodStudent(Maha)
+
+        </div>
+
+    </div>
+
+
+    <div class="success">
+
+        <strong>Answer: TRUE</strong>
+
+    </div>
+
+
+    <h3>🔥 Solved Problem 3 — Forward Chaining Chain</h3>
+
+    <p><strong>Facts:</strong></p>
+
+    <div class="formula">
+
+        A
+
+    </div>
+
+    <p><strong>Rules:</strong></p>
+
+    <div class="formula">
+
+        A → B
+
+        <br>
+
+        B → C
+
+        <br>
+
+        C → D
+
+        <br>
+
+        D → E
+
+    </div>
+
+    <p>
+        <strong>Query:</strong>
+        E?
+    </p>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        Initial fact:
+
+        <br>
+
+        A
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Apply A → B
+
+        <br>
+
+        Therefore B.
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Apply B → C
+
+        <br>
+
+        Therefore C.
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4
+        </div>
+
+        Apply C → D
+
+        <br>
+
+        Therefore D.
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 5
+        </div>
+
+        Apply D → E
+
+        <br>
+
+        Therefore E.
+
+    </div>
+
+    <div class="success">
+
+        <strong>Answer: TRUE</strong>
+
+        <br>
+
+        E is derived through forward chaining.
+
+    </div>
+
+
+    <h3>🔥 Solved Problem 4 — Query Not Derivable</h3>
+
+    <p><strong>Facts:</strong></p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+    </div>
+
+    <p><strong>Rule:</strong></p>
+
+    <div class="formula">
+
+        Student(x) → Learner(x)
+
+    </div>
+
+    <p>
+        Query:
+        Doctor(Maha)?
+    </p>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        We know:
+
+        <br>
+
+        Student(Maha)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Apply the only rule:
+
+        <br>
+
+        Student(x) → Learner(x)
+
+        <br><br>
+
+        Derive:
+
+        <br>
+
+        Learner(Maha)
+
+    </div>
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Check whether:
+
+        <br>
+
+        Doctor(Maha)
+
+        <br>
+
+        can be derived.
+
+    </div>
+
+    <div class="warning">
+
+        No rule derives Doctor(Maha).
+
+        <br><br>
+
+        Therefore the query is <strong>not derivable</strong>
+        from the given knowledge base.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+FORWARD VS BACKWARD
+===================================================== -->
+
+<section>
+
+    <h2>9. Forward Chaining vs Backward Chaining</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Feature</th>
+
+            <th>Forward Chaining</th>
+
+            <th>Backward Chaining</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Approach</td>
+
+            <td>Data-driven</td>
+
+            <td>Goal-driven</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Starts with</td>
+
+            <td>Known facts</td>
+
+            <td>Goal/query</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Direction</td>
+
+            <td>Facts → Conclusion</td>
+
+            <td>Goal → Required facts</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Useful when</td>
+
+            <td>Many facts are available</td>
+
+            <td>Specific goal is known</td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="note">
+
+        <strong>Memory Trick:</strong>
+
+        <br><br>
+
+        Forward = Start from Facts and move Forward.
+
+        <br>
+
+        Backward = Start from Goal and work Backward.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+IMPORTANT TERMS
+===================================================== -->
+
+<section>
+
+    <h2>10. Important Terms</h2>
+
+    <span class="tag">First-Order Logic</span>
+
+    <span class="tag">Predicate</span>
+
+    <span class="tag">Constant</span>
+
+    <span class="tag">Variable</span>
+
+    <span class="tag">Function</span>
+
+    <span class="tag">Term</span>
+
+    <span class="tag">Quantifier</span>
+
+    <span class="tag">Universal</span>
+
+    <span class="tag">Existential</span>
+
+    <span class="tag">Semantics</span>
+
+    <span class="tag">Knowledge Base</span>
+
+    <span class="tag">Knowledge Engineering</span>
+
+    <span class="tag">Unification</span>
+
+    <span class="tag">Substitution</span>
+
+    <span class="tag">MGU</span>
+
+    <span class="tag">Forward Chaining</span>
+
+    <span class="tag">Inference</span>
+
+</section>
+
+
+<!-- =====================================================
+VTU QUESTIONS
+===================================================== -->
+
+<section id="questions">
+
+    <h2>11. Important VTU Exam Questions</h2>
+
+
+    <h3>2-Mark Questions</h3>
+
+    <div class="question">
+
+        <strong>1. What is First-Order Logic?</strong>
+
+        <div class="answer">
+
+            First-Order Logic is a formal language used to
+            represent objects, properties, relationships and
+            quantified statements.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>2. What is a predicate?</strong>
+
+        <div class="answer">
+
+            A predicate represents a property or relationship
+            involving one or more objects.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>3. What is a quantifier?</strong>
+
+        <div class="answer">
+
+            A quantifier specifies the number of objects for which
+            a logical statement is true.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>4. Define unification.</strong>
+
+        <div class="answer">
+
+            Unification is the process of finding substitutions
+            that make two logical expressions identical.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>5. What is forward chaining?</strong>
+
+        <div class="answer">
+
+            Forward chaining is a data-driven inference method
+            that starts with known facts and applies rules to
+            derive new facts.
+
+        </div>
+
+    </div>
+
+
+    <h3>5-Mark Questions</h3>
+
+    <div class="question">
+
+        <strong>
+            1. Explain the syntax of First-Order Logic.
+        </strong>
+
+        <div class="answer">
+
+            Explain:
+
+            <ul>
+
+                <li>Constants</li>
+
+                <li>Variables</li>
+
+                <li>Predicates</li>
+
+                <li>Functions</li>
+
+                <li>Terms</li>
+
+                <li>Quantifiers</li>
+
+                <li>Logical connectives</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            2. Explain universal and existential quantifiers
+            with examples.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            3. Explain knowledge engineering in FOL.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            4. Explain unification with suitable examples.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            5. Explain forward chaining with an example.
+        </strong>
+
+    </div>
+
+
+    <h3>10-Mark Questions</h3>
+
+    <div class="question">
+
+        <strong>
+            1. Explain First-Order Logic syntax and semantics
+            with suitable examples.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            2. Explain the process of knowledge engineering
+            using First-Order Logic.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            3. Explain unification and substitution with
+            suitable solved examples.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            4. Explain forward chaining algorithm and solve
+            a suitable inference problem step-by-step.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            5. Translate the given English statements into
+            First-Order Logic.
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+EXAM WRITING
+===================================================== -->
+
+<section>
+
+    <h2>12. VTU Answer-Writing Format</h2>
+
+    <h3>For 10 Marks</h3>
+
+    <ol>
+
+        <li>Start with definition.</li>
+
+        <li>Explain the concept.</li>
+
+        <li>Write important components.</li>
+
+        <li>Give formulas.</li>
+
+        <li>Draw/write a suitable example.</li>
+
+        <li>Solve the example step-by-step.</li>
+
+        <li>Write the final result clearly.</li>
+
+    </ol>
+
+
+    <div class="success">
+
+        <strong>Golden Rule:</strong>
+
+        For numerical/logical problems, never write only the
+        final answer. Show the substitution or inference steps.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+QUICK REVISION
+===================================================== -->
+
+<section>
+
+    <h2>13. Quick Revision</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Concept</th>
+
+            <th>Remember</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Constant</td>
+
+            <td>Specific object</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Variable</td>
+
+            <td>Unknown object</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Predicate</td>
+
+            <td>Property / relationship</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Function</td>
+
+            <td>Returns an object</td>
+
+        </tr>
+
+        <tr>
+
+            <td>∀</td>
+
+            <td>For all</td>
+
+        </tr>
+
+        <tr>
+
+            <td>∃</td>
+
+            <td>There exists</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Unification</td>
+
+            <td>Make expressions identical</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Substitution</td>
+
+            <td>Replace variable</td>
+
+        </tr>
+
+        <tr>
+
+            <td>MGU</td>
+
+            <td>Most General Unifier</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Forward Chaining</td>
+
+            <td>Facts → Rules → Conclusion</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Knowledge Engineering</td>
+
+            <td>Build and use a knowledge base</td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="note">
+
+        <strong>One-Line Memory:</strong>
+
+        <br><br>
+
+        <strong>
+        FOL = Objects + Relations + Quantifiers
+        </strong>
+
+        <br><br>
+
+        <strong>
+        Unification = Make Same
+        </strong>
+
+        <br><br>
+
+        <strong>
+        Forward Chaining = Facts → Rules → New Facts
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+STUDY FLOW
+===================================================== -->
+
+<section>
+
+    <h2>14. Study Flow</h2>
+
+    <div class="formula">
+
+        FOL Basics
+
+        ↓
+
+        Syntax
+
+        ↓
+
+        Semantics
+
+        ↓
+
+        Predicates & Quantifiers
+
+        ↓
+
+        Knowledge Representation
+
+        ↓
+
+        Knowledge Engineering
+
+        ↓
+
+        Unification
+
+        ↓
+
+        Forward Chaining
+
+        ↓
+
+        Solved Problems
+
+        ↓
+
+        VTU Questions
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+RESOURCES
+===================================================== -->
+
+<section>
+
+    <h2>15. Study Resources</h2>
+
+    <p>
+        Use these resources for additional explanation and
+        revision.
+    </p>
+
+    <div class="btn-area">
+
+        <a
+            class="btn"
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+First+Order+Logic"
+            target="_blank"
+        >
+            📺 Watch FOL Videos
+        </a>
+
+        
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+BOTTOM NAVIGATION
+===================================================== -->
+
+<section>
+
+    <h2>16. Module Navigation</h2>
+
+    <div class="btn-area">
+
+        <a
+            class="btn secondary"
+            href="module3.html"
+        >
+            ← Module 3
+        </a>
+
+        <a
+            class="btn"
+            href="module5.html"
+        >
+            Module 5 →
+        </a>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        <strong>MAHALAKSHMI'S COURSE NOTES</strong>
+    </p>
+
+    <p>
+        BCS515B — Artificial Intelligence
+    </p>
+
+    <p>
+        Module 4 — First-Order Logic
+    </p>
+
+    <p>
+        Made for learning • Practice • VTU Preparation
+    </p>
+
+    <div class="btn-area"
+        style="justify-content:center;">
+
+        <a
+            class="btn"
+            href="https://github.com/mahalakshmikommaranahalli9-cell"
+            target="_blank"
+        >
+            🐙 Visit Mahalakshmi's GitHub
+        </a>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    /* Disable right click */
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    /* Disable selection */
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    /* Disable dragging */
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    /* Disable common copy shortcuts */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                [
+                    "c",
+                    "x",
+                    "a",
+                    "u",
+                    "s",
+                    "p"
+                ].includes(event.key.toLowerCase())
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

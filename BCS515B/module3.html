@@ -1,0 +1,3767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080706"
+    >
+
+    <title>BCS515B Module 3 | Informed Search & Propositional Logic</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080706;
+            color: #f4f1ea;
+            line-height: 1.75;
+            user-select: none;
+        }
+
+        header {
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(212,175,55,0.18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080706,
+                    #17130b
+                );
+
+            border-bottom: 1px solid rgba(212,175,55,0.35);
+
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: #d7d2c8;
+            font-size: 1.05rem;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 8px 18px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            color: #d4af37;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(8,7,6,0.96);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(212,175,55,0.25);
+
+            padding: 12px;
+
+            text-align: center;
+        }
+
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 5px 7px;
+            font-size: 0.88rem;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        section {
+            margin: 45px 0;
+        }
+
+        .card {
+            background: #11100e;
+
+            border: 1px solid rgba(212,175,55,0.22);
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            margin: 25px 0;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.25);
+        }
+
+        h2 {
+            color: #d4af37;
+
+            font-size: 1.9rem;
+
+            margin-bottom: 18px;
+
+            border-left: 4px solid #d4af37;
+
+            padding-left: 14px;
+        }
+
+        h3 {
+            color: #e3c45c;
+
+            margin: 24px 0 12px;
+        }
+
+        h4 {
+            color: #d4af37;
+
+            margin: 18px 0 8px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 25px;
+
+            margin: 12px 0;
+        }
+
+        li {
+            margin: 7px 0;
+        }
+
+        strong {
+            color: #e4c45e;
+        }
+
+        .highlight {
+            background:
+                rgba(212,175,55,0.08);
+
+            border-left:
+                4px solid #d4af37;
+
+            padding: 17px;
+
+            margin: 18px 0;
+
+            border-radius: 8px;
+        }
+
+        .formula {
+            background: #050505;
+
+            border:
+                1px solid #333;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            margin: 18px 0;
+
+            text-align: center;
+
+            color: #f2d675;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            overflow-x: auto;
+        }
+
+        .tree {
+            font-family:
+                "Courier New",
+                monospace;
+
+            background: #050505;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            overflow-x: auto;
+
+            color: #e6d078;
+
+            border:
+                1px solid #302c24;
+
+            white-space: pre;
+        }
+
+        .search-box {
+            background: #050505;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid #39352d;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            overflow-x: auto;
+
+            color: #ddd;
+
+            white-space: pre;
+        }
+
+        .steps {
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+
+            margin: 15px 0;
+
+            padding:
+                16px
+                18px
+                16px
+                55px;
+
+            background: #0b0a09;
+
+            border:
+                1px solid rgba(212,175,55,0.15);
+
+            border-radius: 10px;
+        }
+
+        .step::before {
+            counter-increment: step;
+
+            content: counter(step);
+
+            position: absolute;
+
+            left: 15px;
+            top: 15px;
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #d4af37;
+
+            color: #080706;
+
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border:
+                1px solid #39352d;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+        th {
+            background: #2a2416;
+
+            color: #e5c65d;
+        }
+
+        tr:nth-child(even) {
+            background: #15130f;
+        }
+
+        .answer {
+            border-left:
+                4px solid #d4af37;
+
+            background:
+                rgba(212,175,55,0.07);
+
+            padding: 18px;
+
+            margin: 18px 0;
+
+            border-radius: 8px;
+        }
+
+        .warning {
+            border-left:
+                4px solid #b8860b;
+
+            background:
+                rgba(184,134,11,0.08);
+
+            padding: 16px;
+
+            border-radius: 8px;
+        }
+
+        .memory {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(212,175,55,0.12),
+                    rgba(212,175,55,0.03)
+                );
+
+            border:
+                1px solid rgba(212,175,55,0.35);
+
+            padding: 20px;
+
+            border-radius: 14px;
+        }
+
+        .question {
+            margin: 15px 0;
+
+            padding: 18px;
+
+            background: #0d0c0a;
+
+            border:
+                1px solid #2e2a23;
+
+            border-radius: 10px;
+        }
+
+        .logic {
+            background: #050505;
+
+            border:
+                1px solid #38342c;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            overflow-x: auto;
+        }
+
+        .truth-table {
+            overflow-x: auto;
+        }
+
+        .btn {
+            display: inline-block;
+
+            margin: 8px;
+
+            padding: 12px 20px;
+
+            color: #080706;
+
+            background: #d4af37;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #f0d66d;
+
+            transform:
+                translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 45px 20px;
+
+            margin-top: 70px;
+
+            border-top:
+                1px solid rgba(212,175,55,0.25);
+
+            color: #aaa;
+        }
+
+        .gold {
+            color: #d4af37;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 40px 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 4px;
+            }
+
+            table {
+                font-size: 0.84rem;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+        }
+
+        @media print {
+
+            body {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ===================================================== -->
+<!-- HEADER -->
+<!-- ===================================================== -->
+
+<header>
+
+    <h1>
+        BCS515B — Module 3
+    </h1>
+
+    <p>
+        Informed Search &amp; Propositional Logic
+    </p>
+
+    <div class="badge">
+        Artificial Intelligence | VTU 2022 Scheme
+    </div>
+
+</header>
+
+
+<!-- ===================================================== -->
+<!-- NAVIGATION -->
+<!-- ===================================================== -->
+
+<nav>
+
+    <a href="#informed">
+        Informed Search
+    </a>
+
+    <a href="#heuristic">
+        Heuristics
+    </a>
+
+    <a href="#greedy">
+        Greedy Search
+    </a>
+
+    <a href="#astar">
+        A*
+    </a>
+
+    <a href="#knowledge">
+        Knowledge Agents
+    </a>
+
+    <a href="#wumpus">
+        Wumpus World
+    </a>
+
+    <a href="#logic">
+        Logic
+    </a>
+
+    <a href="#truth">
+        Truth Tables
+    </a>
+
+    <a href="#inference">
+        Inference
+    </a>
+
+    <a href="#questions">
+        Questions
+    </a>
+
+</nav>
+
+
+<main>
+
+
+<!-- ===================================================== -->
+<!-- 1 -->
+<!-- ===================================================== -->
+
+<section id="informed">
+
+    <div class="card">
+
+        <h2>
+            1. Informed Search
+        </h2>
+
+        <p>
+            Informed search is a search technique that uses
+            additional knowledge about the problem to guide the
+            search toward the goal.
+        </p>
+
+        <p>
+            This additional information is usually represented by
+            a <strong>heuristic function</strong>.
+        </p>
+
+        <div class="highlight">
+
+            <strong>
+                Uninformed Search:
+            </strong>
+
+            Searches without knowing which direction is better.
+
+            <br><br>
+
+            <strong>
+                Informed Search:
+            </strong>
+
+            Uses a heuristic to estimate which direction is better.
+
+        </div>
+
+        <h3>
+            Main Informed Search Techniques
+        </h3>
+
+        <ul>
+
+            <li>
+                Greedy Best-First Search
+            </li>
+
+            <li>
+                A* Search
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- 2 -->
+<!-- ===================================================== -->
+
+<section id="heuristic">
+
+    <div class="card">
+
+        <h2>
+            2. Heuristic Function
+        </h2>
+
+        <p>
+            A heuristic function estimates the cost of reaching the
+            goal from a particular node.
+        </p>
+
+        <div class="formula">
+
+            h(n) = estimated cost from node n to the goal
+
+        </div>
+
+        <p>
+            Here:
+        </p>
+
+        <ul>
+
+            <li>
+                <strong>h(n)</strong> = heuristic value
+            </li>
+
+            <li>
+                <strong>n</strong> = current node
+            </li>
+
+        </ul>
+
+        <h3>
+            Example
+        </h3>
+
+        <p>
+            Suppose we want to travel from City A to City D.
+            If our estimate of the remaining distance from B to D
+            is 10 km:
+        </p>
+
+        <div class="formula">
+
+            h(B) = 10
+
+        </div>
+
+        <p>
+            The heuristic does not necessarily give the exact cost.
+            It gives an estimate.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            3. Good Heuristic
+        </h2>
+
+        <p>
+            A useful heuristic should provide a reasonable estimate
+            without overestimating the actual remaining cost when
+            optimal A* search is required.
+        </p>
+
+        <h3>
+            Admissible Heuristic
+        </h3>
+
+        <p>
+            A heuristic is <strong>admissible</strong> if it never
+            overestimates the true cost to reach the goal.
+        </p>
+
+        <div class="formula">
+
+            h(n) ≤ h*(n)
+
+        </div>
+
+        <p>
+            Where <strong>h*(n)</strong> is the actual minimum cost
+            from n to the goal.
+        </p>
+
+        <h3>
+            Example
+        </h3>
+
+        <p>
+            If the actual remaining cost is 10:
+        </p>
+
+        <div class="logic">
+
+h(n) = 7    → admissible
+
+h(n) = 10   → admissible
+
+h(n) = 12   → not admissible
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            4. Consistent Heuristic
+        </h2>
+
+        <p>
+            A heuristic is consistent if, for every node n and
+            successor n':
+        </p>
+
+        <div class="formula">
+
+            h(n) ≤ c(n,n') + h(n')
+
+        </div>
+
+        <p>
+            This is also called the
+            <strong>triangle inequality condition</strong>.
+        </p>
+
+        <div class="highlight">
+
+            Every consistent heuristic is admissible under the
+            usual non-negative path-cost assumptions.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- GREEDY -->
+<!-- ===================================================== -->
+
+<section id="greedy">
+
+    <div class="card">
+
+        <h2>
+            5. Greedy Best-First Search
+        </h2>
+
+        <p>
+            Greedy Best-First Search selects the node that appears
+            closest to the goal according to the heuristic.
+        </p>
+
+        <div class="formula">
+
+            f(n) = h(n)
+
+        </div>
+
+        <div class="highlight">
+
+            <strong>
+                Memory Trick:
+            </strong>
+
+            <br><br>
+
+            Greedy → Look only at
+            <strong>h(n)</strong>.
+
+        </div>
+
+        <h3>
+            Algorithm
+        </h3>
+
+        <div class="steps">
+
+            <div class="step">
+                Put the initial node in the priority queue.
+            </div>
+
+            <div class="step">
+                Select the node having the smallest h(n).
+            </div>
+
+            <div class="step">
+                Expand that node.
+            </div>
+
+            <div class="step">
+                Add its successors.
+            </div>
+
+            <div class="step">
+                Continue until the goal is reached.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            6. Greedy Best-First Search — Solved Problem
+        </h2>
+
+        <p>
+            Consider the following graph.
+        </p>
+
+        <div class="tree">
+
+                 S
+               /   \
+              A     B
+             / \     \
+            C   D     E
+             \       /
+              F-----G
+                   |
+                   H
+
+        </div>
+
+        <p>
+            Suppose the heuristic values are:
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Node</th>
+                <th>h(n)</th>
+            </tr>
+
+            <tr>
+                <td>S</td>
+                <td>8</td>
+            </tr>
+
+            <tr>
+                <td>A</td>
+                <td>6</td>
+            </tr>
+
+            <tr>
+                <td>B</td>
+                <td>3</td>
+            </tr>
+
+            <tr>
+                <td>C</td>
+                <td>5</td>
+            </tr>
+
+            <tr>
+                <td>D</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>E</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>H</td>
+                <td>0</td>
+            </tr>
+
+        </table>
+
+        <h3>
+            Step 1
+        </h3>
+
+        <div class="search-box">
+
+Start = S
+
+Open:
+S(8)
+
+        </div>
+
+        <h3>
+            Step 2
+        </h3>
+
+        <p>
+            Expand S.
+        </p>
+
+        <div class="search-box">
+
+A(6), B(3)
+
+Choose B because:
+
+3 < 6
+
+        </div>
+
+        <h3>
+            Step 3
+        </h3>
+
+        <p>
+            Expand B.
+        </p>
+
+        <div class="search-box">
+
+E(2)
+
+Open:
+E(2), A(6)
+
+Choose E.
+
+        </div>
+
+        <h3>
+            Step 4
+        </h3>
+
+        <p>
+            Continue toward the smallest heuristic.
+        </p>
+
+        <div class="answer">
+
+            The search always chooses the node with the smallest
+            <strong>h(n)</strong>.
+
+        </div>
+
+        <div class="warning">
+
+            Greedy search can reach a goal quickly, but it does not
+            guarantee the lowest-cost solution.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- A STAR -->
+<!-- ===================================================== -->
+
+<section id="astar">
+
+    <div class="card">
+
+        <h2>
+            7. A* Search
+        </h2>
+
+        <p>
+            A* combines the actual cost already travelled with
+            an estimate of the remaining cost.
+        </p>
+
+        <div class="formula">
+
+            f(n) = g(n) + h(n)
+
+        </div>
+
+        <p>
+            Where:
+        </p>
+
+        <ul>
+
+            <li>
+                <strong>g(n)</strong> = actual cost from start to n
+            </li>
+
+            <li>
+                <strong>h(n)</strong> = estimated cost from n to goal
+            </li>
+
+            <li>
+                <strong>f(n)</strong> = estimated total solution cost
+            </li>
+
+        </ul>
+
+        <div class="highlight">
+
+            <strong>
+                Memory Trick:
+            </strong>
+
+            <br><br>
+
+            A* = <strong>Already travelled + Ahead estimate</strong>
+
+            <br><br>
+
+            f(n) = g(n) + h(n)
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            8. A* — Step-by-Step Solved Problem
+        </h2>
+
+        <p>
+            Consider the following weighted graph.
+        </p>
+
+        <div class="tree">
+
+             S
+           /   \
+         2/     \4
+         A       B
+       3/ \2      \3
+       C   D       E
+        \   \      /
+        4\  5\    /2
+           G
+
+        </div>
+
+        <p>
+            Goal = G
+        </p>
+
+        <p>
+            Assume the heuristic values are:
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Node</th>
+                <th>h(n)</th>
+            </tr>
+
+            <tr>
+                <td>S</td>
+                <td>7</td>
+            </tr>
+
+            <tr>
+                <td>A</td>
+                <td>6</td>
+            </tr>
+
+            <tr>
+                <td>B</td>
+                <td>5</td>
+            </tr>
+
+            <tr>
+                <td>C</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>D</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>E</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>G</td>
+                <td>0</td>
+            </tr>
+
+        </table>
+
+        <h3>
+            Step 1 — Start
+        </h3>
+
+        <div class="search-box">
+
+S
+
+g(S) = 0
+
+h(S) = 7
+
+f(S) = g(S) + h(S)
+     = 0 + 7
+     = 7
+
+        </div>
+
+        <h3>
+            Step 2 — Expand S
+        </h3>
+
+        <p>
+            From S:
+        </p>
+
+        <div class="search-box">
+
+A:
+
+g(A) = 2
+h(A) = 6
+
+f(A) = 2 + 6
+     = 8
+
+
+B:
+
+g(B) = 4
+h(B) = 5
+
+f(B) = 4 + 5
+     = 9
+
+        </div>
+
+        <p>
+            Select A because:
+        </p>
+
+        <div class="formula">
+
+            f(A) = 8 &lt; f(B) = 9
+
+        </div>
+
+        <h3>
+            Step 3 — Expand A
+        </h3>
+
+        <p>
+            A produces C and D.
+        </p>
+
+        <div class="search-box">
+
+C:
+
+g(C) = 2 + 3
+     = 5
+
+h(C) = 4
+
+f(C) = 5 + 4
+     = 9
+
+
+D:
+
+g(D) = 2 + 2
+     = 4
+
+h(D) = 4
+
+f(D) = 4 + 4
+     = 8
+
+        </div>
+
+        <p>
+            Lowest f-value is D = 8.
+        </p>
+
+        <h3>
+            Step 4 — Expand D
+        </h3>
+
+        <div class="search-box">
+
+D → G
+
+g(G) = 4 + 5
+     = 9
+
+h(G) = 0
+
+f(G) = 9 + 0
+     = 9
+
+        </div>
+
+        <h3>
+            Step 5 — Compare Remaining Nodes
+        </h3>
+
+        <div class="search-box">
+
+B = 9
+C = 9
+G = 9
+
+        </div>
+
+        <p>
+            A* selects a node with the lowest f-value.
+            With equal values, the exact tie-breaking rule can affect
+            the order of expansion.
+        </p>
+
+        <div class="answer">
+
+            <strong>
+                Important A* Calculation:
+            </strong>
+
+            <br><br>
+
+            Always calculate:
+
+            <br><br>
+
+            f(n) = g(n) + h(n)
+
+        </div>
+
+        <div class="warning">
+
+            In an exam, show every g(n), h(n) and f(n) calculation.
+            This makes the A* solution easy to follow and earns
+            method marks.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            9. A* — Another Easy Numerical
+        </h2>
+
+        <p>
+            Suppose three nodes are available:
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Node</th>
+                <th>g(n)</th>
+                <th>h(n)</th>
+                <th>f(n)</th>
+            </tr>
+
+            <tr>
+                <td>A</td>
+                <td>4</td>
+                <td>7</td>
+                <td>11</td>
+            </tr>
+
+            <tr>
+                <td>B</td>
+                <td>5</td>
+                <td>3</td>
+                <td>8</td>
+            </tr>
+
+            <tr>
+                <td>C</td>
+                <td>2</td>
+                <td>8</td>
+                <td>10</td>
+            </tr>
+
+        </table>
+
+        <div class="answer">
+
+            A* selects:
+
+            <br><br>
+
+            <strong>
+                B
+            </strong>
+
+            <br><br>
+
+            because:
+
+            <br>
+
+            f(B) = 8
+
+            <br><br>
+
+            is the smallest f-value.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            10. Greedy vs A*
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <th>Greedy Best-First</th>
+
+                <th>A*</th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    f(n) = h(n)
+                </td>
+
+                <td>
+                    f(n) = g(n) + h(n)
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Uses estimated remaining cost
+                </td>
+
+                <td>
+                    Uses actual + estimated cost
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Not generally optimal
+                </td>
+
+                <td>
+                    Optimal under standard conditions
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Can be faster in some cases
+                </td>
+
+                <td>
+                    Usually considers more cost information
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- KNOWLEDGE AGENT -->
+<!-- ===================================================== -->
+
+<section id="knowledge">
+
+    <div class="card">
+
+        <h2>
+            11. Knowledge-Based Agents
+        </h2>
+
+        <p>
+            A knowledge-based agent uses stored knowledge and
+            reasoning to decide what action should be performed.
+        </p>
+
+        <h3>
+            Main Components
+        </h3>
+
+        <ul>
+
+            <li>
+                Knowledge Base
+            </li>
+
+            <li>
+                Inference mechanism
+            </li>
+
+            <li>
+                Percepts
+            </li>
+
+            <li>
+                Actions
+            </li>
+
+        </ul>
+
+        <div class="tree">
+
+Environment
+     ↓
+  Percept
+     ↓
+Knowledge Base
+     ↓
+Inference
+     ↓
+  Action
+     ↓
+Environment
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            12. Knowledge Base
+        </h2>
+
+        <p>
+            A knowledge base contains facts and rules about the world.
+        </p>
+
+        <h3>
+            Example
+        </h3>
+
+        <div class="logic">
+
+Fact:
+It is raining.
+
+Rule:
+If it is raining, then the road may be wet.
+
+Inference:
+The road may be wet.
+
+        </div>
+
+        <p>
+            The agent uses the facts and rules to derive new information.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- WUMPUS -->
+<!-- ===================================================== -->
+
+<section id="wumpus">
+
+    <div class="card">
+
+        <h2>
+            13. Wumpus World
+        </h2>
+
+        <p>
+            Wumpus World is a classic AI environment used to explain
+            knowledge-based reasoning.
+        </p>
+
+        <h3>
+            Main Elements
+        </h3>
+
+        <ul>
+
+            <li>
+                <strong>Wumpus:</strong> Dangerous creature.
+            </li>
+
+            <li>
+                <strong>Pits:</strong> Dangerous locations.
+            </li>
+
+            <li>
+                <strong>Gold:</strong> Desired object.
+            </li>
+
+            <li>
+                <strong>Agent:</strong> Explores the environment.
+            </li>
+
+        </ul>
+
+        <div class="tree">
+
++-----+-----+-----+-----+
+|     |     |     |     |
+|     |     | W   |     |
++-----+-----+-----+-----+
+|     | P   |     |     |
+|     |     |     |     |
++-----+-----+-----+-----+
+|     |     | G   |     |
+| A   |     |     |     |
++-----+-----+-----+-----+
+
+A = Agent
+P = Pit
+W = Wumpus
+G = Gold
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            14. Wumpus World Percepts
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <th>Percept</th>
+
+                <th>Meaning</th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Stench
+                </td>
+
+                <td>
+                    Wumpus is in an adjacent square.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Breeze
+                </td>
+
+                <td>
+                    A pit is in an adjacent square.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Glitter
+                </td>
+
+                <td>
+                    Gold is in the current square.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Bump
+                </td>
+
+                <td>
+                    Agent hit a wall.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Scream
+                </td>
+
+                <td>
+                    Wumpus has been killed.
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            15. Wumpus World — Simple Reasoning
+        </h2>
+
+        <p>
+            Suppose the agent is at square (1,1).
+        </p>
+
+        <p>
+            The agent detects a <strong>Breeze</strong>.
+        </p>
+
+        <p>
+            A breeze means that a pit is present in one of the
+            neighboring squares.
+        </p>
+
+        <div class="logic">
+
+Breeze(1,1)
+
+Therefore:
+
+Pit(1,2) OR Pit(2,1)
+
+        </div>
+
+        <p>
+            The agent cannot immediately conclude which square
+            contains the pit.
+        </p>
+
+        <div class="highlight">
+
+            This is an example of reasoning using knowledge and
+            available percepts.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- PROPOSITIONAL LOGIC -->
+<!-- ===================================================== -->
+
+<section id="logic">
+
+    <div class="card">
+
+        <h2>
+            16. Propositional Logic
+        </h2>
+
+        <p>
+            Propositional logic represents knowledge using
+            propositions that are either true or false.
+        </p>
+
+        <h3>
+            Proposition
+        </h3>
+
+        <p>
+            A proposition is a declarative statement that has a
+            truth value.
+        </p>
+
+        <div class="logic">
+
+P = It is raining.
+
+Q = The road is wet.
+
+        </div>
+
+        <p>
+            Each proposition can be:
+        </p>
+
+        <ul>
+
+            <li>
+                True
+            </li>
+
+            <li>
+                False
+            </li>
+
+        </ul>
+
+        <div class="highlight">
+
+            A proposition cannot be both true and false at the same time
+            under classical two-valued propositional logic.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            17. Logical Connectives
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <th>
+                    Symbol
+                </th>
+
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Meaning
+                </th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ¬
+                </td>
+
+                <td>
+                    NOT
+                </td>
+
+                <td>
+                    Negation
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ∧
+                </td>
+
+                <td>
+                    AND
+                </td>
+
+                <td>
+                    Both must be true
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ∨
+                </td>
+
+                <td>
+                    OR
+                </td>
+
+                <td>
+                    At least one must be true
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    →
+                </td>
+
+                <td>
+                    Implication
+                </td>
+
+                <td>
+                    If...then
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    ↔
+                </td>
+
+                <td>
+                    Biconditional
+                </td>
+
+                <td>
+                    If and only if
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            18. Examples of Logical Expressions
+        </h2>
+
+        <div class="logic">
+
+NOT P
+
+¬P
+
+
+P AND Q
+
+P ∧ Q
+
+
+P OR Q
+
+P ∨ Q
+
+
+If P then Q
+
+P → Q
+
+
+P if and only if Q
+
+P ↔ Q
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- TRUTH TABLE -->
+<!-- ===================================================== -->
+
+<section id="truth">
+
+    <div class="card">
+
+        <h2>
+            19. Truth Table — NOT
+        </h2>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        ¬P
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            20. Truth Table — AND
+        </h2>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        Q
+                    </th>
+
+                    <th>
+                        P ∧ Q
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="highlight">
+
+            <strong>AND rule:</strong>
+
+            Both P and Q must be true.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            21. Truth Table — OR
+        </h2>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        Q
+                    </th>
+
+                    <th>
+                        P ∨ Q
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            22. Truth Table — Implication
+        </h2>
+
+        <p>
+            The expression is:
+        </p>
+
+        <div class="formula">
+
+            P → Q
+
+        </div>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        Q
+                    </th>
+
+                    <th>
+                        P → Q
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="highlight">
+
+            <strong>
+                Important:
+            </strong>
+
+            An implication is false only when
+            P is true and Q is false.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            23. Truth Table — Biconditional
+        </h2>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        Q
+                    </th>
+
+                    <th>
+                        P ↔ Q
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="highlight">
+
+            Biconditional is true when both propositions have the
+            same truth value.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- LOGIC PROBLEM -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            24. Solved Propositional Logic Problem
+        </h2>
+
+        <p>
+            Given:
+        </p>
+
+        <div class="logic">
+
+P = It is raining.
+
+Q = The road is wet.
+
+Knowledge:
+P → Q
+
+P
+
+        </div>
+
+        <p>
+            Prove Q.
+        </p>
+
+        <h3>
+            Step 1
+        </h3>
+
+        <p>
+            We know:
+        </p>
+
+        <div class="formula">
+
+            P → Q
+
+        </div>
+
+        <h3>
+            Step 2
+        </h3>
+
+        <p>
+            We also know:
+        </p>
+
+        <div class="formula">
+
+            P
+
+        </div>
+
+        <h3>
+            Step 3
+        </h3>
+
+        <p>
+            If P is true and P implies Q, then Q must be true.
+        </p>
+
+        <div class="answer">
+
+            Therefore:
+
+            <br><br>
+
+            <strong>
+                Q is true.
+            </strong>
+
+            <br><br>
+
+            The road is wet.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- INFERENCE -->
+<!-- ===================================================== -->
+
+<section id="inference">
+
+    <div class="card">
+
+        <h2>
+            25. Inference
+        </h2>
+
+        <p>
+            Inference is the process of deriving new knowledge from
+            existing facts and rules.
+        </p>
+
+        <div class="tree">
+
+Facts + Rules
+      ↓
+   Inference
+      ↓
+New Knowledge
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            26. Modus Ponens
+        </h2>
+
+        <p>
+            Modus Ponens is a basic inference rule.
+        </p>
+
+        <div class="formula">
+
+            P → Q
+
+            <br><br>
+
+            P
+
+            <br>
+
+            ─────────
+
+            <br>
+
+            ∴ Q
+
+        </div>
+
+        <h3>
+            Example
+        </h3>
+
+        <div class="logic">
+
+If a student studies, then the student passes.
+
+Student studies.
+
+Therefore, the student passes.
+
+        </div>
+
+        <div class="answer">
+
+            <strong>
+                Conclusion:
+            </strong>
+
+            The student passes.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            27. Modus Tollens
+        </h2>
+
+        <p>
+            Modus Tollens is another important inference pattern.
+        </p>
+
+        <div class="formula">
+
+            P → Q
+
+            <br><br>
+
+            ¬Q
+
+            <br>
+
+            ─────────
+
+            <br>
+
+            ∴ ¬P
+
+        </div>
+
+        <h3>
+            Example
+        </h3>
+
+        <div class="logic">
+
+If the system is connected,
+then the status is online.
+
+The status is not online.
+
+Therefore, the system is not connected.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            28. Model Checking
+        </h2>
+
+        <p>
+            Model checking can be used to determine whether a
+            knowledge base entails a query by considering possible
+            models.
+        </p>
+
+        <div class="formula">
+
+            KB ⊨ α
+
+        </div>
+
+        <p>
+            This means:
+        </p>
+
+        <div class="highlight">
+
+            Every model in which KB is true also makes α true.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SOLVED LOGIC -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            29. Solved Logic Problem — Truth Table
+        </h2>
+
+        <p>
+            Determine whether:
+        </p>
+
+        <div class="formula">
+
+            (P ∧ Q) → P
+
+        </div>
+
+        <p>
+            is always true.
+        </p>
+
+        <h3>
+            Step 1 — Construct P ∧ Q
+        </h3>
+
+        <div class="truth-table">
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        P
+                    </th>
+
+                    <th>
+                        Q
+                    </th>
+
+                    <th>
+                        P ∧ Q
+                    </th>
+
+                    <th>
+                        (P ∧ Q) → P
+                    </th>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        F
+                    </td>
+
+                    <td>
+                        T
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="answer">
+
+            Since the final column is true for every possible
+            combination:
+
+            <br><br>
+
+            <strong>
+                (P ∧ Q) → P is a tautology.
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            30. Solved Logic Problem — Deriving a Conclusion
+        </h2>
+
+        <p>
+            Given:
+        </p>
+
+        <div class="logic">
+
+P → Q
+
+Q → R
+
+P
+
+        </div>
+
+        <p>
+            Prove R.
+        </p>
+
+        <h3>
+            Step 1
+        </h3>
+
+        <p>
+            From:
+        </p>
+
+        <div class="formula">
+
+            P → Q
+
+            and
+
+            P
+
+        </div>
+
+        <p>
+            By Modus Ponens:
+        </p>
+
+        <div class="formula">
+
+            Q
+
+        </div>
+
+        <h3>
+            Step 2
+        </h3>
+
+        <p>
+            We have:
+        </p>
+
+        <div class="formula">
+
+            Q → R
+
+            and
+
+            Q
+
+        </div>
+
+        <p>
+            By Modus Ponens:
+        </p>
+
+        <div class="formula">
+
+            R
+
+        </div>
+
+        <div class="answer">
+
+            <strong>
+                Therefore, R is proved.
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- IMPORTANT TERMS -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            31. Important Terms
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <th>
+                    Term
+                </th>
+
+                <th>
+                    Meaning
+                </th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Heuristic
+                </td>
+
+                <td>
+                    Estimate of remaining cost.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    h(n)
+                </td>
+
+                <td>
+                    Estimated cost from n to goal.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    g(n)
+                </td>
+
+                <td>
+                    Actual cost from start to n.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    f(n)
+                </td>
+
+                <td>
+                    Evaluation function.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Admissible
+                </td>
+
+                <td>
+                    Never overestimates the true remaining cost.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Proposition
+                </td>
+
+                <td>
+                    Statement having a truth value.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Knowledge Base
+                </td>
+
+                <td>
+                    Collection of facts and rules.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Inference
+                </td>
+
+                <td>
+                    Deriving new information from known information.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Entailment
+                </td>
+
+                <td>
+                    A sentence is true in every model of the KB.
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- MEMORY -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            32. Easy Memory Tricks 🧠
+        </h2>
+
+        <div class="memory">
+
+            <h3>
+                Greedy
+            </h3>
+
+            <p>
+                <strong>
+                    h(n)
+                </strong>
+                only.
+            </p>
+
+            <h3>
+                A*
+            </h3>
+
+            <p>
+                <strong>
+                    g(n) + h(n)
+                </strong>
+            </p>
+
+            <h3>
+                g(n)
+            </h3>
+
+            <p>
+                Already travelled.
+            </p>
+
+            <h3>
+                h(n)
+            </h3>
+
+            <p>
+                Hope/estimate ahead.
+            </p>
+
+            <h3>
+                Wumpus
+            </h3>
+
+            <p>
+                Stench → Wumpus nearby.
+                Breeze → Pit nearby.
+                Glitter → Gold.
+            </p>
+
+            <h3>
+                AND
+            </h3>
+
+            <p>
+                Both true.
+            </p>
+
+            <h3>
+                OR
+            </h3>
+
+            <p>
+                At least one true.
+            </p>
+
+            <h3>
+                Implication
+            </h3>
+
+            <p>
+                False only for T → F.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- EXAM QUESTIONS -->
+<!-- ===================================================== -->
+
+<section id="questions">
+
+    <div class="card">
+
+        <h2>
+            33. Important VTU Exam Questions
+        </h2>
+
+        <h3>
+            10-Mark Questions
+        </h3>
+
+        <div class="question">
+
+            <strong>
+                1.
+            </strong>
+
+            Explain informed search and heuristic functions
+            with suitable examples.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                2.
+            </strong>
+
+            Explain Greedy Best-First Search with algorithm and
+            suitable example.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                3.
+            </strong>
+
+            Explain A* Search with a suitable example.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                4.
+            </strong>
+
+            Explain admissible and consistent heuristic functions.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                5.
+            </strong>
+
+            Explain knowledge-based agents.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                6.
+            </strong>
+
+            Explain Wumpus World and its percepts.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                7.
+            </strong>
+
+            Explain propositional logic and its logical connectives.
+
+        </div>
+
+        <div class="question">
+
+            <strong>
+                8.
+            </strong>
+
+            Explain inference and model checking.
+
+        </div>
+
+        <h3>
+            5-Mark Questions
+        </h3>
+
+        <div class="question">
+
+            Define heuristic function.
+
+        </div>
+
+        <div class="question">
+
+            Differentiate Greedy Best-First Search and A* Search.
+
+        </div>
+
+        <div class="question">
+
+            What is an admissible heuristic?
+
+        </div>
+
+        <div class="question">
+
+            Explain Wumpus World.
+
+        </div>
+
+        <div class="question">
+
+            Explain propositional logic.
+
+        </div>
+
+        <div class="question">
+
+            Explain Modus Ponens and Modus Tollens.
+
+        </div>
+
+        <h3>
+            2-Mark Questions
+        </h3>
+
+        <div class="question">
+
+            What is h(n)?
+
+        </div>
+
+        <div class="question">
+
+            What is g(n)?
+
+        </div>
+
+        <div class="question">
+
+            Write the A* evaluation function.
+
+        </div>
+
+        <div class="question">
+
+            Define proposition.
+
+        </div>
+
+        <div class="question">
+
+            What is inference?
+
+        </div>
+
+        <div class="question">
+
+            What does a breeze indicate in Wumpus World?
+
+        </div>
+
+        <div class="question">
+
+            What does glitter indicate in Wumpus World?
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- ANSWER FORMAT -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            34. How to Write a 10-Mark Answer
+        </h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                Write the definition.
+
+            </div>
+
+            <div class="step">
+
+                Explain the concept.
+
+            </div>
+
+            <div class="step">
+
+                Write the important formula.
+
+            </div>
+
+            <div class="step">
+
+                Draw a suitable diagram.
+
+            </div>
+
+            <div class="step">
+
+                Solve an example step-by-step.
+
+            </div>
+
+            <div class="step">
+
+                Write advantages, limitations or properties.
+
+            </div>
+
+            <div class="step">
+
+                End with a short conclusion.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- QUICK REVISION -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            35. Quick Revision 🚀
+        </h2>
+
+        <table>
+
+            <tr>
+
+                <th>
+                    Topic
+                </th>
+
+                <th>
+                    Remember
+                </th>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Informed Search
+                </td>
+
+                <td>
+                    Uses additional knowledge.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Heuristic
+                </td>
+
+                <td>
+                    Estimates remaining cost.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Greedy
+                </td>
+
+                <td>
+                    f(n) = h(n)
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    A*
+                </td>
+
+                <td>
+                    f(n) = g(n) + h(n)
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Knowledge Agent
+                </td>
+
+                <td>
+                    Knowledge + Inference → Action
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Wumpus
+                </td>
+
+                <td>
+                    Stench, Breeze, Glitter, Bump, Scream
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Proposition
+                </td>
+
+                <td>
+                    True or False statement.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    AND
+                </td>
+
+                <td>
+                    Both true.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    OR
+                </td>
+
+                <td>
+                    At least one true.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Implication
+                </td>
+
+                <td>
+                    False only when T → F.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Modus Ponens
+                </td>
+
+                <td>
+                    P → Q, P ⟹ Q
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    Modus Tollens
+                </td>
+
+                <td>
+                    P → Q, ¬Q ⟹ ¬P
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- STUDY FLOW -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            36. Module 3 Study Flow 📚
+        </h2>
+
+        <div class="tree">
+
+Informed Search
+       ↓
+Heuristic Functions
+       ↓
+Greedy Best-First Search
+       ↓
+A* Search
+       ↓
+Admissible Heuristic
+       ↓
+Consistent Heuristic
+       ↓
+Knowledge-Based Agents
+       ↓
+Wumpus World
+       ↓
+Propositional Logic
+       ↓
+Truth Tables
+       ↓
+Inference
+       ↓
+Model Checking
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- RESOURCES -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            37. Useful Resources
+        </h2>
+
+        <a
+            class="btn"
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+VTU"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            ▶ YouTube — BCS515B
+        </a>
+
+        
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
+
+<footer>
+
+    <h3 class="gold">
+        MAHALAKSHMI'S COURSE NOTES
+    </h3>
+
+    <p>
+        BCS515B — Artificial Intelligence
+    </p>
+
+    <p>
+        Module 3 — Informed Search &amp; Propositional Logic
+    </p>
+
+    <br>
+
+    <a
+        class="btn"
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</footer>
+
+
+<!-- ===================================================== -->
+<!-- BASIC CONTENT PROTECTION -->
+<!-- ===================================================== -->
+
+<script>
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    document.addEventListener(
+        "copy",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    document.addEventListener(
+        "cut",
+        function(event) {
+            event.preventDefault();
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            const key =
+                event.key.toLowerCase();
+
+            if (
+                event.ctrlKey &&
+                [
+                    "c",
+                    "x",
+                    "a",
+                    "u",
+                    "s",
+                    "p"
+                ].includes(key)
+            ) {
+
+                event.preventDefault();
+
+            }
+
+            if (event.metaKey) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

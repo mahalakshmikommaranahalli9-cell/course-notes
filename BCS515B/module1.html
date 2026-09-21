@@ -1,0 +1,2889 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#050505"
+    >
+
+    <title>BCS515B Module 1 | Artificial Intelligence</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050505;
+            color: #eeeeee;
+            line-height: 1.75;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(212,175,55,0.18),
+                    transparent 45%
+                ),
+                #050505;
+
+            border-bottom: 1px solid #292929;
+
+            padding: 55px 20px;
+
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            border: 1px solid #d4af37;
+
+            color: #d4af37;
+
+            border-radius: 30px;
+
+            padding: 6px 16px;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+        }
+
+        header h1 {
+            color: #d4af37;
+
+            font-size: clamp(34px, 7vw, 65px);
+
+            margin-bottom: 8px;
+        }
+
+        header h2 {
+            color: #ffffff;
+
+            font-size: clamp(20px, 4vw, 30px);
+
+            font-weight: 500;
+        }
+
+        header p {
+            color: #aaaaaa;
+
+            max-width: 800px;
+
+            margin: 18px auto 0;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: min(1050px, 92%);
+
+            margin: auto;
+        }
+
+        section {
+            padding: 45px 0;
+        }
+
+        /* =========================
+           CONTENT BOX
+        ========================= */
+
+        .box {
+            background: #0d0d0d;
+
+            border: 1px solid #292929;
+
+            border-left: 4px solid #d4af37;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .box:hover {
+            border-color: #d4af37;
+        }
+
+        h2 {
+            color: #d4af37;
+
+            margin-bottom: 18px;
+
+            font-size: 28px;
+        }
+
+        h3 {
+            color: #d4af37;
+
+            margin: 22px 0 10px;
+
+            font-size: 21px;
+        }
+
+        h4 {
+            color: #ffffff;
+
+            margin: 16px 0 8px;
+        }
+
+        p {
+            color: #c8c8c8;
+
+            margin-bottom: 12px;
+        }
+
+        strong {
+            color: #ffffff;
+        }
+
+        .gold {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrap {
+            overflow-x: auto;
+
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+        }
+
+        th,
+        td {
+            border: 1px solid #333;
+
+            padding: 12px;
+
+            text-align: left;
+
+            vertical-align: top;
+        }
+
+        th {
+            background: #171717;
+
+            color: #d4af37;
+        }
+
+        td {
+            color: #cfcfcf;
+        }
+
+        /* =========================
+           LISTS
+        ========================= */
+
+        ul,
+        ol {
+            margin: 12px 0 15px 25px;
+        }
+
+        li {
+            color: #c8c8c8;
+
+            margin: 6px 0;
+        }
+
+        li::marker {
+            color: #d4af37;
+        }
+
+        /* =========================
+           FORMULA
+        ========================= */
+
+        .formula {
+            background: #080808;
+
+            border: 1px solid #333;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            margin: 18px 0;
+
+            text-align: center;
+
+            color: #d4af37;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            overflow-x: auto;
+        }
+
+        /* =========================
+           EXAMPLE
+        ========================= */
+
+        .example {
+            background: #111;
+
+            border: 1px solid #333;
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin: 18px 0;
+        }
+
+        .example-title {
+            color: #d4af37;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           PEAS
+        ========================= */
+
+        .peas {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin: 20px 0;
+        }
+
+        .peas-card {
+            background: #101010;
+
+            border: 1px solid #333;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            text-align: center;
+        }
+
+        .peas-card strong {
+            display: block;
+
+            color: #d4af37;
+
+            font-size: 24px;
+
+            margin-bottom: 7px;
+        }
+
+        .peas-card span {
+            color: #aaa;
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           AGENT DIAGRAM
+        ========================= */
+
+        .diagram {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin: 25px 0;
+        }
+
+        .diagram-box {
+            background: #111;
+
+            border: 2px solid #d4af37;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            min-width: 150px;
+        }
+
+        .diagram-box h4 {
+            color: #d4af37;
+
+            margin: 0 0 5px;
+        }
+
+        .arrow {
+            color: #d4af37;
+
+            font-size: 28px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           IMPORTANT
+        ========================= */
+
+        .important {
+            background: #17130a;
+
+            border: 1px solid #6d5920;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin: 20px 0;
+        }
+
+        .important h3 {
+            margin-top: 0;
+        }
+
+        /* =========================
+           QUESTION BOX
+        ========================= */
+
+        .question {
+            background: #0d0d0d;
+
+            border: 1px solid #292929;
+
+            border-radius: 9px;
+
+            padding: 18px;
+
+            margin: 12px 0;
+        }
+
+        .question span {
+            color: #d4af37;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           YOUTUBE
+        ========================= */
+
+        .youtube {
+            text-align: center;
+
+            background: #0c0c0c;
+
+            border: 1px solid #292929;
+
+            border-radius: 10px;
+
+            padding: 28px;
+        }
+
+        .youtube a {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #d4af37;
+
+            color: #050505;
+
+            padding: 11px 20px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            margin-top: 12px;
+        }
+
+        /* =========================
+           GITHUB
+        ========================= */
+
+        .github {
+            text-align: center;
+
+            padding: 50px 0;
+
+            background: #090909;
+        }
+
+        .github a {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #d4af37;
+
+            color: #050505;
+
+            padding: 12px 22px;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 1px solid #292929;
+
+            text-align: center;
+
+            padding: 25px;
+
+            background: #030303;
+        }
+
+        footer p {
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .peas {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            section {
+                padding: 32px 0;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .box {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .peas {
+                grid-template-columns: 1fr;
+            }
+
+            .diagram {
+                flex-direction: column;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+        }
+
+        /* =========================
+           ANTI COPY
+        ========================= */
+
+        body {
+            user-select: none;
+
+            -webkit-user-select: none;
+        }
+
+        img {
+            -webkit-user-drag: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="badge">
+        BCS515B • MODULE 1
+    </div>
+
+    <h1>Artificial Intelligence</h1>
+
+    <h2>Introduction & Intelligent Agents</h2>
+
+    <p>
+        Complete Module 1 notes with simple explanations,
+        examples, solved problems, PEAS representations,
+        important VTU questions and quick revision.
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================
+     SYLLABUS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>📚 Module 1 Syllabus</h2>
+
+        <p>
+            According to the VTU BCS515B syllabus, Module 1
+            contains the following topics:
+        </p>
+
+        <ul>
+
+            <li>Introduction: What Is AI?</li>
+
+            <li>The State of the Art</li>
+
+            <li>Agents and Environment</li>
+
+            <li>Concept of Rationality</li>
+
+            <li>The Nature of Environment</li>
+
+            <li>The Structure of Agents</li>
+
+        </ul>
+
+        <p>
+            Reference chapters:
+            <strong>Chapter 1: 1.1, 1.4</strong> and
+            <strong>Chapter 2: 2.1, 2.2, 2.3, 2.4</strong>.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     1. WHAT IS AI
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>1. What is Artificial Intelligence?</h2>
+
+        <p>
+            <strong>Artificial Intelligence (AI)</strong> is a branch
+            of computer science concerned with building systems that
+            can perceive their environment, reason about information,
+            learn from experience and take actions to achieve goals.
+        </p>
+
+        <p>
+            In simple words, AI tries to make machines behave
+            intelligently.
+        </p>
+
+        <div class="important">
+
+            <h3>⭐ Simple Definition</h3>
+
+            <p>
+                AI is the science and engineering of making
+                intelligent machines and intelligent computer programs.
+            </p>
+
+        </div>
+
+
+        <h3>Human Intelligence vs Artificial Intelligence</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Human Intelligence</th>
+                    <th>Artificial Intelligence</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        Natural ability of humans
+                    </td>
+
+                    <td>
+                        Intelligence implemented in machines
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Learns from life experience
+                    </td>
+
+                    <td>
+                        Can learn from data and experience
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Uses biological brain
+                    </td>
+
+                    <td>
+                        Uses computer hardware and software
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Can use common sense naturally
+                    </td>
+
+                    <td>
+                        Requires algorithms and knowledge
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>Examples of AI</h3>
+
+        <ul>
+
+            <li>Voice assistants</li>
+
+            <li>Recommendation systems</li>
+
+            <li>Self-driving vehicles</li>
+
+            <li>Face recognition</li>
+
+            <li>Medical diagnosis systems</li>
+
+            <li>Fraud detection</li>
+
+            <li>Chatbots</li>
+
+            <li>Game-playing systems</li>
+
+            <li>Robotics</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     2. FOUNDATIONS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>2. Foundations of Artificial Intelligence</h2>
+
+        <p>
+            AI has developed using ideas from several fields.
+            These fields provide theories, methods and techniques
+            that help us build intelligent systems.
+        </p>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Field</th>
+                    <th>Contribution to AI</th>
+                </tr>
+
+                <tr>
+                    <td>Philosophy</td>
+                    <td>
+                        Logic, reasoning, knowledge and principles
+                        of intelligent behaviour.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Mathematics</td>
+                    <td>
+                        Logic, probability, statistics,
+                        optimization and algorithms.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Economics</td>
+                    <td>
+                        Decision theory, utility and rational choices.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Neuroscience</td>
+                    <td>
+                        Understanding how biological brains
+                        process information.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Psychology</td>
+                    <td>
+                        Learning, perception, memory and behaviour.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Computer Engineering</td>
+                    <td>
+                        Hardware and computing systems required
+                        to implement AI.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Control Theory</td>
+                    <td>
+                        Systems that perceive conditions and
+                        take actions to reach desired states.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Linguistics</td>
+                    <td>
+                        Language understanding and natural
+                        language processing.
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     3. STATE OF ART
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>3. The State of the Art</h2>
+
+        <p>
+            The <strong>state of the art</strong> refers to the
+            current level of development and capability of AI
+            techniques and applications.
+        </p>
+
+        <h3>Important AI Application Areas</h3>
+
+        <ul>
+
+            <li>
+                <strong>Natural Language Processing:</strong>
+                Understanding and generating human language.
+            </li>
+
+            <li>
+                <strong>Computer Vision:</strong>
+                Understanding images and videos.
+            </li>
+
+            <li>
+                <strong>Robotics:</strong>
+                Building systems that sense and act in the physical world.
+            </li>
+
+            <li>
+                <strong>Machine Learning:</strong>
+                Learning patterns from data.
+            </li>
+
+            <li>
+                <strong>Planning:</strong>
+                Selecting actions to achieve goals.
+            </li>
+
+            <li>
+                <strong>Speech Processing:</strong>
+                Processing human speech.
+            </li>
+
+        </ul>
+
+        <div class="example">
+
+            <div class="example-title">
+                Example
+            </div>
+
+            <p>
+                A navigation application can use AI to estimate
+                traffic conditions and suggest a route.
+                The system observes information, processes it,
+                evaluates possible actions and provides a decision.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     4. AGENTS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>4. Intelligent Agents</h2>
+
+        <p>
+            An <strong>agent</strong> is anything that can perceive
+            its environment through sensors and act upon that
+            environment through actuators.
+        </p>
+
+        <h3>Agent = Sensors + Decision Making + Actuators</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-box">
+
+                <h4>Environment</h4>
+
+                <p>
+                    Surrounding world
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Sensors</h4>
+
+                <p>
+                    Percepts
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Agent</h4>
+
+                <p>
+                    Decision
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Actuators</h4>
+
+                <p>
+                    Actions
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Environment</h4>
+
+                <p>
+                    Changed state
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h3>Example: Self-Driving Car</h3>
+
+        <p>
+            A self-driving car is an intelligent agent.
+        </p>
+
+        <ul>
+
+            <li>
+                Cameras and sensors perceive roads,
+                vehicles and pedestrians.
+            </li>
+
+            <li>
+                The AI system processes the information.
+            </li>
+
+            <li>
+                It decides whether to accelerate,
+                brake or turn.
+            </li>
+
+            <li>
+                Actuators control the steering,
+                brakes and accelerator.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     5. AGENT FUNCTION
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>5. Agent Function</h2>
+
+        <p>
+            The <strong>agent function</strong> describes how an
+            agent maps a sequence of percepts to an action.
+        </p>
+
+        <div class="formula">
+
+            f : P* → A
+
+        </div>
+
+        <p>
+            Where:
+        </p>
+
+        <ul>
+
+            <li>
+                <strong>P*</strong> = possible sequences of percepts
+            </li>
+
+            <li>
+                <strong>A</strong> = set of possible actions
+            </li>
+
+        </ul>
+
+        <div class="example">
+
+            <div class="example-title">
+                Example
+            </div>
+
+            <p>
+                If a vacuum-cleaner agent senses that the current
+                location is dirty, its agent function may select
+                the action <strong>Suck</strong>.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     6. AGENT PROGRAM
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>6. Agent Program</h2>
+
+        <p>
+            An <strong>agent program</strong> is the implementation
+            of the agent function running on a physical system.
+        </p>
+
+        <p>
+            The agent function is an abstract mathematical
+            description, whereas the agent program is the actual
+            computer program that implements the behaviour.
+        </p>
+
+        <div class="important">
+
+            <h3>Remember</h3>
+
+            <p>
+                <strong>Agent Function:</strong>
+                What the agent should do.
+            </p>
+
+            <p>
+                <strong>Agent Program:</strong>
+                The actual implementation that makes it happen.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     7. RATIONALITY
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>7. Concept of Rationality</h2>
+
+        <p>
+            A <strong>rational agent</strong> chooses an action
+            expected to maximize its performance measure, based
+            on the available percept sequence and knowledge.
+        </p>
+
+        <h3>Rationality depends on four factors</h3>
+
+        <ol>
+
+            <li>
+                <strong>Performance measure</strong>
+            </li>
+
+            <li>
+                <strong>Percept sequence</strong>
+            </li>
+
+            <li>
+                <strong>Agent's prior knowledge</strong>
+            </li>
+
+            <li>
+                <strong>Actions available to the agent</strong>
+            </li>
+
+        </ol>
+
+
+        <h3>Example: Vacuum Cleaner</h3>
+
+        <p>
+            Suppose a vacuum cleaner receives a percept that
+            the current square is dirty.
+        </p>
+
+        <p>
+            A rational action would normally be to clean the square,
+            because this improves the performance measure.
+        </p>
+
+        <div class="formula">
+
+            Rational Action = Action that maximizes expected performance
+
+        </div>
+
+        <div class="important">
+
+            <h3>⚠️ Important</h3>
+
+            <p>
+                Rational does not mean that the agent always
+                makes the perfect decision.
+            </p>
+
+            <p>
+                It means the agent chooses the best action
+                it can based on the information available to it.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     8. PEAS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>8. PEAS Framework</h2>
+
+        <p>
+            <strong>PEAS</strong> is used to specify the task
+            environment of an intelligent agent.
+        </p>
+
+        <div class="peas">
+
+            <div class="peas-card">
+
+                <strong>P</strong>
+
+                <span>
+                    Performance Measure
+                </span>
+
+            </div>
+
+            <div class="peas-card">
+
+                <strong>E</strong>
+
+                <span>
+                    Environment
+                </span>
+
+            </div>
+
+            <div class="peas-card">
+
+                <strong>A</strong>
+
+                <span>
+                    Actuators
+                </span>
+
+            </div>
+
+            <div class="peas-card">
+
+                <strong>S</strong>
+
+                <span>
+                    Sensors
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <h3>Meaning of PEAS</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Letter</th>
+                    <th>Meaning</th>
+                    <th>Question to ask</th>
+                </tr>
+
+                <tr>
+                    <td>P</td>
+                    <td>Performance Measure</td>
+                    <td>
+                        How do we measure success?
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>E</td>
+                    <td>Environment</td>
+                    <td>
+                        Where does the agent operate?
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>A</td>
+                    <td>Actuators</td>
+                    <td>
+                        How does the agent act?
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>S</td>
+                    <td>Sensors</td>
+                    <td>
+                        How does the agent perceive?
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOLVED PEAS 1
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>9. Solved Problem — PEAS for Automated Taxi</h2>
+
+        <div class="example">
+
+            <div class="example-title">
+                Question
+            </div>
+
+            <p>
+                Give the PEAS specification for an
+                automated taxi driver.
+            </p>
+
+        </div>
+
+
+        <h3>Step 1 — Performance Measure</h3>
+
+        <ul>
+
+            <li>Safe driving</li>
+
+            <li>Reach destination correctly</li>
+
+            <li>Minimum travel time</li>
+
+            <li>Passenger comfort</li>
+
+            <li>Low fuel/energy consumption</li>
+
+            <li>Following traffic rules</li>
+
+        </ul>
+
+
+        <h3>Step 2 — Environment</h3>
+
+        <ul>
+
+            <li>Roads</li>
+
+            <li>Traffic</li>
+
+            <li>Pedestrians</li>
+
+            <li>Passengers</li>
+
+            <li>Traffic signals</li>
+
+            <li>Weather conditions</li>
+
+            <li>Other vehicles</li>
+
+        </ul>
+
+
+        <h3>Step 3 — Actuators</h3>
+
+        <ul>
+
+            <li>Steering</li>
+
+            <li>Accelerator</li>
+
+            <li>Brake</li>
+
+            <li>Gear control</li>
+
+            <li>Indicators</li>
+
+            <li>Horn</li>
+
+        </ul>
+
+
+        <h3>Step 4 — Sensors</h3>
+
+        <ul>
+
+            <li>Cameras</li>
+
+            <li>GPS</li>
+
+            <li>Radar</li>
+
+            <li>Lidar</li>
+
+            <li>Speed sensors</li>
+
+            <li>Microphones</li>
+
+        </ul>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>P</th>
+                    <th>E</th>
+                    <th>A</th>
+                    <th>S</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Safety,
+                        comfort,
+                        correct destination,
+                        minimum time
+                    </td>
+
+                    <td>
+                        Roads,
+                        traffic,
+                        pedestrians,
+                        weather
+                    </td>
+
+                    <td>
+                        Steering,
+                        brake,
+                        accelerator,
+                        horn
+                    </td>
+
+                    <td>
+                        Cameras,
+                        GPS,
+                        radar,
+                        lidar
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOLVED PEAS 2
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>10. Solved Problem — PEAS for Biometric Authentication</h2>
+
+        <div class="example">
+
+            <div class="example-title">
+                Question
+            </div>
+
+            <p>
+                Give the PEAS specification of a biometric
+                authentication system.
+            </p>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Component</th>
+                    <th>Answer</th>
+                </tr>
+
+                <tr>
+                    <td>Performance</td>
+                    <td>
+                        High authentication accuracy,
+                        low false acceptance,
+                        low false rejection,
+                        fast response and security.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Environment</td>
+                    <td>
+                        User, authentication device,
+                        database and operating environment.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Actuators</td>
+                    <td>
+                        Display messages,
+                        allow/deny access,
+                        alarms or notifications.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Sensors</td>
+                    <td>
+                        Fingerprint scanner,
+                        camera,
+                        iris scanner,
+                        microphone depending on biometric type.
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     11. NATURE OF ENVIRONMENT
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>11. Nature of the Environment</h2>
+
+        <p>
+            The nature of an environment affects how an intelligent
+            agent should make decisions.
+        </p>
+
+        <p>
+            AI environments can be classified using several
+            important properties.
+        </p>
+
+
+        <h3>1. Fully Observable vs Partially Observable</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Fully Observable</th>
+                    <th>Partially Observable</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Agent can access the complete relevant
+                        state of the environment.
+                    </td>
+
+                    <td>
+                        Agent cannot access the complete
+                        state of the environment.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: Chess
+                    </td>
+
+                    <td>
+                        Example: Driving in traffic
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>2. Single Agent vs Multiagent</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Single Agent</th>
+                    <th>Multiagent</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Only one agent is involved
+                        in the environment.
+                    </td>
+
+                    <td>
+                        Multiple agents interact
+                        with each other.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: Crossword puzzle
+                    </td>
+
+                    <td>
+                        Example: Chess
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>3. Deterministic vs Stochastic</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Deterministic</th>
+                    <th>Stochastic</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        The next state is determined
+                        completely by the current state
+                        and action.
+                    </td>
+
+                    <td>
+                        Outcomes involve uncertainty.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: 8-puzzle
+                    </td>
+
+                    <td>
+                        Example: Driving
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>4. Episodic vs Sequential</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Episodic</th>
+                    <th>Sequential</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Each decision is independent
+                        of previous decisions.
+                    </td>
+
+                    <td>
+                        Current decisions can affect
+                        future decisions.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: Image classification
+                    </td>
+
+                    <td>
+                        Example: Chess
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>5. Static vs Dynamic</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Static</th>
+                    <th>Dynamic</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Environment does not change
+                        while the agent is deciding.
+                    </td>
+
+                    <td>
+                        Environment may change while
+                        the agent is deciding.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: Crossword
+                    </td>
+
+                    <td>
+                        Example: Autonomous driving
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>6. Discrete vs Continuous</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Discrete</th>
+                    <th>Continuous</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Finite or countable states,
+                        actions or time steps.
+                    </td>
+
+                    <td>
+                        States, actions or time
+                        can vary continuously.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Example: Chess
+                    </td>
+
+                    <td>
+                        Example: Robot movement
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>7. Known vs Unknown</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Known</th>
+                    <th>Unknown</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Agent knows the rules or
+                        consequences of actions.
+                    </td>
+
+                    <td>
+                        Agent must learn or discover
+                        aspects of the environment.
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOLVED CLASSIFICATION
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>12. Solved Problem — Environment Classification</h2>
+
+        <div class="example">
+
+            <div class="example-title">
+                Question
+            </div>
+
+            <p>
+                Classify the environment of an automated taxi.
+            </p>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Property</th>
+                    <th>Classification</th>
+                    <th>Reason</th>
+                </tr>
+
+                <tr>
+                    <td>Observability</td>
+                    <td>Partially Observable</td>
+                    <td>
+                        Sensors cannot observe everything.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Agents</td>
+                    <td>Multiagent</td>
+                    <td>
+                        Other drivers and pedestrians interact
+                        with the taxi.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Determinism</td>
+                    <td>Stochastic</td>
+                    <td>
+                        Traffic and other events are uncertain.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Episodes</td>
+                    <td>Sequential</td>
+                    <td>
+                        Current actions affect future states.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Dynamics</td>
+                    <td>Dynamic</td>
+                    <td>
+                        Traffic conditions can change while
+                        the agent is making decisions.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>State/Action</td>
+                    <td>Continuous</td>
+                    <td>
+                        Speed, position and steering can vary
+                        continuously.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Knowledge</td>
+                    <td>Partially Known</td>
+                    <td>
+                        Some conditions may be uncertain
+                        or need to be learned.
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     13. STRUCTURE OF AGENTS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>13. Structure of an Agent</h2>
+
+        <p>
+            The structure of an intelligent agent describes
+            the hardware and software components through which
+            the agent perceives and acts.
+        </p>
+
+        <div class="formula">
+
+            Agent = Architecture + Agent Program
+
+        </div>
+
+        <h3>Architecture</h3>
+
+        <p>
+            Architecture is the physical or computational platform
+            on which the agent program operates.
+        </p>
+
+        <h3>Agent Program</h3>
+
+        <p>
+            The agent program implements the decision-making
+            behaviour of the agent.
+        </p>
+
+
+        <h3>Basic Structure</h3>
+
+        <div class="diagram">
+
+            <div class="diagram-box">
+
+                <h4>Sensors</h4>
+
+                <p>
+                    Receive percepts
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Agent Program</h4>
+
+                <p>
+                    Selects action
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="diagram-box">
+
+                <h4>Actuators</h4>
+
+                <p>
+                    Perform action
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     14. TYPES OF AGENTS
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>14. Types of Intelligent Agents</h2>
+
+        <p>
+            The standard agent models discussed in introductory
+            AI include the following:
+        </p>
+
+
+        <h3>1. Simple Reflex Agent</h3>
+
+        <p>
+            A simple reflex agent selects actions based only on
+            the current percept.
+        </p>
+
+        <div class="formula">
+
+            Current Percept → Condition → Action
+
+        </div>
+
+        <p>
+            Example:
+            If the vacuum cleaner detects dirt,
+            it performs the Suck action.
+        </p>
+
+
+        <h3>2. Model-Based Reflex Agent</h3>
+
+        <p>
+            A model-based reflex agent maintains an internal
+            state that represents aspects of the world that
+            cannot be directly observed.
+        </p>
+
+
+        <h3>3. Goal-Based Agent</h3>
+
+        <p>
+            A goal-based agent selects actions by considering
+            future states and whether they help achieve a goal.
+        </p>
+
+        <div class="formula">
+
+            Current State + Goal → Action
+
+        </div>
+
+
+        <h3>4. Utility-Based Agent</h3>
+
+        <p>
+            A utility-based agent evaluates possible outcomes
+            using a utility measure and chooses an action that
+            provides a desirable expected result.
+        </p>
+
+
+        <h3>5. Learning Agent</h3>
+
+        <p>
+            A learning agent improves its performance through
+            experience.
+        </p>
+
+        <div class="diagram">
+
+            <div class="diagram-box">
+                <h4>Performance Element</h4>
+                <p>Chooses actions</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4>Learning Element</h4>
+                <p>Improves performance</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4>Critic</h4>
+                <p>Provides feedback</p>
+            </div>
+
+            <div class="diagram-box">
+                <h4>Problem Generator</h4>
+                <p>Suggests exploration</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOLVED AGENT PROBLEM
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>15. Solved Problem — Vacuum Cleaner Agent</h2>
+
+        <div class="example">
+
+            <div class="example-title">
+                Question
+            </div>
+
+            <p>
+                Explain how a vacuum cleaner can work as
+                an intelligent agent.
+            </p>
+
+        </div>
+
+        <h3>Step 1 — Sensors</h3>
+
+        <p>
+            The agent detects the current location and whether
+            the location contains dirt.
+        </p>
+
+        <h3>Step 2 — Percept</h3>
+
+        <p>
+            Example percept:
+        </p>
+
+        <div class="formula">
+
+            [Location = A, Status = Dirty]
+
+        </div>
+
+        <h3>Step 3 — Decision</h3>
+
+        <p>
+            Since the location is dirty, the agent selects
+            the Suck action.
+        </p>
+
+        <h3>Step 4 — Action</h3>
+
+        <p>
+            The actuator operates the vacuum cleaner.
+        </p>
+
+        <h3>Step 5 — New Percept</h3>
+
+        <p>
+            The agent observes the updated condition and
+            decides what to do next.
+        </p>
+
+        <div class="important">
+
+            <h3>Result</h3>
+
+            <p>
+                The vacuum cleaner demonstrates the basic
+                perception → decision → action cycle of an
+                intelligent agent.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     16. KEY DIFFERENCES
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>16. Important Differences</h2>
+
+        <h3>Agent Function vs Agent Program</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Agent Function</th>
+                    <th>Agent Program</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Abstract mathematical mapping.
+                    </td>
+
+                    <td>
+                        Actual implementation.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Describes what action should be selected.
+                    </td>
+
+                    <td>
+                        Implements how the action is selected.
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <h3>Sensor vs Actuator</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Sensor</th>
+                    <th>Actuator</th>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Receives information from environment.
+                    </td>
+
+                    <td>
+                        Performs action on environment.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>
+                        Camera, microphone, GPS.
+                    </td>
+
+                    <td>
+                        Motor, brake, speaker, steering.
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     17. VTU 10 MARK
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>17. Important 10-Mark Questions</h2>
+
+        <div class="question">
+            <span>Q1.</span>
+            Define Artificial Intelligence and explain
+            the foundations of AI.
+        </div>
+
+        <div class="question">
+            <span>Q2.</span>
+            Explain intelligent agents and the concept
+            of rationality.
+        </div>
+
+        <div class="question">
+            <span>Q3.</span>
+            Explain the PEAS framework with a suitable example.
+        </div>
+
+        <div class="question">
+            <span>Q4.</span>
+            Give the PEAS specification of an automated taxi driver.
+        </div>
+
+        <div class="question">
+            <span>Q5.</span>
+            Discuss the different types of task environments.
+        </div>
+
+        <div class="question">
+            <span>Q6.</span>
+            Differentiate fully observable and partially observable
+            environments.
+        </div>
+
+        <div class="question">
+            <span>Q7.</span>
+            Differentiate deterministic and stochastic environments.
+        </div>
+
+        <div class="question">
+            <span>Q8.</span>
+            Explain the structure of an intelligent agent.
+        </div>
+
+        <div class="question">
+            <span>Q9.</span>
+            Explain different types of intelligent agents.
+        </div>
+
+        <div class="question">
+            <span>Q10.</span>
+            Explain the environment classification of an
+            automated taxi driver.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     18. 5 MARK
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>18. Important 5-Mark Questions</h2>
+
+        <ul>
+
+            <li>
+                Define AI.
+            </li>
+
+            <li>
+                What is an intelligent agent?
+            </li>
+
+            <li>
+                Define rational agent.
+            </li>
+
+            <li>
+                Explain PEAS.
+            </li>
+
+            <li>
+                What are sensors and actuators?
+            </li>
+
+            <li>
+                Explain fully observable environment.
+            </li>
+
+            <li>
+                Explain partially observable environment.
+            </li>
+
+            <li>
+                Differentiate static and dynamic environments.
+            </li>
+
+            <li>
+                Explain episodic and sequential environments.
+            </li>
+
+            <li>
+                Explain simple reflex agent.
+            </li>
+
+            <li>
+                Explain goal-based agent.
+            </li>
+
+            <li>
+                Explain learning agent.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     19. 2 MARK
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>19. Important 2-Mark Questions</h2>
+
+        <ul>
+
+            <li>Define Artificial Intelligence.</li>
+
+            <li>Define intelligent agent.</li>
+
+            <li>What is a rational agent?</li>
+
+            <li>What is a percept?</li>
+
+            <li>What is a percept sequence?</li>
+
+            <li>What is PEAS?</li>
+
+            <li>What is a sensor?</li>
+
+            <li>What is an actuator?</li>
+
+            <li>Define fully observable environment.</li>
+
+            <li>Define stochastic environment.</li>
+
+            <li>What is an episodic environment?</li>
+
+            <li>What is a learning agent?</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     20. EXAM WRITING
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>20. VTU 10-Mark Answer Writing Format</h2>
+
+        <p>
+            For a 10-mark question, don't write only definitions.
+            Use a structured answer.
+        </p>
+
+        <ol>
+
+            <li>
+                Start with the definition.
+            </li>
+
+            <li>
+                Explain the concept.
+            </li>
+
+            <li>
+                Draw a neat diagram if applicable.
+            </li>
+
+            <li>
+                Explain each component.
+            </li>
+
+            <li>
+                Give a suitable example.
+            </li>
+
+            <li>
+                Add a table for comparisons where useful.
+            </li>
+
+            <li>
+                End with a short conclusion.
+            </li>
+
+        </ol>
+
+        <div class="important">
+
+            <h3>🔥 Example</h3>
+
+            <p>
+                For “Explain PEAS specification of an automated taxi”:
+            </p>
+
+            <p>
+                <strong>
+                    Definition → PEAS meaning → P → E → A → S
+                    → table → example → conclusion
+                </strong>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     21. QUICK REVISION
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>21. ⚡ Quick Revision</h2>
+
+        <ul>
+
+            <li>
+                <strong>AI:</strong>
+                Making machines perform intelligent tasks.
+            </li>
+
+            <li>
+                <strong>Agent:</strong>
+                Perceives environment and performs actions.
+            </li>
+
+            <li>
+                <strong>Sensor:</strong>
+                Receives information.
+            </li>
+
+            <li>
+                <strong>Actuator:</strong>
+                Performs actions.
+            </li>
+
+            <li>
+                <strong>Rational Agent:</strong>
+                Selects action expected to maximize performance.
+            </li>
+
+            <li>
+                <strong>PEAS:</strong>
+                Performance, Environment, Actuators, Sensors.
+            </li>
+
+            <li>
+                <strong>Fully Observable:</strong>
+                Complete relevant state is available.
+            </li>
+
+            <li>
+                <strong>Partially Observable:</strong>
+                Complete state is not available.
+            </li>
+
+            <li>
+                <strong>Deterministic:</strong>
+                Outcome is determined by state and action.
+            </li>
+
+            <li>
+                <strong>Stochastic:</strong>
+                Outcome involves uncertainty.
+            </li>
+
+            <li>
+                <strong>Static:</strong>
+                Environment does not change during decision-making.
+            </li>
+
+            <li>
+                <strong>Dynamic:</strong>
+                Environment may change during decision-making.
+            </li>
+
+            <li>
+                <strong>Episodic:</strong>
+                Decisions are independent.
+            </li>
+
+            <li>
+                <strong>Sequential:</strong>
+                Current actions affect future states.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     22. MEMORY TRICK
+========================= -->
+
+<section>
+
+    <div class="box">
+
+        <h2>22. 🧠 Easy Memory Tricks</h2>
+
+        <div class="important">
+
+            <h3>PEAS</h3>
+
+            <p>
+                <strong>P</strong> = Performance
+            </p>
+
+            <p>
+                <strong>E</strong> = Environment
+            </p>
+
+            <p>
+                <strong>A</strong> = Actuators
+            </p>
+
+            <p>
+                <strong>S</strong> = Sensors
+            </p>
+
+        </div>
+
+
+        <div class="important">
+
+            <h3>Agent Cycle</h3>
+
+            <p>
+                <strong>
+                    PERCEIVE → THINK → ACT
+                </strong>
+            </p>
+
+        </div>
+
+
+        <div class="important">
+
+            <h3>Environment Properties</h3>
+
+            <p>
+                Remember:
+            </p>
+
+            <p>
+                <strong>
+                    Observable → Agents → Determinism
+                    → Episodes → Dynamics → Discrete
+                    → Knowledge
+                </strong>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     23. YOUTUBE
+========================= -->
+
+<section>
+
+    <div class="youtube">
+
+        <h2>🎥 YouTube Learning</h2>
+
+        <p>
+            Search for BCS515B Artificial Intelligence
+            Module 1 lectures and intelligent-agent explanations.
+        </p>
+
+        <a
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+Module+1+Intelligent+Agents"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            ▶ Search Module 1 Videos
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     GITHUB
+========================= -->
+
+<section class="github">
+
+    <h2>MAHALAKSHMI'S GITHUB</h2>
+
+    <p>
+        Explore more projects and course resources.
+    </p>
+
+    <br>
+
+    <a
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        BCS515B — Artificial Intelligence
+    </p>
+
+    <p>
+        Module 1 • Mahalakshmi's Course Notes
+    </p>
+
+    <p>
+        © 2026 Mahalakshmi
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     ANTI-COPY SCRIPT
+========================= -->
+
+<script>
+
+    /* Right click */
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Text selection */
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Dragging */
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Keyboard shortcuts */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                [
+                    "c",
+                    "x",
+                    "a",
+                    "u",
+                    "s",
+                    "p"
+                ].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

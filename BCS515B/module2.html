@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080706">
+
+    <title>BCS515B Module 2 | Problem Solving & Uninformed Search</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080706;
+            color: #f4f1ea;
+            line-height: 1.75;
+            user-select: none;
+        }
+
+        header {
+            background:
+                radial-gradient(circle at top right, rgba(212,175,55,0.18), transparent 35%),
+                linear-gradient(135deg, #080706, #17130b);
+
+            border-bottom: 1px solid rgba(212,175,55,0.35);
+
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: #d7d2c8;
+            font-size: 1.05rem;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 8px 18px;
+            border: 1px solid #d4af37;
+            border-radius: 30px;
+            color: #d4af37;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(8,7,6,0.95);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(212,175,55,0.25);
+
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 5px 8px;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        section {
+            margin: 45px 0;
+        }
+
+        .card {
+            background: #11100e;
+            border: 1px solid rgba(212,175,55,0.22);
+            border-radius: 18px;
+            padding: 28px;
+            margin: 25px 0;
+
+            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+        }
+
+        h2 {
+            color: #d4af37;
+            font-size: 1.9rem;
+            margin-bottom: 18px;
+
+            border-left: 4px solid #d4af37;
+            padding-left: 14px;
+        }
+
+        h3 {
+            color: #e3c45c;
+            margin: 22px 0 12px;
+        }
+
+        h4 {
+            color: #d4af37;
+            margin: 18px 0 8px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        ul,
+        ol {
+            padding-left: 25px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin: 7px 0;
+        }
+
+        strong {
+            color: #e4c45c;
+        }
+
+        .highlight {
+            background: rgba(212,175,55,0.08);
+            border-left: 4px solid #d4af37;
+            padding: 16px;
+            margin: 18px 0;
+            border-radius: 8px;
+        }
+
+        .formula {
+            background: #050505;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 15px 0;
+            text-align: center;
+            color: #f2d675;
+            font-family: "Courier New", monospace;
+            overflow-x: auto;
+        }
+
+        .steps {
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            margin: 15px 0;
+            padding: 16px 18px 16px 55px;
+            background: #0b0a09;
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 10px;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+
+            position: absolute;
+            left: 15px;
+            top: 15px;
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #d4af37;
+            color: #080706;
+
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            border: 1px solid #39352d;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #2a2416;
+            color: #e5c65d;
+        }
+
+        tr:nth-child(even) {
+            background: #15130f;
+        }
+
+        .search-box {
+            background: #050505;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #39352d;
+            font-family: "Courier New", monospace;
+            overflow-x: auto;
+            white-space: pre;
+            color: #ddd;
+        }
+
+        .tree {
+            font-family: "Courier New", monospace;
+            background: #050505;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            color: #e6d078;
+            border: 1px solid #302c24;
+        }
+
+        .answer {
+            border-left: 4px solid #d4af37;
+            background: rgba(212,175,55,0.07);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 8px;
+        }
+
+        .warning {
+            border-left: 4px solid #b8860b;
+            background: rgba(184,134,11,0.08);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .memory {
+            background: linear-gradient(
+                135deg,
+                rgba(212,175,55,0.12),
+                rgba(212,175,55,0.03)
+            );
+
+            border: 1px solid rgba(212,175,55,0.35);
+            padding: 20px;
+            border-radius: 14px;
+        }
+
+        .question {
+            margin: 15px 0;
+            padding: 18px;
+            background: #0d0c0a;
+            border-radius: 10px;
+            border: 1px solid #2e2a23;
+        }
+
+        .btn {
+            display: inline-block;
+            margin: 8px;
+            padding: 12px 20px;
+
+            color: #080706;
+            background: #d4af37;
+
+            text-decoration: none;
+            border-radius: 8px;
+
+            font-weight: bold;
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #f0d66d;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 45px 20px;
+            margin-top: 70px;
+
+            border-top: 1px solid rgba(212,175,55,0.25);
+            color: #aaa;
+        }
+
+        .gold {
+            color: #d4af37;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 40px 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 4px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+        }
+
+        @media print {
+
+            body {
+                display: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>BCS515B — Module 2</h1>
+
+    <p>
+        Problem Solving &amp; Uninformed Search
+    </p>
+
+    <div class="badge">
+        Artificial Intelligence | VTU 2022 Scheme
+    </div>
+
+</header>
+
+
+<nav>
+
+    <a href="#intro">Introduction</a>
+    <a href="#problem">Problem Solving</a>
+    <a href="#search">Searching</a>
+    <a href="#bfs">BFS</a>
+    <a href="#ucs">UCS</a>
+    <a href="#dfs">DFS</a>
+    <a href="#dls">DLS</a>
+    <a href="#ids">IDS</a>
+    <a href="#bidirectional">Bidirectional</a>
+    <a href="#comparison">Comparison</a>
+    <a href="#questions">Questions</a>
+
+</nav>
+
+
+<main>
+
+
+<!-- ===================================================== -->
+<!-- INTRODUCTION -->
+<!-- ===================================================== -->
+
+<section id="intro">
+
+    <div class="card">
+
+        <h2>1. Introduction to Problem Solving</h2>
+
+        <p>
+            An intelligent agent often needs to decide what actions it
+            should perform in order to achieve a desired goal.
+        </p>
+
+        <p>
+            <strong>Problem solving</strong> is the process of finding
+            a sequence of actions that leads from an initial state
+            to a goal state.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Basic idea:</strong>
+
+            <br><br>
+
+            Initial State
+            →
+            Actions
+            →
+            Intermediate States
+            →
+            Goal State
+
+        </div>
+
+        <h3>Example</h3>
+
+        <p>
+            Suppose a person wants to travel from
+            <strong>City A</strong> to <strong>City D</strong>.
+        </p>
+
+        <p>
+            The cities are states and travelling between cities
+            represents actions.
+        </p>
+
+        <div class="formula">
+
+            Initial State = City A
+
+            <br>
+
+            Goal State = City D
+
+            <br>
+
+            Solution = A → B → D
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- PROBLEM SOLVING AGENT -->
+<!-- ===================================================== -->
+
+<section id="problem">
+
+    <div class="card">
+
+        <h2>2. Problem-Solving Agent</h2>
+
+        <p>
+            A problem-solving agent is a goal-based agent that decides
+            what actions should be taken to achieve a particular goal.
+        </p>
+
+        <h3>Four Main Steps</h3>
+
+        <div class="steps">
+
+            <div class="step">
+                <strong>Goal Formulation</strong>
+                <br>
+                Decide what the agent wants to achieve.
+            </div>
+
+            <div class="step">
+                <strong>Problem Formulation</strong>
+                <br>
+                Define the initial state, actions, transition model,
+                goal test and path cost.
+            </div>
+
+            <div class="step">
+                <strong>Search</strong>
+                <br>
+                Find a sequence of actions that reaches the goal.
+            </div>
+
+            <div class="step">
+                <strong>Execution</strong>
+                <br>
+                Execute the selected actions.
+            </div>
+
+        </div>
+
+        <h3>General Flow</h3>
+
+        <div class="tree">
+
+Goal
+  ↓
+Problem Formulation
+  ↓
+Search
+  ↓
+Solution
+  ↓
+Execution
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- PROBLEM FORMULATION -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>3. Problem Formulation</h2>
+
+        <p>
+            A well-defined problem can be represented using
+            five important components.
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Component</th>
+                <th>Meaning</th>
+            </tr>
+
+            <tr>
+                <td>Initial State</td>
+                <td>The state where the problem starts.</td>
+            </tr>
+
+            <tr>
+                <td>Actions</td>
+                <td>Possible actions available from a state.</td>
+            </tr>
+
+            <tr>
+                <td>Transition Model</td>
+                <td>Describes the result of performing an action.</td>
+            </tr>
+
+            <tr>
+                <td>Goal Test</td>
+                <td>Checks whether the current state is the goal.</td>
+            </tr>
+
+            <tr>
+                <td>Path Cost</td>
+                <td>Total cost of the actions used in a solution.</td>
+            </tr>
+
+        </table>
+
+        <h3>Example: Route Finding</h3>
+
+        <p>
+            Find a route from A to D.
+        </p>
+
+        <div class="tree">
+
+A ─── B ─── D
+│
+└─── C ─── D
+
+        </div>
+
+        <ul>
+
+            <li>
+                <strong>Initial state:</strong> A
+            </li>
+
+            <li>
+                <strong>Actions:</strong> Move to connected city
+            </li>
+
+            <li>
+                <strong>Transition model:</strong> Moving to another city
+            </li>
+
+            <li>
+                <strong>Goal:</strong> Reach D
+            </li>
+
+            <li>
+                <strong>Path cost:</strong> Sum of road costs
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- EXAMPLE PROBLEM -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>4. Example Problem — 8-Puzzle</h2>
+
+        <p>
+            The 8-puzzle consists of eight numbered tiles and one
+            blank space arranged on a 3 × 3 board.
+        </p>
+
+        <h3>Initial State</h3>
+
+        <div class="tree">
+
+1  2  3
+4  _  6
+7  5  8
+
+        </div>
+
+        <h3>Goal State</h3>
+
+        <div class="tree">
+
+1  2  3
+4  5  6
+7  8  _
+
+        </div>
+
+        <p>
+            The blank space can move up, down, left or right,
+            depending on its position.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Important:</strong>
+            The search algorithm explores different possible states
+            until it reaches the goal state.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SEARCH -->
+<!-- ===================================================== -->
+
+<section id="search">
+
+    <div class="card">
+
+        <h2>5. Searching for Solutions</h2>
+
+        <p>
+            Search is the process of systematically exploring the
+            state space to find a path from the initial state
+            to a goal state.
+        </p>
+
+        <h3>Search Tree</h3>
+
+        <div class="tree">
+
+                 A
+              /  |  \
+             B   C   D
+            / \      |
+           E   F     G
+
+        </div>
+
+        <p>
+            Here, A is the root or initial state.
+            E, F and G are deeper states.
+        </p>
+
+        <h3>Important Search Terms</h3>
+
+        <ul>
+
+            <li>
+                <strong>Node:</strong> Represents a state.
+            </li>
+
+            <li>
+                <strong>Root:</strong> Initial state.
+            </li>
+
+            <li>
+                <strong>Goal node:</strong> Desired state.
+            </li>
+
+            <li>
+                <strong>Depth:</strong> Number of edges from root.
+            </li>
+
+            <li>
+                <strong>Path:</strong> Sequence of nodes.
+            </li>
+
+            <li>
+                <strong>Branching factor:</strong> Number of successors
+                generated by a node.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- UNINFORMED SEARCH -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>6. Uninformed Search Strategies</h2>
+
+        <p>
+            Uninformed search is also called
+            <strong>blind search</strong>.
+        </p>
+
+        <p>
+            It does not use additional information about how close
+            a state is to the goal.
+        </p>
+
+        <h3>Main Uninformed Search Methods</h3>
+
+        <ol>
+
+            <li>Breadth-First Search (BFS)</li>
+
+            <li>Uniform-Cost Search (UCS)</li>
+
+            <li>Depth-First Search (DFS)</li>
+
+            <li>Depth-Limited Search (DLS)</li>
+
+            <li>Iterative Deepening Search (IDS)</li>
+
+            <li>Bidirectional Search</li>
+
+        </ol>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- BFS -->
+<!-- ===================================================== -->
+
+<section id="bfs">
+
+    <div class="card">
+
+        <h2>7. Breadth-First Search (BFS)</h2>
+
+        <p>
+            Breadth-First Search explores nodes
+            <strong>level by level</strong>.
+        </p>
+
+        <p>
+            BFS uses a <strong>FIFO queue</strong>.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Memory trick:</strong>
+
+            <br>
+
+            BFS → <strong>Queue → Level by Level</strong>
+
+        </div>
+
+        <h3>Algorithm</h3>
+
+        <ol>
+
+            <li>Put the initial node into the queue.</li>
+
+            <li>Remove the first node from the queue.</li>
+
+            <li>Check whether it is the goal.</li>
+
+            <li>If not, add its unvisited children to the queue.</li>
+
+            <li>Repeat until the goal is found or the queue becomes empty.</li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>8. BFS — Solved Problem</h2>
+
+        <p>
+            Consider the following graph.
+        </p>
+
+        <div class="tree">
+
+                 A
+              /  |  \
+             B   C   D
+            / \      |
+           E   F     G
+              /
+             H
+
+        </div>
+
+        <p>
+            Find a path from <strong>A</strong> to
+            <strong>H</strong> using BFS.
+        </p>
+
+        <h3>Step 1 — Start</h3>
+
+        <div class="search-box">
+
+Queue = [A]
+Visited = []
+
+        </div>
+
+        <p>
+            Remove A.
+        </p>
+
+        <div class="search-box">
+
+Queue = [B, C, D]
+Visited = [A]
+
+        </div>
+
+        <h3>Step 2 — Expand B</h3>
+
+        <div class="search-box">
+
+Queue = [C, D, E, F]
+Visited = [A, B]
+
+        </div>
+
+        <h3>Step 3 — Expand C</h3>
+
+        <div class="search-box">
+
+Queue = [D, E, F]
+Visited = [A, B, C]
+
+        </div>
+
+        <h3>Step 4 — Expand D</h3>
+
+        <div class="search-box">
+
+Queue = [E, F, G]
+Visited = [A, B, C, D]
+
+        </div>
+
+        <h3>Step 5 — Expand E</h3>
+
+        <div class="search-box">
+
+Queue = [F, G]
+Visited = [A, B, C, D, E]
+
+        </div>
+
+        <h3>Step 6 — Expand F</h3>
+
+        <div class="search-box">
+
+Queue = [G, H]
+Visited = [A, B, C, D, E, F]
+
+        </div>
+
+        <h3>Step 7 — Remove H</h3>
+
+        <p>
+            H is the goal.
+        </p>
+
+        <div class="answer">
+
+            <strong>Solution Path:</strong>
+
+            <br><br>
+
+            A → B → F → H
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>9. BFS Properties</h2>
+
+        <table>
+
+            <tr>
+                <th>Property</th>
+                <th>BFS</th>
+            </tr>
+
+            <tr>
+                <td>Data structure</td>
+                <td>FIFO Queue</td>
+            </tr>
+
+            <tr>
+                <td>Complete</td>
+                <td>Yes, if branching factor is finite</td>
+            </tr>
+
+            <tr>
+                <td>Optimal</td>
+                <td>Yes, when all step costs are equal</td>
+            </tr>
+
+            <tr>
+                <td>Time complexity</td>
+                <td>O(b<sup>d</sup>)</td>
+            </tr>
+
+            <tr>
+                <td>Space complexity</td>
+                <td>O(b<sup>d</sup>)</td>
+            </tr>
+
+        </table>
+
+        <p>
+            Here:
+        </p>
+
+        <ul>
+
+            <li><strong>b</strong> = branching factor</li>
+
+            <li><strong>d</strong> = depth of shallowest goal</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- UCS -->
+<!-- ===================================================== -->
+
+<section id="ucs">
+
+    <div class="card">
+
+        <h2>10. Uniform-Cost Search (UCS)</h2>
+
+        <p>
+            Uniform-Cost Search expands the node having the
+            <strong>lowest path cost</strong>.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Memory trick:</strong>
+
+            <br>
+
+            UCS → <strong>Lowest Cost First</strong>
+
+        </div>
+
+        <p>
+            UCS uses a priority queue.
+        </p>
+
+        <div class="formula">
+
+            g(n) = Cost of path from initial state to node n
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>11. UCS — Step-by-Step Solved Problem</h2>
+
+        <p>
+            Consider this weighted graph:
+        </p>
+
+        <div class="tree">
+
+             A
+           /   \
+         2/     \5
+         B       C
+       /  \       \
+     4/    \1      \2
+     D      E       F
+              \     /
+               \3  /1
+                 G
+
+        </div>
+
+        <p>
+            Find the least-cost path from A to G.
+        </p>
+
+        <h3>Step 1</h3>
+
+        <p>
+            Start from A.
+        </p>
+
+        <div class="search-box">
+
+A = 0
+
+Priority Queue:
+
+A(0)
+
+        </div>
+
+        <h3>Step 2</h3>
+
+        <p>
+            Expand A.
+        </p>
+
+        <div class="search-box">
+
+B = 2
+C = 5
+
+Priority Queue:
+
+B(2), C(5)
+
+        </div>
+
+        <h3>Step 3</h3>
+
+        <p>
+            Select B because its cost 2 is smaller than 5.
+        </p>
+
+        <div class="search-box">
+
+Expand B
+
+D = 2 + 4 = 6
+E = 2 + 1 = 3
+
+Priority Queue:
+
+E(3), C(5), D(6)
+
+        </div>
+
+        <h3>Step 4</h3>
+
+        <p>
+            Select E because it has the lowest cost.
+        </p>
+
+        <div class="search-box">
+
+Expand E
+
+G = 3 + 3 = 6
+
+Priority Queue:
+
+C(5), D(6), G(6)
+
+        </div>
+
+        <h3>Step 5</h3>
+
+        <p>
+            Select C.
+        </p>
+
+        <div class="search-box">
+
+Expand C
+
+F = 5 + 2 = 7
+
+Priority Queue:
+
+D(6), G(6), F(7)
+
+        </div>
+
+        <h3>Step 6</h3>
+
+        <p>
+            The next lowest-cost node is G with cost 6.
+        </p>
+
+        <div class="answer">
+
+            <strong>Goal reached.</strong>
+
+            <br><br>
+
+            Path:
+
+            <br>
+
+            A → B → E → G
+
+            <br><br>
+
+            Total Cost:
+
+            <br>
+
+            2 + 1 + 3 = <strong>6</strong>
+
+        </div>
+
+        <div class="warning">
+
+            <strong>Important:</strong>
+            UCS does NOT simply choose the nearest-looking node.
+            It always considers the accumulated path cost.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>12. UCS Properties</h2>
+
+        <table>
+
+            <tr>
+                <th>Property</th>
+                <th>UCS</th>
+            </tr>
+
+            <tr>
+                <td>Data structure</td>
+                <td>Priority Queue</td>
+            </tr>
+
+            <tr>
+                <td>Selection rule</td>
+                <td>Lowest path cost</td>
+            </tr>
+
+            <tr>
+                <td>Complete</td>
+                <td>Yes, under standard positive-cost assumptions</td>
+            </tr>
+
+            <tr>
+                <td>Optimal</td>
+                <td>Yes, when step costs are positive</td>
+            </tr>
+
+            <tr>
+                <td>Cost function</td>
+                <td>g(n)</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- DFS -->
+<!-- ===================================================== -->
+
+<section id="dfs">
+
+    <div class="card">
+
+        <h2>13. Depth-First Search (DFS)</h2>
+
+        <p>
+            Depth-First Search explores one branch as deeply as possible
+            before backtracking.
+        </p>
+
+        <div class="highlight">
+
+            <strong>Memory trick:</strong>
+
+            <br>
+
+            DFS → <strong>Stack → Go Deep First</strong>
+
+        </div>
+
+        <p>
+            DFS can be implemented using a stack or recursion.
+        </p>
+
+        <h3>Basic Algorithm</h3>
+
+        <ol>
+
+            <li>Start at the initial node.</li>
+
+            <li>Visit the node.</li>
+
+            <li>Select one unvisited child.</li>
+
+            <li>Continue deeper.</li>
+
+            <li>If no child is available, backtrack.</li>
+
+            <li>Continue until the goal is found.</li>
+
+        </ol>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>14. DFS — Solved Problem</h2>
+
+        <p>
+            Use the same graph:
+        </p>
+
+        <div class="tree">
+
+                 A
+              /  |  \
+             B   C   D
+            / \      |
+           E   F     G
+              /
+             H
+
+        </div>
+
+        <p>
+            Assume children are explored from left to right.
+            Find the path from A to H.
+        </p>
+
+        <h3>Step-by-Step</h3>
+
+        <div class="search-box">
+
+Start at A
+
+A
+↓
+B
+↓
+E
+
+        </div>
+
+        <p>
+            E has no unvisited child, so backtrack to B.
+        </p>
+
+        <div class="search-box">
+
+A → B → E
+       ↑
+     Backtrack
+
+        </div>
+
+        <p>
+            Now explore F.
+        </p>
+
+        <div class="search-box">
+
+A → B → F → H
+
+        </div>
+
+        <p>
+            H is the goal.
+        </p>
+
+        <div class="answer">
+
+            <strong>DFS Solution:</strong>
+
+            <br><br>
+
+            A → B → F → H
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>15. DFS Properties</h2>
+
+        <table>
+
+            <tr>
+                <th>Property</th>
+                <th>DFS</th>
+            </tr>
+
+            <tr>
+                <td>Data structure</td>
+                <td>Stack / Recursion</td>
+            </tr>
+
+            <tr>
+                <td>Complete</td>
+                <td>No, in general</td>
+            </tr>
+
+            <tr>
+                <td>Optimal</td>
+                <td>No, in general</td>
+            </tr>
+
+            <tr>
+                <td>Time complexity</td>
+                <td>O(b<sup>m</sup>)</td>
+            </tr>
+
+            <tr>
+                <td>Space complexity</td>
+                <td>O(bm)</td>
+            </tr>
+
+        </table>
+
+        <p>
+            Here <strong>m</strong> is the maximum depth of the search tree.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- DLS -->
+<!-- ===================================================== -->
+
+<section id="dls">
+
+    <div class="card">
+
+        <h2>16. Depth-Limited Search (DLS)</h2>
+
+        <p>
+            Depth-Limited Search is DFS with a fixed depth limit.
+        </p>
+
+        <div class="formula">
+
+            DFS + Depth Limit = DLS
+
+        </div>
+
+        <p>
+            The search does not continue below the specified depth.
+        </p>
+
+        <h3>Example</h3>
+
+        <div class="tree">
+
+Depth 0:        A
+
+Depth 1:      B   C
+
+Depth 2:    D E   F G
+
+Depth 3:   H
+
+        </div>
+
+        <p>
+            If the depth limit is 2, the search will not explore H
+            because H is at depth 3.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>17. DLS — Solved Problem</h2>
+
+        <p>
+            Consider:
+        </p>
+
+        <div class="tree">
+
+          A
+         / \
+        B   C
+       / \
+      D   E
+     /
+    F
+
+        </div>
+
+        <p>
+            Goal = F
+        </p>
+
+        <p>
+            Depth limit = 2
+        </p>
+
+        <h3>Depth Calculation</h3>
+
+        <div class="search-box">
+
+A = depth 0
+
+B = depth 1
+
+D = depth 2
+
+F = depth 3
+
+        </div>
+
+        <p>
+            Since the limit is 2, F cannot be explored.
+        </p>
+
+        <div class="answer">
+
+            <strong>Result:</strong>
+
+            <br><br>
+
+            Goal F is not found because it is beyond
+            the depth limit.
+
+        </div>
+
+        <p>
+            If the limit is increased to 3, F can be found.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- IDS -->
+<!-- ===================================================== -->
+
+<section id="ids">
+
+    <div class="card">
+
+        <h2>18. Iterative Deepening Search (IDS)</h2>
+
+        <p>
+            Iterative Deepening Search repeatedly performs
+            depth-limited search with increasing depth limits.
+        </p>
+
+        <div class="formula">
+
+            Limit 0 → Limit 1 → Limit 2 → Limit 3 → ...
+
+        </div>
+
+        <div class="highlight">
+
+            <strong>Memory trick:</strong>
+
+            <br>
+
+            IDS = DLS repeated with increasing limits.
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>19. IDS — Step-by-Step Solved Problem</h2>
+
+        <p>
+            Consider:
+        </p>
+
+        <div class="tree">
+
+             A
+            / \
+           B   C
+          / \
+         D   E
+        /
+       F
+
+        </div>
+
+        <p>
+            Goal = F
+        </p>
+
+        <h3>Iteration 1 — Limit 0</h3>
+
+        <div class="search-box">
+
+A
+
+Goal F not found.
+
+        </div>
+
+        <h3>Iteration 2 — Limit 1</h3>
+
+        <div class="search-box">
+
+A
+├── B
+└── C
+
+Goal F not found.
+
+        </div>
+
+        <h3>Iteration 3 — Limit 2</h3>
+
+        <div class="search-box">
+
+A
+├── B
+│   ├── D
+│   └── E
+└── C
+
+Goal F not found.
+
+        </div>
+
+        <h3>Iteration 4 — Limit 3</h3>
+
+        <div class="search-box">
+
+A
+└── B
+    └── D
+        └── F
+
+Goal found.
+
+        </div>
+
+        <div class="answer">
+
+            <strong>Solution:</strong>
+
+            <br><br>
+
+            A → B → D → F
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>20. IDS Properties</h2>
+
+        <table>
+
+            <tr>
+                <th>Property</th>
+                <th>IDS</th>
+            </tr>
+
+            <tr>
+                <td>Technique</td>
+                <td>Repeated DLS</td>
+            </tr>
+
+            <tr>
+                <td>Complete</td>
+                <td>Yes, under standard finite-branching assumptions</td>
+            </tr>
+
+            <tr>
+                <td>Optimal</td>
+                <td>Yes, when all step costs are equal</td>
+            </tr>
+
+            <tr>
+                <td>Memory</td>
+                <td>Low compared with BFS</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- BIDIRECTIONAL -->
+<!-- ===================================================== -->
+
+<section id="bidirectional">
+
+    <div class="card">
+
+        <h2>21. Bidirectional Search</h2>
+
+        <p>
+            Bidirectional Search performs two simultaneous searches:
+        </p>
+
+        <ul>
+
+            <li>One search starts from the initial state.</li>
+
+            <li>Another search starts from the goal state.</li>
+
+            <li>The searches continue until they meet.</li>
+
+        </ul>
+
+        <div class="formula">
+
+            Start → → → Meeting Point ← ← ← Goal
+
+        </div>
+
+        <h3>Example</h3>
+
+        <div class="tree">
+
+A → B → C → D → E
+
+Forward search:
+A → B → C
+
+Backward search:
+E → D → C
+
+Meeting point = C
+
+        </div>
+
+        <div class="answer">
+
+            <strong>Final Path:</strong>
+
+            <br><br>
+
+            A → B → C → D → E
+
+        </div>
+
+        <h3>Important Requirement</h3>
+
+        <p>
+            We need a way to generate predecessors from the goal
+            or otherwise search backward effectively.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- COMPARISON -->
+<!-- ===================================================== -->
+
+<section id="comparison">
+
+    <div class="card">
+
+        <h2>22. Comparison of Uninformed Search</h2>
+
+        <table>
+
+            <tr>
+
+                <th>Method</th>
+                <th>Data Structure</th>
+                <th>Complete?</th>
+                <th>Optimal?</th>
+                <th>Main Idea</th>
+
+            </tr>
+
+            <tr>
+
+                <td>BFS</td>
+                <td>Queue</td>
+                <td>Yes*</td>
+                <td>Yes*</td>
+                <td>Level by level</td>
+
+            </tr>
+
+            <tr>
+
+                <td>UCS</td>
+                <td>Priority Queue</td>
+                <td>Yes*</td>
+                <td>Yes*</td>
+                <td>Lowest path cost</td>
+
+            </tr>
+
+            <tr>
+
+                <td>DFS</td>
+                <td>Stack</td>
+                <td>No*</td>
+                <td>No</td>
+                <td>Go deep first</td>
+
+            </tr>
+
+            <tr>
+
+                <td>DLS</td>
+                <td>Stack / Recursion</td>
+                <td>Depends on limit</td>
+                <td>No</td>
+                <td>DFS with depth limit</td>
+
+            </tr>
+
+            <tr>
+
+                <td>IDS</td>
+                <td>Repeated DLS</td>
+                <td>Yes*</td>
+                <td>Yes*</td>
+                <td>Increase depth gradually</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Bidirectional</td>
+                <td>Depends on search</td>
+                <td>Usually with suitable setup</td>
+                <td>Depends on search</td>
+                <td>Search from both ends</td>
+
+            </tr>
+
+        </table>
+
+        <p>
+            *The exact guarantees depend on assumptions such as finite
+            branching, edge costs and repeated-state handling.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- IMPORTANT DIFFERENCES -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>23. BFS vs DFS</h2>
+
+        <table>
+
+            <tr>
+                <th>BFS</th>
+                <th>DFS</th>
+            </tr>
+
+            <tr>
+                <td>Uses Queue</td>
+                <td>Uses Stack</td>
+            </tr>
+
+            <tr>
+                <td>Explores level by level</td>
+                <td>Explores deeply</td>
+            </tr>
+
+            <tr>
+                <td>Requires more memory</td>
+                <td>Usually requires less memory</td>
+            </tr>
+
+            <tr>
+                <td>Can find shallowest solution</td>
+                <td>May find a deeper solution first</td>
+            </tr>
+
+            <tr>
+                <td>Optimal for equal step costs</td>
+                <td>Not generally optimal</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>24. BFS vs UCS</h2>
+
+        <table>
+
+            <tr>
+                <th>BFS</th>
+                <th>UCS</th>
+            </tr>
+
+            <tr>
+                <td>Uses depth/order</td>
+                <td>Uses path cost</td>
+            </tr>
+
+            <tr>
+                <td>Queue</td>
+                <td>Priority Queue</td>
+            </tr>
+
+            <tr>
+                <td>Works naturally when step costs are equal</td>
+                <td>Handles different positive path costs</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>25. DFS vs DLS vs IDS</h2>
+
+        <table>
+
+            <tr>
+                <th>DFS</th>
+                <th>DLS</th>
+                <th>IDS</th>
+            </tr>
+
+            <tr>
+                <td>No fixed limit</td>
+                <td>Fixed limit</td>
+                <td>Increasing limits</td>
+            </tr>
+
+            <tr>
+                <td>Can go very deep</td>
+                <td>Stops at limit</td>
+                <td>Eventually reaches deeper levels</td>
+            </tr>
+
+            <tr>
+                <td>Not generally complete</td>
+                <td>Depends on limit</td>
+                <td>Complete under standard assumptions</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- STEP-BY-STEP PRACTICE -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>26. Practice Problem — BFS</h2>
+
+        <p>
+            Consider:
+        </p>
+
+        <div class="tree">
+
+             S
+           / | \
+          A  B  C
+         / \    |
+        D   E   F
+           /
+          G
+
+        </div>
+
+        <p>
+            Find the path from S to G using BFS.
+        </p>
+
+        <h3>Queue Trace</h3>
+
+        <div class="search-box">
+
+Start:
+[S]
+
+Expand S:
+[A, B, C]
+
+Expand A:
+[B, C, D, E]
+
+Expand B:
+[C, D, E]
+
+Expand C:
+[D, E, F]
+
+Expand D:
+[E, F]
+
+Expand E:
+[F, G]
+
+G found.
+
+        </div>
+
+        <div class="answer">
+
+            <strong>Answer:</strong>
+
+            <br><br>
+
+            S → A → E → G
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>27. Practice Problem — DFS</h2>
+
+        <p>
+            Using the same graph, assume left-to-right traversal.
+        </p>
+
+        <div class="search-box">
+
+S
+↓
+A
+↓
+D
+
+Backtrack
+
+S
+↓
+A
+↓
+E
+↓
+G
+
+        </div>
+
+        <div class="answer">
+
+            <strong>DFS Answer:</strong>
+
+            <br><br>
+
+            S → A → E → G
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>28. Practice Problem — UCS</h2>
+
+        <p>
+            Consider the weighted graph:
+        </p>
+
+        <div class="tree">
+
+A --2-- B --5-- D
+ \      |
+  6     1
+   \    |
+     C--2--D
+
+        </div>
+
+        <p>
+            Find the lowest-cost path from A to D.
+        </p>
+
+        <h3>Calculate Possible Paths</h3>
+
+        <div class="formula">
+
+A → B → D
+
+Cost = 2 + 5 = 7
+
+        </div>
+
+        <div class="formula">
+
+A → B → C → D
+
+Cost = 2 + 1 + 2 = 5
+
+        </div>
+
+        <div class="answer">
+
+            <strong>Lowest-cost path:</strong>
+
+            <br><br>
+
+            A → B → C → D
+
+            <br><br>
+
+            Total cost = <strong>5</strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SEARCH STRATEGY MEMORY -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>29. Easy Memory Tricks 🧠</h2>
+
+        <div class="memory">
+
+            <h3>BFS</h3>
+
+            <p>
+                <strong>B</strong>readth =
+                <strong>B</strong>ranches level by level
+            </p>
+
+            <h3>DFS</h3>
+
+            <p>
+                <strong>D</strong>epth =
+                go <strong>D</strong>eep
+            </p>
+
+            <h3>UCS</h3>
+
+            <p>
+                <strong>U</strong>niform Cost =
+                choose <strong>lowest cost</strong>
+            </p>
+
+            <h3>DLS</h3>
+
+            <p>
+                DFS + <strong>Limit</strong>
+            </p>
+
+            <h3>IDS</h3>
+
+            <p>
+                DLS + <strong>Increasing limits</strong>
+            </p>
+
+            <h3>Bidirectional</h3>
+
+            <p>
+                Search from <strong>both directions</strong>.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- EXAM QUESTIONS -->
+<!-- ===================================================== -->
+
+<section id="questions">
+
+    <div class="card">
+
+        <h2>30. Important VTU Exam Questions</h2>
+
+        <h3>10-Mark Questions</h3>
+
+        <div class="question">
+
+            <strong>1.</strong>
+            Explain problem-solving agents and the process of
+            problem formulation.
+
+        </div>
+
+        <div class="question">
+
+            <strong>2.</strong>
+            Explain Breadth-First Search with a suitable example.
+            Discuss its properties.
+
+        </div>
+
+        <div class="question">
+
+            <strong>3.</strong>
+            Explain Uniform-Cost Search with a suitable example.
+
+        </div>
+
+        <div class="question">
+
+            <strong>4.</strong>
+            Explain Depth-First Search with algorithm and example.
+
+        </div>
+
+        <div class="question">
+
+            <strong>5.</strong>
+            Explain Depth-Limited Search and Iterative Deepening Search.
+
+        </div>
+
+        <div class="question">
+
+            <strong>6.</strong>
+            Explain Bidirectional Search with a suitable example.
+
+        </div>
+
+        <h3>5-Mark Questions</h3>
+
+        <div class="question">
+
+            <strong>1.</strong>
+            What is problem formulation?
+
+        </div>
+
+        <div class="question">
+
+            <strong>2.</strong>
+            Explain the components of a search problem.
+
+        </div>
+
+        <div class="question">
+
+            <strong>3.</strong>
+            Explain BFS.
+
+        </div>
+
+        <div class="question">
+
+            <strong>4.</strong>
+            Explain DFS.
+
+        </div>
+
+        <div class="question">
+
+            <strong>5.</strong>
+            Explain UCS.
+
+        </div>
+
+        <div class="question">
+
+            <strong>6.</strong>
+            Differentiate BFS and DFS.
+
+        </div>
+
+        <div class="question">
+
+            <strong>7.</strong>
+            What is DLS?
+
+        </div>
+
+        <div class="question">
+
+            <strong>8.</strong>
+            What is IDS?
+
+        </div>
+
+        <h3>2-Mark Questions</h3>
+
+        <div class="question">
+
+            <strong>1.</strong>
+            Define search.
+
+        </div>
+
+        <div class="question">
+
+            <strong>2.</strong>
+            Define initial state.
+
+        </div>
+
+        <div class="question">
+
+            <strong>3.</strong>
+            What is a goal test?
+
+        </div>
+
+        <div class="question">
+
+            <strong>4.</strong>
+            What is BFS?
+
+        </div>
+
+        <div class="question">
+
+            <strong>5.</strong>
+            What is DFS?
+
+        </div>
+
+        <div class="question">
+
+            <strong>6.</strong>
+            What is UCS?
+
+        </div>
+
+        <div class="question">
+
+            <strong>7.</strong>
+            Define branching factor.
+
+        </div>
+
+        <div class="question">
+
+            <strong>8.</strong>
+            What is a state space?
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- ANSWER WRITING -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>31. How to Write a 10-Mark Answer</h2>
+
+        <p>
+            For a VTU long-answer question, use this structure:
+        </p>
+
+        <div class="steps">
+
+            <div class="step">
+                <strong>Definition</strong>
+                <br>
+                Start with a clear definition.
+            </div>
+
+            <div class="step">
+                <strong>Concept</strong>
+                <br>
+                Explain how the technique works.
+            </div>
+
+            <div class="step">
+                <strong>Algorithm</strong>
+                <br>
+                Write the important steps.
+            </div>
+
+            <div class="step">
+                <strong>Diagram</strong>
+                <br>
+                Draw the search tree or state space.
+            </div>
+
+            <div class="step">
+                <strong>Example</strong>
+                <br>
+                Solve one example step-by-step.
+            </div>
+
+            <div class="step">
+                <strong>Properties</strong>
+                <br>
+                Mention completeness, optimality, time and space.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- QUICK REVISION -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>32. Quick Revision 🚀</h2>
+
+        <table>
+
+            <tr>
+                <th>Topic</th>
+                <th>Remember</th>
+            </tr>
+
+            <tr>
+                <td>Problem Solving</td>
+                <td>Initial → Actions → Goal</td>
+            </tr>
+
+            <tr>
+                <td>Problem Formulation</td>
+                <td>Initial, Actions, Transition, Goal, Cost</td>
+            </tr>
+
+            <tr>
+                <td>BFS</td>
+                <td>Queue + Level by level</td>
+            </tr>
+
+            <tr>
+                <td>UCS</td>
+                <td>Lowest path cost</td>
+            </tr>
+
+            <tr>
+                <td>DFS</td>
+                <td>Stack + Go deep</td>
+            </tr>
+
+            <tr>
+                <td>DLS</td>
+                <td>DFS + Depth limit</td>
+            </tr>
+
+            <tr>
+                <td>IDS</td>
+                <td>Repeated DLS</td>
+            </tr>
+
+            <tr>
+                <td>Bidirectional</td>
+                <td>Search from both sides</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- STUDY FLOW -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>33. Module 2 Study Flow 📚</h2>
+
+        <div class="tree">
+
+Problem Solving
+      ↓
+Problem Formulation
+      ↓
+State Space
+      ↓
+Search
+      ↓
+Uninformed Search
+      ↓
+BFS
+      ↓
+UCS
+      ↓
+DFS
+      ↓
+DLS
+      ↓
+IDS
+      ↓
+Bidirectional Search
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- RESOURCES -->
+<!-- ===================================================== -->
+
+<section>
+
+    <div class="card">
+
+        <h2>34. Useful Resources</h2>
+
+        <p>
+            For additional explanations and revision:
+        </p>
+
+        <a
+            class="btn"
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+VTU"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            ▶ YouTube — BCS515B
+        </a>
+
+        
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
+
+<footer>
+
+    <h3 class="gold">
+        MAHALAKSHMI'S COURSE NOTES
+    </h3>
+
+    <p>
+        BCS515B — Artificial Intelligence
+    </p>
+
+    <p>
+        Module 2 — Problem Solving &amp; Uninformed Search
+    </p>
+
+    <br>
+
+    <a
+        class="btn"
+        href="https://github.com/mahalakshmikommaranahalli9-cell"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        🐙 Visit Mahalakshmi's GitHub
+    </a>
+
+</footer>
+
+
+</main>
+
+
+<script>
+
+    /* =====================================================
+       BASIC CONTENT PROTECTION
+    ===================================================== */
+
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("dragstart", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("copy", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("cut", function(event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("keydown", function(event) {
+
+        if (
+            event.ctrlKey &&
+            ["c", "x", "a", "u", "s", "p"].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.metaKey) {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

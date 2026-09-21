@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+        content="#080706">
+
+    <meta name="description"
+        content="BCS515B Artificial Intelligence Module 5 - Inference and Classical Planning">
+
+    <title>BCS515B | Module 5 - Inference & Classical Planning</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080706;
+            color: #f5f0e6;
+            line-height: 1.7;
+        }
+
+        ::selection {
+            background: #d4af37;
+            color: #080706;
+        }
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #0d0b08,
+                #17130b
+            );
+
+            border-bottom: 1px solid #4d3b16;
+
+            padding: 35px 20px;
+
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+
+            font-size: 2.3rem;
+
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #cfc6b5;
+
+            font-size: 1rem;
+        }
+
+        nav {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            background: rgba(8, 7, 6, 0.96);
+
+            border-bottom: 1px solid #3e3013;
+
+            padding: 12px;
+
+            text-align: center;
+        }
+
+        nav a {
+            color: #d4af37;
+
+            text-decoration: none;
+
+            margin: 0 9px;
+
+            font-size: 0.9rem;
+
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #fff3b0;
+        }
+
+        .container {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 30px 18px 60px;
+        }
+
+        section {
+            background: #0e0c09;
+
+            border: 1px solid #3c3018;
+
+            border-radius: 14px;
+
+            padding: 28px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        h2 {
+            color: #d4af37;
+
+            font-size: 1.7rem;
+
+            margin-bottom: 18px;
+
+            border-bottom: 1px solid #4b3a17;
+
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #e3c45b;
+
+            margin-top: 22px;
+
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #f0d878;
+
+            margin-top: 16px;
+
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        ul,
+        ol {
+            margin-left: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 7px;
+        }
+
+        strong {
+            color: #f1d66b;
+        }
+
+        code {
+            background: #18140c;
+
+            color: #ffe48a;
+
+            padding: 3px 7px;
+
+            border-radius: 5px;
+
+            font-family: Consolas, monospace;
+        }
+
+        .formula {
+            background: #151108;
+
+            border-left: 4px solid #d4af37;
+
+            padding: 14px 18px;
+
+            margin: 15px 0;
+
+            font-family: Consolas, monospace;
+
+            color: #ffe8a3;
+
+            overflow-x: auto;
+        }
+
+        .note {
+            background: #171207;
+
+            border-left: 4px solid #d4af37;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        .warning {
+            background: #1a1009;
+
+            border-left: 4px solid #c98232;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        .success {
+            background: #0d170f;
+
+            border-left: 4px solid #65a765;
+
+            padding: 15px 18px;
+
+            margin: 18px 0;
+
+            border-radius: 6px;
+        }
+
+        .step {
+            background: #13110d;
+
+            border: 1px solid #332b1a;
+
+            border-radius: 8px;
+
+            padding: 15px;
+
+            margin: 12px 0;
+        }
+
+        .step-title {
+            color: #d4af37;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin: 18px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #4a3b1d;
+
+            padding: 11px;
+
+            text-align: left;
+
+            vertical-align: top;
+        }
+
+        th {
+            background: #211a0d;
+
+            color: #e4c85c;
+        }
+
+        td {
+            background: #100e0b;
+        }
+
+        .question {
+            background: #12100c;
+
+            border: 1px solid #3d321c;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            margin: 14px 0;
+        }
+
+        .answer {
+            margin-top: 10px;
+
+            color: #ddd5c6;
+        }
+
+        .tag {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            margin: 4px;
+
+            border-radius: 20px;
+
+            background: #1c1609;
+
+            color: #e3c45b;
+
+            border: 1px solid #4c3c18;
+
+            font-size: 0.85rem;
+        }
+
+        .btn-area {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            background: #d4af37;
+
+            color: #080706;
+
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #f1d66b;
+
+            transform: translateY(-2px);
+        }
+
+        .btn.secondary {
+            background: transparent;
+
+            color: #d4af37;
+
+            border: 1px solid #d4af37;
+        }
+
+        .btn.secondary:hover {
+            background: #d4af37;
+
+            color: #080706;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 30px 15px;
+
+            border-top: 1px solid #3d3017;
+
+            color: #9f9686;
+        }
+
+        footer strong {
+            color: #d4af37;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 1.7rem;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+
+                margin: 4px 6px;
+            }
+
+            table {
+                display: block;
+
+                overflow-x: auto;
+
+                white-space: nowrap;
+            }
+
+            .container {
+                padding: 20px 12px 45px;
+            }
+        }
+
+        /* Basic copy protection */
+
+        body {
+            user-select: none;
+        }
+
+        @media print {
+
+            body {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>BCS515B — Module 5</h1>
+
+    <p>
+        Artificial Intelligence | Inference & Classical Planning
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="#inference">Inference</a>
+
+    <a href="#backward">Backward Chaining</a>
+
+    <a href="#resolution">Resolution</a>
+
+    <a href="#planning">Classical Planning</a>
+
+    <a href="#statespace">State Space</a>
+
+    <a href="#graph">Planning Graph</a>
+
+    <a href="#questions">Questions</a>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+1 INFERENCE
+===================================================== -->
+
+<section id="inference">
+
+    <h2>1. Inference in Artificial Intelligence</h2>
+
+    <p>
+        <strong>Inference</strong> is the process of deriving
+        new information from known facts and rules.
+    </p>
+
+    <div class="formula">
+
+        Known Facts + Rules → New Knowledge
+
+    </div>
+
+    <h3>Example</h3>
+
+    <div class="formula">
+
+        Student(Maha)
+
+        <br>
+
+        Student(x) → Learner(x)
+
+    </div>
+
+    <p>
+        From these two statements we can infer:
+    </p>
+
+    <div class="formula">
+
+        Learner(Maha)
+
+    </div>
+
+
+    <h3>Types of Inference</h3>
+
+    <ul>
+
+        <li>Forward Chaining</li>
+
+        <li>Backward Chaining</li>
+
+        <li>Resolution</li>
+
+    </ul>
+
+    <div class="note">
+
+        <strong>Remember:</strong>
+
+        <br><br>
+
+        Forward Chaining →
+        Facts to Goal
+
+        <br>
+
+        Backward Chaining →
+        Goal to Facts
+
+        <br>
+
+        Resolution →
+        Prove a statement by contradiction
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+2 BACKWARD CHAINING
+===================================================== -->
+
+<section id="backward">
+
+    <h2>2. Backward Chaining</h2>
+
+    <p>
+        Backward chaining is a <strong>goal-driven</strong>
+        inference method.
+    </p>
+
+    <p>
+        Instead of starting with known facts, it starts with the
+        desired goal and works backward to find facts that support
+        the goal.
+    </p>
+
+    <div class="formula">
+
+        Goal
+        ↓
+        Find Rule
+        ↓
+        Find Required Conditions
+        ↓
+        Check Facts
+
+    </div>
+
+
+    <h3>Steps</h3>
+
+    <ol>
+
+        <li>Start with the query or goal.</li>
+
+        <li>Find a rule that can produce the goal.</li>
+
+        <li>Replace the goal with the rule's conditions.</li>
+
+        <li>Check whether those conditions are known.</li>
+
+        <li>Continue recursively.</li>
+
+        <li>If all conditions are satisfied, the goal is proved.</li>
+
+    </ol>
+
+
+    <h3>🔥 Solved Problem 1 — Simple Backward Chaining</h3>
+
+    <p><strong>Facts:</strong></p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+    </div>
+
+    <p><strong>Rules:</strong></p>
+
+    <div class="formula">
+
+        Student(x) → Learner(x)
+
+        <br>
+
+        Learner(x) → Intelligent(x)
+
+    </div>
+
+    <p>
+        <strong>Goal:</strong>
+        Intelligent(Maha)
+    </p>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Start with the goal
+        </div>
+
+        <div class="formula">
+
+            Intelligent(Maha)
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Find a rule that concludes the goal
+        </div>
+
+        Rule:
+
+        <br>
+
+        Learner(x) → Intelligent(x)
+
+        <br><br>
+
+        Therefore we need:
+
+        <div class="formula">
+
+            Learner(Maha)
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Find a rule for Learner(Maha)
+        </div>
+
+        Rule:
+
+        <br>
+
+        Student(x) → Learner(x)
+
+        <br><br>
+
+        Therefore we need:
+
+        <div class="formula">
+
+            Student(Maha)
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4: Check the fact
+        </div>
+
+        Given:
+
+        <br>
+
+        Student(Maha)
+
+        <br><br>
+
+        The fact is TRUE.
+
+    </div>
+
+
+    <div class="success">
+
+        Therefore:
+
+        <br><br>
+
+        Student(Maha)
+
+        ↓
+
+        Learner(Maha)
+
+        ↓
+
+        Intelligent(Maha)
+
+        <br><br>
+
+        <strong>Goal proved.</strong>
+
+    </div>
+
+
+    <h3>🔥 Solved Problem 2 — Multiple Conditions</h3>
+
+    <p><strong>Facts:</strong></p>
+
+    <div class="formula">
+
+        Student(Maha)
+
+        <br>
+
+        Studies(Maha, AI)
+
+        <br>
+
+        Smart(Maha)
+
+    </div>
+
+    <p><strong>Rules:</strong></p>
+
+    <div class="formula">
+
+        Student(x) ∧ Studies(x, AI)
+        → LearnsAI(x)
+
+        <br><br>
+
+        LearnsAI(x) ∧ Smart(x)
+        → GoodStudent(x)
+
+    </div>
+
+    <p>
+        <strong>Goal:</strong>
+        GoodStudent(Maha)
+    </p>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1
+        </div>
+
+        Goal:
+
+        <br>
+
+        GoodStudent(Maha)
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2
+        </div>
+
+        Find rule:
+
+        <div class="formula">
+
+            LearnsAI(x) ∧ Smart(x)
+            → GoodStudent(x)
+
+        </div>
+
+        Therefore we need:
+
+        <br>
+
+        LearnsAI(Maha)
+
+        <br>
+
+        Smart(Maha)
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3
+        </div>
+
+        Smart(Maha) is already a fact.
+
+        <br><br>
+
+        Now prove LearnsAI(Maha).
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4
+        </div>
+
+        Use:
+
+        <div class="formula">
+
+            Student(x) ∧ Studies(x, AI)
+            → LearnsAI(x)
+
+        </div>
+
+        We have:
+
+        <br>
+
+        Student(Maha) ✔
+
+        <br>
+
+        Studies(Maha, AI) ✔
+
+    </div>
+
+
+    <div class="success">
+
+        Therefore:
+
+        <br>
+
+        LearnsAI(Maha) ✔
+
+        <br>
+
+        Smart(Maha) ✔
+
+        <br><br>
+
+        Hence:
+
+        <br>
+
+        <strong>GoodStudent(Maha) is TRUE.</strong>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+3 RESOLUTION
+===================================================== -->
+
+<section id="resolution">
+
+    <h2>3. Resolution</h2>
+
+    <p>
+        Resolution is an inference rule used in automated
+        reasoning and theorem proving.
+    </p>
+
+    <p>
+        It is commonly used by converting logical statements into
+        <strong>Conjunctive Normal Form (CNF)</strong>.
+    </p>
+
+
+    <h3>Basic Resolution Rule</h3>
+
+    <div class="formula">
+
+        P ∨ Q
+
+        <br>
+
+        ¬Q ∨ R
+
+        <br>
+
+        ─────────
+
+        <br>
+
+        P ∨ R
+
+    </div>
+
+
+    <h3>Important Idea</h3>
+
+    <p>
+        Resolution eliminates complementary literals.
+    </p>
+
+    <div class="formula">
+
+        Q and ¬Q
+
+    </div>
+
+    <p>
+        are complementary literals.
+    </p>
+
+
+    <h3>Resolution by Refutation</h3>
+
+    <p>
+        To prove a statement, assume its negation and try to
+        derive a contradiction.
+    </p>
+
+    <div class="formula">
+
+        Knowledge Base + ¬Goal
+
+        ↓
+
+        Resolution
+
+        ↓
+
+        Empty Clause
+
+        ↓
+
+        Goal proved
+
+    </div>
+
+
+    <h3>🔥 Solved Problem — Resolution</h3>
+
+    <p>
+        Prove <strong>R</strong> using the following clauses:
+    </p>
+
+    <div class="formula">
+
+        1. P ∨ Q
+
+        <br>
+
+        2. ¬Q ∨ R
+
+        <br>
+
+        3. ¬P
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Start with Clause 1 and Clause 3
+        </div>
+
+        Clause 1:
+
+        <br>
+
+        P ∨ Q
+
+        <br><br>
+
+        Clause 3:
+
+        <br>
+
+        ¬P
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Resolve P and ¬P
+        </div>
+
+        Remove P and ¬P.
+
+        <br><br>
+
+        Remaining:
+
+        <div class="formula">
+
+            Q
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Use Clause 2
+        </div>
+
+        Clause 2:
+
+        <div class="formula">
+
+            ¬Q ∨ R
+
+        </div>
+
+        We have:
+
+        <br>
+
+        Q
+
+        <br>
+
+        and:
+
+        <br>
+
+        ¬Q ∨ R
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4: Resolve Q and ¬Q
+        </div>
+
+        Remaining literal:
+
+        <div class="formula">
+
+            R
+
+        </div>
+
+    </div>
+
+
+    <div class="success">
+
+        Therefore:
+
+        <br><br>
+
+        <strong>R is proved.</strong>
+
+    </div>
+
+
+    <h3>CNF Reminder</h3>
+
+    <p>
+        A formula is in Conjunctive Normal Form when it is an AND
+        of OR clauses.
+    </p>
+
+    <div class="formula">
+
+        (P ∨ Q) ∧ (¬R ∨ S)
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+4 CLASSICAL PLANNING
+===================================================== -->
+
+<section id="planning">
+
+    <h2>4. Classical Planning</h2>
+
+    <p>
+        <strong>Classical planning</strong> is the process of
+        finding a sequence of actions that transforms an initial
+        state into a desired goal state.
+    </p>
+
+
+    <div class="formula">
+
+        Initial State
+
+        ↓
+
+        Action 1
+
+        ↓
+
+        Action 2
+
+        ↓
+
+        Action 3
+
+        ↓
+
+        Goal State
+
+    </div>
+
+
+    <h3>Components of Classical Planning</h3>
+
+    <ul>
+
+        <li>Initial state</li>
+
+        <li>Goal state</li>
+
+        <li>Actions</li>
+
+        <li>Preconditions</li>
+
+        <li>Effects</li>
+
+    </ul>
+
+
+    <h3>Action Representation</h3>
+
+    <p>
+        An action can be represented using:
+    </p>
+
+    <div class="formula">
+
+        Action
+
+        <br>
+
+        Preconditions
+
+        <br>
+
+        Effects
+
+    </div>
+
+
+    <h3>Example — Pick Up an Object</h3>
+
+    <div class="formula">
+
+        Action: Pickup(A)
+
+        <br><br>
+
+        Preconditions:
+
+        OnTable(A)
+
+        ∧
+
+        Clear(A)
+
+        <br><br>
+
+        Effects:
+
+        Holding(A)
+
+        ∧
+
+        ¬OnTable(A)
+
+    </div>
+
+
+    <h3>Types of Effects</h3>
+
+    <ul>
+
+        <li>
+            <strong>Add effects:</strong>
+            Facts that become true.
+        </li>
+
+        <li>
+            <strong>Delete effects:</strong>
+            Facts that become false.
+        </li>
+
+    </ul>
+
+</section>
+
+
+<!-- =====================================================
+5 STATE SPACE SEARCH
+===================================================== -->
+
+<section id="statespace">
+
+    <h2>5. State-Space Search</h2>
+
+    <p>
+        State-space search represents planning as a search problem.
+        Each state represents a possible situation and each action
+        moves the system to another state.
+    </p>
+
+
+    <h3>Forward State-Space Search</h3>
+
+    <p>
+        Starts from the initial state and applies actions until the
+        goal is reached.
+    </p>
+
+    <div class="formula">
+
+        Initial State
+
+        →
+
+        Successor State
+
+        →
+
+        Successor State
+
+        →
+
+        Goal
+
+    </div>
+
+
+    <h3>Backward State-Space Search</h3>
+
+    <p>
+        Starts from the goal and searches backward for actions that
+        could produce it.
+    </p>
+
+    <div class="formula">
+
+        Goal
+
+        →
+
+        Previous State
+
+        →
+
+        Previous State
+
+        →
+
+        Initial State
+
+    </div>
+
+
+    <h3>🔥 Solved Planning Problem</h3>
+
+    <p>
+        Consider a simple robot that must move a box from one
+        location to another.
+    </p>
+
+
+    <p><strong>Initial State:</strong></p>
+
+    <div class="formula">
+
+        At(Robot, A)
+
+        <br>
+
+        At(Box, A)
+
+    </div>
+
+
+    <p><strong>Goal:</strong></p>
+
+    <div class="formula">
+
+        At(Box, B)
+
+    </div>
+
+
+    <p><strong>Actions:</strong></p>
+
+    <div class="formula">
+
+        Move(A,B)
+
+        <br>
+
+        Preconditions:
+
+        At(Robot,A)
+
+        <br><br>
+
+        Effect:
+
+        At(Robot,B)
+
+    </div>
+
+
+    <div class="formula">
+
+        Push(A,B)
+
+        <br>
+
+        Preconditions:
+
+        At(Robot,A) ∧ At(Box,A)
+
+        <br><br>
+
+        Effects:
+
+        At(Robot,B) ∧ At(Box,B)
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1: Initial state
+        </div>
+
+        <div class="formula">
+
+            At(Robot,A)
+
+            <br>
+
+            At(Box,A)
+
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2: Check Push(A,B)
+        </div>
+
+        Preconditions:
+
+        <br>
+
+        At(Robot,A) ✔
+
+        <br>
+
+        At(Box,A) ✔
+
+        <br><br>
+
+        Both conditions are satisfied.
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3: Apply Push(A,B)
+        </div>
+
+        Effects:
+
+        <div class="formula">
+
+            At(Robot,B)
+
+            <br>
+
+            At(Box,B)
+
+        </div>
+
+    </div>
+
+
+    <div class="success">
+
+        Goal:
+
+        <br>
+
+        At(Box,B)
+
+        <br><br>
+
+        <strong>Goal achieved.</strong>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+6 PLANNING GRAPH
+===================================================== -->
+
+<section id="graph">
+
+    <h2>6. Planning Graph</h2>
+
+    <p>
+        A <strong>Planning Graph</strong> is a layered graph used
+        for planning and finding possible actions and states.
+    </p>
+
+
+    <h3>Main Layers</h3>
+
+    <ul>
+
+        <li>
+            <strong>S-level:</strong>
+            State level
+        </li>
+
+        <li>
+            <strong>A-level:</strong>
+            Action level
+        </li>
+
+    </ul>
+
+
+    <div class="formula">
+
+        S0
+
+        ↓
+
+        A0
+
+        ↓
+
+        S1
+
+        ↓
+
+        A1
+
+        ↓
+
+        S2
+
+    </div>
+
+
+    <h3>State Level</h3>
+
+    <p>
+        Contains propositions that may be true at that point.
+    </p>
+
+
+    <h3>Action Level</h3>
+
+    <p>
+        Contains actions whose preconditions can be satisfied.
+    </p>
+
+
+    <h3>Mutex Relations</h3>
+
+    <p>
+        Mutex means <strong>mutually exclusive</strong>.
+        Two actions or propositions may not be simultaneously
+        achievable.
+    </p>
+
+
+    <h3>Types of Action Mutex</h3>
+
+    <ul>
+
+        <li>Inconsistent effects</li>
+
+        <li>Interference</li>
+
+        <li>Competing needs</li>
+
+    </ul>
+
+
+    <h3>Example Planning Graph</h3>
+
+    <div class="formula">
+
+        S0:
+
+        <br>
+
+        At(Robot,A)
+
+        <br>
+
+        At(Box,A)
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        A0:
+
+        <br>
+
+        Push(A,B)
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        S1:
+
+        <br>
+
+        At(Robot,B)
+
+        <br>
+
+        At(Box,B)
+
+    </div>
+
+
+    <div class="success">
+
+        Since At(Box,B) appears in S1,
+        the goal can be achieved in this example.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+7 CLASSICAL PLANNING EXAMPLE
+===================================================== -->
+
+<section>
+
+    <h2>7. Complete Classical Planning Example</h2>
+
+    <p>
+        Consider the following problem:
+    </p>
+
+    <p>
+        A robot is at location A and a package is at location A.
+        The robot must deliver the package to location B.
+    </p>
+
+
+    <h3>Initial State</h3>
+
+    <div class="formula">
+
+        At(Robot,A)
+
+        <br>
+
+        At(Package,A)
+
+    </div>
+
+
+    <h3>Goal State</h3>
+
+    <div class="formula">
+
+        At(Package,B)
+
+    </div>
+
+
+    <h3>Action</h3>
+
+    <div class="formula">
+
+        Deliver(A,B)
+
+        <br><br>
+
+        Preconditions:
+
+        At(Robot,A)
+
+        ∧
+
+        At(Package,A)
+
+        <br><br>
+
+        Effects:
+
+        At(Robot,B)
+
+        ∧
+
+        At(Package,B)
+
+    </div>
+
+
+    <h3>Step-by-Step Solution</h3>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 1 — Initial state
+        </div>
+
+        Robot is at A.
+
+        <br>
+
+        Package is at A.
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 2 — Check preconditions
+        </div>
+
+        At(Robot,A) → TRUE
+
+        <br>
+
+        At(Package,A) → TRUE
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 3 — Apply action
+        </div>
+
+        Deliver(A,B)
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="step-title">
+            Step 4 — Apply effects
+        </div>
+
+        At(Robot,B)
+
+        <br>
+
+        At(Package,B)
+
+    </div>
+
+
+    <div class="success">
+
+        <strong>Final Answer:</strong>
+
+        <br><br>
+
+        The package reaches B.
+
+        <br>
+
+        Therefore the goal state is achieved.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+8 FORWARD VS BACKWARD PLANNING
+===================================================== -->
+
+<section>
+
+    <h2>8. Forward Planning vs Backward Planning</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Feature</th>
+
+            <th>Forward Planning</th>
+
+            <th>Backward Planning</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Starts from</td>
+
+            <td>Initial state</td>
+
+            <td>Goal state</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Direction</td>
+
+            <td>Forward</td>
+
+            <td>Backward</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Approach</td>
+
+            <td>Data-driven</td>
+
+            <td>Goal-driven</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Search ends</td>
+
+            <td>When goal is reached</td>
+
+            <td>When initial state is reached</td>
+
+        </tr>
+
+    </table>
+
+</section>
+
+
+<!-- =====================================================
+9 INFERENCE VS PLANNING
+===================================================== -->
+
+<section>
+
+    <h2>9. Inference vs Classical Planning</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Feature</th>
+
+            <th>Inference</th>
+
+            <th>Planning</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Purpose</td>
+
+            <td>Derive new knowledge</td>
+
+            <td>Find action sequence</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Input</td>
+
+            <td>Facts and rules</td>
+
+            <td>Initial state and goal</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Output</td>
+
+            <td>New facts</td>
+
+            <td>Plan / actions</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Example</td>
+
+            <td>Student → Learner</td>
+
+            <td>Move → Pick → Deliver</td>
+
+        </tr>
+
+    </table>
+
+</section>
+
+
+<!-- =====================================================
+10 IMPORTANT TERMS
+===================================================== -->
+
+<section>
+
+    <h2>10. Important Terms</h2>
+
+    <span class="tag">Inference</span>
+
+    <span class="tag">Forward Chaining</span>
+
+    <span class="tag">Backward Chaining</span>
+
+    <span class="tag">Resolution</span>
+
+    <span class="tag">CNF</span>
+
+    <span class="tag">Clause</span>
+
+    <span class="tag">Literal</span>
+
+    <span class="tag">Planning</span>
+
+    <span class="tag">Initial State</span>
+
+    <span class="tag">Goal State</span>
+
+    <span class="tag">Action</span>
+
+    <span class="tag">Precondition</span>
+
+    <span class="tag">Effect</span>
+
+    <span class="tag">State Space</span>
+
+    <span class="tag">Planning Graph</span>
+
+    <span class="tag">Mutex</span>
+
+</section>
+
+
+<!-- =====================================================
+11 VTU QUESTIONS
+===================================================== -->
+
+<section id="questions">
+
+    <h2>11. Important VTU Exam Questions</h2>
+
+
+    <h3>2-Mark Questions</h3>
+
+
+    <div class="question">
+
+        <strong>1. Define inference.</strong>
+
+        <div class="answer">
+
+            Inference is the process of deriving new knowledge
+            from known facts and rules.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>2. What is backward chaining?</strong>
+
+        <div class="answer">
+
+            Backward chaining is a goal-driven inference method
+            that starts with the goal and works backward toward
+            known facts.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>3. What is resolution?</strong>
+
+        <div class="answer">
+
+            Resolution is an inference rule used for automated
+            theorem proving by eliminating complementary literals.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>4. Define classical planning.</strong>
+
+        <div class="answer">
+
+            Classical planning is the process of finding a sequence
+            of actions that transforms an initial state into a
+            desired goal state.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>5. What is a planning graph?</strong>
+
+        <div class="answer">
+
+            A planning graph is a layered representation containing
+            state and action levels used for solving planning problems.
+
+        </div>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>6. What is mutex?</strong>
+
+        <div class="answer">
+
+            Mutex means mutually exclusive. It represents actions
+            or propositions that cannot occur together under the
+            given planning constraints.
+
+        </div>
+
+    </div>
+
+
+    <h3>5-Mark Questions</h3>
+
+
+    <div class="question">
+
+        <strong>
+            1. Explain backward chaining with an example.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            2. Explain resolution inference rule.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            3. Explain classical planning and its components.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            4. Explain forward and backward state-space planning.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            5. Explain planning graphs and mutex relations.
+        </strong>
+
+    </div>
+
+
+    <h3>10-Mark Questions</h3>
+
+
+    <div class="question">
+
+        <strong>
+            1. Explain backward chaining algorithm with a
+            suitable example.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            2. Explain resolution and solve a suitable problem
+            step-by-step.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            3. Explain classical planning with state-space
+            search and suitable example.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            4. Explain planning graphs and different types of
+            mutex relations.
+        </strong>
+
+    </div>
+
+
+    <div class="question">
+
+        <strong>
+            5. Compare forward and backward planning.
+        </strong>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+12 EXAM WRITING
+===================================================== -->
+
+<section>
+
+    <h2>12. VTU Answer-Writing Format</h2>
+
+    <h3>For Theory Questions</h3>
+
+    <ol>
+
+        <li>Write the definition.</li>
+
+        <li>Explain the concept.</li>
+
+        <li>List important components.</li>
+
+        <li>Write the algorithm/steps.</li>
+
+        <li>Give a suitable example.</li>
+
+        <li>Explain the example.</li>
+
+        <li>Write the conclusion.</li>
+
+    </ol>
+
+
+    <h3>For Numerical / Logical Problems</h3>
+
+    <ol>
+
+        <li>Write the given facts.</li>
+
+        <li>Write the rules.</li>
+
+        <li>Identify the goal.</li>
+
+        <li>Show every inference step.</li>
+
+        <li>Write the final result.</li>
+
+    </ol>
+
+
+    <div class="success">
+
+        <strong>Exam Tip:</strong>
+
+        Do not jump directly to the final answer.
+        Show the intermediate states, substitutions,
+        clauses or actions.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+13 QUICK REVISION
+===================================================== -->
+
+<section>
+
+    <h2>13. Quick Revision</h2>
+
+    <table>
+
+        <tr>
+
+            <th>Concept</th>
+
+            <th>Easy Meaning</th>
+
+        </tr>
+
+        <tr>
+
+            <td>Inference</td>
+
+            <td>Derive new knowledge</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Forward Chaining</td>
+
+            <td>Facts → Goal</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Backward Chaining</td>
+
+            <td>Goal → Facts</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Resolution</td>
+
+            <td>Remove complementary literals</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Classical Planning</td>
+
+            <td>Find action sequence</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Initial State</td>
+
+            <td>Starting situation</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Goal State</td>
+
+            <td>Desired situation</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Precondition</td>
+
+            <td>What must be true before action</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Effect</td>
+
+            <td>What changes after action</td>
+
+        </tr>
+
+        <tr>
+
+            <td>State Space</td>
+
+            <td>Collection of possible states</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Planning Graph</td>
+
+            <td>State and action layers</td>
+
+        </tr>
+
+        <tr>
+
+            <td>Mutex</td>
+
+            <td>Mutually exclusive</td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="note">
+
+        <strong>Super Memory Trick:</strong>
+
+        <br><br>
+
+        <strong>
+        Inference = KNOW
+        </strong>
+
+        <br>
+
+        <strong>
+        Planning = DO
+        </strong>
+
+        <br><br>
+
+        Forward → Start from facts.
+
+        <br>
+
+        Backward → Start from goal.
+
+        <br>
+
+        Resolution → Contradiction → Proof.
+
+        <br>
+
+        Planning → State → Action → State.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+14 COMPLETE MODULE REVISION
+===================================================== -->
+
+<section>
+
+    <h2>14. Complete Module 5 Revision</h2>
+
+    <div class="formula">
+
+        INFERENCE
+
+        <br>
+        ↓
+        <br>
+
+        Forward Chaining
+
+        <br>
+        ↓
+        <br>
+
+        Backward Chaining
+
+        <br>
+        ↓
+        <br>
+
+        Resolution
+
+        <br><br>
+
+        CLASSICAL PLANNING
+
+        <br>
+        ↓
+        <br>
+
+        Initial State
+
+        <br>
+        ↓
+        <br>
+
+        Actions
+
+        <br>
+        ↓
+        <br>
+
+        State-Space Search
+
+        <br>
+        ↓
+        <br>
+
+        Goal State
+
+        <br><br>
+
+        PLANNING GRAPH
+
+        <br>
+        ↓
+        <br>
+
+        State Level
+
+        ↕
+
+        Action Level
+
+        <br>
+        ↓
+        <br>
+
+        Mutex
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+15 STUDY FLOW
+===================================================== -->
+
+<section>
+
+    <h2>15. BCS515B Complete Study Flow</h2>
+
+    <div class="formula">
+
+        MODULE 1
+
+        <br>
+
+        Intelligent Agents
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        MODULE 2
+
+        <br>
+
+        Problem Solving & Uninformed Search
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        MODULE 3
+
+        <br>
+
+        Informed Search & Propositional Logic
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        MODULE 4
+
+        <br>
+
+        First-Order Logic
+
+        <br><br>
+
+        ↓
+
+        <br><br>
+
+        MODULE 5
+
+        <br>
+
+        Inference & Classical Planning
+
+    </div>
+
+
+    <div class="success">
+
+        🎯 <strong>BCS515B COMPLETE!</strong>
+
+        <br><br>
+
+        All five modules are now covered.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+16 RESOURCES
+===================================================== -->
+
+<section>
+
+    <h2>16. Study Resources</h2>
+
+    <p>
+        Use these resources for additional explanation,
+        revision and practice.
+    </p>
+
+
+    <div class="btn-area">
+
+        <a
+            class="btn"
+            href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+Module+5+Inference+Planning"
+            target="_blank"
+        >
+            📺 Watch Module 5 Videos
+        </a>
+
+
+        
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+17 NAVIGATION
+===================================================== -->
+
+<section>
+
+    <h2>17. Module Navigation</h2>
+
+    <div class="btn-area">
+
+        <a
+            class="btn secondary"
+            href="module4.html"
+        >
+            ← Module 4
+        </a>
+
+
+        <a
+            class="btn"
+            href="index.html"
+        >
+            🏠 BCS515B Home
+        </a>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+
+        <strong>
+            MAHALAKSHMI'S COURSE NOTES
+        </strong>
+
+    </p>
+
+    <p>
+        BCS515B — Artificial Intelligence
+    </p>
+
+    <p>
+        Module 5 — Inference & Classical Planning
+    </p>
+
+    <p>
+        Made for learning • Practice • VTU Preparation
+    </p>
+
+
+    <div
+        class="btn-area"
+        style="justify-content:center;"
+    >
+
+        <a
+            class="btn"
+            href="https://github.com/mahalakshmikommaranahalli9-cell"
+            target="_blank"
+        >
+            🐙 Visit Mahalakshmi's GitHub
+        </a>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    /* Disable right click */
+
+    document.addEventListener(
+        "contextmenu",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Disable selection */
+
+    document.addEventListener(
+        "selectstart",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Disable dragging */
+
+    document.addEventListener(
+        "dragstart",
+        function(event) {
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    /* Disable common shortcuts */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                (event.ctrlKey || event.metaKey) &&
+                [
+                    "c",
+                    "x",
+                    "a",
+                    "u",
+                    "s",
+                    "p"
+                ].includes(
+                    event.key.toLowerCase()
+                )
+            ) {
+
+                event.preventDefault();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
