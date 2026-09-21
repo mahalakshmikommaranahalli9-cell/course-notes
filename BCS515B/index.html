@@ -1,717 +1,569 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
+    <meta name="theme-color" content="#050505" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#050505">
-
-    <meta name="description"
-        content="BCS515B Artificial Intelligence Course Notes - 5th Semester CSE">
+    <meta
+      name="description"
+      content="BCS515B Artificial Intelligence Course Notes - 5th Semester CSE"
+    />
 
     <title>BCS515B | Artificial Intelligence | Mahalakshmi</title>
 
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #050505;
+        color: #f5f5f5;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: #f5f5f5;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+      body::before {
+        content: "🦁";
+        position: fixed;
+        font-size: 260px;
+        opacity: 0.025;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        pointer-events: none;
+      }
 
-        body::before {
-            content: "🦁";
-            position: fixed;
-            font-size: 260px;
-            opacity: 0.025;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -1;
-            pointer-events: none;
-        }
+      header {
+        text-align: center;
+        padding: 70px 20px 50px;
+        border-bottom: 1px solid #2b2412;
+      }
 
+      .badge {
+        display: inline-block;
+        padding: 8px 18px;
+        border: 1px solid #d4af37;
+        border-radius: 30px;
+        color: #d4af37;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 8vw, 80px);
+        color: #d4af37;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: clamp(20px, 4vw, 32px);
+        color: #ffffff;
+        margin-bottom: 15px;
+      }
+
+      .description {
+        max-width: 750px;
+        margin: auto;
+        color: #aaa;
+        font-size: 16px;
+      }
+
+      main {
+        width: min(1100px, 92%);
+        margin: auto;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        color: #d4af37;
+        font-size: 30px;
+        margin-bottom: 35px;
+      }
+
+      .welcome {
+        background: #0b0b0b;
+        border: 1px solid #29220f;
+        border-radius: 18px;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .welcome h2 {
+        color: #d4af37;
+        margin-bottom: 15px;
+      }
+
+      .welcome p {
+        color: #bbb;
+      }
+
+      .modules {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 22px;
+      }
+
+      .module-card {
+        background: #0b0b0b;
+        border: 1px solid #29220f;
+        border-radius: 18px;
+        padding: 28px;
+        transition: 0.3s ease;
+      }
+
+      .module-card:hover {
+        transform: translateY(-6px);
+        border-color: #d4af37;
+        box-shadow: 0 10px 35px rgba(212, 175, 55, 0.08);
+      }
+
+      .module-number {
+        color: #d4af37;
+        font-size: 14px;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+
+      .module-card h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .module-card p {
+        color: #999;
+        min-height: 75px;
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        color: #050505;
+        background: #d4af37;
+        padding: 11px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.25s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: #f1cf61;
+        transform: translateY(-2px);
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 18px;
+      }
+
+      .flow-box {
+        background: #0b0b0b;
+        border: 1px solid #29220f;
+        padding: 22px;
+        border-radius: 14px;
+        text-align: center;
+      }
+
+      .flow-box span {
+        display: block;
+        color: #d4af37;
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+
+      .flow-box h3 {
+        margin-bottom: 6px;
+      }
+
+      .flow-box p {
+        color: #999;
+        font-size: 14px;
+      }
+
+      .exam {
+        background: #0b0b0b;
+        border: 1px solid #29220f;
+        border-radius: 18px;
+        padding: 30px;
+      }
+
+      .exam ul {
+        padding-left: 25px;
+        color: #bbb;
+      }
+
+      .exam li {
+        margin-bottom: 10px;
+      }
+
+      .exam strong {
+        color: #d4af37;
+      }
+
+      .resources {
+        text-align: center;
+      }
+
+      .resource-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .github {
+        text-align: center;
+        padding: 50px 20px;
+        border-top: 1px solid #29220f;
+      }
+
+      .github h2 {
+        color: #d4af37;
+        margin-bottom: 15px;
+      }
+
+      .github p {
+        color: #aaa;
+        margin-bottom: 20px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        border-top: 1px solid #29220f;
+        color: #777;
+        font-size: 14px;
+      }
+
+      footer span {
+        color: #d4af37;
+      }
+
+      @media (max-width: 600px) {
         header {
-            text-align: center;
-            padding: 70px 20px 50px;
-            border-bottom: 1px solid #2b2412;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 8px 18px;
-            border: 1px solid #d4af37;
-            border-radius: 30px;
-            color: #d4af37;
-            font-size: 13px;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: clamp(42px, 8vw, 80px);
-            color: #d4af37;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: clamp(20px, 4vw, 32px);
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        .description {
-            max-width: 750px;
-            margin: auto;
-            color: #aaa;
-            font-size: 16px;
-        }
-
-        main {
-            width: min(1100px, 92%);
-            margin: auto;
+          padding: 50px 15px 35px;
         }
 
         section {
-            padding: 55px 0;
+          padding: 40px 0;
         }
 
-        .section-title {
-            text-align: center;
-            color: #d4af37;
-            font-size: 30px;
-            margin-bottom: 35px;
-        }
-
-        .welcome {
-            background: #0b0b0b;
-            border: 1px solid #29220f;
-            border-radius: 18px;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .welcome h2 {
-            color: #d4af37;
-            margin-bottom: 15px;
-        }
-
-        .welcome p {
-            color: #bbb;
-        }
-
-        .modules {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
+        .welcome,
+        .exam {
+          padding: 22px;
         }
 
         .module-card {
-            background: #0b0b0b;
-            border: 1px solid #29220f;
-            border-radius: 18px;
-            padding: 28px;
-            transition: 0.3s ease;
-        }
-
-        .module-card:hover {
-            transform: translateY(-6px);
-            border-color: #d4af37;
-            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.08);
-        }
-
-        .module-number {
-            color: #d4af37;
-            font-size: 14px;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-
-        .module-card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #fff;
+          padding: 22px;
         }
 
         .module-card p {
-            color: #999;
-            min-height: 75px;
-            margin-bottom: 20px;
+          min-height: auto;
         }
+      }
 
-        .btn {
-            display: inline-block;
-            text-decoration: none;
-            color: #050505;
-            background: #d4af37;
-            padding: 11px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: 0.25s ease;
-            cursor: pointer;
+      @media print {
+        body {
+          display: none;
         }
-
-        .btn:hover {
-            background: #f1cf61;
-            transform: translateY(-2px);
-        }
-
-        .flow {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 18px;
-        }
-
-        .flow-box {
-            background: #0b0b0b;
-            border: 1px solid #29220f;
-            padding: 22px;
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .flow-box span {
-            display: block;
-            color: #d4af37;
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .flow-box h3 {
-            margin-bottom: 6px;
-        }
-
-        .flow-box p {
-            color: #999;
-            font-size: 14px;
-        }
-
-        .exam {
-            background: #0b0b0b;
-            border: 1px solid #29220f;
-            border-radius: 18px;
-            padding: 30px;
-        }
-
-        .exam ul {
-            padding-left: 25px;
-            color: #bbb;
-        }
-
-        .exam li {
-            margin-bottom: 10px;
-        }
-
-        .exam strong {
-            color: #d4af37;
-        }
-
-        .resources {
-            text-align: center;
-        }
-
-        .resource-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .github {
-            text-align: center;
-            padding: 50px 20px;
-            border-top: 1px solid #29220f;
-        }
-
-        .github h2 {
-            color: #d4af37;
-            margin-bottom: 15px;
-        }
-
-        .github p {
-            color: #aaa;
-            margin-bottom: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            border-top: 1px solid #29220f;
-            color: #777;
-            font-size: 14px;
-        }
-
-        footer span {
-            color: #d4af37;
-        }
-
-        @media (max-width: 600px) {
-
-            header {
-                padding: 50px 15px 35px;
-            }
-
-            section {
-                padding: 40px 0;
-            }
-
-            .welcome,
-            .exam {
-                padding: 22px;
-            }
-
-            .module-card {
-                padding: 22px;
-            }
-
-            .module-card p {
-                min-height: auto;
-            }
-
-        }
-
-        @media print {
-
-            body {
-                display: none;
-            }
-
-        }
-
+      }
     </style>
+  </head>
 
-</head>
+  <body>
+    <header>
+      <div class="badge">5TH SEMESTER • CSE</div>
 
-<body>
+      <h1>BCS515B</h1>
 
-<header>
+      <div class="subtitle">Artificial Intelligence</div>
 
-    <div class="badge">
-        5TH SEMESTER • CSE
-    </div>
+      <p class="description">
+        Complete course notes, solved problems, important questions, revision
+        points and exam preparation material.
+      </p>
+    </header>
 
-    <h1>BCS515B</h1>
+    <main>
+      <section>
+        <div class="welcome">
+          <h2>Welcome to AI Notes 🤖</h2>
 
-    <div class="subtitle">
-        Artificial Intelligence
-    </div>
+          <p>
+            These notes are prepared for easy understanding, revision and VTU
+            examination preparation. Each module contains theory, examples,
+            solved problems and important questions.
+          </p>
+        </div>
+      </section>
 
-    <p class="description">
-        Complete course notes, solved problems, important questions,
-        revision points and exam preparation material.
-    </p>
+      <section>
+        <h2 class="section-title">Course Modules</h2>
 
-</header>
+        <div class="modules">
+          <!-- MODULE 1 -->
 
+          <div class="module-card">
+            <div class="module-number">MODULE 01</div>
 
-<main>
-
-
-<section>
-
-    <div class="welcome">
-
-        <h2>Welcome to AI Notes 🤖</h2>
-
-        <p>
-            These notes are prepared for easy understanding,
-            revision and VTU examination preparation.
-            Each module contains theory, examples, solved problems
-            and important questions.
-        </p>
-
-    </div>
-
-</section>
-
-
-<section>
-
-    <h2 class="section-title">
-        Course Modules
-    </h2>
-
-    <div class="modules">
-
-
-        <!-- MODULE 1 -->
-
-        <div class="module-card">
-
-            <div class="module-number">
-                MODULE 01
-            </div>
-
-            <h3>
-                Introduction & Intelligent Agents
-            </h3>
+            <h3>Introduction & Intelligent Agents</h3>
 
             <p>
-                AI fundamentals, intelligent agents,
-                rationality, PEAS, environments and
-                types of agents.
+              AI fundamentals, intelligent agents, rationality, PEAS,
+              environments and types of agents.
             </p>
 
             <a
-                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module1.html"
-                class="btn"
+              href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module1.html?v=2026"
+              class="btn"
             >
-                Open Module 1 →
+              Open Module 1 →
             </a>
+          </div>
 
-        </div>
+          <!-- MODULE 2 -->
 
+          <div class="module-card">
+            <div class="module-number">MODULE 02</div>
 
-        <!-- MODULE 2 -->
-
-        <div class="module-card">
-
-            <div class="module-number">
-                MODULE 02
-            </div>
-
-            <h3>
-                Problem Solving & Search
-            </h3>
+            <h3>Problem Solving & Search</h3>
 
             <p>
-                Problem-solving agents, problem formulation,
-                uninformed search and important search algorithms.
+              Problem-solving agents, problem formulation, uninformed search and
+              important search algorithms.
             </p>
 
             <a
-                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module2.html"
-                class="btn"
+              href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module2.html?v=2026"
+              class="btn"
             >
-                Open Module 2 →
+              Open Module 2 →
             </a>
+          </div>
 
-        </div>
+          <!-- MODULE 3 -->
 
+          <div class="module-card">
+            <div class="module-number">MODULE 03</div>
 
-        <!-- MODULE 3 -->
-
-        <div class="module-card">
-
-            <div class="module-number">
-                MODULE 03
-            </div>
-
-            <h3>
-                Informed Search & Propositional Logic
-            </h3>
+            <h3>Informed Search & Propositional Logic</h3>
 
             <p>
-                Heuristic search, Greedy Search, A*,
-                knowledge-based agents, Wumpus World
-                and propositional logic.
+              Heuristic search, Greedy Search, A*, knowledge-based agents,
+              Wumpus World and propositional logic.
             </p>
 
             <a
-                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module3.html"
-                class="btn"
+              href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module3.html?v=2026"
+              class="btn"
             >
-                Open Module 3 →
+              Open Module 3 →
             </a>
+          </div>
 
-        </div>
+          <!-- MODULE 4 -->
 
+          <div class="module-card">
+            <div class="module-number">MODULE 04</div>
 
-        <!-- MODULE 4 -->
-
-        <div class="module-card">
-
-            <div class="module-number">
-                MODULE 04
-            </div>
-
-            <h3>
-                First-Order Logic
-            </h3>
+            <h3>First-Order Logic</h3>
 
             <p>
-                FOL syntax and semantics, knowledge engineering,
-                unification and forward chaining.
+              FOL syntax and semantics, knowledge engineering, unification and
+              forward chaining.
             </p>
 
             <a
-                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module4.html"
-                class="btn"
+              href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module4.html?v=2026"
+              class="btn"
             >
-                Open Module 4 →
+              Open Module 4 →
             </a>
+          </div>
 
-        </div>
+          <!-- MODULE 5 -->
 
+          <div class="module-card">
+            <div class="module-number">MODULE 05</div>
 
-        <!-- MODULE 5 -->
-
-        <div class="module-card">
-
-            <div class="module-number">
-                MODULE 05
-            </div>
-
-            <h3>
-                Inference & Classical Planning
-            </h3>
+            <h3>Inference & Classical Planning</h3>
 
             <p>
-                Backward chaining, resolution, classical planning,
-                state-space search and planning graphs.
+              Backward chaining, resolution, classical planning, state-space
+              search and planning graphs.
             </p>
 
             <a
-                href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module5.html"
-                class="btn"
+              href="https://mahalakshmikommaranahalli9-cell.github.io/course-notes/BCS515B/module5.html?v=2026"
+              class="btn"
             >
-                Open Module 5 →
+              Open Module 5 →
             </a>
-
+          </div>
         </div>
+      </section>
 
+      <section>
+        <h2 class="section-title">Study Flow</h2>
 
-    </div>
-
-</section>
-
-
-<section>
-
-    <h2 class="section-title">
-        Study Flow
-    </h2>
-
-    <div class="flow">
-
-        <div class="flow-box">
-
+        <div class="flow">
+          <div class="flow-box">
             <span>01</span>
 
             <h3>Learn</h3>
 
-            <p>
-                Understand the concept and basic definitions.
-            </p>
+            <p>Understand the concept and basic definitions.</p>
+          </div>
 
-        </div>
-
-
-        <div class="flow-box">
-
+          <div class="flow-box">
             <span>02</span>
 
             <h3>Practice</h3>
 
-            <p>
-                Work through solved examples and problems.
-            </p>
+            <p>Work through solved examples and problems.</p>
+          </div>
 
-        </div>
-
-
-        <div class="flow-box">
-
+          <div class="flow-box">
             <span>03</span>
 
             <h3>Revise</h3>
 
-            <p>
-                Use important points and quick revision sections.
-            </p>
+            <p>Use important points and quick revision sections.</p>
+          </div>
 
-        </div>
-
-
-        <div class="flow-box">
-
+          <div class="flow-box">
             <span>04</span>
 
             <h3>Write</h3>
 
-            <p>
-                Practice answers according to VTU exam patterns.
-            </p>
-
+            <p>Practice answers according to VTU exam patterns.</p>
+          </div>
         </div>
+      </section>
 
-    </div>
+      <section>
+        <h2 class="section-title">Exam Preparation</h2>
 
-</section>
-
-
-<section>
-
-    <h2 class="section-title">
-        Exam Preparation
-    </h2>
-
-    <div class="exam">
-
-        <ul>
-
+        <div class="exam">
+          <ul>
             <li>
-                <strong>2 Marks:</strong>
-                Focus on definitions, differences and short concepts.
+              <strong>2 Marks:</strong>
+              Focus on definitions, differences and short concepts.
             </li>
 
             <li>
-                <strong>5 Marks:</strong>
-                Learn explanations with suitable examples.
+              <strong>5 Marks:</strong>
+              Learn explanations with suitable examples.
             </li>
 
             <li>
-                <strong>10 Marks:</strong>
-                Practice complete answers with algorithms,
-                diagrams, steps and solved problems.
+              <strong>10 Marks:</strong>
+              Practice complete answers with algorithms, diagrams, steps and
+              solved problems.
             </li>
 
             <li>
-                <strong>Numericals:</strong>
-                Always write the problem, steps, calculation
-                and final answer clearly.
+              <strong>Numericals:</strong>
+              Always write the problem, steps, calculation and final answer
+              clearly.
             </li>
 
             <li>
-                <strong>Revision:</strong>
-                Revise each module completely before the examination.
+              <strong>Revision:</strong>
+              Revise each module completely before the examination.
             </li>
+          </ul>
+        </div>
+      </section>
 
-        </ul>
+      <section class="resources">
+        <h2 class="section-title">Learning Resources</h2>
 
-    </div>
-
-</section>
-
-
-<section class="resources">
-
-    <h2 class="section-title">
-        Learning Resources
-    </h2>
-
-    <div class="resource-buttons">
-
-        <a
+        <div class="resource-buttons">
+          <a
             href="https://www.youtube.com/results?search_query=BCS515B+Artificial+Intelligence+VTU"
             target="_blank"
             rel="noopener noreferrer"
             class="btn"
-        >
+          >
             ▶ YouTube AI Lectures
-        </a>
+          </a>
 
-
-        <a
+          <a
             href="https://github.com/mahalakshmikommaranahalli9-cell"
             target="_blank"
             rel="noopener noreferrer"
             class="btn"
-        >
+          >
             🐙 GitHub
+          </a>
+        </div>
+      </section>
+
+      <section class="github">
+        <h2>MAHALAKSHMI'S GITHUB</h2>
+
+        <p>Explore my projects, notes and coding work.</p>
+
+        <a
+          href="https://github.com/mahalakshmikommaranahalli9-cell"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn"
+        >
+          🐙 Visit Mahalakshmi's GitHub
         </a>
+      </section>
+    </main>
 
-    </div>
+    <footer>
+      <p>© 2026 <span>Mahalakshmi</span> | BCS515B Artificial Intelligence</p>
 
-</section>
+      <p>5th Semester • Computer Science & Engineering</p>
+    </footer>
 
+    <script>
+      document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+      });
 
-<section class="github">
+      document.addEventListener("selectstart", function (event) {
+        event.preventDefault();
+      });
 
-    <h2>
-        MAHALAKSHMI'S GITHUB
-    </h2>
+      document.addEventListener("dragstart", function (event) {
+        event.preventDefault();
+      });
 
-    <p>
-        Explore my projects, notes and coding work.
-    </p>
-
-    <a
-        href="https://github.com/mahalakshmikommaranahalli9-cell"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn"
-    >
-        🐙 Visit Mahalakshmi's GitHub
-    </a>
-
-</section>
-
-
-</main>
-
-
-<footer>
-
-    <p>
-        © 2026 <span>Mahalakshmi</span> |
-        BCS515B Artificial Intelligence
-    </p>
-
-    <p>
-        5th Semester • Computer Science & Engineering
-    </p>
-
-</footer>
-
-
-<script>
-
-    document.addEventListener(
-        "contextmenu",
-        function(event) {
-            event.preventDefault();
+      document.addEventListener("keydown", function (event) {
+        if (
+          (event.ctrlKey || event.metaKey) &&
+          ["c", "x", "a", "u", "s", "p"].includes(event.key.toLowerCase())
+        ) {
+          event.preventDefault();
         }
-    );
-
-    document.addEventListener(
-        "selectstart",
-        function(event) {
-            event.preventDefault();
-        }
-    );
-
-    document.addEventListener(
-        "dragstart",
-        function(event) {
-            event.preventDefault();
-        }
-    );
-
-    document.addEventListener(
-        "keydown",
-        function(event) {
-
-            if (
-                (event.ctrlKey || event.metaKey) &&
-                ["c", "x", "a", "u", "s", "p"].includes(
-                    event.key.toLowerCase()
-                )
-            ) {
-                event.preventDefault();
-            }
-
-        }
-    );
-
-</script>
-
-</body>
-
+      });
+    </script>
+  </body>
 </html>
